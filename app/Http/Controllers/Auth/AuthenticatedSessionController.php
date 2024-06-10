@@ -32,20 +32,12 @@ class AuthenticatedSessionController extends Controller
         {
             return redirect('admin/admin-dashboard');
         }
-        if($request->user()->usertype == 'tr')
+        else
         {
-            return redirect('tr/tr-dashboard');
-        }
-        if($request->user()->usertype == 'eg')
-        {
-            return redirect('eg/eg-dashboard');
-        }
-        if($request->user()->usertype == 'fa')
-        {
-            return redirect('fa/fa-dashboard');
+            return redirect('dashboard');
         }
 
-        return redirect()->intended(route('dashboard'));
+        // return redirect()->intended(route('dashboard'));
     }
 
     /**

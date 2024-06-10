@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class FA
+class Users
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,9 @@ class FA
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->usertype != 'fa')
+        if(Auth::user()->usertype != 'tr' && Auth::user()->usertype != 'eg' && Auth::user()->usertype != 'fa')
         {
-            return redirect('dashboard');
+            return redirect('404');
         }
         return $next($request);
     }
