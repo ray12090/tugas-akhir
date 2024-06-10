@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\TRController;
-use App\Http\Controllers\EGController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UnitController;
+use App\Http\Controllers\KepenghunianController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FAController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -25,6 +26,11 @@ require __DIR__.'/auth.php';
 
 
 route::get('admin/admin-dashboard', [AdminController::class, 'index'])->middleware(['auth', 'admin']);
-route::get('tr/tr-dashboard', [TRController::class, 'index'])->middleware(['auth', 'tr']);
-route::get('eg/eg-dashboard', [EGController::class, 'index'])->middleware(['auth', 'eg']);
-route::get('fa/fa-dashboard', [FAController::class, 'index'])->middleware(['auth', 'fa']);
+route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 'tr']);
+route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 'eg']);
+route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 'fa']);
+
+route::get('unit', [UnitController::class, 'index'])->name('unit');
+// route::get('kepenghunian', [KepenghunianController::class, 'index'])->name('kepenghunian');
+Route::get('kepenghunian', [KepenghunianController::class, 'index'])->name('kepenghunian.index');
+route::get('dashboard', [DashboardController::class, 'index'])->name('home');
