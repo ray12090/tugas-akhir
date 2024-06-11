@@ -79,7 +79,7 @@
                                             @endif
                                         </a>
                                     </th>
-                                    <th class="p-4">Aksi</th>
+                                    <th class="p-4 text-center">{{ __('Aksi')}}</th>
                                 </tr>
                             </thead>
                             <tbody>

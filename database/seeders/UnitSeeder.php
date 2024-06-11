@@ -5,28 +5,33 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Unit;
 
 class UnitSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        $towers = ['A', 'B'];
-        $units = [];
+        // Disable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        foreach ($towers as $tower) {
-            for ($i = 1; $i <= 3; $i++) {
-                $floor = str_pad($i, 2, '0', STR_PAD_LEFT);
-                $units[] = [
-                    'tower' => $tower,
-                    'lantai' => $floor,
-                    'unit' => $floor . $floor,
-                ];
-            }
+        // Truncate the table
+        Unit::truncate();
+
+        // Re-enable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        // Create 10 dummy units
+        for ($i = 1; $i <= 10; $i++) {
+            Unit::create([
+                'tower' => 'Tower ' . chr(64 + $i), // A, B, C, etc.
+                'lantai' => rand(1, 20), // Random floor number
+                'unit' => 'Unit ' . $i,
+            ]);
         }
-
-        DB::table('units')->insert($units);
     }
 }

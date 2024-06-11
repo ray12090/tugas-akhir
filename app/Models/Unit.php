@@ -14,4 +14,9 @@ class Unit extends Model
     {
         return $this->hasMany(Kepenghunian::class, 'unit_id');
     }
+
+    public function komplains()
+    {
+        return $this->hasMany(Komplain::class, 'unit_id');
+    }
 }

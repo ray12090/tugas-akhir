@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\KepenghunianController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KomplainController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,3 +35,7 @@ route::get('unit', [UnitController::class, 'index'])->name('unit');
 // route::get('kepenghunian', [KepenghunianController::class, 'index'])->name('kepenghunian');
 Route::get('kepenghunian', [KepenghunianController::class, 'index'])->name('kepenghunian.index');
 route::get('dashboard', [DashboardController::class, 'index'])->name('home');
+
+Route::get('komplain', [KomplainController::class, 'index'])->name('komplain.index');
+Route::get('komplain/create', [KomplainController::class, 'create'])->name('komplain.create');
+Route::post('komplain', [KomplainController::class, 'store'])->name('komplain.store');

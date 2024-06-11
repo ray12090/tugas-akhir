@@ -69,7 +69,7 @@
                 (Auth::user()->usertype === 'tr' || Auth::user()->usertype === 'admin' || Auth::user()->usertype === 'eg') &&
                     Auth::user()->usertype !== 'fa')
                 <li>
-                    <button type="button"
+                    <a href="{{ route('komplain.index')}}"
                         class="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         aria-controls="dropdown-sales" data-collapse-toggle="dropdown-sales">
                         <svg class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
@@ -81,7 +81,7 @@
                         </svg>
 
                         <span class="flex-1 ml-3 text-left whitespace-nowrap">{{ __('Data Komplain') }}</span>
-                    </button>
+                    </a>
                 </li>
             @endif
             @if (Auth::user()->usertype === 'fa' &&
