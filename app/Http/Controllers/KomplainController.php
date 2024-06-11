@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Komplain;
+use App\Models\Unit;
 use App\Http\Requests\StoreKomplainRequest;
 use App\Http\Requests\UpdateKomplainRequest;
 use Illuminate\Http\Request;
@@ -38,7 +39,8 @@ class KomplainController extends Controller
      */
     public function create()
     {
-        return view('komplain.komplain-create');
+        $units = Unit::all();
+        return view('komplain.komplain-create', compact('units'));
     }
 
     /**
@@ -49,13 +51,15 @@ class KomplainController extends Controller
         $request->validate([
             'nomor_laporan' => 'required|unique:komplains',
             'tanggal_laporan' => 'required|date',
-            'tower' => 'required|string|max:255',
-            'unit' => 'required|string|max:255',
+            'unit_id' => 'required|string|max:255',
             'kategori_laporan' => 'required|string|max:255',
             'nama_pelapor' => 'required|string|max:255',
             'nomor_kontak' => 'required|string|max:255',
             'uraian_komplain' => 'required|string',
             'kategori' => 'required|array',
+            'respon' => 'nullable|string',
+            'analisis_awal' => 'nullable|string',
+            'keterangan_selesai' => 'nullable|string',
             'foto_analisis_awal' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             'foto_hasil_perbaikan' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
         ]);
@@ -72,7 +76,7 @@ class KomplainController extends Controller
 
         Komplain::create($data);
 
-        return redirect()->route('keluhan.create')->with('success', 'Keluhan berhasil ditambahkan.');
+        return redirect()->route('komplain.create')->with('success', 'Komplain berhasil ditambahkan.');
     }
 
     /**
@@ -105,5 +109,10 @@ class KomplainController extends Controller
     public function destroy(Komplain $komplain)
     {
         //
+    }
+    public function getUnits($unit)
+    {
+        $units = Unit::where('unit', $unit)->get();
+        return response()->json(['units' => $units]);
     }
 }

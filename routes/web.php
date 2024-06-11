@@ -39,3 +39,5 @@ route::get('dashboard', [DashboardController::class, 'index'])->name('home');
 Route::get('komplain', [KomplainController::class, 'index'])->name('komplain.index');
 Route::get('komplain/create', [KomplainController::class, 'create'])->name('komplain.create');
 Route::post('komplain', [KomplainController::class, 'store'])->name('komplain.store');
+Route::get('/get-units/{unit}', [KomplainController::class, 'getUnits']);
+Route::resource('komplain', KomplainController::class);
