@@ -13,26 +13,43 @@
 
 ### 2. Install composer dependencies
 
-`composer install`
+```
+composer install
+```
 
 ### 3. Setup .env
+
 Duplicate the `.env.example` file and rename it to `.env`.
 
 ### 4. Generate application key
-`php artisan key:generate`
+
+```
+php artisan key:generate
+```
 
 ### 5. Migrate the database
-`php artisan migrate`
+
+```
+php artisan migrate
+```
 
 ### 6. Seed the database
-`php artisan db:seed`
+
+```
+php artisan db:seed
+```
 
 ### 7. Install node.js dependencies (if haven't)
-`npm install`
+
+```
+npm install
+```
 
 ### 8. Compile and run
 ```
 npm run dev
+```
+```
 php artisan serve
 ```
 
