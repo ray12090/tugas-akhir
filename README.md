@@ -7,6 +7,35 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Installation steps
+
+### 1. Clone git repository
+
+### 2. Install composer dependencies
+
+`composer install`
+
+### 3. Setup .env
+Duplicate the `.env.example` file and rename it to `.env`.
+
+### 4. Generate application key
+`php artisan key:generate`
+
+### 5. Migrate the database
+`php artisan migrate`
+
+### 6. Seed the database
+`php artisan db:seed`
+
+### 7. Install node.js dependencies (if haven't)
+`npm install`
+
+### 8. Compile and run
+```
+npm run dev
+php artisan serve
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
