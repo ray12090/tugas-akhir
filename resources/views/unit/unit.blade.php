@@ -8,7 +8,7 @@
     <div>
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
-                <div class="pb-3 text-gray-900 text-lg font-semibold">
+                <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                     {{ __('Tabel Unit') }}
                 </div>
                 <div class="text-gray-500 text-sm font-reguler">
