@@ -1,10 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Data Komplain') }}
-        </h2>
-    </x-slot>
-
     <div>
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>

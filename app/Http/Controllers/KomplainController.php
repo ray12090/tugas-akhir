@@ -7,6 +7,8 @@ use App\Models\Unit;
 use App\Http\Requests\StoreKomplainRequest;
 use App\Http\Requests\UpdateKomplainRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\RedirectResponse;
 
 class KomplainController extends Controller
 {
@@ -46,8 +48,9 @@ class KomplainController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
+        // Validate the form
         $request->validate([
             'nomor_laporan' => 'required|unique:komplains',
             'tanggal_laporan' => 'required|date',
@@ -60,24 +63,50 @@ class KomplainController extends Controller
             'respon' => 'nullable|string',
             'analisis_awal' => 'nullable|string',
             'keterangan_selesai' => 'nullable|string',
-            'foto_analisis_awal' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
-            'foto_hasil_perbaikan' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+            'foto_analisis_awal' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
+            'foto_hasil_perbaikan' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
         ]);
 
-        $data = $request->all();
+        // Prepare data for storage
+        $data = $request->except('foto_analisis_awal', 'foto_hasil_perbaikan');
 
+        // Handle file upload for foto_analisis_awal
         if ($request->hasFile('foto_analisis_awal')) {
-            $data['foto_analisis_awal'] = $request->file('foto_analisis_awal')->store('analisis_awal');
+            $image = $request->file('foto_analisis_awal');
+            $image->storeAs('public/analisis_awal', $image->hashName());
+            $data['foto_analisis_awal'] = $image->hashName();
         }
 
+        // Handle file upload for foto_hasil_perbaikan
         if ($request->hasFile('foto_hasil_perbaikan')) {
-            $data['foto_hasil_perbaikan'] = $request->file('foto_hasil_perbaikan')->store('hasil_perbaikan');
+            $image = $request->file('foto_hasil_perbaikan');
+            $image->storeAs('public/hasil_perbaikan', $image->hashName());
+            $data['foto_hasil_perbaikan'] = $image->hashName();
         }
 
-        Komplain::create($data);
+        // Create Komplain record
+        Komplain::create([
+            'nomor_laporan' => $data['nomor_laporan'],
+            'tanggal_laporan' => $data['tanggal_laporan'],
+            'unit_id' => $data['unit_id'],
+            'kategori_laporan' => $data['kategori_laporan'],
+            'nama_pelapor' => $data['nama_pelapor'],
+            'nomor_kontak' => $data['nomor_kontak'],
+            'uraian_komplain' => $data['uraian_komplain'],
+            'kategori' => json_encode($data['kategori']), // Convert array to JSON
+            'respon' => $data['respon'],
+            'analisis_awal' => $data['analisis_awal'],
+            'keterangan_selesai' => $data['keterangan_selesai'],
+            'foto_analisis_awal' => $data['foto_analisis_awal'] ?? null,
+            'foto_hasil_perbaikan' => $data['foto_hasil_perbaikan'] ?? null,
+        ]);
 
+        // Redirect with success message
         return redirect()->route('komplain.create')->with('success', 'Komplain berhasil ditambahkan.');
     }
+
+
+
 
     /**
      * Display the specified resource.
