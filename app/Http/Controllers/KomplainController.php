@@ -69,6 +69,7 @@ class KomplainController extends Controller
 
         // Prepare data for storage
         $data = $request->except('foto_analisis_awal', 'foto_hasil_perbaikan');
+        $data['kategori'] = json_encode($request->kategori); // Encode to JSON
 
         // Handle file upload for foto_analisis_awal
         if ($request->hasFile('foto_analisis_awal')) {
@@ -85,27 +86,11 @@ class KomplainController extends Controller
         }
 
         // Create Komplain record
-        Komplain::create([
-            'nomor_laporan' => $data['nomor_laporan'],
-            'tanggal_laporan' => $data['tanggal_laporan'],
-            'unit_id' => $data['unit_id'],
-            'kategori_laporan' => $data['kategori_laporan'],
-            'nama_pelapor' => $data['nama_pelapor'],
-            'nomor_kontak' => $data['nomor_kontak'],
-            'uraian_komplain' => $data['uraian_komplain'],
-            'kategori' => json_encode($data['kategori']), // Convert array to JSON
-            'respon' => $data['respon'],
-            'analisis_awal' => $data['analisis_awal'],
-            'keterangan_selesai' => $data['keterangan_selesai'],
-            'foto_analisis_awal' => $data['foto_analisis_awal'] ?? null,
-            'foto_hasil_perbaikan' => $data['foto_hasil_perbaikan'] ?? null,
-        ]);
+        Komplain::create($data);
 
         // Redirect with success message
         return redirect()->route('komplain.create')->with('success', 'Komplain berhasil ditambahkan.');
     }
-
-
 
 
     /**
@@ -113,31 +98,77 @@ class KomplainController extends Controller
      */
     public function show(Komplain $komplain)
     {
-        //
+        $komplain->kategori = json_decode($komplain->kategori, true); // Decode to array
+        return view('komplain.komplain-read', compact('komplain'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Komplain $komplain)
     {
-        //
+        $komplain->kategori = json_decode($komplain->kategori, true); // Decode JSON to array
+        $units = Unit::all();
+        return view('komplain.komplain-edit', compact('komplain', 'units'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateKomplainRequest $request, Komplain $komplain)
+    public function update(Request $request, Komplain $komplain): RedirectResponse
     {
-        //
+        // Validate the form
+        $request->validate([
+            'nomor_laporan' => 'required|unique:komplains,nomor_laporan,' . $komplain->id,
+            'tanggal_laporan' => 'required|date',
+            'unit_id' => 'required|string|max:255',
+            'kategori_laporan' => 'required|string|max:255',
+            'nama_pelapor' => 'required|string|max:255',
+            'nomor_kontak' => 'required|string|max:255',
+            'uraian_komplain' => 'required|string',
+            'kategori' => 'required|array',
+            'respon' => 'nullable|string',
+            'analisis_awal' => 'nullable|string',
+            'keterangan_selesai' => 'nullable|string',
+            'foto_analisis_awal' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
+            'foto_hasil_perbaikan' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
+        ]);
+
+        // Prepare data for update
+        $data = $request->except('foto_analisis_awal', 'foto_hasil_perbaikan');
+        $data['kategori'] = json_encode($request->kategori); // Encode to JSON
+
+        // Handle file upload for foto_analisis_awal
+        if ($request->hasFile('foto_analisis_awal')) {
+            $image = $request->file('foto_analisis_awal');
+            $image->storeAs('public/analisis_awal', $image->hashName());
+            $data['foto_analisis_awal'] = $image->hashName();
+        }
+
+        // Handle file upload for foto_hasil_perbaikan
+        if ($request->hasFile('foto_hasil_perbaikan')) {
+            $image = $request->file('foto_hasil_perbaikan');
+            $image->storeAs('public/hasil_perbaikan', $image->hashName());
+            $data['foto_hasil_perbaikan'] = $image->hashName();
+        }
+
+        // Update Komplain record
+        $komplain->update($data);
+
+        // Redirect with success message
+        return back()->with('success', 'Komplain berhasil diperbarui.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Komplain $komplain)
     {
-        //
+        try {
+            $komplain->delete();
+            return redirect()->route('komplain.index')->with('danger', 'Komplain berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('komplain.index')->withErrors(['msg' => 'Error deleting komplain. Please try again.']);
+        }
     }
     public function getUnits($unit)
     {
