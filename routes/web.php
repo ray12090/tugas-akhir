@@ -34,7 +34,10 @@ route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 
 route::get('unit', [UnitController::class, 'index'])->name('unit');
 // route::get('kepenghunian', [KepenghunianController::class, 'index'])->name('kepenghunian');
 Route::get('kepenghunian', [KepenghunianController::class, 'index'])->name('kepenghunian.index');
+Route::get('kepenghunian/create', [KepenghunianController::class, 'create'])->name('kepenghunian.create');
+Route::post('kepenghunian', [KepenghunianController::class, 'store'])->name('kepenghunian.store');
 route::get('dashboard', [DashboardController::class, 'index'])->name('home');
+Route::resource('kepenghunian', KepenghunianController::class);
 
 Route::get('komplain', [KomplainController::class, 'index'])->name('komplain.index');
 Route::get('komplain/create', [KomplainController::class, 'create'])->name('komplain.create');

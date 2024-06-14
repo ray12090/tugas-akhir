@@ -15,10 +15,10 @@ class KepenghunianSeeder extends Seeder
     public function run(): void
     {
         $unitIds = DB::table('units')->pluck('id')->toArray();
-        $statuses = [0, 1];
+        $statuses = ['Pemilik', 'Penyewa'];
         $names = ['John Doe', 'Jane Smith', 'Alice Johnson', 'Bob Brown'];
-        $countries = [1, 2];
-        $religions = [1, 2, 3, 4, 5, 6, 7];
+        $countries = ['WNI', 'WNA'];
+        $religions = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Budha', 'Konghucu', 'Lainnya'];
         $startDate = '2023-01-01';
         $endDate = '2024-01-01';
 
@@ -32,8 +32,9 @@ class KepenghunianSeeder extends Seeder
                     'status' => $statuses[array_rand($statuses)],
                     'nama' => $name,
                     'no_hp' => '08123456789' . rand(0, 9),
+                    'tempat_lahir' => 'Bogor',
                     'tanggal_lahir' => now()->subYears(rand(20, 60))->subDays(rand(1, 365)),
-                    'warna_negara' => $countries[array_rand($countries)],
+                    'warga_negara' => $countries[array_rand($countries)],
                     'no_ktp' => '1234567890123456' . rand(0, 9),
                     'agama' => $religions[array_rand($religions)],
                     'alamat' => 'Jl. Contoh Alamat No. ' . rand(1, 100),

@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('unit_id');
             $table->date('tanggal_huni');
-            $table->integer('status');
+            $table->string('status');
             $table->string('nama');
             $table->bigInteger('no_hp');
+            $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
-            $table->integer('warna_negara');
+            $table->string('warga_negara');
             $table->bigInteger('no_ktp');
-            $table->integer('agama');
+            $table->string('agama');
             $table->string('alamat');
             $table->date('awal_sewa');
             $table->date('akhir_sewa');
