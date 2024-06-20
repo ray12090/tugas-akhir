@@ -1,10 +1,18 @@
 <x-app-layout>
     <div>
-        @include('components.alert')
+        <div class="pb-6">
+            @include('components.alert')
+            @include('components.breadcrumbs', [
+                'breadcrumbs' => [
+                    ['title' => 'Dashboard', 'url' => Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard')],
+                    ['title' => 'Data Komplain', 'url' => route('komplain.index')]
+                ]
+            ])
+        </div>
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Tabel Komplain') }}
+                    {{ __('Data Komplain') }}
                 </div>
                 <div class="text-gray-500 text-sm font-regular">
                     {{ __('Di bawah merupakan tabel komplain. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Tenant Relation.') }}

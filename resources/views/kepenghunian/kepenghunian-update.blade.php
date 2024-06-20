@@ -1,6 +1,15 @@
 <x-app-layout>
     <div>
-        @include('components.alert')
+        <div class="pb-6">
+            @include('components.alert')
+            @include('components.breadcrumbs', [
+                'breadcrumbs' => [
+                    ['title' => 'Dashboard', 'url' => Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard')],
+                    ['title' => 'Data Kepenghunian', 'url' => route('kepenghunian.index')],
+                    ['title' => 'Ubah Kepenghunian', 'url' => '']
+                ]
+            ])
+        </div>
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
@@ -248,7 +257,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                     </div>
                 </div>
                 </form>

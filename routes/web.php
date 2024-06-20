@@ -7,6 +7,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\KepenghunianController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomplainController;
+use App\Http\Controllers\AkunController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,10 +27,16 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-route::get('admin/admin-dashboard', [AdminController::class, 'index'])->middleware(['auth', 'admin']);
-route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 'tr']);
-route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 'eg']);
-route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 'fa']);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('admin/admin-dashboard', [AdminController::class, 'index'])->name('admin-dashboard')->middleware('admin');
+    Route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 'tr']);
+    Route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 'eg']);
+    Route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 'fa']);
+});
 
 route::get('unit', [UnitController::class, 'index'])->name('unit');
 // route::get('kepenghunian', [KepenghunianController::class, 'index'])->name('kepenghunian');
@@ -44,3 +51,5 @@ Route::get('komplain/create', [KomplainController::class, 'create'])->name('komp
 Route::post('komplain', [KomplainController::class, 'store'])->name('komplain.store');
 Route::get('/get-units/{unit}', [KomplainController::class, 'getUnits']);
 Route::resource('komplain', KomplainController::class);
+
+Route::resource('akun', AkunController::class);

@@ -1,10 +1,18 @@
 <x-app-layout>
     <div>
-    @include('components.alert')
+        <div class="pb-6">
+            @include('components.alert')
+            @include('components.breadcrumbs', [
+                'breadcrumbs' => [
+                    ['title' => 'Dashboard', 'url' => Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard')],
+                    ['title' => 'Data Kepenghunian', 'url' => route('kepenghunian.index')]
+                ]
+            ])
+        </div>
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Tabel Kepenghunian') }}
+                    {{ __('Data Kepenghunian') }}
                 </div>
                 <div class="text-gray-500 text-sm font-regular">
                     {{ __('Di bawah merupakan tabel kepenghunian. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Tenant Relation.') }}
@@ -178,7 +186,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        
+
                         @include('components.modal', ['type' => 'delete'])
                     </div>
 
