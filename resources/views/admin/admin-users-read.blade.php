@@ -1,3 +1,15 @@
+@php
+    // Mapping array for usertype
+    $usertypeLabels = [
+        'admin' => 'Admin',
+        'eg' => 'Engineer',
+        'fa' => 'Finance',
+        'tr' => 'Tenant Relation'
+    ];
+
+    // Get the human-readable label for the usertype
+    $usertypeLabel = $usertypeLabels[$user->usertype] ?? 'Unknown';
+@endphp
 <x-app-layout>
     <div>
         <div class="pb-6">
@@ -70,7 +82,7 @@
                                     <div class="relative">
                                         <input type="text" id="usertype" name="usertype"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            value="{{ $user->usertype }}" readonly>
+                                            value="{{ $usertypeLabel }}" readonly>
                                     </div>
                                 </div>
                                 <div class="sm:col-span-3"></div>
