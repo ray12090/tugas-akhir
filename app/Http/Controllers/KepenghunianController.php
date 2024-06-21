@@ -73,7 +73,7 @@ class KepenghunianController extends Controller
 
     public function show(Kepenghunian $kepenghunian)
     {
-        $units = Unit::all(); 
+        $units = Unit::all();
         return view('kepenghunian.kepenghunian-read', compact('kepenghunian', 'units'));
     }
 
@@ -81,7 +81,7 @@ class KepenghunianController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Kepenghunian $kepenghunian)
-    { 
+    {
         $units = Unit::all();
         return view('kepenghunian.kepenghunian-update', compact('kepenghunian', 'units'));
     }

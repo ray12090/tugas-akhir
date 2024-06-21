@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Users;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -61,7 +62,7 @@ class AkunController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('admin.admin-users-read', compact('user'));
     }
 
     /**
@@ -69,16 +70,34 @@ class AkunController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('admin.admin-users-edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $users)
+    public function update(Request $request, User $user)
     {
-        //
+        // Validate request
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8',
+            'usertype' => 'required|string',
+        ]);
+
+        $data = $request->except('password');
+
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->input('password'));
+        }
+
+        $user->update($data);
+
+        return redirect()->route('akun.index')->with('success', 'Akun berhasil diperbarui.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

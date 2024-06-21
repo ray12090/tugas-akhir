@@ -264,7 +264,7 @@
                         modal.classList.toggle('hidden');
                     }
 
-                    function confirmDelete(wvwnt, form, name) {
+                    function confirmDelete(event, form, name) {
                         event.preventDefault();
                         const deleteModal = document.getElementById('deleteModal');
                         const deleteModalText = document.getElementById('deleteModalText');
