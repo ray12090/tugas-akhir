@@ -6,6 +6,7 @@ use App\Http\Middleware\Users;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 
 class AkunController extends Controller
 {
@@ -27,6 +28,7 @@ class AkunController extends Controller
             })
             ->orderBy($sort_by, $sort_order)
             ->paginate(5);
+        // dd($users);
 
         return view('admin.admin-users', compact('users', 'sort_by', 'sort_order'));
     }
@@ -60,41 +62,55 @@ class AkunController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($id)
     {
+        $user = User::findOrFail($id);
         return view('admin.admin-users-read', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit($id)
     {
+        $user = User::findOrFail($id);
         return view('admin.admin-users-edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+
+    public function update(Request $request, $id): RedirectResponse
     {
-        // Validate request
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8',
-            'usertype' => 'required|string',
-        ]);
+        try {
+            // Retrieve user by ID
+            $data = User::findOrFail($id);
 
-        $data = $request->except('password');
+            // Validate input
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $data->id],
+                'password' => ['nullable', 'string', 'min:8'],
+                'usertype' => ['required', 'string']
+            ], [
+                'email.unique' => 'Email sudah digunakan. Silakan pilih email lain.',
+            ]);
 
-        if ($request->filled('password')) {
-            $data['password'] = bcrypt($request->input('password'));
+            // Update user data
+            $data->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password ? bcrypt($request->password) : $data->password,
+                'usertype' => $request->usertype,
+            ]);
+
+            return redirect()->route('akun.index')->with(['success' => 'Detail akun berhasil diubah!']);
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator)->withInput();
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['msg' => 'Terjadi kesalahan saat mengubah akun. Silakan coba lagi.'])->withInput();
         }
-
-        $user->update($data);
-
-        return redirect()->route('akun.index')->with('success', 'Akun berhasil diperbarui.');
     }
 
 

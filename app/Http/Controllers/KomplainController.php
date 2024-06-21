@@ -99,6 +99,7 @@ class KomplainController extends Controller
     public function show(Komplain $komplain)
     {
         $komplain->kategori = json_decode($komplain->kategori, true); // Decode to array
+        // dd(Komplain::find($komplain->id)->toArray());
         return view('komplain.komplain-read', compact('komplain'));
     }
 

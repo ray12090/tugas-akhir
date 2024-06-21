@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div>
+    {{-- <div>
         <div class="pb-6">
             @include('components.alert')
             @include('components.breadcrumbs', [
@@ -201,5 +201,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+    {{ $komplain->nomor_laporan }}
 </x-app-layout>

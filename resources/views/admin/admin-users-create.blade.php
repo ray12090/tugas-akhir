@@ -28,7 +28,7 @@
                     class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between py-4 dark:border-gray-700">
                     <div class="w-full">
                         <form action="{{ route('akun.store') }}" method="POST" enctype="multipart/form-data"
-                            onsubmit="return confirmSave(this);">
+                            onsubmit="return confirmSave(this);" autocomplete="off">
                             @csrf
                             <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
                                 <div class="w-full">
