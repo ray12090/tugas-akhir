@@ -27,10 +27,14 @@ class UnitSeeder extends Seeder
 
         // Create 10 dummy units
         for ($i = 1; $i <= 10; $i++) {
+            $tower = chr(64 + $i);
+            $lantai = rand(1, 20);
+            $nomor_unit = $i;
+
             Unit::create([
-                'tower' => 'Tower ' . chr(64 + $i), // A, B, C, etc.
-                'lantai' => rand(1, 20), // Random floor number
-                'unit' => 'Unit ' . $i,
+                'tower' => $tower,
+                'lantai' => sprintf('%02d', $lantai),
+                'unit' => $tower . '-' . sprintf('%02d', $lantai) . sprintf('%02d', $nomor_unit),
             ]);
         }
     }

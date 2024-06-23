@@ -2,13 +2,13 @@
     <div>
         <div class="pb-6">
             @include('components.alert')
-            @include('components.breadcrumbs', [
+            {{-- @include('components.breadcrumbs', [
                 'breadcrumbs' => [
                     ['title' => 'Dashboard', 'url' => Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard')],
                     ['title' => 'Data Komplain', 'url' => route('komplain.index')],
                     ['title' => 'Tambah Komplain', 'url' => '']
                 ]
-            ])
+            ]) --}}
         </div>
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>

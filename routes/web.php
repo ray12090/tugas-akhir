@@ -8,6 +8,7 @@ use App\Http\Controllers\KepenghunianController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomplainController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\IplController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,6 +18,8 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('dashboard', DashboardController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -53,3 +56,5 @@ Route::get('/get-units/{unit}', [KomplainController::class, 'getUnits']);
 Route::resource('komplain', KomplainController::class);
 
 Route::resource('akun', AkunController::class);
+
+Route::resource('ipl', IplController::class);

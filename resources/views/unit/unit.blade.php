@@ -1,11 +1,14 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Data Unit') }}
-        </h2>
-    </x-slot>
-
     <div>
+        <div class="pb-6">
+            @include('components.alert')
+            {{-- @include('components.breadcrumbs', [
+                'breadcrumbs' => [
+                    ['title' => 'Dashboard', 'url' => Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard')],
+                    ['title' => 'Data Komplain', 'url' => route('komplain.index')]
+                ]
+            ]) --}}
+        </div>
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
