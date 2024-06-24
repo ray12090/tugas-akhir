@@ -19,4 +19,16 @@ class Unit extends Model
     {
         return $this->hasMany(Komplain::class, 'unit_id');
     }
+
+    public function pemilik()
+    {
+        return $this->hasOne(Kepenghunian::class, 'unit_id')
+                    ->where('status', 'pemilik');
+    }
+
+    public function penyewas()
+    {
+        return $this->hasMany(Kepenghunian::class, 'unit_id')
+                    ->where('status', 'penyewa');
+    }
 }
