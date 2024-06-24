@@ -139,7 +139,7 @@
                                     <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $kepenghunian->unit->tower }}{{ __('-') }}{{ $kepenghunian->unit->unit }}
+                                            {{ $kepenghunian->unit->unit }}
                                         </td>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
