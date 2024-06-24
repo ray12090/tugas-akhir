@@ -60,6 +60,6 @@ Route::resource('akun', AkunController::class);
 Route::get('ipl', [IplController::class, 'index'])->name('ipl.index');
 Route::get('ipl/create', [IplController::class, 'create'])->name('ipl.create');
 Route::post('ipl', [IplController::class, 'store'])->name('ipl.store');
-Route::get('/get-owner-info/{unit_id}', 'App\Http\Controllers\IplController@getOwnerInfo')->name('get-owner-info');
+Route::get('/get-owner-info-by-name/{unitName}', [IplController::class, 'getOwnerInfoByName']);
 // Route::delete('/ipl/{ipl}', [IplController::class, 'destroy'])->name('ipl.destroy');
 Route::resource('ipl', IplController::class);

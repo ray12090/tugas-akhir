@@ -70,15 +70,27 @@ class IplController extends Controller
         ]);
     }
 
-    public function getOwnerInfo($unit_id)
+    public function getOwnerInfoByName($unitName)
     {
+        // Cari unit berdasarkan nama
+        $unit = Unit::where('unit', $unitName)->first();
+
+        if (!$unit) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unit tidak ditemukan.'
+            ]);
+        }
+
         // Ambil data kepenghunian dengan status 'pemilik' berdasarkan unit_id
-        $kepenghunian = Kepenghunian::where('unit_id', $unit_id)
+        $kepenghunian = Kepenghunian::where('unit_id', $unit->id)
             ->where('status', 'pemilik')
             ->first();
 
         if ($kepenghunian) {
             return response()->json([
+                'success' => true,
+                'unit' => $unit,
                 'nama' => $kepenghunian->nama,
                 'alamat' => $kepenghunian->alamat,
             ]);
@@ -86,10 +98,11 @@ class IplController extends Controller
 
         // Jika tidak ditemukan, kembalikan response kosong atau sesuaikan dengan kebutuhan Anda
         return response()->json([
-            'nama' => '',
-            'alamat' => '',
+            'success' => false,
+            'message' => 'Pemilik unit tidak ditemukan.'
         ]);
     }
+
     private function generateInitialInvoiceNumber()
     {
         $currentMonth = now()->format('m');
@@ -158,7 +171,6 @@ class IplController extends Controller
         Ipl::create($validatedData);
 
         return redirect()->route('ipl.index')->with('success', 'IPL created successfully.');
-
     }
 
     /**
