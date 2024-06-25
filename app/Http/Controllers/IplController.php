@@ -41,7 +41,7 @@ class IplController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create()
     {
         // Ambil no invoice terkahir
         $lastInvoice = Ipl::orderBy('id', 'desc')->first();
@@ -75,25 +75,23 @@ class IplController extends Controller
         // Cari unit berdasarkan nama
         $unit = Unit::where('unit', $unitName)->first();
 
-        // if (!$unit) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'message' => 'Unit tidak ditemukan.'
-        //     ]);
-        // }
+        if ($unit) {
+            // Ambil data kepenghunian dengan status 'pemilik' berdasarkan unit_id
+            $kepenghunian = Kepenghunian::where('unit_id', $unit->id)
+                ->where('status', 'pemilik')
+                ->first();
 
-        // Ambil data kepenghunian dengan status 'pemilik' berdasarkan unit_id
-        $kepenghunian = Kepenghunian::where('unit_id', $unit->id)
-            ->where('status', 'pemilik')
-            ->first();
-
-        if ($kepenghunian) {
-            return response()->json([
-                'success' => true,
-                'unit' => $unit,
-                'nama' => $kepenghunian->nama,
-                'alamat' => $kepenghunian->alamat,
-            ]);
+            if ($kepenghunian) {
+                return response()->json([
+                    'success' => true,
+                    'unit' => $unit,
+                    'kepenghunian' => [
+                        'id' => $kepenghunian->id,
+                    ],
+                    'nama' => $kepenghunian->nama,
+                    'alamat' => $kepenghunian->alamat,
+                ]);
+            }
         }
 
         // Jika tidak ditemukan, kembalikan response kosong atau sesuaikan dengan kebutuhan Anda
@@ -102,6 +100,7 @@ class IplController extends Controller
             'message' => 'Pemilik unit tidak ditemukan.'
         ]);
     }
+
 
     private function generateInitialInvoiceNumber()
     {
@@ -130,47 +129,73 @@ class IplController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreIplRequest $request)
+
+    public function store(Request $request)
     {
-        // Generate the invoice number again to ensure it hasn't changed
-        $lastInvoice = Ipl::orderBy('id', 'desc')->first();
-        $nextInvoiceNumber = $lastInvoice ? $this->generateNextInvoiceNumber($lastInvoice->nomor_invoice) : $this->generateInitialInvoiceNumber();
-
-        $validatedData = $request->validated();
-        $validatedData['nomor_invoice'] = $nextInvoiceNumber;
-
-        // Ensure the generated invoice number is unique
+        // Validasi input dari form
         $request->validate([
-            'nomor_invoice' => 'required|unique:ipls,nomor_invoice',
-            // Add other validation rules as needed
+            'nomor_invoice' => 'required|string',
+            'bulan_ipl' => 'required|string',
+            'tanggal_invoice' => 'required|date',
+            'jatuh_tempo' => 'required|date',
+            'unit_id' => 'required|exists:units,id',
+            'kepenghunian_id' => 'required|exists:kepenghunians,id',
+            'total_tagihan_belum_dibayar' => 'nullable|numeric',
+            'titipan_pengelolaan' => 'nullable|numeric',
+            'titipan_air' => 'nullable|numeric',
+            'iuran_pengelolaan' => 'nullable|numeric',
+            'dana_cadangan' => 'nullable|numeric',
+            'meter_air_awal' => 'nullable|numeric',
+            'meter_air_akhir' => 'nullable|numeric',
+            'denda' => 'nullable|numeric',
+            'status' => 'required|string',
+            'foto_bukti_pembayaran' => 'nullable|image|max:5120', // Maks 5MB
         ]);
 
-        // Retrieve the tarif information
-        $tarif = Tarif::findOrFail($validatedData['tarif_id']);
-        $hargaAir = $tarif->harga_air;
-        $biayaAdmin = $tarif->biaya_admin;
+        // Ambil data tarif
+        $tarif = Tarif::findOrFail($request->tarif_id);
 
-        // Calculate the usage and the costs
-        $meterAirAwal = $validatedData['meter_air_awal'];
-        $meterAirAkhir = $validatedData['meter_air_akhir'];
-        $pemakaianAir = $meterAirAkhir - $meterAirAwal;
-        $tagihanAir = $hargaAir * $pemakaianAir;
+        // Hitung pemakaian air
+        $pemakaian_air = $request->meter_air_akhir - $request->meter_air_awal;
+        $tagihan_air = $pemakaian_air * $tarif->harga_air;
+        $total_biaya_admin = $tarif->biaya_admin;
 
-        // Calculate the total
-        $total = $validatedData['total_tagihan_belum_dibayar'] +
-            $validatedData['titipan_pengelolaan'] +
-            $validatedData['titipan_air'] +
-            $validatedData['iuran_pengelolaan'] +
-            $validatedData['dana_cadangan'] +
-            $tagihanAir +
-            $biayaAdmin +
-            $validatedData['denda'];
+        // Hitung total akhir
+        $total_akhir = $request->total_tagihan_belum_dibayar + $request->titipan_pengelolaan + $request->titipan_air + $request->iuran_pengelolaan + $request->dana_cadangan + $tagihan_air + $total_biaya_admin + $request->denda;
 
-        $validatedData['total'] = $total;
+        // Simpan bukti pembayaran jika ada
+        if ($request->hasFile('foto_bukti_pembayaran')) {
+            $fotoBuktiPembayaran = $request->file('foto_bukti_pembayaran');
+            $fotoBuktiPembayaran->storeAs('public/bukti_pembayaran', $fotoBuktiPembayaran->hashName());
+        } else {
+            $fotoBuktiPembayaran = null;
+        }
 
-        Ipl::create($validatedData);
+        // Simpan data ke dalam tabel `ipls`
+        Ipl::create([
+            'nomor_invoice' => $request->nomor_invoice,
+            'bulan_ipl' => $request->bulan_ipl,
+            'tanggal_invoice' => $request->tanggal_invoice,
+            'jatuh_tempo' => $request->jatuh_tempo,
+            'unit_id' => $request->unit_id,
+            'kepenghunian_id' => $request->kepenghunian_id,
+            'total_tagihan_belum_dibayar' => $request->total_tagihan_belum_dibayar,
+            'titipan_pengelolaan' => $request->titipan_pengelolaan,
+            'titipan_air' => $request->titipan_air,
+            'iuran_pengelolaan' => $request->iuran_pengelolaan,
+            'dana_cadangan' => $request->dana_cadangan,
+            'meter_air_awal' => $request->meter_air_awal,
+            'meter_air_akhir' => $request->meter_air_akhir,
+            'tarif_id' => $request->tarif_id,
+            'pemakaian_air' => $pemakaian_air,
+            'tagihan_air' => $tagihan_air,
+            'denda' => $request->denda,
+            'total' => $total_akhir,
+            'foto_bukti_pembayaran' => $fotoBuktiPembayaran->hashName(),
+            'status' => $request->status,
+        ]);
 
-        return redirect()->route('ipl.index')->with('success', 'IPL created successfully.');
+        return redirect()->route('ipl.index')->with('success', 'Data pembayaran IPL berhasil ditambahkan.');
     }
 
     /**
@@ -178,7 +203,9 @@ class IplController extends Controller
      */
     public function show(Ipl $ipl)
     {
-        //
+        $tarif = Tarif::all();
+        $tarif = $tarif->first();
+        return view('ipl.ipl-read', compact('ipl', 'tarif'));
     }
 
     /**
@@ -186,16 +213,71 @@ class IplController extends Controller
      */
     public function edit(Ipl $ipl)
     {
-        //
+        $tarif = Tarif::all();
+        $tarif = $tarif->first();
+        return view('ipl.ipl-edit', compact('ipl', 'tarif'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateIplRequest $request, Ipl $ipl)
+    public function update(Request $request, Ipl $ipl): RedirectResponse
     {
-        //
+        // Validate the form
+        $request->validate([
+            'nomor_invoice' => 'required|string',
+            'bulan_ipl' => 'required|string',
+            'tanggal_invoice' => 'required|date',
+            'jatuh_tempo' => 'required|date',
+            'unit_id' => 'required|exists:units,id',
+            'kepenghunian_id' => 'required|exists:kepenghunians,id',
+            'total_tagihan_belum_dibayar' => 'nullable|numeric',
+            'titipan_pengelolaan' => 'nullable|numeric',
+            'titipan_air' => 'nullable|numeric',
+            'iuran_pengelolaan' => 'nullable|numeric',
+            'dana_cadangan' => 'nullable|numeric',
+            'meter_air_awal' => 'nullable|numeric',
+            'meter_air_akhir' => 'nullable|numeric',
+            'denda' => 'nullable|numeric',
+            'status' => 'required|string',
+            'foto_bukti_pembayaran' => 'nullable|image|max:5120', // Maks 5MB
+        ]);
+
+        // Prepare data for update
+        $tarif = Tarif::findOrFail($request->tarif_id);
+        $pemakaian_air = $request->meter_air_akhir - $request->meter_air_awal;
+        $tagihan_air = $pemakaian_air * $tarif->harga_air;
+        $total_biaya_admin = $tarif->biaya_admin;
+
+        $total_akhir = ($request->total_tagihan_belum_dibayar ?? 0) +
+            ($request->titipan_pengelolaan ?? 0) +
+            ($request->titipan_air ?? 0) +
+            ($request->iuran_pengelolaan ?? 0) +
+            ($request->dana_cadangan ?? 0) +
+            $tagihan_air +
+            $total_biaya_admin +
+            ($request->denda ?? 0);
+
+        $data = $request->except('foto_bukti_pembayaran');
+        $data['pemakaian_air'] = $pemakaian_air;
+        $data['tagihan_air'] = $tagihan_air;
+        $data['total'] = $total_akhir;
+
+        // Handle file upload for foto_bukti_pembayaran
+        if ($request->hasFile('foto_bukti_pembayaran')) {
+            $image = $request->file('foto_bukti_pembayaran');
+            $image->storeAs('public/bukti_pembayaran', $image->hashName());
+            $data['foto_bukti_pembayaran'] = $image->hashName();
+        }
+
+        // Update IPL record
+        $ipl->update($data);
+
+        // Redirect with success message
+        return redirect()->route('ipl.index')->with('success', 'Data pembayaran IPL berhasil diperbarui.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
