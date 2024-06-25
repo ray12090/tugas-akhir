@@ -75,12 +75,12 @@ class IplController extends Controller
         // Cari unit berdasarkan nama
         $unit = Unit::where('unit', $unitName)->first();
 
-        if (!$unit) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Unit tidak ditemukan.'
-            ]);
-        }
+        // if (!$unit) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Unit tidak ditemukan.'
+        //     ]);
+        // }
 
         // Ambil data kepenghunian dengan status 'pemilik' berdasarkan unit_id
         $kepenghunian = Kepenghunian::where('unit_id', $unit->id)

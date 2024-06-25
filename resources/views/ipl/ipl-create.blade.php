@@ -367,14 +367,13 @@
             const namaInput = document.getElementById('nama');
             const alamatInput = document.getElementById('alamat');
 
-            // Function to set the unit ID and fetch owner info
             function setUnitIdAndFetchOwnerInfo(unitName) {
                 unitIdInput.value = ''; // Clear previous value
                 namaInput.value = ''; // Clear previous value
                 alamatInput.value = ''; // Clear previous value
 
-                if (unitName.trim() === '') {
-                    return; // Skip empty input
+                if (unitName.trim().length < 6) {
+                    return; // Skip if less than 6 characters
                 }
 
                 fetch(`/get-owner-info-by-name/${unitName}`)
@@ -395,17 +394,14 @@
 
             const debouncedFetch = debounce(setUnitIdAndFetchOwnerInfo, 500);
 
-            // Event listener for input changes with debounce
             unitInput.addEventListener('input', function() {
                 debouncedFetch(unitInput.value.trim());
             });
 
-            // Event listener for blur event to handle input after typing
             unitInput.addEventListener('blur', function() {
-                setUnitIdAndFetchOwnerInfo(unitInput.value.trim());
-
-                // Provide feedback if no match is found
-                if (!unitIdInput.value) {
+                if (unitInput.value.trim().length >= 6) {
+                    setUnitIdAndFetchOwnerInfo(unitInput.value.trim());
+                } else {
                     alert('Unit ID tidak ditemukan. Pastikan unit name yang dimasukkan benar.');
                 }
             });
