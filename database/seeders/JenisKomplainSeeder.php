@@ -5,20 +5,17 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Komplain;
-use App\Models\Unit;
-use Illuminate\Support\Str;
 
-
-class KomplainSeeder extends Seeder
+class JenisKomplainSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        
+        DB::table('jenis_komplain')->insert([
+            ['jenis_komplain' => 'Keluhan'],
+            ['jenis_komplain' => 'Permintaan'],
+        ]);
     }
 }

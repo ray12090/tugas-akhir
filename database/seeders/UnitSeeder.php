@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Unit;
+use App\Models\Lantai;
+use App\Models\Tower;
 
 class UnitSeeder extends Seeder
 {
@@ -16,26 +18,18 @@ class UnitSeeder extends Seeder
      */
     public function run()
     {
-        // Disable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        $lantais = Lantai::with('tower')->get();
 
-        // Truncate the table
-        Unit::truncate();
+        foreach ($lantais as $lantai) {
+            for ($i = 1; $i <= 10; $i++) {
+                $unit_number = str_pad($i, 2, '0', STR_PAD_LEFT);
+                $unit_name = $lantai->tower->tower . '-' . str_pad($lantai->lantai, 2, '0', STR_PAD_LEFT) . $unit_number;
 
-        // Re-enable foreign key checks
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-        // Create 10 dummy units
-        for ($i = 1; $i <= 10; $i++) {
-            $tower = chr(64 + $i);
-            $lantai = rand(1, 20);
-            $nomor_unit = $i;
-
-            Unit::create([
-                'tower' => $tower,
-                'lantai' => sprintf('%02d', $lantai),
-                'unit' => $tower . '-' . sprintf('%02d', $lantai) . sprintf('%02d', $nomor_unit),
-            ]);
+                Unit::create([
+                    'lantai_id' => $lantai->id,
+                    'unit' => $unit_name,
+                ]);
+            }
         }
     }
 }

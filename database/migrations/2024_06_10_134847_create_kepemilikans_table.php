@@ -11,19 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kepenghunians', function (Blueprint $table) {
+        Schema::create('kepemilikans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('unit_id');
             $table->date('tanggal_huni');
             $table->string('status');
-            $table->string('nama');
-            $table->bigInteger('no_hp');
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
-            $table->string('warga_negara');
-            $table->bigInteger('no_ktp');
-            $table->string('agama');
-            $table->string('alamat');
             $table->date('awal_sewa');
             $table->date('akhir_sewa');
             $table->timestamps();

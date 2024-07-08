@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             TarifSeeder::class,
+            TowerSeeder::class,
+            LantaiSeeder::class,
             UnitSeeder::class,
             KepenghunianSeeder::class,
             KomplainSeeder::class,

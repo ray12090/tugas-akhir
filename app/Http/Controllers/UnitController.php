@@ -22,11 +22,10 @@ class UnitController extends Controller
     $units = Unit::query()
         ->when($search, function ($query, $search) {
             return $query->where('unit', 'like', "%{$search}%")
-                ->orWhere('tower', 'like', "%{$search}%")
                 ->orWhere('lantai', 'like', "%{$search}%");
         })
         ->orderBy($sortBy, $sortOrder)
-        ->paginate(5);
+        ->paginate(10);
 
     return view('unit.unit', compact('units', 'sortBy', 'sortOrder'));
 }

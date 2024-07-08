@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Unit extends Model
 {
     use HasFactory;
-    protected $fillable = ['tower', 'lantai', 'unit'];
+    protected $fillable = ['lantai_id', 'unit'];
 
     public function kepenghunians()
     {

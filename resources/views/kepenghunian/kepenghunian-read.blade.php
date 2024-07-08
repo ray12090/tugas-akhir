@@ -30,41 +30,43 @@
                         <form>
                             @csrf
                             <div class="grid gap-4 sm:grid-cols-3 sm:gap-6">
-                                <div class="w-full">
-                                    <label for="unit_name"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ __('No. Unit') }}
-                                    </label>
-                                    <div class="relative">
-                                        <input type="text" id="unit_name" name="unit_name" placeholder="X-1234"
-                                            value="{{ $kepenghunian->unit->unit ?? '' }}" disabled
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd"
-                                                d="M4 4a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2v14a1 1 0 1 1 0 2H5a1 1 0 1 1 0-2V5a1 1 0 0 1-1-1Zm5 2a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-1Zm-5 4a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-1Zm-3 4a2 2 0 0 0-2 2v3h2v-3h2v3h2v-3a2 2 0 0 0-2-2h-2Z"
-                                                clip-rule="evenodd" />
-                                        </svg>
+                                <div class="sm:col-span-1 grid gap-4 sm:grid-cols-3 sm:gap-6">
+                                    <div class="w-full">
+                                        <label for="unit_name"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            {{ __('No. Unit') }}
+                                        </label>
+                                        <div class="relative">
+                                            <input type="text" id="unit_name" name="unit_name" placeholder="X-1234"
+                                                value="{{ $kepenghunian->unit->unit ?? '' }}" disabled
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                <path fill-rule="evenodd"
+                                                    d="M4 4a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2v14a1 1 0 1 1 0 2H5a1 1 0 1 1 0-2V5a1 1 0 0 1-1-1Zm5 2a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-1Zm-5 4a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-1Zm-3 4a2 2 0 0 0-2 2v3h2v-3h2v3h2v-3a2 2 0 0 0-2-2h-2Z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="w-full">
-                                    <label for="tanggal_huni"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Tanggal Huni') }}</label>
-                                    <input type="date" name="tanggal_huni" id="tanggal_huni"
-                                        value="{{ $kepenghunian->tanggal_huni }}" disabled
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        required>
-                                </div>
-                                <div class="w-full mb-4">
-                                    <label for="status"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Status') }}</label>
-                                    <select name="status" id="status" value="{{ $kepenghunian->status }}" disabled
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        onchange="toggleMasaHuniInput()">
-                                        <option value="Pemilik">Pemilik</option>
-                                        <option value="Penyewa">Penyewa</option>
-                                    </select>
+                                    <div class="w-full">
+                                        <label for="tanggal_huni"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Tanggal Huni') }}</label>
+                                        <input type="date" name="tanggal_huni" id="tanggal_huni"
+                                            value="{{ $kepenghunian->tanggal_huni }}" disabled
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            required>
+                                    </div>
+                                    <div class="w-full mb-4">
+                                        <label for="status"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Status') }}</label>
+                                        <select name="status" id="status" value="{{ $kepenghunian->status }}" disabled
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            onchange="toggleMasaHuniInput()">
+                                            <option value="Pemilik">Pemilik</option>
+                                            <option value="Penyewa">Penyewa</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="sm:col-span-3 ">
                                     <div class=" text-gray-900 text-lg font-semibold">
@@ -97,7 +99,7 @@
                                     <div class="w-full">
                                         <label for="no_hp"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('No.HP') }}
+                                            {{ __('No. HP') }}
                                         </label>
                                         <div class="relative">
                                             <input type="text" name="no_hp" id="no_hp"
@@ -150,7 +152,7 @@
                                 <div class="w-full">
                                     <label for="no_ktp"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ __('No.KTP') }}
+                                        {{ __('No. KTP') }}
                                     </label>
                                     <div class="relative">
                                         <input type="text" name="no_ktp" id="no_ktp"

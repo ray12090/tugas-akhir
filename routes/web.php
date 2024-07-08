@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\TowerController;
+use App\Http\Controllers\LantaiController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\KepenghunianController;
 use App\Http\Controllers\DashboardController;
@@ -40,6 +42,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 'eg']);
     Route::get('dashboard', [UsersController::class, 'index'])->middleware(['auth', 'fa']);
 });
+
+Route::resource('tower', TowerController::class);
+
+Route::resource('lantai', LantaiController::class);
 
 route::get('unit', [UnitController::class, 'index'])->name('unit');
 // route::get('kepenghunian', [KepenghunianController::class, 'index'])->name('kepenghunian');
