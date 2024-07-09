@@ -8,29 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Komplain extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'nomor_laporan',
-        'tanggal_laporan',
-        'unit_id',
-        'kategori_laporan',
-        'nama_pelapor',
-        'nomor_kontak',
-        'uraian_komplain',
-        'kategori',
-        'respon',
-        'analisis_awal',
-        'keterangan_selesai',
-        'foto_analisis_awal',
-        'foto_hasil_perbaikan'
-    ];
-
-    protected $casts = [
-        'kategori' => 'array',
+        'nomor_laporan', 'tanggal_laporan', 'unit_id', 'jenis_komplain_id',
+        'nama_pelapor', 'no_hp', 'uraian_komplain', 'foto_komplain'
     ];
 
     public function unit()
     {
         return $this->belongsTo(Unit::class);
     }
+
+    public function jenisKomplain()
+    {
+        return $this->belongsTo(JenisKomplain::class);
+    }
+
+    public function bagianKomplains()
+    {
+        return $this->belongsToMany(BagianKomplain::class, 'komplain_bagians', 'komplain_id', 'bagian_komplain_id');
+    }
+
 }

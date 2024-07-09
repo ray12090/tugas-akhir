@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class statusKomplain extends Model
+class biayaAdmin extends Model
 {
-    protected $fillable = [
-        'status_komplain',
-    ];
+    use HasFactory;
 
-    public function komplain()
-    {
-        return $this->hasMany(Komplain::class);
-    }
+    protected $fillable = [
+        'biaya_admin',
+    ];
 }

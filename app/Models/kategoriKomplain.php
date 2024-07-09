@@ -9,7 +9,7 @@ class kategoriKomplain extends Model
 {
     protected $fillable = ['nama_kategori'];
 
-    public function penangananKomplains()
+    public function penangananKomplain()
     {
         return $this->belongsToMany(PenangananKomplain::class, 'penanganan_komplain_kategori');
     }

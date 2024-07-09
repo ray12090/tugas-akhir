@@ -16,16 +16,15 @@ return new class extends Migration
             $table->string('nomor_laporan')->unique();
             $table->date('tanggal_laporan');
             $table->unsignedBigInteger('unit_id');
-            $table->unsignedBigInteger('jenis_komplain');
+            $table->unsignedBigInteger('jenis_komplain_id');
             $table->text('nama_pelapor');
             $table->bigInteger('no_hp');
-            $table->unsignedBigInteger('bagian_komplain');
-            $table->text('uraian_komplain');
+            $table->text('uraian_komplain')->nullable();
+            $table->string('foto_komplain')->nullable();
+            $table->timestamps();
 
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
-            $table->foreign('jenis_komplain')->references('id')->on('jenis_komplains')->onDelete('cascade');
-            $table->foreign('bagian_komplain')->references('id')->on('bagian_komplains')->onDelete('cascade');
-            $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
+            $table->foreign('jenis_komplain_id')->references('id')->on('jenis_komplains')->onDelete('cascade');
         });
     }
 

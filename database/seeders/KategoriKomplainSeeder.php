@@ -13,7 +13,7 @@ class KategoriKomplainSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('kategori_komplain')->insert([
+        DB::table('kategori_komplains')->insert([
             ['kategori_komplain' => 'Air'],
             ['kategori_komplain' => 'Kebersihan'],
             ['kategori_komplain' => 'Keamanan'],

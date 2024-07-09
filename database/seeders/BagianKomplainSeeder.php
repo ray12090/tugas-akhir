@@ -13,7 +13,7 @@ class BagianKomplainSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('bagian_komplain')->insert([
+        DB::table('bagian_komplains')->insert([
             ['bagian_komplain' => 'Kamar Tidur'],
             ['bagian_komplain' => 'Kamar Mandi'],
             ['bagian_komplain' => 'Ruang Tamu'],

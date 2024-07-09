@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class jenisKomplain extends Model
 {
-    use HasFactory;
+    protected $fillable = ['jenis_komplain'];
+
+    public function komplain()
+    {
+        return $this->hasMany(Komplain::class);
+    }
 }

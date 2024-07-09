@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class detailAgama extends Model
+class detailKewarganegaraan extends Model
 {
-    use HasFactory;
     protected $fillable = [
-        'agama',
+        'status_kewarganegaraan'
     ];
 
     public function pemilik()

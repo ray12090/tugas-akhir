@@ -6,16 +6,19 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class JenisKomplainSeeder extends Seeder
+class HargaAirSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        DB::table('jenis_komplains')->insert([
-            ['jenis_komplain' => 'Keluhan'],
-            ['jenis_komplain' => 'Permintaan'],
+        DB::table('harga_airs')->insert([
+            [
+                'harga_air' => '12600',
+            ]
         ]);
     }
 }

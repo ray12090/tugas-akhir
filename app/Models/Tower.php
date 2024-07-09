@@ -9,4 +9,9 @@ class Tower extends Model
 {
     use HasFactory;
     protected $fillable = ['tower'];
+
+    public function lantai()
+    {
+        return $this->hasMany(Lantai::class);
+    }
 }

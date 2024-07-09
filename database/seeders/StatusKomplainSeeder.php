@@ -13,7 +13,7 @@ class StatusKomplainSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('status_komplain')->insert([
+        DB::table('status_komplains')->insert([
             ['status_komplain' => 'Belum Diproses'],
             ['status_komplain' => 'Sedang Diproses'],
             ['status_komplain' => 'Selesai'],

@@ -10,25 +10,17 @@ class Unit extends Model
     use HasFactory;
     protected $fillable = ['lantai_id', 'unit'];
 
-    public function kepenghunians()
+    public function lantai()
     {
-        return $this->hasMany(Kepenghunian::class, 'unit_id');
+        return $this->belongsTo(Lantai::class, 'lantai_id', 'id');
+    }
+    public function kepemilikan()
+    {
+        return $this->hasMany(Kepemilikan::class, 'unit_id');
     }
 
-    public function komplains()
+    public function komplain()
     {
         return $this->hasMany(Komplain::class, 'unit_id');
-    }
-
-    public function pemilik()
-    {
-        return $this->hasOne(Kepenghunian::class, 'unit_id')
-                    ->where('status', 'pemilik');
-    }
-
-    public function penyewas()
-    {
-        return $this->hasMany(Kepenghunian::class, 'unit_id')
-                    ->where('status', 'penyewa');
     }
 }

@@ -14,4 +14,9 @@ class Lantai extends Model
     {
         return $this->belongsTo(Tower::class, 'tower_id', 'id');
     }
+
+    public function unit()
+    {
+        return $this->hasMany(Unit::class);
+    }
 }

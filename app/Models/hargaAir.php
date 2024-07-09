@@ -11,6 +11,5 @@ class Tarif extends Model
 
     protected $fillable = [
         'harga_air',
-        'biaya_admin'
     ];
 }
