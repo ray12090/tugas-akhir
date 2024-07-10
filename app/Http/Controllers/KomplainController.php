@@ -31,13 +31,12 @@ class KomplainController extends Controller
                     ->orWhere('unit', 'like', "%{$search}%")
                     ->orWhere('jenis_komplain', 'like', "%{$search}%")
                     ->orWhere('nama_pelapor', 'like', "%{$search}%")
-                    ->orWhere('no_hp', 'like', "%{$search}%")
-                    ->orWhere('bagian_komplain', 'like', "%{$search}%");
+                    ->orWhere('no_hp', 'like', "%{$search}%");
             })
             ->orderBy($sort_by, $sort_order)
             ->paginate(10);
 
-            // dd($komplains);
+        // dd($komplains);
 
         return view('komplain.komplain', compact('komplains', 'sort_by', 'sort_order'));
     }
@@ -65,7 +64,7 @@ class KomplainController extends Controller
             'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
             'nama_pelapor' => 'required|string',
             'no_hp' => 'required|numeric',
-            'uraian_komplain' => 'required|string',
+            'uraian_komplain' => 'nullable|string',
             'bagian_komplain_id' => 'required|array',
             'bagian_komplain_id.*' => 'exists:bagian_komplains,id',
             'foto_komplain' => 'nullable|image'
@@ -87,6 +86,7 @@ class KomplainController extends Controller
     }
 
 
+
     /**
      * Display the specified resource.
      */
@@ -102,9 +102,9 @@ class KomplainController extends Controller
     public function edit(Komplain $komplain)
     {
         $units = Unit::all();
-        $jenisKomplain = JenisKomplain::all();
-        $bagianKomplain = BagianKomplain::all();
-        return view('komplain.komplain-edit', compact('komplain', 'units'));
+        $jenisKomplains = JenisKomplain::all();
+        $bagianKomplains = BagianKomplain::all();
+        return view('komplain.komplain-edit', compact('komplain', 'units', 'jenisKomplains', 'bagianKomplains'));
     }
 
     public function update(Request $request, $id): RedirectResponse
@@ -116,7 +116,7 @@ class KomplainController extends Controller
             'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
             'nama_pelapor' => 'required|string',
             'no_hp' => 'required|numeric',
-            'uraian_komplain' => 'required|string',
+            'uraian_komplain' => 'nullable|string',
             'bagian_komplain_id' => 'required|array',
             'bagian_komplain_id.*' => 'exists:bagian_komplains,id',
             'foto_komplain' => 'nullable|image'
@@ -135,7 +135,6 @@ class KomplainController extends Controller
 
         $komplain->bagianKomplains()->sync($request->bagian_komplain_id);
 
-        // Redirect with success message
         return back()->with('success', 'Komplain berhasil diperbarui.');
     }
 

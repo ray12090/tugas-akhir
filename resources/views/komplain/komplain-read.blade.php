@@ -26,39 +26,49 @@
                         <form>
                             @csrf
                             <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
-                                <div class="sm:col-span-2">
-                                    <label for="nomor_laporan"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ __('Nomor Laporan') }}
-                                    </label>
-                                    <div class="relative">
-                                        <input type="text" name="nomor_laporan" id="nomor_laporan"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Nomor Laporan" value="{{ $komplain->nomor_laporan }}" readonly>
-                                        <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd"
-                                                d="M7 2a2 2 0 0 0-2 2v1a1 1 0 0 0 0 2v1a1 1 0 0 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7Zm3 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1Z"
-                                                clip-rule="evenodd" />
-                                        </svg>
+                                <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
+                                    <div class="sm:col-span-1">
+                                        <label for="jenis_komplain"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kategori Laporan') }}</label>
+                                        <input type="text" name="jenis_komplain" id="jenis_komplain"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            value="{{ $komplain->jenisKomplain->jenis_komplain }}" readonly>
+                                    </div>
+                                    <div class="sm:col-span-3">
+                                        <label for="nomor_laporan"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            {{ __('Nomor Laporan') }}
+                                        </label>
+                                        <div class="relative">
+                                            <input type="text" name="nomor_laporan" id="nomor_laporan"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="Nomor Laporan" value="{{ $komplain->nomor_laporan }}" readonly>
+                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                <path fill-rule="evenodd"
+                                                    d="M7 2a2 2 0 0 0-2 2v1a1 1 0 0 0 0 2v1a1 1 0 0 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7Zm3 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1Z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-2">
-                                    <label for="tanggal_laporan"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Tanggal Laporan') }}</label>
-                                    <input type="date" name="tanggal_laporan" id="tanggal_laporan"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        value="{{ $komplain->tanggal_laporan }}" readonly>
-                                </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-2">
-                                    <label for="jenis_komplain"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kategori Laporan') }}</label>
-                                    <input type="text" name="jenis_komplain" id="jenis_komplain"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        value="{{ $komplain->jenisKomplain->jenis_komplain }}" readonly>
+                                    <label for="tanggal_laporan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ __('Tanggal Laporan') }}
+                                    </label>
+                                    <div class="relative max-w">
+                                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                <path fill-rule="evenodd" d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <input id="tanggal_laporan" name="tanggal_laporan" type="text" datepicker datepicker-format="yyyy-mm-dd" datepicker-buttons
+                                            datepicker-autoselect-today
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="Pilih tanggal" value="{{ $komplain->tanggal_laporan }}" disabled>
+                                    </div>
                                 </div>
                                 <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-2">
@@ -87,7 +97,7 @@
                                         {{ __('Identitas Pelapor') }}
                                     </div>
                                 </div>
-                                <div class="w-full">
+                                <div class="sm:col-span-2">
                                     <label for="nama_pelapor"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Nama Pelapor') }}
@@ -105,7 +115,8 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="w-full">
+                                <div class="sm:col-span-2"></div>
+                                <div class="sm:col-span-2">
                                     <label for="no_hp"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('No. HP') }}
@@ -123,7 +134,6 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="w-full"></div>
                                 <div class="sm:col-span-4">
                                     <div class=" text-gray-900 text-lg font-semibold">
                                         {{ __('Isi Komplain') }}
@@ -151,9 +161,9 @@
                                 </div>
                                 <div class="sm:col-span-2"></div>
                                 <div class="w-full">
-                                    <label for="foto_hasil_perbaikan"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Hasil Perbaikan') }}</label>
-                                    @if ($komplain->foto_hasil_perbaikan)
+                                    <label for="foto_komplain"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Komplain') }}</label>
+                                    @if ($komplain->foto_komplain)
                                         <div>
                                             <img src="{{ asset('storage/foto_komplain/' . $komplain->foto_komplain) }}"
                                                 alt="Foto Komplain" class="w-full h-auto rounded-lg">

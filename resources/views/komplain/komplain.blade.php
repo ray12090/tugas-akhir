@@ -147,19 +147,7 @@
                                         </a>
                                     </th>
                                     <th class="w-1/6 p-4">
-                                        <a
-                                            href="{{ route('komplain.index', ['sort_by' => 'bagian_komplain', 'sort_order' => $sort_by === 'bagian_komplain' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('Bagian Komplain') }}
-                                            @if ($sort_by === 'bagian_komplain')
-                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
-                                                    </path>
-                                                </svg>
-                                            @endif
-                                        </a>
+                                        {{ __('Bagian Komplain') }}
                                     </th>
                                     <th class="w-1/6 p-4 text-center">{{ __('Aksi') }}</th>
                                 </tr>
