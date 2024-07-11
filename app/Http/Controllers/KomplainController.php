@@ -60,6 +60,7 @@ class KomplainController extends Controller
             'tanggal_laporan' => 'required|date',
             'unit_id' => 'required|exists:units,id',
             'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
+            'status_komplain_id' => 'required|exists:status_komplains,id',
             'nama_pelapor' => 'required|string',
             'no_hp' => 'required|numeric',
             'uraian_komplain' => 'nullable|string',
@@ -112,6 +113,7 @@ class KomplainController extends Controller
             'tanggal_laporan' => 'required|date',
             'unit_id' => 'required|exists:units,id',
             'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
+            'status_komplain_id' => 'required|exists:status_komplains,id', // 'status_komplain_id' => 'required|exists:status_komplains,id
             'nama_pelapor' => 'required|string',
             'no_hp' => 'required|numeric',
             'uraian_komplain' => 'nullable|string',

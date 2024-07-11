@@ -28,11 +28,12 @@ class DatabaseSeeder extends Seeder
             // KepenghunianSeeder::class,
             JenisKomplainSeeder::class,
             LokasiKomplainSeeder::class,
+            StatusKomplainSeeder::class,
             KomplainSeeder::class,
             komplainLokasiPivotSeeder::class,
             KategoriPenangananSeeder::class,
             StatusKomplainSeeder::class,
-            PenangananKomplainSeeder::class,
+            PenangananSeeder::class,
             KomplainSeeder::class,
         ]);
     }

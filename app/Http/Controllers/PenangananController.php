@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\penangananKomplain;
+use App\Models\Penanganan;
 use Illuminate\Http\Request;
 
-class PenangananKomplainController extends Controller
+class PenangananController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class PenangananKomplainController extends Controller
         $sort_by = $request->input('sort_by', 'tanggal_laporan');
         $sort_order = $request->input('sort_order', 'desc');
 
-        $komplains = Komplain::with('unit', 'jenisKomplain', 'bagianKomplains')
+        $penanganans = Penanganan::with('unit', 'jenisKomplain', 'lokasiKomplains')
             ->when($search, function ($query, $search) {
-                return $query->where('nomor_laporan', 'like', "%{$search}%")
+                return $query->where('nomor_penanganan', 'like', "%{$search}%")
                     ->orWhere('tanggal_laporan', 'like', "%{$search}%")
                     ->orWhere('unit', 'like', "%{$search}%")
                     ->orWhere('jenis_komplain', 'like', "%{$search}%")

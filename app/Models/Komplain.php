@@ -9,7 +9,7 @@ class Komplain extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nomor_laporan', 'tanggal_laporan', 'unit_id', 'jenis_komplain_id',
+        'nomor_laporan', 'tanggal_laporan', 'unit_id', 'jenis_komplain_id', 'status_komplain_id',
         'nama_pelapor', 'no_hp', 'uraian_komplain', 'foto_komplain'
     ];
 
@@ -28,8 +28,13 @@ class Komplain extends Model
         return $this->belongsToMany(LokasiKomplain::class, 'komplain_lokasi_pivot', 'komplain_id', 'lokasi_komplain_id');
     }
 
-    public function penangananKomplain()
+    public function statusKomplain()
     {
-        return $this->belongsTo(PenangananKomplain::class);
+        return $this->belongsTo(StatusKomplain::class);
+    }
+
+    public function Penanganan()
+    {
+        return $this->belongsTo(Penanganan::class);
     }
 }

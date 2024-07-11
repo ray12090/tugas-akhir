@@ -9,7 +9,7 @@ use App\Models\Komplain;
 use App\Models\Unit;
 use App\Models\JenisKomplain;
 use App\Models\LokasiKomplain;
-use app\Models\komplainBagian;
+use App\Models\statusKomplain;
 use Illuminate\Support\Str;
 
 
@@ -25,12 +25,13 @@ class KomplainSeeder extends Seeder
         $units = Unit::all();
         $jenisKomplains = JenisKomplain::all();
         $lokasiKomplains = LokasiKomplain::all();
+        $statusKomplains = StatusKomplain::all();
 
         for ($i = 0; $i < 10; $i++) {
             $unit = $units->random();
             $jenisKomplain = $jenisKomplains->random();
+            $statusKomplain = $statusKomplains->random();
 
-            // Generate a random number with maximum 6 digits
             $nomor_laporan = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
             $komplain = Komplain::create([
@@ -38,6 +39,7 @@ class KomplainSeeder extends Seeder
                 'tanggal_laporan' => now()->subDays(rand(0, 30)),
                 'unit_id' => $unit->id,
                 'jenis_komplain_id' => $jenisKomplain->id,
+                'status_komplain_id' => $statusKomplain->id,
                 'nama_pelapor' => 'Pelapor ' . ($i + 1),
                 'no_hp' => '08123456789' . rand(0, 9),
                 'uraian_komplain' => 'Uraian komplain ' . ($i + 1),

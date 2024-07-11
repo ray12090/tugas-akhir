@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class statusKomplain extends Model
 {
+    use HasFactory;
     protected $fillable = [
-        'status_komplain',
+        'nama_status_komplain',
     ];
 
     public function komplain()

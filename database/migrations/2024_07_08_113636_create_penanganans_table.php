@@ -15,16 +15,25 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('komplain_id');
             $table->string('nomor_penanganan')->unique();
-            $table->date('tanggal_laporan');
-            $table->text('respon')->nullable();
+            $table->text('respon_awal')->nullable();
             $table->text('pemeriksaan_awal')->nullable();
-            $table->text('keterangan_selesai')->nullable();
-            $table->string('foto_pemeriksaan_awal')->nullable();
-            $table->string('foto_hasil_perbaikan')->nullable();
+            $table->text('penyelesaian_komplain')->nullable();
+            $table->json('foto_pemeriksaan_awal')->nullable();
+            $table->json('foto_hasil_perbaikan')->nullable();
+            $table->tinyInteger('persetujuan_selesai_tr')->default(0);
+            $table->tinyInteger('persetujuan_selesai_pelaksana')->default(0);
+            $table->timestamp('tanggal_penanganan')->nullable();
             $table->timestamps();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
 
             $table->foreign('komplain_id')->references('id')->on('komplains')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null');
+
+            $table->index('komplain_id');
         });
+
     }
 
     /**

@@ -46,8 +46,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function penangananKomplain()
+    public function Penanganan()
     {
-        return $this->belongsToMany(penangananKomplain::class);
+        return $this->belongsToMany(Penanganan::class);
     }
 }
