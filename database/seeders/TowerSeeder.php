@@ -16,10 +16,10 @@ class TowerSeeder extends Seeder
     {
         DB::table('towers')->insert([
             [
-                'tower' => 'A'
+                'nama_tower' => 'A'
             ],
             [
-                'tower' => 'B'
+                'nama_tower' => 'B'
             ]
         ]);
     }

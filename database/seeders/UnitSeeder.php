@@ -23,11 +23,11 @@ class UnitSeeder extends Seeder
         foreach ($lantais as $lantai) {
             for ($i = 1; $i <= 10; $i++) {
                 $unit_number = str_pad($i, 2, '0', STR_PAD_LEFT);
-                $unit_name = $lantai->tower->tower . '-' . str_pad($lantai->lantai, 2, '0', STR_PAD_LEFT) . $unit_number;
+                $unit_name = $lantai->tower->nama_tower . '-' . str_pad($lantai->nama_lantai, 2, '0', STR_PAD_LEFT) . $unit_number;
 
                 Unit::create([
                     'lantai_id' => $lantai->id,
-                    'unit' => $unit_name,
+                    'nama_unit' => $unit_name,
                 ]);
             }
         }

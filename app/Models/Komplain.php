@@ -23,9 +23,13 @@ class Komplain extends Model
         return $this->belongsTo(JenisKomplain::class);
     }
 
-    public function bagianKomplains()
+    public function lokasiKomplains()
     {
-        return $this->belongsToMany(BagianKomplain::class, 'komplain_bagians', 'komplain_id', 'bagian_komplain_id');
+        return $this->belongsToMany(LokasiKomplain::class, 'komplain_lokasi_pivot', 'komplain_id', 'lokasi_komplain_id');
     }
 
+    public function penangananKomplain()
+    {
+        return $this->belongsTo(PenangananKomplain::class);
+    }
 }

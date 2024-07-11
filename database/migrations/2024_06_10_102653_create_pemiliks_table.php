@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('pemiliks', function (Blueprint $table) {
             $table->id();
+            $table->string('nik');
+            $table->unsignedBigInteger('warga_negara_id');
+            $table->unsignedBigInteger('agama_id');
+            $table->unsignedBigInteger('perkawinan_id');
             $table->string('nama_pemilik');
             $table->string('no_hp');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
-            $table->unsignedBigInteger('warga_negara_id');
-            $table->string('nik');
-            $table->unsignedBigInteger('agama_id');
-            $table->unsignedBigInteger('perkawinan_id');
             $table->string('alamat');
             $table->timestamps();
 

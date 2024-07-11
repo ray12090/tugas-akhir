@@ -14,10 +14,10 @@ class StatusKomplainSeeder extends Seeder
     public function run(): void
     {
         DB::table('status_komplains')->insert([
-            ['status_komplain' => 'Belum Diproses'],
-            ['status_komplain' => 'Sedang Diproses'],
-            ['status_komplain' => 'Selesai'],
-            ['status_komplain' => 'Ditolak'],
+            ['nama_status_komplain' => 'Belum Diproses'],
+            ['nama_status_komplain' => 'Sedang Diproses'],
+            ['nama_status_komplain' => 'Selesai'],
+            ['nama_status_komplain' => 'Ditolak'],
         ]);
     }
 }

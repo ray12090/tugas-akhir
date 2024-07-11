@@ -8,7 +8,7 @@ use App\Http\Requests\StoreKepenghunianRequest;
 use App\Http\Requests\UpdateKepenghunianRequest;
 use Illuminate\Http\Request;
 
-class KepemilikanController extends Controller
+class PemilikUnitController extends Controller
 {
     /**
      * Display a listing of the resource.

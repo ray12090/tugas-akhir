@@ -14,8 +14,8 @@ class JenisKomplainSeeder extends Seeder
     public function run(): void
     {
         DB::table('jenis_komplains')->insert([
-            ['jenis_komplain' => 'Keluhan'],
-            ['jenis_komplain' => 'Permintaan'],
+            ['nama_jenis_komplain' => 'Keluhan'],
+            ['nama_jenis_komplain' => 'Permintaan'],
         ]);
     }
 }

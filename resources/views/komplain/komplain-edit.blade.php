@@ -1,6 +1,6 @@
 <x-app-layout>
     <div>
-        <div class="pb-6">
+        <div class="">
             @include('components.alert')
             {{-- @include('components.breadcrumbs', [
                 'breadcrumbs' => [
@@ -37,7 +37,7 @@
                                             @foreach ($jenisKomplains as $jenis)
                                                 <option value="{{ $jenis->id }}"
                                                     {{ $jenis->id == $komplain->jenis_komplain_id ? 'selected' : '' }}>
-                                                    {{ $jenis->jenis_komplain }}
+                                                    {{ $jenis->nama_jenis_komplain }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -93,7 +93,7 @@
                                     <div class="relative">
                                         <input type="text" id="unit_name" name="unit_name" placeholder="X-1234"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            value="{{ $komplain->unit->unit ?? '' }}">
+                                            value="{{ $komplain->unit->nama_unit ?? '' }}">
                                         <input type="hidden" id="unit_id" name="unit_id"
                                             value="{{ $komplain->unit_id }}">
                                         <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
@@ -158,21 +158,21 @@
                                 <div class="sm:col-span-2">
                                     <label for="bagian_komplain"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ __('Bagian Komplain') }}
+                                        {{ __('Lokasi') }}
                                     </label>
                                     <ul
                                         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                        @foreach ($bagianKomplains as $bagian)
+                                        @foreach ($lokasiKomplains as $lokasi)
                                             <li
                                                 class="border-b border-gray-200 sm:border-b sm:border-r dark:border-gray-600 py-1 px-4">
                                                 <div class="flex items-center">
-                                                    <input id="bagian_komplain_{{ $bagian->id }}" type="checkbox"
-                                                        value="{{ $bagian->id }}" name="bagian_komplain_id[]"
+                                                    <input id="lokasi_komplain_{{ $lokasi->id }}" type="checkbox"
+                                                        value="{{ $lokasi->id }}" name="lokasi_komplain_id[]"
                                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 items-end rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                                                        @if (in_array($bagian->id, $komplain->bagianKomplains->pluck('id')->toArray())) checked @endif>
-                                                    <label for="bagian_komplain_{{ $bagian->id }}"
+                                                        @if (in_array($lokasi->id, $komplain->lokasiKomplains->pluck('id')->toArray())) checked @endif>
+                                                    <label for="lokasi{{ $lokasi->id }}"
                                                         class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                        {{ $bagian->bagian_komplain }}
+                                                        {{ $lokasi->nama_lokasi_komplain }}
                                                     </label>
                                                 </div>
                                             </li>
@@ -188,7 +188,7 @@
                                         placeholder="Uraikan komplain (opsional)">{{ $komplain->uraian_komplain }}</textarea>
                                 </div>
                                 <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-1">
+                                <div class="sm:col-span-2">
                                     <label for="foto_komplain"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Foto Komplain Saat Ini') }}
@@ -196,7 +196,7 @@
                                     @if ($komplain->foto_komplain)
                                         <div class="sm:col-span-4">
                                             <img src="{{ asset('storage/foto_komplain/' . $komplain->foto_komplain) }}"
-                                                alt="Foto Komplain" class="w-full h-auto rounded-lg mb-2">
+                                                alt="Foto Komplain" class="w-1/2 h-auto rounded-lg mb-2">
                                         </div>
                                     @endif
                                     <input type="file" name="foto_komplain" id="foto_komplain"

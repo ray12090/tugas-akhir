@@ -1,15 +1,6 @@
 <x-app-layout>
     <div>
-        <div class="pb-6">
-            @include('components.alert')
-            {{-- @include('components.breadcrumbs', [
-                'breadcrumbs' => [
-                    ['title' => 'Dashboard', 'url' => Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard')],
-                    ['title' => 'Data Komplain', 'url' => route('komplain.index')],
-                    ['title' => 'Tambah Komplain', 'url' => '']
-                ]
-            ]) --}}
-        </div>
+        @include('components.alert')
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
@@ -34,7 +25,7 @@
                                         <select name="jenis_komplain_id" id="jenis_komplain_id"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                             @foreach ($jenisKomplains as $jenis)
-                                                <option value="{{ $jenis->id }}">{{ $jenis->jenis_komplain }}
+                                                <option value="{{ $jenis->id }}">{{ $jenis->nama_jenis_komplain }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -145,22 +136,22 @@
                                     </div>
                                 </div>
                                 <div class="sm:col-span-2">
-                                    <label for="bagian_komplain"
+                                    <label for="lokasi_komplain"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ __('Bagian Komplain') }}
+                                        {{ __('Lokasi') }}
                                     </label>
                                     <ul
                                         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                        @foreach ($bagianKomplains as $bagian)
+                                        @foreach ($lokasiKomplains as $lokasi)
                                             <li
                                                 class="border-b border-gray-200 sm:border-b sm:border-r dark:border-gray-600 py-1 px-4">
                                                 <div class="flex items-center">
-                                                    <input id="bagian_komplain_{{ $bagian->id }}" type="checkbox"
-                                                        value="{{ $bagian->id }}" name="bagian_komplain_id[]"
+                                                    <input id="lokasi_komplain_{{ $lokasi->id }}" type="checkbox"
+                                                        value="{{ $lokasi->id }}" name="lokasi_komplain_id[]"
                                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 items-end rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                    <label for="bagian_komplain_{{ $bagian->id }}"
+                                                    <label for="lokasi_komplain_{{ $lokasi->id }}"
                                                         class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                        {{ $bagian->bagian_komplain }}
+                                                        {{ $lokasi->nama_lokasi_komplain }}
                                                     </label>
                                                 </div>
                                             </li>
@@ -241,7 +232,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const unitInput = document.getElementById('unit_name');
             const unitIdInput = document.getElementById('unit_id');
-            const units = {!! $units->pluck('unit', 'id') !!};
+            const units = {!! $units->pluck('nama_unit', 'id') !!};
 
             unitInput.addEventListener('input', function() {
                 const inputValue = unitInput.value.trim().toLowerCase();

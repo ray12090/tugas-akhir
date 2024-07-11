@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('tanggal_invoice');
             $table->date('jatuh_tempo');
             $table->unsignedBigInteger('unit_id');
-            $table->unsignedBigInteger('kepemilikan_id');
+            $table->unsignedBigInteger('pemilik_id');
             $table->decimal('total_tagihan_belum_dibayar', 15, 2)->nullable();
             $table->decimal('titipan_pengelolaan', 15, 2)->nullable();
             $table->decimal('titipan_air', 15, 2)->nullable();
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
-            $table->foreign('kepemilikan_id')->references('id')->on('kepemilikans')->onDelete('cascade');
+            $table->foreign('pemilik_id')->references('id')->on('pemiliks')->onDelete('cascade');
             $table->foreign('harga_air_id')->references('id')->on('harga_airs')->onDelete('cascade');
         });
     }

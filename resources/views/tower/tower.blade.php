@@ -1,6 +1,6 @@
 <x-app-layout>
     <div>
-        <div class="pb-6">
+        <div class="">
             @include('components.alert')
             {{-- @include('components.breadcrumbs', [
                 'breadcrumbs' => [
@@ -43,13 +43,13 @@
                         </div>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table class="table-auto text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th class="p-4">
-                                        <a href="{{ route('tower.index', array_merge(request()->query(), ['sort_by' => 'tower', 'sort_order' => request('sort_order') === 'asc' ? 'desc' : 'asc'])) }}">
+                                        <a href="{{ route('tower.index', array_merge(request()->query(), ['sort_by' => 'nama_tower', 'sort_order' => request('sort_order') === 'asc' ? 'desc' : 'asc'])) }}">
                                             {{ __('Tower')}}
-                                            @if (request('sort_by') === 'tower')
+                                            @if (request('sort_by') === 'nama_tower')
                                                 @if (request('sort_order') === 'asc')
                                                     &#9650;
                                                 @else
@@ -64,7 +64,7 @@
                             <tbody>
                                 @foreach($towers as $tower)
                                 <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $tower->tower }}</td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $tower->nama_tower }}</td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <div class="flex items-center space-x-4 justify-center">
                                             <button type="button" data-drawer-target="drawer-update-product" data-drawer-show="drawer-update-product" aria-controls="drawer-update-product" class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">

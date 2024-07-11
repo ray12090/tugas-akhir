@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penanganan_komplains', function (Blueprint $table) {
+        Schema::create('penanganans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('komplain_id');
+            $table->string('nomor_penanganan')->unique();
+            $table->date('tanggal_laporan');
             $table->text('respon')->nullable();
-            $table->text('analisis_awal')->nullable();
+            $table->text('pemeriksaan_awal')->nullable();
             $table->text('keterangan_selesai')->nullable();
-            $table->string('foto_analisis_awal')->nullable();
+            $table->string('foto_pemeriksaan_awal')->nullable();
             $table->string('foto_hasil_perbaikan')->nullable();
             $table->timestamps();
+
+            $table->foreign('komplain_id')->references('id')->on('komplains')->onDelete('cascade');
         });
     }
 
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penanganan_komplains');
+        Schema::dropIfExists('penanganans');
     }
 };

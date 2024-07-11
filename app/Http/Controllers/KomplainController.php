@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Komplain;
 use App\Models\Unit;
 use App\Models\JenisKomplain;
-use App\Models\BagianKomplain;
+use App\Models\LokasiKomplain;
 use App\Http\Requests\StoreKomplainRequest;
 use App\Http\Requests\UpdateKomplainRequest;
 use Illuminate\Http\Request;
@@ -24,19 +24,17 @@ class KomplainController extends Controller
         $sort_by = $request->input('sort_by', 'tanggal_laporan');
         $sort_order = $request->input('sort_order', 'desc');
 
-        $komplains = Komplain::with('unit', 'jenisKomplain', 'bagianKomplains')
+        $komplains = Komplain::with('unit', 'jenisKomplain', 'lokasiKomplains')
             ->when($search, function ($query, $search) {
                 return $query->where('nomor_laporan', 'like', "%{$search}%")
                     ->orWhere('tanggal_laporan', 'like', "%{$search}%")
                     ->orWhere('unit', 'like', "%{$search}%")
-                    ->orWhere('jenis_komplain', 'like', "%{$search}%")
+                    ->orWhere('nama_jenis_komplain', 'like', "%{$search}%")
                     ->orWhere('nama_pelapor', 'like', "%{$search}%")
                     ->orWhere('no_hp', 'like', "%{$search}%");
             })
             ->orderBy($sort_by, $sort_order)
             ->paginate(10);
-
-        // dd($komplains);
 
         return view('komplain.komplain', compact('komplains', 'sort_by', 'sort_order'));
     }
@@ -48,8 +46,8 @@ class KomplainController extends Controller
     {
         $units = Unit::all();
         $jenisKomplains = JenisKomplain::all();
-        $bagianKomplains = BagianKomplain::all();
-        return view('komplain.komplain-create', compact('units', 'jenisKomplains', 'bagianKomplains'));
+        $lokasiKomplains = LokasiKomplain::all();
+        return view('komplain.komplain-create', compact('units', 'jenisKomplains', 'lokasiKomplains'));
     }
 
     /**
@@ -65,8 +63,8 @@ class KomplainController extends Controller
             'nama_pelapor' => 'required|string',
             'no_hp' => 'required|numeric',
             'uraian_komplain' => 'nullable|string',
-            'bagian_komplain_id' => 'required|array',
-            'bagian_komplain_id.*' => 'exists:bagian_komplains,id',
+            'lokasi_komplain_id' => 'required|array',
+            'lokasi_komplain_id.*' => 'exists:lokasi_komplains,id',
             'foto_komplain' => 'nullable|image'
         ]);
 
@@ -80,7 +78,7 @@ class KomplainController extends Controller
 
         $komplain = Komplain::create($data);
 
-        $komplain->bagianKomplains()->sync($request->bagian_komplain_id);
+        $komplain->lokasiKomplains()->sync($request->lokasi_komplain_id);
 
         return redirect()->route('komplain.create')->with('success', 'Komplain berhasil ditambahkan.');
     }
@@ -103,8 +101,8 @@ class KomplainController extends Controller
     {
         $units = Unit::all();
         $jenisKomplains = JenisKomplain::all();
-        $bagianKomplains = BagianKomplain::all();
-        return view('komplain.komplain-edit', compact('komplain', 'units', 'jenisKomplains', 'bagianKomplains'));
+        $lokasiKomplains = LokasiKomplain::all();
+        return view('komplain.komplain-edit', compact('komplain', 'units', 'jenisKomplains', 'lokasiKomplains'));
     }
 
     public function update(Request $request, $id): RedirectResponse
@@ -117,8 +115,8 @@ class KomplainController extends Controller
             'nama_pelapor' => 'required|string',
             'no_hp' => 'required|numeric',
             'uraian_komplain' => 'nullable|string',
-            'bagian_komplain_id' => 'required|array',
-            'bagian_komplain_id.*' => 'exists:bagian_komplains,id',
+            'lokasi_komplain_id' => 'required|array',
+            'lokasi_komplain_id.*' => 'exists:lokasi_komplains,id',
             'foto_komplain' => 'nullable|image'
         ]);
 
@@ -133,7 +131,7 @@ class KomplainController extends Controller
         $komplain = Komplain::findOrFail($id);
         $komplain->update($data);
 
-        $komplain->bagianKomplains()->sync($request->bagian_komplain_id);
+        $komplain->lokasiKomplains()->sync($request->lokasi_komplain_id);
 
         return back()->with('success', 'Komplain berhasil diperbarui.');
     }

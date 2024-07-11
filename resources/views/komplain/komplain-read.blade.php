@@ -1,6 +1,6 @@
 <x-app-layout>
     <div>
-        <div class="pb-6">
+        <div class="">
             @include('components.alert')
             {{-- @include('components.breadcrumbs', [
                 'breadcrumbs' => [
@@ -32,7 +32,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kategori Laporan') }}</label>
                                         <input type="text" name="jenis_komplain" id="jenis_komplain"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            value="{{ $komplain->jenisKomplain->jenis_komplain }}" readonly>
+                                            value="{{ $komplain->jenisKomplain->nama_jenis_komplain }}" readonly>
                                     </div>
                                     <div class="sm:col-span-3">
                                         <label for="nomor_laporan"
@@ -79,7 +79,7 @@
                                     <div class="relative">
                                         <input type="text" id="unit_name" name="unit_name"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            value="{{ $komplain->unit->unit ?? '' }}" readonly>
+                                            value="{{ $komplain->unit->nama_unit ?? '' }}" readonly>
                                         <input type="hidden" id="unit_id" name="unit_id"
                                             value="{{ $komplain->unit_id }}">
                                         <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
@@ -140,13 +140,13 @@
                                     </div>
                                 </div>
                                 <div class="sm:col-span-2">
-                                    <label for="bagian_komplain"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Bagian Komplain') }}</label>
+                                    <label for="lokasi_komplain"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Lokasi') }}</label>
                                         <div class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'>
-                                            @foreach ($komplain->bagianKomplains as $bagian)
+                                            @foreach ($komplain->lokasiKomplains as $lokasi)
                                             <span
                                                 class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-                                                {{ $bagian->bagian_komplain }}
+                                                {{ $lokasi->nama_lokasi_komplain }}
                                             </span>
                                             @endforeach
                                         </div>

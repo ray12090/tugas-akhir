@@ -13,12 +13,12 @@ class TowerController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $sortBy = $request->input('sort_by', 'tower');
+        $sortBy = $request->input('sort_by', 'nama_tower');
         $sortOrder = $request->input('sort_order', 'asc');
 
         $towers = Tower::query()
             ->when($search, function ($query, $search) {
-                return $query->where('tower', 'like', "%{$search}%");})
+                return $query->where('nama_tower', 'like', "%{$search}%");})
             ->orderBy($sortBy, $sortOrder)
             ->paginate(10);
 

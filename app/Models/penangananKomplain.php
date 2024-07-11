@@ -11,6 +11,16 @@ class penangananKomplain extends Model
 
     public function kategoriKomplain()
     {
-        return $this->belongsToMany(KategoriKomplain::class, 'penanganan_komplain_kategori');
+        return $this->belongsToMany(KategoriPenanganan::class, 'penanganan_komplain_kategori');
+    }
+
+    public function Komplain()
+    {
+        return $this->belongsTo(Komplain::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class, 'penanganan_komplain_users');
     }
 }

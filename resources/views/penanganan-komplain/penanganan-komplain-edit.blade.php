@@ -1,6 +1,6 @@
 <x-app-layout>
     <div>
-        <div class="pb-6">
+        <div class="">
             @include('components.alert')
             {{-- @include('components.breadcrumbs', [
                 'breadcrumbs' => [

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class jenisKomplain extends Model
 {
-    protected $fillable = ['jenis_komplain'];
+    protected $fillable = ['nama_jenis_komplain'];
 
     public function komplain()
     {

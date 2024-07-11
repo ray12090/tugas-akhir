@@ -1,6 +1,6 @@
 <x-app-layout>
     <div>
-        <div class="pb-6">
+        <div class="">
             @include('components.alert')
             {{-- @include('components.breadcrumbs', [
                 'breadcrumbs' => [
@@ -9,7 +9,7 @@
                 ]
             ]) --}}
         </div>
-        <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
+        <div class="p-6 bg-white overflow-hidden shadow-sm">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                     {{ __('Data Komplain') }}
@@ -52,12 +52,12 @@
                             </a>
                         </div>
                     </div>
-                    <div class="overflow-x-auto">
+                    <div class="">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                                    <th class="w-1/6 p-4">
+                                    <th class="p-4">
                                         <a
                                             href="{{ route('komplain.index', ['sort_by' => 'nomor_laporan', 'sort_order' => $sort_by === 'nomor_laporan' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
                                             {{ __('Nomor Laporan') }}
@@ -72,7 +72,7 @@
                                             @endif
                                         </a>
                                     </th>
-                                    <th class="w-1/6 p-4">
+                                    <th class="p-4">
                                         <a
                                             href="{{ route('komplain.index', ['sort_by' => 'tanggal_laporan', 'sort_order' => $sort_by === 'tanggal_laporan' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
                                             {{ __('Tanggal Laporan') }}
@@ -86,7 +86,7 @@
                                             @endif
                                         </a>
                                     </th>
-                                    <th class="w-1/6 p-4">
+                                    <th class="p-4">
                                         <a
                                             href="{{ route('komplain.index', ['sort_by' => 'kategori_laporan', 'sort_order' => $sort_by === 'kategori_laporan' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
                                             {{ __('Kategori Laporan') }}
@@ -101,7 +101,7 @@
                                             @endif
                                         </a>
                                     </th>
-                                    <th class="w-1/6 p-4">
+                                    <th class="p-4">
                                         <a
                                             href="{{ route('komplain.index', ['sort_by' => 'unit_id', 'sort_order' => $sort_by === 'unit_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
                                             {{ __('Unit') }}
@@ -116,7 +116,7 @@
                                             @endif
                                         </a>
                                     </th>
-                                    <th class="w-1/6 p-4">
+                                    <th class="p-4">
                                         <a
                                             href="{{ route('komplain.index', ['sort_by' => 'nama_pelapor', 'sort_order' => $sort_by === 'nama_pelapor' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
                                             {{ __('Nama Pelapor') }}
@@ -131,7 +131,7 @@
                                             @endif
                                         </a>
                                     </th>
-                                    <th class="w-1/6 p-4">
+                                    <th class="p-4">
                                         <a
                                             href="{{ route('komplain.index', ['sort_by' => 'nomor_kontak', 'sort_order' => $sort_by === 'nomor_kontak' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
                                             {{ __('No Kontak') }}
@@ -146,7 +146,7 @@
                                             @endif
                                         </a>
                                     </th>
-                                    <th class="w-1/6 p-4 text-center">{{ __('Aksi') }}</th>
+                                    <th class="p-4 text-center">{{ __('Aksi') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -163,7 +163,7 @@
                                             {{ $komplain->kategori_laporan }}</td>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $komplain->unit->unit }}</td>
+                                            {{ $komplain->unit->nama_unit }}</td>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $komplain->nama_pelapor }}</td>

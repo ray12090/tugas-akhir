@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kepemilikans', function (Blueprint $table) {
-            $table->id();
+        Schema::create('pemilik_units', function (Blueprint $table) {
+            $table->unsignedBigInteger('pemilik_id');
             $table->unsignedBigInteger('unit_id');
-            $table->date('tanggal_huni');
-            $table->string('status');
             $table->date('awal_sewa');
             $table->date('akhir_sewa');
             $table->timestamps();
 
+            $table->foreign('pemilik_id')->references('id')->on('pemiliks')->onDelete('cascade');
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
         });
     }

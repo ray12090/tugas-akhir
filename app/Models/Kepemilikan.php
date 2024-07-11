@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kepemilikan extends Model
 {
     use HasFactory;
-    protected $fillable = ['unit_id', 'tanggal_huni', 'status', 'nama', 'no_hp', 'tempat_lahir', 'tanggal_lahir', 'warga_negara', 'no_ktp', 'agama', 'alamat', 'awal_sewa', 'akhir_sewa'];
+    protected $fillable = ['pemilik_id', 'unit_id', 'awal_huni', 'akhir_huni'];
 
     public function unit()
     {

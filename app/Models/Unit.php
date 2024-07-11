@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Unit extends Model
 {
     use HasFactory;
-    protected $fillable = ['lantai_id', 'unit'];
+    protected $fillable = ['lantai_id', 'nama_unit'];
 
     public function lantai()
     {

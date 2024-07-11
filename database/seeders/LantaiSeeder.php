@@ -21,7 +21,7 @@ class LantaiSeeder extends Seeder
             for ($i = 1; $i <= 20; $i++) {
                 Lantai::create([
                     'tower_id' => $tower->id,
-                    'lantai' => $i,
+                    'nama_lantai' => $i,
                 ]);
             }
         }

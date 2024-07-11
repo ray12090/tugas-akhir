@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Komplain;
 use App\Models\Unit;
 use App\Models\JenisKomplain;
-use App\Models\bagianKomplain;
+use App\Models\LokasiKomplain;
 use app\Models\komplainBagian;
 use Illuminate\Support\Str;
 
@@ -24,15 +24,17 @@ class KomplainSeeder extends Seeder
     {
         $units = Unit::all();
         $jenisKomplains = JenisKomplain::all();
-        $bagianKomplains = BagianKomplain::all();
+        $lokasiKomplains = LokasiKomplain::all();
 
         for ($i = 0; $i < 10; $i++) {
             $unit = $units->random();
             $jenisKomplain = $jenisKomplains->random();
 
-            // Buat komplain baru
+            // Generate a random number with maximum 6 digits
+            $nomor_laporan = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+
             $komplain = Komplain::create([
-                'nomor_laporan' => Str::uuid(),
+                'nomor_laporan' => $nomor_laporan,
                 'tanggal_laporan' => now()->subDays(rand(0, 30)),
                 'unit_id' => $unit->id,
                 'jenis_komplain_id' => $jenisKomplain->id,
@@ -41,11 +43,9 @@ class KomplainSeeder extends Seeder
                 'uraian_komplain' => 'Uraian komplain ' . ($i + 1),
             ]);
 
-            // Pilih bagian komplain secara acak (1 hingga 3 bagian komplain)
-            $randomBagianKomplains = $bagianKomplains->random(rand(1, 3))->pluck('id')->toArray();
+            $randomLokasiKomplains = $lokasiKomplains->random(rand(1, 3))->pluck('id')->toArray();
 
-            // Simpan relasi dengan bagian komplain
-            $komplain->bagianKomplains()->sync($randomBagianKomplains);
+            $komplain->lokasiKomplains()->sync($randomLokasiKomplains);
         }
     }
 }

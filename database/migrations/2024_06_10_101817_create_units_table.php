@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('lantai_id');
-            $table->string('unit');
+            $table->string('nama_unit');
             $table->timestamps();
 
             $table->foreign('lantai_id')->references('id')->on('lantais')->onDelete('cascade');

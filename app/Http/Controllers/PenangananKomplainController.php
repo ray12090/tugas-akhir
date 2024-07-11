@@ -10,9 +10,27 @@ class PenangananKomplainController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->input('search');
+        $sort_by = $request->input('sort_by', 'tanggal_laporan');
+        $sort_order = $request->input('sort_order', 'desc');
+
+        $komplains = Komplain::with('unit', 'jenisKomplain', 'bagianKomplains')
+            ->when($search, function ($query, $search) {
+                return $query->where('nomor_laporan', 'like', "%{$search}%")
+                    ->orWhere('tanggal_laporan', 'like', "%{$search}%")
+                    ->orWhere('unit', 'like', "%{$search}%")
+                    ->orWhere('jenis_komplain', 'like', "%{$search}%")
+                    ->orWhere('nama_pelapor', 'like', "%{$search}%")
+                    ->orWhere('no_hp', 'like', "%{$search}%");
+            })
+            ->orderBy($sort_by, $sort_order)
+            ->paginate(10);
+
+        // dd($komplains);
+
+        return view('komplain.komplain', compact('komplains', 'sort_by', 'sort_order'));
     }
 
     /**
