@@ -38,6 +38,7 @@ class PenangananSeeder extends Seeder
                 'foto_hasil_perbaikan' => null,
                 'persetujuan_selesai_tr' => $faker->numberBetween(0, 1),
                 'persetujuan_selesai_pelaksana' => $faker->numberBetween(0, 1),
+                'tanggal_penanganan' => $faker->dateTimeThisYear(),
                 'created_by' => $faker->randomElement($createdByIds),
                 'updated_by' => $faker->randomElement($updatedByIds),
                 'created_at' => now(),

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->text('respon_awal')->nullable();
             $table->text('pemeriksaan_awal')->nullable();
             $table->text('penyelesaian_komplain')->nullable();
-            $table->json('foto_pemeriksaan_awal')->nullable();
-            $table->json('foto_hasil_perbaikan')->nullable();
+            $table->string('foto_pemeriksaan_awal')->nullable();
+            $table->string('foto_hasil_perbaikan')->nullable();
             $table->tinyInteger('persetujuan_selesai_tr')->default(0);
             $table->tinyInteger('persetujuan_selesai_pelaksana')->default(0);
             $table->timestamp('tanggal_penanganan')->nullable();

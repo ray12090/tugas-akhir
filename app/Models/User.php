@@ -48,6 +48,6 @@ class User extends Authenticatable
 
     public function Penanganan()
     {
-        return $this->belongsToMany(Penanganan::class);
+        return $this->belongsToMany(Penanganan::class, 'penanganan_user_pivot');
     }
 }

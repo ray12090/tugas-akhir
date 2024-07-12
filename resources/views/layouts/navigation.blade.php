@@ -4,7 +4,7 @@
         <div class="flex flex-wrap justify-between items-center">
             <div class="flex justify-start items-center">
                 <button data-drawer-target="sidenav" data-drawer-toggle="sidenav" aria-controls="Sidenav"
-                    class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer md:hidden hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    class="bg-gray-100 p-2 mr-2 text-gray-600 rounded-lg hover:text-gray-900 hover:bg-gray-200 focus:bg-gray-100 dark:focus:bg-gray-700 focus:ring-2 focus:ring-gray-100 dark:focus:ring-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                     <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -22,7 +22,7 @@
             </div>
             <div class="flex items-center lg:order-2">
                 <button type="button"
-                    class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    class="flex mx-3 text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                     <span class="sr-only">{{ __('Open user menu') }}</span>
                     <img class="w-8 h-8 rounded-full"
@@ -66,7 +66,7 @@
     </nav>
 
     <aside id="sidenav"
-        class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700"
         aria-label="Sidenav">
         <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
             <ul>
@@ -130,7 +130,7 @@
                     </li>
                 @endif
                 <li>
-                    <a href="{{ route('komplain.index') }}"
+                    <a href="{{ route('penanganan.index') }}"
                         class="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                         aria-controls="dropdown-sales" data-collapse-toggle="dropdown-sales">
                         <svg class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
@@ -140,7 +140,7 @@
                                 d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <span class="flex-1 ml-3 text-left whitespace-nowrap">{{ __('Data Komplain') }}</span>
+                        <span class="flex-1 ml-3 text-left whitespace-nowrap">{{ __('Data Penanganan') }}</span>
                     </a>
                 </li>
                 @if (Auth::user()->usertype === 'fa')

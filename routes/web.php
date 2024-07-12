@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomplainController;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\IplController;
+use App\Http\Controllers\PenangananController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -69,3 +70,5 @@ Route::post('ipl', [IplController::class, 'store'])->name('ipl.store');
 Route::get('/get-owner-info-by-name/{unitName}', [IplController::class, 'getOwnerInfoByName']);
 // Route::delete('/ipl/{ipl}', [IplController::class, 'destroy'])->name('ipl.destroy');
 Route::resource('ipl', IplController::class);
+
+Route::resource('penanganan', PenangananController::class);

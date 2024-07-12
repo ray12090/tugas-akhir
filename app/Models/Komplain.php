@@ -35,6 +35,6 @@ class Komplain extends Model
 
     public function Penanganan()
     {
-        return $this->belongsTo(Penanganan::class);
+        return $this->hasMany(Penanganan::class);
     }
 }

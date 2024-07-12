@@ -12,10 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kategori_penanganan_pivot', function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('penanganan_id');
             $table->unsignedBigInteger('kategori_penanganan_id');
-            $table->timestamps();
 
             $table->foreign('penanganan_id')->references('id')->on('penanganans')->onDelete('cascade');
             $table->foreign('kategori_penanganan_id')->references('id')->on('kategori_penanganans')->onDelete('cascade');

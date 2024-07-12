@@ -34,7 +34,8 @@ class DatabaseSeeder extends Seeder
             KategoriPenangananSeeder::class,
             StatusKomplainSeeder::class,
             PenangananSeeder::class,
-            KomplainSeeder::class,
+            penangananUserPivotSeeder::class,
+            kategoriPenangananPivotSeeder::class,
         ]);
     }
 }
