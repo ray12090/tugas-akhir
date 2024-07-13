@@ -33,8 +33,8 @@ class Komplain extends Model
         return $this->belongsTo(StatusKomplain::class);
     }
 
-    public function Penanganan()
+    public function penanganan()
     {
-        return $this->hasMany(Penanganan::class);
+        return $this->hasMany(Penanganan::class, 'komplain_id');
     }
 }

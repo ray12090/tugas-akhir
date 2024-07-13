@@ -112,10 +112,12 @@ class PenangananController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Penanganan $penanganan)
     {
-        $penanganan = Penanganan::with('komplain', 'kategoriPenanganan', 'users')->findOrFail($id);
-        return view('penanganan.penanganan-read', compact('penanganan'));
+        $users = User::all();
+        $groupedUsers = $users->groupBy('usertype');
+        // $penanganan = Penanganan::with('komplains', 'kategoriPenanganans', 'users')->findOrFail($id);
+        return view('penanganan.penanganan-read', compact('penanganan', 'groupedUsers'));
     }
 
     /**

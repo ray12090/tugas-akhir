@@ -15,6 +15,9 @@ class Penanganan extends Model
     ];
 
     protected $dates = ['tanggal_penanganan'];
+    protected $casts = [
+        'tanggal_penanganan' => 'datetime',
+    ];
 
     public function kategoriPenanganan()
     {
@@ -23,7 +26,7 @@ class Penanganan extends Model
 
     public function komplain()
     {
-        return $this->belongsTo(Komplain::class);
+        return $this->belongsTo(Komplain::class, 'komplain_id');
     }
 
     public function users()

@@ -36,25 +36,47 @@
                                 <div class="sm:col-span-2">
                                     <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
                                         <div class="sm:col-span-1">
-                                            <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Waktu Penanganan')}}</label>
+                                            <label for="time"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Waktu Penanganan') }}</label>
                                             <div class="relative">
-                                                <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd"/>
+                                                <div
+                                                    class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="currentColor" viewBox="0 0 24 24">
+                                                        <path fill-rule="evenodd"
+                                                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                                                            clip-rule="evenodd" />
                                                     </svg>
                                                 </div>
-                                                <input type="time" id="time" name="time" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" min="09:00" max="18:00" value="{{ old('time', $penanganan->waktu_penanganan ? $penanganan->waktu_penanganan->format('H:i') : '00:00') }}" required />
+                                                <input type="time" id="time" name="time"
+                                                    class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    value="{{ $penanganan->tanggal_penanganan ? $penanganan->tanggal_penanganan->format('H:i') : '' }}"/>
                                             </div>
                                         </div>
                                         <div class="sm:col-span-3">
-                                            <label for="tanggal_penanganan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Tanggal Penanganan') }}</label>
+                                            <label for="tanggal_penanganan"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ __('Tanggal Penanganan') }}
+                                            </label>
                                             <div class="relative max-w">
-                                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                    <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path fill-rule="evenodd" d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z" clip-rule="evenodd" />
+                                                <div
+                                                    class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                    <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        width="24" height="24" fill="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill-rule="evenodd"
+                                                            d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
+                                                            clip-rule="evenodd" />
                                                     </svg>
                                                 </div>
-                                                <input id="tanggal_penanganan" name="tanggal_penanganan" type="text" datepicker datepicker-format="yyyy-mm-dd" datepicker-buttons datepicker-autoselect-today class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Pilih tanggal" required>
+                                                <input id="tanggal_penanganan" name="tanggal_penanganan" type="text"
+                                                    datepicker datepicker-format="yyyy-mm-dd" datepicker-buttons
+                                                    datepicker-autoselect-today
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    placeholder="Pilih tanggal"
+                                                    value="{{ $penanganan->tanggal_penanganan ? $penanganan->tanggal_penanganan->format('Y-m-d') : '' }}">
                                             </div>
                                         </div>
                                     </div>

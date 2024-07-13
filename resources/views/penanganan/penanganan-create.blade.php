@@ -82,7 +82,7 @@
                                         <textarea id="respon_awal" name="respon_awal" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2 sm:row-span-3">
+                                <div class="sm:col-span-2">
                                     <div class="grid gap-4 sm:col-span-2 sm:grid-cols-1 sm:gap-6">
                                         <div class="sm:col-span-2 text-gray-900 text-lg font-semibold">{{ __('Penugasan') }}</div>
                                         <div class="sm:row-span-2">
@@ -134,8 +134,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-4 text-gray-900 text-lg font-semibold">{{ __('Persetujuan Selesai') }}</div>
-                                <div class="grid gap-4 sm:col-span-2 sm:grid-cols-1 sm:gap-6">
+                                <div class="grid gap-4 sm:col-span-4 sm:grid-cols-2 sm:gap-6">
+                                    <div class="sm:col-span-2 text-gray-900 text-lg font-semibold">
+                                        {{ __('Persetujuan Selesai') }}
+                                    </div>
                                     <div class="sm:row-span-2">
                                         <label for="persetujuan_selesai_tr" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Oleh Tenant Relation') }}</label>
                                         <div class="flex items-center">
