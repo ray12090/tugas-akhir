@@ -50,4 +50,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Penanganan::class, 'penanganan_user_pivot');
     }
+    public function isTenantRelation()
+    {
+        return $this->usertype === 'tr';
+    }
+
+    public function isAssignedPelaksana($penanganan)
+    {
+        return $penanganan->users->contains($this->id);
+    }
 }

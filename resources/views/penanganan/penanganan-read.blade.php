@@ -118,7 +118,7 @@
                                             readonly>{{ $penanganan->respon_awal }}</textarea>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2 sm:row-span-3">
+                                <div class="sm:col-span-2">
                                     <div class="grid gap-4 sm:col-span-2 sm:grid-cols-1 sm:gap-6">
                                         <div class="sm:col-span-2 text-gray-900 text-lg font-semibold">
                                             {{ __('Penugasan') }}</div>
@@ -161,33 +161,33 @@
                                                     readonly>{{ $penanganan->penyelesaian_komplain }}</textarea>
                                             </div>
                                         </div>
-                                        <div class="sm:col-span-2">
-                                            <label for="foto_pemeriksaan_awal"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Pemeriksaan Awal') }}</label>
-                                            @if ($penanganan->foto_pemeriksaan_awal)
-                                                <div>
-                                                    <img src="{{ asset('storage/foto_pemeriksaan_awal/' . $penanganan->foto_pemeriksaan_awal) }}"
-                                                        alt="Foto Pemeriksaan Awal" class="w-full h-auto rounded-lg">
-                                                </div>
-                                            @else
-                                                <p class="text-gray-500">{{ __('Tidak ada foto pemeriksaan awal.') }}
-                                                </p>
-                                            @endif
-                                        </div>
-                                        <div class="sm:col-span-2">
-                                            <label for="foto_hasil_perbaikan"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Hasil Perbaikan') }}</label>
-                                            @if ($penanganan->foto_hasil_perbaikan)
-                                                <div>
-                                                    <img src="{{ asset('storage/foto_hasil_perbaikan/' . $penanganan->foto_hasil_perbaikan) }}"
-                                                        alt="Foto Hasil Perbaikan" class="w-full h-auto rounded-lg">
-                                                </div>
-                                            @else
-                                                <p class="text-gray-500">{{ __('Tidak ada foto hasil perbaikan.') }}
-                                                </p>
-                                            @endif
-                                        </div>
                                     </div>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="foto_pemeriksaan_awal"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Pemeriksaan Awal') }}</label>
+                                    @if ($penanganan->foto_pemeriksaan_awal)
+                                        <div>
+                                            <img src="{{ asset('storage/foto_pemeriksaan_awal/' . $penanganan->foto_pemeriksaan_awal) }}"
+                                                alt="Foto Pemeriksaan Awal" class="w-full h-auto rounded-lg">
+                                        </div>
+                                    @else
+                                        <p class="text-gray-500">{{ __('Tidak ada foto pemeriksaan awal.') }}
+                                        </p>
+                                    @endif
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="foto_hasil_perbaikan"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Hasil Perbaikan') }}</label>
+                                    @if ($penanganan->foto_hasil_perbaikan)
+                                        <div>
+                                            <img src="{{ asset('storage/foto_hasil_perbaikan/' . $penanganan->foto_hasil_perbaikan) }}"
+                                                alt="Foto Hasil Perbaikan" class="w-full h-auto rounded-lg">
+                                        </div>
+                                    @else
+                                        <p class="text-gray-500">{{ __('Tidak ada foto hasil perbaikan.') }}
+                                        </p>
+                                    @endif
                                 </div>
                                 <div class="grid gap-4 sm:col-span-4 sm:grid-cols-2 sm:gap-6">
                                     <div class="sm:col-span-2 text-gray-900 text-lg font-semibold">

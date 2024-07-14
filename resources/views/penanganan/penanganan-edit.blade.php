@@ -152,24 +152,32 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-4 text-gray-900 text-lg font-semibold">{{ __('Persetujuan Selesai') }}</div>
-                                <div class="grid gap-4 sm:col-span-2 sm:grid-cols-1 sm:gap-6">
+                                <div class="grid gap-4 sm:col-span-4 sm:grid-cols-2 sm:gap-6">
+                                    <div class="sm:col-span-2 text-gray-900 text-lg font-semibold">
+                                        {{ __('Persetujuan Selesai') }}
+                                    </div>
                                     <div class="sm:row-span-2">
                                         <label for="persetujuan_selesai_tr" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Oleh Tenant Relation') }}</label>
                                         <div class="flex items-center">
-                                            <input id="persetujuan_selesai_tr" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" {{ $penanganan->persetujuan_selesai_tr ? 'checked' : '' }} disabled>
-                                            <label for="persetujuan_selesai_tr" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ __('Tenant Relation menyetujui bahwa komplain telah diselesaikan')}}</label>
+                                            <input type="hidden" name="persetujuan_selesai_tr" value="0">
+                                            <input id="persetujuan_selesai_tr" name="persetujuan_selesai_tr" type="checkbox" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                {{ $penanganan->persetujuan_selesai_tr ? 'checked' : '' }}
+                                                {{ auth()->user()->usertype !== 'tr' ? 'disabled' : '' }}>
+                                            <label for="persetujuan_selesai_tr" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ __('Tenant Relation menyetujui bahwa komplain telah diselesaikan') }}</label>
                                         </div>
                                     </div>
                                     <div class="sm:row-span-2">
                                         <label for="persetujuan_selesai_pelaksana" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Oleh Pelaksana') }}</label>
                                         <div class="flex items-center">
-                                            <input id="persetujuan_selesai_pelaksana" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" {{ $penanganan->persetujuan_selesai_pelaksana ? 'checked' : '' }} disabled>
-                                            <label for="persetujuan_selesai_pelaksana" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ __('Pelaksana menyetujui bahwa komplain telah diselesaikan')}}</label>
+                                            <input type="hidden" name="persetujuan_selesai_pelaksana" value="0">
+                                            <input id="persetujuan_selesai_pelaksana" name="persetujuan_selesai_pelaksana" type="checkbox" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                {{ $penanganan->persetujuan_selesai_pelaksana ? 'checked' : '' }}
+                                                {{ !in_array(auth()->user()->id, $penanganan->users->pluck('id')->toArray()) ? 'disabled' : '' }}>
+                                            <label for="persetujuan_selesai_pelaksana" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ __('Pelaksana menyetujui bahwa komplain telah diselesaikan') }}</label>
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" id="created_by" name="created_by" value="{{ $penanganan->created_by }}">
+                                {{-- <input type="hidden" id="created_by" name="created_by" value="{{ $penanganan->created_by }}"> --}}
                                 <input type="hidden" id="updated_by" name="updated_by" value="{{ Auth::user()->id }}">
                                 <div class="sm:col-span-4 items-end">
                                     <a href="{{ route('penanganan.index') }}" class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-GRAY-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">

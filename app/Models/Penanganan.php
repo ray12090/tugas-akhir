@@ -17,6 +17,8 @@ class Penanganan extends Model
     protected $dates = ['tanggal_penanganan'];
     protected $casts = [
         'tanggal_penanganan' => 'datetime',
+        'persetujuan_selesai_tr' => 'boolean',
+        'persetujuan_selesai_pelaksana' => 'boolean',
     ];
 
     public function kategoriPenanganan()
