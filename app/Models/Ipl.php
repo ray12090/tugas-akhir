@@ -14,7 +14,7 @@ class Ipl extends Model
         'tanggal_invoice',
         'jatuh_tempo',
         'unit_id',
-        'kepenghunian_id',
+        'pemilik_unit_id',
         'total_tagihan_belum_dibayar',
         'titipan_pengelolaan',
         'titipan_air',
@@ -35,9 +35,9 @@ class Ipl extends Model
     {
         return $this->belongsTo(Unit::class);
     }
-    public function kepenghunian()
+    public function pemilikUnit()
     {
-        return $this->belongsTo(Kepenghunian::class);
+        return $this->belongsTo(PemilikUnit::class);
     }
     public function tarif()
     {

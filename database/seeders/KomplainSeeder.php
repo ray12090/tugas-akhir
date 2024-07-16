@@ -7,6 +7,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Komplain;
 use App\Models\Unit;
+use App\Models\JenisKomplain;
+use App\Models\LokasiKomplain;
+use App\Models\statusKomplain;
 use Illuminate\Support\Str;
 
 
@@ -19,37 +22,32 @@ class KomplainSeeder extends Seeder
      */
     public function run()
     {
-        // You might want to truncate the table first
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('komplains')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-        $dummyCategories = [
-            'Engineering', 'Plumbing', 'Marmer', 'Parquet',
-            'Sloping', 'Safety', 'Rembes', 'Sipl Lainnya',
-            'Listrik', 'AC + Exhaust', 'TR', 'Mekanik',
-            'Access Card/Parkir', 'Supervisi', 'Pest Control'
-        ];
-
-        // Get all unit IDs from the units table
-        $unitIds = Unit::pluck('id')->toArray();
+        $units = Unit::all();
+        $jenisKomplains = JenisKomplain::all();
+        $lokasiKomplains = LokasiKomplain::all();
+        $statusKomplains = StatusKomplain::all();
 
         for ($i = 0; $i < 10; $i++) {
-            Komplain::create([
-                'nomor_laporan' => 'KOMP-' . Str::random(5),
-                'tanggal_laporan' => now()->subDays(rand(1, 30)),
-                'unit_id' => $unitIds[array_rand($unitIds)], // Randomly select an existing unit ID
-                'kategori_laporan' => 'Keluhan',
+            $unit = $units->random();
+            $jenisKomplain = $jenisKomplains->random();
+            $statusKomplain = $statusKomplains->random();
+
+            $nomor_laporan = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+
+            $komplain = Komplain::create([
+                'nomor_laporan' => $nomor_laporan,
+                'tanggal_laporan' => now()->subDays(rand(0, 30)),
+                'unit_id' => $unit->id,
+                'jenis_komplain_id' => $jenisKomplain->id,
+                'status_komplain_id' => $statusKomplain->id,
                 'nama_pelapor' => 'Pelapor ' . ($i + 1),
-                'nomor_kontak' => '0812345678' . $i,
-                'uraian_komplain' => 'This is a dummy complaint description for complaint ' . ($i + 1),
-                'kategori' => json_encode(array_rand(array_flip($dummyCategories), rand(1, 3))),
-                'respon' => null,
-                'analisis_awal' => null,
-                'keterangan_selesai' => null,
-                'foto_analisis_awal' => null,
-                'foto_hasil_perbaikan' => null,
+                'no_hp' => '08123456789' . rand(0, 9),
+                'uraian_komplain' => 'Uraian komplain ' . ($i + 1),
             ]);
+
+            $randomLokasiKomplains = $lokasiKomplains->random(rand(1, 3))->pluck('id')->toArray();
+
+            $komplain->lokasiKomplains()->sync($randomLokasiKomplains);
         }
     }
 }

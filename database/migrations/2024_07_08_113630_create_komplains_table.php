@@ -16,19 +16,17 @@ return new class extends Migration
             $table->string('nomor_laporan')->unique();
             $table->date('tanggal_laporan');
             $table->unsignedBigInteger('unit_id');
-            $table->string('kategori_laporan');
-            $table->string('nama_pelapor');
-            $table->string('nomor_kontak');
-            $table->text('uraian_komplain');
-            $table->json('kategori'); // Storing multiple categories as JSON
-            $table->text('respon')->nullable();
-            $table->text('analisis_awal')->nullable();
-            $table->text('keterangan_selesai')->nullable();
-            $table->string('foto_analisis_awal')->nullable();
-            $table->string('foto_hasil_perbaikan')->nullable();
+            $table->unsignedBigInteger('jenis_komplain_id');
+            $table->unsignedBigInteger('status_komplain_id');
+            $table->text('nama_pelapor');
+            $table->string('no_hp');
+            $table->text('uraian_komplain')->nullable();
+            $table->string('foto_komplain')->nullable();
             $table->timestamps();
 
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
+            $table->foreign('jenis_komplain_id')->references('id')->on('jenis_komplains')->onDelete('cascade');
+            $table->foreign('status_komplain_id')->references('id')->on('status_komplains')->onDelete('cascade');
         });
     }
 

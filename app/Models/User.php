@@ -45,4 +45,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function Penanganan()
+    {
+        return $this->belongsToMany(Penanganan::class, 'penanganan_user_pivot');
+    }
+    public function isTenantRelation()
+    {
+        return $this->usertype === 'tr';
+    }
+
+    public function isAssignedPelaksana($penanganan)
+    {
+        return $penanganan->users->contains($this->id);
+    }
 }

@@ -15,10 +15,27 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            TarifSeeder::class,
+            HargaAirSeeder::class,
+            BiayaAdminSeeder::class,
+            detailAgamaSeeder::class,
+            detailPerkawinanSeeder::class,
+            detailKewarganegaraanSeeder::class,
+            PemilikSeeder::class,
+            // PenyewaSeeder::class,
+            TowerSeeder::class,
+            LantaiSeeder::class,
             UnitSeeder::class,
-            KepenghunianSeeder::class,
+            // KepenghunianSeeder::class,
+            JenisKomplainSeeder::class,
+            LokasiKomplainSeeder::class,
+            StatusKomplainSeeder::class,
             KomplainSeeder::class,
+            komplainLokasiPivotSeeder::class,
+            KategoriPenangananSeeder::class,
+            StatusKomplainSeeder::class,
+            PenangananSeeder::class,
+            penangananUserPivotSeeder::class,
+            kategoriPenangananPivotSeeder::class,
         ]);
     }
 }

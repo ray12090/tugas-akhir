@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tarifs', function (Blueprint $table) {
+        Schema::create('detail_perkawinans', function (Blueprint $table) {
             $table->id();
-            $table->decimal('harga_air', 15, 2);
-            $table->decimal('biaya_admin', 15, 2);
+            $table->string('status_perkawinan');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tarifs');
+        Schema::dropIfExists('detail_perkawinans');
     }
 };

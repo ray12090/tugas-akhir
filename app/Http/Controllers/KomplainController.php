@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Komplain;
 use App\Models\Unit;
+use App\Models\JenisKomplain;
+use App\Models\LokasiKomplain;
 use App\Http\Requests\StoreKomplainRequest;
 use App\Http\Requests\UpdateKomplainRequest;
 use Illuminate\Http\Request;
@@ -17,21 +19,22 @@ class KomplainController extends Controller
      */
     public function index(Request $request)
     {
+
         $search = $request->input('search');
         $sort_by = $request->input('sort_by', 'tanggal_laporan');
         $sort_order = $request->input('sort_order', 'desc');
 
-        $komplains = Komplain::with('unit')
+        $komplains = Komplain::with('unit', 'jenisKomplain', 'lokasiKomplains')
             ->when($search, function ($query, $search) {
                 return $query->where('nomor_laporan', 'like', "%{$search}%")
                     ->orWhere('tanggal_laporan', 'like', "%{$search}%")
                     ->orWhere('unit', 'like', "%{$search}%")
-                    ->orWhere('kategori_laporan', 'like', "%{$search}%")
+                    ->orWhere('nama_jenis_komplain', 'like', "%{$search}%")
                     ->orWhere('nama_pelapor', 'like', "%{$search}%")
-                    ->orWhere('nomor_kontak', 'like', "%{$search}%");
+                    ->orWhere('no_hp', 'like', "%{$search}%");
             })
             ->orderBy($sort_by, $sort_order)
-            ->paginate(5);
+            ->paginate(10);
 
         return view('komplain.komplain', compact('komplains', 'sort_by', 'sort_order'));
     }
@@ -42,7 +45,9 @@ class KomplainController extends Controller
     public function create()
     {
         $units = Unit::all();
-        return view('komplain.komplain-create', compact('units'));
+        $jenisKomplains = JenisKomplain::all();
+        $lokasiKomplains = LokasiKomplain::all();
+        return view('komplain.komplain-create', compact('units', 'jenisKomplains', 'lokasiKomplains'));
     }
 
     /**
@@ -50,47 +55,35 @@ class KomplainController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // Validate the form
-        $request->validate([
-            'nomor_laporan' => 'required|unique:komplains',
+        $validatedData = $request->validate([
+            'nomor_laporan' => 'required|string|unique:komplains,nomor_laporan',
             'tanggal_laporan' => 'required|date',
-            'unit_id' => 'required|string|max:255',
-            'kategori_laporan' => 'required|string|max:255',
-            'nama_pelapor' => 'required|string|max:255',
-            'nomor_kontak' => 'required|string|max:255',
-            'uraian_komplain' => 'required|string',
-            'kategori' => 'required|array',
-            'respon' => 'nullable|string',
-            'analisis_awal' => 'nullable|string',
-            'keterangan_selesai' => 'nullable|string',
-            'foto_analisis_awal' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
-            'foto_hasil_perbaikan' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
+            'unit_id' => 'required|exists:units,id',
+            'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
+            'status_komplain_id' => 'required|exists:status_komplains,id',
+            'nama_pelapor' => 'required|string',
+            'no_hp' => 'required|numeric',
+            'uraian_komplain' => 'nullable|string',
+            'lokasi_komplain_id' => 'required|array',
+            'lokasi_komplain_id.*' => 'exists:lokasi_komplains,id',
+            'foto_komplain' => 'nullable|image'
         ]);
 
-        // Prepare data for storage
-        $data = $request->except('foto_analisis_awal', 'foto_hasil_perbaikan');
-        $data['kategori'] = json_encode($request->kategori); // Encode to JSON
+        $data = $request->except('foto_komplain');
 
-        // Handle file upload for foto_analisis_awal
-        if ($request->hasFile('foto_analisis_awal')) {
-            $image = $request->file('foto_analisis_awal');
-            $image->storeAs('public/analisis_awal', $image->hashName());
-            $data['foto_analisis_awal'] = $image->hashName();
+        if ($request->hasFile('foto_komplain')) {
+            $image = $request->file('foto_komplain');
+            $image->storeAs('public/foto_komplain', $image->hashName());
+            $data['foto_komplain'] = $image->hashName();
         }
 
-        // Handle file upload for foto_hasil_perbaikan
-        if ($request->hasFile('foto_hasil_perbaikan')) {
-            $image = $request->file('foto_hasil_perbaikan');
-            $image->storeAs('public/hasil_perbaikan', $image->hashName());
-            $data['foto_hasil_perbaikan'] = $image->hashName();
-        }
+        $komplain = Komplain::create($data);
 
-        // Create Komplain record
-        Komplain::create($data);
+        $komplain->lokasiKomplains()->sync($request->lokasi_komplain_id);
 
-        // Redirect with success message
         return redirect()->route('komplain.create')->with('success', 'Komplain berhasil ditambahkan.');
     }
+
 
 
     /**
@@ -98,8 +91,6 @@ class KomplainController extends Controller
      */
     public function show(Komplain $komplain)
     {
-        $komplain->kategori = json_decode($komplain->kategori, true); // Decode to array
-        // dd(Komplain::find($komplain->id)->toArray());
         return view('komplain.komplain-read', compact('komplain'));
     }
 
@@ -109,52 +100,41 @@ class KomplainController extends Controller
      */
     public function edit(Komplain $komplain)
     {
-        $komplain->kategori = json_decode($komplain->kategori, true); // Decode JSON to array
         $units = Unit::all();
-        return view('komplain.komplain-edit', compact('komplain', 'units'));
+        $jenisKomplains = JenisKomplain::all();
+        $lokasiKomplains = LokasiKomplain::all();
+        return view('komplain.komplain-edit', compact('komplain', 'units', 'jenisKomplains', 'lokasiKomplains'));
     }
 
-    public function update(Request $request, Komplain $komplain): RedirectResponse
+    public function update(Request $request, $id): RedirectResponse
     {
-        // Validate the form
-        $request->validate([
-            'nomor_laporan' => 'required|unique:komplains,nomor_laporan,' . $komplain->id,
+        $validatedData = $request->validate([
+            'nomor_laporan' => 'required|string|unique:komplains,nomor_laporan,' . $id,
             'tanggal_laporan' => 'required|date',
-            'unit_id' => 'required|string|max:255',
-            'kategori_laporan' => 'required|string|max:255',
-            'nama_pelapor' => 'required|string|max:255',
-            'nomor_kontak' => 'required|string|max:255',
-            'uraian_komplain' => 'required|string',
-            'kategori' => 'required|array',
-            'respon' => 'nullable|string',
-            'analisis_awal' => 'nullable|string',
-            'keterangan_selesai' => 'nullable|string',
-            'foto_analisis_awal' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
-            'foto_hasil_perbaikan' => 'nullable|image|mimes:jpeg,jpg,png|max:5120',
+            'unit_id' => 'required|exists:units,id',
+            'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
+            'status_komplain_id' => 'required|exists:status_komplains,id', // 'status_komplain_id' => 'required|exists:status_komplains,id
+            'nama_pelapor' => 'required|string',
+            'no_hp' => 'required|numeric',
+            'uraian_komplain' => 'nullable|string',
+            'lokasi_komplain_id' => 'required|array',
+            'lokasi_komplain_id.*' => 'exists:lokasi_komplains,id',
+            'foto_komplain' => 'nullable|image'
         ]);
 
-        // Prepare data for update
-        $data = $request->except('foto_analisis_awal', 'foto_hasil_perbaikan');
-        $data['kategori'] = json_encode($request->kategori); // Encode to JSON
+        $data = $request->except('foto_komplain');
 
-        // Handle file upload for foto_analisis_awal
-        if ($request->hasFile('foto_analisis_awal')) {
-            $image = $request->file('foto_analisis_awal');
-            $image->storeAs('public/analisis_awal', $image->hashName());
-            $data['foto_analisis_awal'] = $image->hashName();
+        if ($request->hasFile('foto_komplain')) {
+            $image = $request->file('foto_komplain');
+            $image->storeAs('public/foto_komplain', $image->hashName());
+            $data['foto_komplain'] = $image->hashName();
         }
 
-        // Handle file upload for foto_hasil_perbaikan
-        if ($request->hasFile('foto_hasil_perbaikan')) {
-            $image = $request->file('foto_hasil_perbaikan');
-            $image->storeAs('public/hasil_perbaikan', $image->hashName());
-            $data['foto_hasil_perbaikan'] = $image->hashName();
-        }
-
-        // Update Komplain record
+        $komplain = Komplain::findOrFail($id);
         $komplain->update($data);
 
-        // Redirect with success message
+        $komplain->lokasiKomplains()->sync($request->lokasi_komplain_id);
+
         return back()->with('success', 'Komplain berhasil diperbarui.');
     }
 

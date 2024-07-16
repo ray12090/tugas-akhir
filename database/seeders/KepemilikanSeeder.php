@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-class KepenghunianSeeder extends Seeder
+class KepemilikanSeeder extends Seeder
 {
     /**
      * Run the database seeds.

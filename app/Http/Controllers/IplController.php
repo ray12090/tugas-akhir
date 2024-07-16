@@ -22,11 +22,11 @@ class IplController extends Controller
         $sort_by = $request->input('sort_by', 'jatuh_tempo');
         $sort_order = $request->input('sort_order', 'desc');
 
-        $ipls = Ipl::with('unit', 'kepenghunian')
+        $ipls = Ipl::with('unit', 'pemilik')
             ->when($search, function ($query, $search) {
                 return $query->where('nomor_invoice', 'like', "%{$search}%")
                     ->orWhere('unit', 'like', "%{$search}%")
-                    ->orWhere('kepenghunian', 'like', "%{$search}%")
+                    ->orWhere('pemilik', 'like', "%{$search}%")
                     ->orWhere('tanggal_invoice', 'like', "%{$search}%")
                     ->orWhere('jatuh_tempo', 'like', "%{$search}%")
                     ->orWhere('total', 'like', "%{$search}%")

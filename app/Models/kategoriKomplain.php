@@ -5,12 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tarif extends Model
+class kategoriKomplain extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'harga_air',
-        'biaya_admin'
-    ];
+    protected $fillable = ['nama_kategori_komplain'];
 }

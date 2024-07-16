@@ -8,7 +8,7 @@ use App\Http\Requests\StoreKepenghunianRequest;
 use App\Http\Requests\UpdateKepenghunianRequest;
 use Illuminate\Http\Request;
 
-class KepenghunianController extends Controller
+class PemilikUnitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,7 +30,7 @@ class KepenghunianController extends Controller
                     ->orWhere('no_hp', 'like', "%{$search}%");
             })
             ->orderBy($sort_by, $sort_order)
-            ->paginate(5);
+            ->paginate(10);
 
         return view('kepenghunian.kepenghunian', compact('kepenghunians', 'sort_by', 'sort_order'));
     }
@@ -106,7 +106,7 @@ class KepenghunianController extends Controller
             'awal_sewa' => 'nullable|date',
             'akhir_sewa' => 'nullable|date',
         ]);
-    
+
         $kepenghunian->update($data);
         return back()->with('success', 'Data penghuni berhasil diperbarui.');
 

@@ -9,39 +9,31 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+@include('layouts.navigation')
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100 flex">
-        <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-md">
-            @include('layouts.navigation')
-        </aside>
+<body class="font-sans antialiased bg-gray-200">
+    <!-- Main content -->
+    <div class="flex-1">
+        <!-- Page Heading -->
+        @isset($header)
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endisset
 
-        <!-- Main content -->
-        <div class="flex-1">
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main class="p-4">
-                {{ $slot }}
-            </main>
-        </div>
+        <!-- Page Content -->
+        <main class="p-4 h-full pt-20 bg-gray-200">
+            {{ $slot }}
+        </main>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 </body>
 
 </html>

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tarif;
+use App\Models\statusKomplain;
 use Illuminate\Http\Request;
 
-class TarifController extends Controller
+class StatusKomplainController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class TarifController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tarif $tarif)
+    public function show(statusKomplain $statusKomplain)
     {
         //
     }
@@ -42,7 +42,7 @@ class TarifController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tarif $tarif)
+    public function edit(statusKomplain $statusKomplain)
     {
         //
     }
@@ -50,7 +50,7 @@ class TarifController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tarif $tarif)
+    public function update(Request $request, statusKomplain $statusKomplain)
     {
         //
     }
@@ -58,7 +58,7 @@ class TarifController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tarif $tarif)
+    public function destroy(statusKomplain $statusKomplain)
     {
         //
     }
