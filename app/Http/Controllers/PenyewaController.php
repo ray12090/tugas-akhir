@@ -180,6 +180,11 @@ class PenyewaController extends Controller
      */
     public function destroy(Penyewa $penyewa)
     {
-        //
+        try {
+            $penyewa->delete();
+            return redirect()->route('penyewa.index')->with('danger', 'Data Peyewa berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('penyewa.index')->withErrors(['msg' => 'Error deleting komplain. Please try again.']);
+        }
     }
 }
