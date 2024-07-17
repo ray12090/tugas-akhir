@@ -1,13 +1,6 @@
 <x-app-layout>
     <div>
-        <div class="">
-            @include('components.alert')
-            {{-- @include('components.breadcrumbs', [
-                'breadcrumbs' => [
-                    ['title' => 'Dashboard', 'url' => Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard')],
-                    ['title' => 'Data Komplain', 'url' => route('komplain.index')]
-                ]
-            ]) --}}
+        @include('components.alert')
         </div>
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>

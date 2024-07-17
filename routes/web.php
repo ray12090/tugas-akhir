@@ -55,7 +55,6 @@ Route::resource('pemilik', PemilikController::class);
 
 Route::resource('penyewa', PenyewaController::class);
 
-route::get('unit', [UnitController::class, 'index'])->name('unit');
 // route::get('kepenghunian', [KepenghunianController::class, 'index'])->name('kepenghunian');
 Route::get('kepenghunian', [KepenghunianController::class, 'index'])->name('kepenghunian.index');
 Route::get('kepenghunian/create', [KepenghunianController::class, 'create'])->name('kepenghunian.create');
@@ -79,3 +78,6 @@ Route::get('/get-owner-info-by-name/{unitName}', [IplController::class, 'getOwne
 Route::resource('ipl', IplController::class);
 
 Route::resource('penanganan', PenangananController::class);
+
+Route::get('/get-lantais/{tower_id}', [UnitController::class, 'getLantais']);
+
