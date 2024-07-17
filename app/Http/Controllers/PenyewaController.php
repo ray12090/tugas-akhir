@@ -121,25 +121,58 @@ class PenyewaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Penyewa $penyewa)
+    public function show($id)
     {
-        //
+        $penyewa = Penyewa::with('unit', 'detailKewarganegaraan', 'detailAgama', 'detailPerkawinan', 'detailTempatLahir', 'user')->findOrFail($id);
+        return view('penyewa.penyewa-read', compact('penyewa'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Penyewa $penyewa)
+    public function edit($id)
     {
-        //
+        $penyewa = Penyewa::findOrFail($id);
+        $units = Unit::all();
+        $detailKewarganegaraans = DetailKewarganegaraan::all();
+        $detailAgamas = DetailAgama::all();
+        $detailPerkawinans = DetailPerkawinan::all();
+        $detailTempatLahirs = DetailTempatLahir::all();
+        $users = User::where('usertype', 'user')->get();
+
+        return view('penyewa.penyewa-update', compact('penyewa', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahirs', 'users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Penyewa $penyewa)
+    public function update(Request $request, $id)
     {
-        //
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'nik' => 'required|string|max:20|unique:penyewas,nik,' . $id,
+            'unit_id' => 'required|exists:units,id',
+            'warga_negara_id' => 'required|exists:detail_kewarganegaraans,id',
+            'agama_id' => 'required|exists:detail_agamas,id',
+            'perkawinan_id' => 'required|exists:detail_perkawinans,id',
+            'user_id' => 'nullable|exists:users,id',
+            'nama_penyewa' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:15',
+            'tempat_lahir_id' => 'required|exists:detail_tempat_lahirs,id',
+            'tanggal_lahir' => 'required|date',
+            'alamat' => 'required|string|max:255',
+            'awal_sewa' => 'required|date',
+            'akhir_sewa' => 'required|date|after:awal_sewa',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Update penyewa
+        $penyewa = Penyewa::findOrFail($id);
+        $penyewa->update($request->all());
+
+        return redirect()->route('penyewa.index')->with('success', 'Penyewa berhasil diperbarui');
     }
 
     /**

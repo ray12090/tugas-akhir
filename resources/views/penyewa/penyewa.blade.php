@@ -281,7 +281,7 @@
                                                 </a>
                                                 <form action="{{ route('penyewa.destroy', $penyewa->id) }}"
                                                     method="POST"
-                                                    onsubmit="return confirmDelete(this, '{{ $penyewa->nama }}');">
+                                                    onsubmit="return confirmDelete(this, '{{ $penyewa->nama_penyewa }}');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
