@@ -59,4 +59,12 @@ class User extends Authenticatable
     {
         return $penanganan->users->contains($this->id);
     }
+    public function Pemilik()
+    {
+        return $this->hasOne(Pemilik::class);
+    }
+    public function Penyewa()
+    {
+        return $this->hasOne(Penyewa::class);
+    }
 }

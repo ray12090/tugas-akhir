@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('pemilik_units', function (Blueprint $table) {
             $table->unsignedBigInteger('pemilik_id');
             $table->unsignedBigInteger('unit_id');
-            $table->date('awal_sewa');
-            $table->date('akhir_sewa');
+            $table->date('awal_huni');
+            $table->date('akhir_huni')->nullable();
             $table->timestamps();
 
             $table->foreign('pemilik_id')->references('id')->on('pemiliks')->onDelete('cascade');

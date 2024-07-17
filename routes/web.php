@@ -6,7 +6,8 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\TowerController;
 use App\Http\Controllers\LantaiController;
 use App\Http\Controllers\UnitController;
-use App\Http\Controllers\KepenghunianController;
+use App\Http\Controllers\PemilikController;
+use App\Http\Controllers\PenyewaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomplainController;
 use App\Http\Controllers\AkunController;
@@ -47,6 +48,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::resource('tower', TowerController::class);
 
 Route::resource('lantai', LantaiController::class);
+
+Route::resource('unit', UnitController::class);
+
+Route::resource('pemilik', PemilikController::class);
+
+Route::resource('penyewa', PenyewaController::class);
 
 route::get('unit', [UnitController::class, 'index'])->name('unit');
 // route::get('kepenghunian', [KepenghunianController::class, 'index'])->name('kepenghunian');

@@ -14,9 +14,9 @@ class Unit extends Model
     {
         return $this->belongsTo(Lantai::class, 'lantai_id', 'id');
     }
-    public function kepemilikan()
+    public function penyewa()
     {
-        return $this->hasMany(Kepemilikan::class, 'unit_id');
+        return $this->hasOne(Penyewa::class, 'unit_id');
     }
 
     public function komplain()

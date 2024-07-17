@@ -10,7 +10,7 @@ use App\Models\detailPerkawinan;
 
 class Pemilik extends Model
 {
-    protected $fillable = ['nama_pemilik', 'no_hp', 'tempat_lahir', 'tanggal_lahir', 'warga_negara_id', 'nik', 'agama_id', 'perkawinan_id', 'alamat'];
+    protected $fillable = ['nama_pemilik', 'no_hp', 'tempat_lahir', 'tanggal_lahir', 'warga_negara_id', 'user_id', 'nik', 'agama_id', 'perkawinan_id', 'alamat'];
 
     public function unit()
     {
@@ -18,17 +18,17 @@ class Pemilik extends Model
     }
     public function detailKewarganegaraan()
     {
-        return $this->belongsTo(detailKewarganegaraan::class);
+        return $this->belongsTo(detailKewarganegaraan::class, 'warga_negara_id');
     }
 
     public function detailAgama()
     {
-        return $this->belongsTo(detailAgama::class);
+        return $this->belongsTo(detailAgama::class, 'agama_id');
     }
 
     public function detailPerkawinan()
     {
-        return $this->belongsTo(detailPerkawinan::class);
+        return $this->belongsTo(detailPerkawinan::class, 'perkawinan_id');
     }
 
     public function detailTempatLahir()
@@ -38,5 +38,9 @@ class Pemilik extends Model
     public function approvalRequestPemilik()
     {
         return $this->hasMany(approvalRequestPemilik::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

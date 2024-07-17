@@ -2,39 +2,43 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Penyewa;
+use App\Models\Unit;
 use App\Models\DetailKewarganegaraan;
 use App\Models\DetailAgama;
 use App\Models\DetailPerkawinan;
+use App\Models\User;
 use Faker\Factory as Faker;
 
 class PenyewaSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
         $faker = Faker::create();
+        $units = Unit::all();
+        $wargaNegaraIds = DetailKewarganegaraan::pluck('id')->toArray();
+        $agamaIds = DetailAgama::pluck('id')->toArray();
+        $perkawinanIds = DetailPerkawinan::pluck('id')->toArray();
+        $namaUser = User::all();
+        $userIds = User::where('usertype', 'user')->pluck('id')->toArray();
 
-        $kewarganegaraans = DetailKewarganegaraan::all();
-        $agamas = DetailAgama::all();
-        $perkawinans = DetailPerkawinan::all();
+    Penyewa::create([
+        'nik' => $faker->unique()->numerify('##########'),
+        'unit_id' => 1,
+        'user_id' => 10,
+        'warga_negara_id' => $faker->randomElement($wargaNegaraIds),
+        'agama_id' => $faker->randomElement($agamaIds),
+        'perkawinan_id' => $faker->randomElement($perkawinanIds),
+        'nama_penyewa' => 'Penyewa 1',
+        'no_hp' => $faker->phoneNumber,
+        'tempat_lahir' => $faker->city,
+        'tanggal_lahir' => $faker->date,
+        'alamat' => $faker->address,
+        'awal_sewa' => $faker->dateTimeBetween('-2 years', 'now'),
+        'akhir_sewa' => $faker->dateTimeBetween('now', '+2 years'),
+    ]);
 
-        for ($i = 0; $i < 400; $i++) {
-            Penyewa::create([
-                'nama_penyewa' => $faker->name,
-                'no_hp' => $faker->phoneNumber,
-                'tempat_lahir' => $faker->city,
-                'tanggal_lahir' => $faker->date(),
-                'warga_negara_id' => $kewarganegaraans->random()->id,
-                'nik' => $faker->unique()->numerify('################'),
-                'agama_id' => $agamas->random()->id,
-                'perkawinan_id' => $perkawinans->random()->id,
-                'alamat' => $faker->address,
-            ]);
-        }
+
     }
 }

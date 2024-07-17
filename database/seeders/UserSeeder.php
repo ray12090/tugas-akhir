@@ -4,15 +4,18 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\Unit;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('users')->delete();
+        $faker = Faker::create();
 
-        DB::table('users')->insert([
+        // Create predefined users
+        $users = [
             [
                 'name' => 'Admin',
                 'email' => 'admin@landmark.com',
@@ -69,6 +72,34 @@ class UserSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-        ]);
+            [
+                'name' => 'Pemilik 1',
+                'email' => 'pemilik1@landmark.com',
+                'password' => Hash::make('12345678'),
+                'usertype' => 'user',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Pemilik 2',
+                'email' => 'pemilik2@landmark.com',
+                'password' => Hash::make('12345678'),
+                'usertype' => 'user',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Penyewa 1',
+                'email' => 'penyewa1@landmark.com',
+                'password' => Hash::make('12345678'),
+                'usertype' => 'user',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ];
+
+        // Insert predefined users
+        User::insert($users);
+
     }
 }

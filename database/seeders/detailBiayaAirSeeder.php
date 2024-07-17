@@ -6,17 +6,17 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class biayaAdminSeeder extends Seeder
+class detailBiayaAirSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('biaya_admins')->insert([
-            [
-                'biaya_admin' => '10000',
-            ]
-        ]);
+        $biayaAir = [
+            ['biaya_air' => '10000'],
+        ];
+
+        DB::table('detail_biaya_airs')->insert($biayaAir);
     }
 }
