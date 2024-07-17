@@ -71,7 +71,7 @@
         <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
             <ul>
                 <li>
-                    <a href="{{ route('home') }}"
+                    <a href="{{ route('dashboard.index') }}"
                         class="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         <svg class="w-6 h-6 text-gray-400 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"

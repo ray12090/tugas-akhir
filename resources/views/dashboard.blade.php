@@ -3,7 +3,7 @@
         <div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-2xl">
                 <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+                    {{ __("Selamat Datang, ") }}{{ Auth::user()->name }}!
                 </div>
             </div>
         </div>
