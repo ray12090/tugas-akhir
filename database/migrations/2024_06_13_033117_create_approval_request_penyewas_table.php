@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('approval_request_penyewas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('penyewa_id');
-            $table->varchar('status');
+            $table->string('status');
             $table->unsignedBigInteger('approved_by');
             $table->timestamps();
 
-            $table->foreign('penyewa_id')->references('id')->on('peyewas')->onDelete('cascade');
+            $table->foreign('penyewa_id')->references('id')->on('penyewas')->onDelete('cascade');
             $table->foreign('approved_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
