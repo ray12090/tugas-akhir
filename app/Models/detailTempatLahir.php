@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class detailTempatLahir extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nama_kota'
+    ];
+
+    public function pemilik()
+    {
+        return $this->hasMany(Pemilik::class);
+    }
+    public function penyewa()
+    {
+        return $this->hasMany(Pemilik::class);
+    }
 }

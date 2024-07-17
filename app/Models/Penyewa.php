@@ -25,6 +25,10 @@ class Penyewa extends Model
         return $this->belongsTo(detailPerkawinan::class);
     }
 
+    public function detailTempatLahir()
+    {
+        return $this->belongsTo(detailTempatLahir::class);
+    }
     public function approvalRequestPenyewa()
     {
         return $this->hasMany(approvalRequestPenyewa::class);
