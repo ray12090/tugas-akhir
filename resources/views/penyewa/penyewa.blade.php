@@ -4,7 +4,7 @@
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Data Pemilik') }}
+                    {{ __('Data Penyewa') }}
                 </div>
                 <div class="text-gray-500 text-sm font-regular">
                     {{ __('Di bawah merupakan tabel penyewa. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Tenant Relation.') }}
@@ -41,7 +41,7 @@
                                     <path clip-rule="evenodd" fill-rule="evenodd"
                                         d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                                 </svg>
-                                {{ __('Tambah Pemilik') }}
+                                {{ __('Tambah Penyewa') }}
                             </a>
                         </div>
                     </div>
@@ -156,21 +156,6 @@
                                     </th>
                                     <th class="w-1/6 p-4">
                                         <a
-                                            href="{{ route('penyewa.index', ['sort_by' => 'user_id', 'sort_order' => $sort_by === 'user_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('Email') }}
-                                            @if ($sort_by === 'user_id')
-                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
-                                                    </path>
-                                                </svg>
-                                            @endif
-                                        </a>
-                                    </th>
-                                    <th class="w-1/6 p-4">
-                                        <a
                                             href="{{ route('penyewa.index', ['sort_by' => 'nama_penyewa', 'sort_order' => $sort_by === 'nama_penyewa' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
                                             {{ __('Nama Lengkap') }}
                                             @if ($sort_by === 'nama_penyewa')
@@ -257,16 +242,13 @@
                                         {{ $penyewa->detailPerkawinan->status_perkawinan }}
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->user->email }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->nama_pemilik }}
+                                        {{ $penyewa->nama_penyewa }}
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $penyewa->no_hp }}
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->tempat_lahir }}
+                                        {{ $penyewa->detailTempatLahir->nama_kota }}
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $penyewa->tanggal_lahir }}

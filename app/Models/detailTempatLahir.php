@@ -14,10 +14,10 @@ class detailTempatLahir extends Model
 
     public function pemilik()
     {
-        return $this->hasMany(Pemilik::class);
+        return $this->hasMany(Pemilik::class, 'tempat_lahir_id', 'id');
     }
     public function penyewa()
     {
-        return $this->hasMany(Pemilik::class);
+        return $this->hasMany(Pemilik::class, 'tempat_lahir_id', 'id');
     }
 }

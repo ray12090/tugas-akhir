@@ -33,7 +33,7 @@ class Pemilik extends Model
 
     public function detailTempatLahir()
     {
-        return $this->belongsTo(detailTempatLahir::class);
+        return $this->belongsTo(detailTempatLahir::class, 'tempat_lahir_id');
     }
     public function approvalRequestPemilik()
     {

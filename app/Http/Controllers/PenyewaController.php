@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penyewa;
+use App\Models\Unit;
+use App\Models\DetailKewarganegaraan;
+use App\Models\DetailAgama;
+use App\Models\DetailPerkawinan;
+use App\Models\DetailTempatLahir;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PenyewaController extends Controller
 {
@@ -16,7 +23,7 @@ class PenyewaController extends Controller
         $sort_by = $request->input('sort_by', 'nama_penyewa');
         $sort_order = $request->input('sort_order', 'desc');
 
-        $penyewas = Penyewa::with(['unit', 'detailKewarganegaraan', 'detailAgama', 'detailPerkawinan', 'user'])
+        $penyewas = Penyewa::with(['unit', 'detailKewarganegaraan', 'detailAgama', 'detailPerkawinan', 'user', 'detailTempatLahir'])
             ->when($search, function ($query, $search) {
                 return $query->where('nik', 'like', "%{$search}%")
                     ->orWhere('nama_penyewa', 'like', "%{$search}%")
@@ -53,7 +60,14 @@ class PenyewaController extends Controller
      */
     public function create()
     {
-        //
+        $penyewas = Penyewa::all();
+        $units = Unit::all();
+        $detailKewarganegaraans = DetailKewarganegaraan::all();
+        $detailAgamas = DetailAgama::all();
+        $detailPerkawinans = DetailPerkawinan::all();
+        $detailTempatLahirs = DetailTempatLahir::all();
+        $users = User::all();
+        return view('penyewa.penyewa-create', compact('penyewas', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahirs', 'users'));
     }
 
     /**
@@ -61,7 +75,47 @@ class PenyewaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'nik' => 'required|string|max:20|unique:penyewas',
+            'unit_id' => 'required|exists:units,id',
+            'warga_negara_id' => 'required|exists:detail_kewarganegaraans,id',
+            'agama_id' => 'required|exists:detail_agamas,id',
+            'perkawinan_id' => 'required|exists:detail_perkawinans,id',
+            'user_id' => 'nullable|exists:users,id',
+            'tempat_lahir_id' => 'required|exists:detail_tempat_lahirs,id',
+            'nama_penyewa' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:15',
+            'tanggal_lahir' => 'required|date',
+            'alamat' => 'required|string|max:255',
+            'awal_sewa' => 'required|date',
+            'akhir_sewa' => 'required|date|after:awal_sewa',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Buat penyewa baru
+        Penyewa::create([
+            'nik' => $request->input('nik'),
+            'unit_id' => $request->input('unit_id'),
+            'warga_negara_id' => $request->input('warga_negara_id'),
+            'agama_id' => $request->input('agama_id'),
+            'perkawinan_id' => $request->input('perkawinan_id'),
+            'user_id' => $request->input('user_id'),
+            'tempat_lahir_id' => $request->input('tempat_lahir_id'),
+            'nama_penyewa' => $request->input('nama_penyewa'),
+            'no_hp' => $request->input('no_hp'),
+            'tanggal_lahir' => $request->input('tanggal_lahir'),
+            'alamat' => $request->input('alamat'),
+            'awal_sewa' => $request->input('awal_sewa'),
+            'akhir_sewa' => $request->input('akhir_sewa'),
+        ]);
+
+        return redirect()->route('penyewa.index')->with('success', 'Penyewa berhasil ditambahkan');
     }
 
     /**
