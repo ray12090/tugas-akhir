@@ -10,7 +10,7 @@ use App\Models\detailPerkawinan;
 
 class Pemilik extends Model
 {
-    protected $fillable = ['nama_pemilik', 'no_hp', 'tempat_lahir', 'tanggal_lahir', 'warga_negara_id', 'user_id', 'nik', 'agama_id', 'perkawinan_id', 'alamat'];
+    protected $fillable = ['nama_pemilik', 'no_hp', 'tempat_lahir_id', 'tanggal_lahir', 'warga_negara_id', 'user_id', 'nik', 'agama_id', 'perkawinan_id', 'alamat'];
 
     public function unit()
     {

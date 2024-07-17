@@ -126,21 +126,6 @@
                                     </th>
                                     <th class="w-1/6 p-4">
                                         <a
-                                            href="{{ route('pemilik.index', ['sort_by' => 'user_id', 'sort_order' => $sort_by === 'user_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('Email') }}
-                                            @if ($sort_by === 'user_id')
-                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
-                                                    </path>
-                                                </svg>
-                                            @endif
-                                        </a>
-                                    </th>
-                                    <th class="w-1/6 p-4">
-                                        <a
                                             href="{{ route('pemilik.index', ['sort_by' => 'nama_pemilik', 'sort_order' => $sort_by === 'nama_pemilik' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
                                             {{ __('Nama Lengkap') }}
                                             @if ($sort_by === 'nama_pemilik')
@@ -225,9 +210,7 @@
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $pemilik->detailPerkawinan->status_perkawinan }}
                                     </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $pemilik->user->email }}
-                                    </td>
+                                    
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $pemilik->nama_pemilik }}
                                     </td>
