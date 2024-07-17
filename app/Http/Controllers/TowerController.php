@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tower;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TowerController extends Controller
 {
@@ -18,19 +19,21 @@ class TowerController extends Controller
 
         $towers = Tower::query()
             ->when($search, function ($query, $search) {
-                return $query->where('nama_tower', 'like', "%{$search}%");})
+                return $query->where('nama_tower', 'like', "%{$search}%");
+            })
             ->orderBy($sortBy, $sortOrder)
             ->paginate(10);
 
         return view('tower.tower', compact('towers', 'sortBy', 'sortOrder'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('tower.tower-create');
     }
 
     /**
@@ -38,7 +41,11 @@ class TowerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Tower::create([
+            'nama_tower' => $request->input('nama_tower'),
+        ]);
+
+        return redirect()->route('tower.index')->with('success', 'Tower berhasil ditambahkan');
     }
 
     /**
@@ -46,7 +53,7 @@ class TowerController extends Controller
      */
     public function show(tower $tower)
     {
-        //
+        return view('tower.tower-read', compact('tower'));
     }
 
     /**
@@ -54,7 +61,7 @@ class TowerController extends Controller
      */
     public function edit(tower $tower)
     {
-        //
+        return view('tower.tower-update', compact('tower'));
     }
 
     /**
@@ -62,7 +69,13 @@ class TowerController extends Controller
      */
     public function update(Request $request, tower $tower)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nama_tower' => 'required|string|max:20'
+        ]);
+
+        $tower->update($request->all());
+
+        return redirect()->route('tower.index')->with('success', 'Data Tower berhasil diubah.');
     }
 
     /**
@@ -70,6 +83,11 @@ class TowerController extends Controller
      */
     public function destroy(tower $tower)
     {
-        //
+        try {
+            $tower->delete();
+            return redirect()->route('tower.index')->with('danger', 'Data Tower berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('tower.index')->withErrors(['msg' => 'Error deleting tower. Please try again.']);
+        }
     }
 }

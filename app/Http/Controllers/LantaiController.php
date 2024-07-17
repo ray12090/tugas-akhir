@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lantai;
 use Illuminate\Http\Request;
+use App\Models\Tower;
 
 class LantaiController extends Controller
 {
@@ -13,15 +14,18 @@ class LantaiController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $sortBy = $request->input('sort_by', 'tower');
+        $sortBy = $request->input('sort_by', 'nama_lantai');
         $sortOrder = $request->input('sort_order', 'asc');
 
         $lantais = Lantai::query()
             ->when($search, function ($query, $search) {
-                return $query->where('unit', 'like', "%{$search}%")
-                    ->orWhere('lantai', 'like', "%{$search}%");
+                return $query->where('nama_lantai', 'like', "%{$search}%");
             })
-            ->orderBy($sortBy, $sortOrder)
+            ->when($sortBy === 'nama_lantai', function ($query) use ($sortOrder) {
+                return $query->orderByRaw('LENGTH(nama_lantai), nama_lantai ' . $sortOrder);
+            }, function ($query) use ($sortBy, $sortOrder) {
+                return $query->orderBy($sortBy, $sortOrder);
+            })
             ->paginate(10);
 
         return view('lantai.lantai', compact('lantais', 'sortBy', 'sortOrder'));
@@ -32,7 +36,8 @@ class LantaiController extends Controller
      */
     public function create()
     {
-        //
+        $towers = Tower::all();
+        return view('lantai.lantai-create', compact('towers'));
     }
 
     /**
@@ -40,38 +45,69 @@ class LantaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tower_id' => 'required|exists:towers,id',
+            'floors' => 'required|array',
+            'floors.*' => 'required|string|max:255',
+        ]);
+
+        $tower = Tower::findOrFail($request->tower_id);
+
+        foreach ($request->floors as $floor) {
+            Lantai::create([
+                'tower_id' => $tower->id,
+                'nama_lantai' => $floor,
+            ]);
+        }
+
+        return redirect()->route('lantai.index')->with('success', 'Tower dan lantai berhasil ditambahkan.');
     }
+
+
 
     /**
      * Display the specified resource.
      */
     public function show(lantai $lantai)
     {
-        //
+        $tower = Tower::all();
+        return view('lantai.lantai-read', compact('lantai', 'tower'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(lantai $lantai)
+    public function edit($id)
     {
-        //
+        $lantai = Lantai::findOrFail($id);
+        return view('lantai.lantai-update', compact('lantai'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, lantai $lantai)
+    // Fungsi update
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_lantai' => 'required|string|max:255',
+        ]);
+
+        $lantai = Lantai::findOrFail($id);
+        $lantai->update([
+            'nama_lantai' => $request->nama_lantai,
+        ]);
+
+        return redirect()->route('lantai.index')->with('success', 'Lantai berhasil diupdate');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(lantai $lantai)
+    public function destroy(Lantai $lantai)
     {
-        //
+        try {
+            $lantai->delete();
+            return redirect()->route('lantai.index')->with('danger', 'Lantai berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('lantai.index')->withErrors(['msg' => 'Error deleting lantai. Please try again.']);
+        }
     }
 }

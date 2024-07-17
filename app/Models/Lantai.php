@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lantai extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'tower_id', 'lantai'];
+    protected $fillable = ['id', 'tower_id', 'nama_lantai'];
 
     public function tower()
     {

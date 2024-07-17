@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Tower extends Model
 {
     use HasFactory;
-    protected $fillable = ['tower'];
+    protected $fillable = ['nama_tower'];
 
     public function lantai()
     {
-        return $this->hasMany(Lantai::class);
+        return $this->hasMany(Lantai::class, 'tower_id', 'id');
     }
 }
