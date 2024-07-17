@@ -18,7 +18,11 @@ class Unit extends Model
     {
         return $this->hasOne(Penyewa::class, 'unit_id');
     }
-
+    public function pemilik()
+    {
+        return $this->belongsToMany(Pemilik::class, 'pemilik_units', 'unit_id', 'pemilik_id')
+                ->withPivot('awal_huni', 'akhir_huni');
+    }
     public function komplain()
     {
         return $this->hasMany(Komplain::class, 'unit_id');

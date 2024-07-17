@@ -87,8 +87,8 @@ class PemilikController extends Controller
             'no_hp' => 'required|string|max:15',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
-            'awal_sewa' => 'required|date',
-            'akhir_sewa' => 'required|date|after:awal_sewa',
+            'awal_huni' => 'required|date',
+            'akhir_huni' => 'nullable|date' ,
         ]);
 
         if ($validator->fails()) {
@@ -98,7 +98,7 @@ class PemilikController extends Controller
         }
 
         // Buat pemilik baru
-        Pemilik::create([
+        $pemilik = Pemilik::create([
             'nik' => $request->input('nik'),
             'unit_id' => $request->input('unit_id'),
             'warga_negara_id' => $request->input('warga_negara_id'),
@@ -110,8 +110,11 @@ class PemilikController extends Controller
             'no_hp' => $request->input('no_hp'),
             'tanggal_lahir' => $request->input('tanggal_lahir'),
             'alamat' => $request->input('alamat'),
-            'awal_sewa' => $request->input('awal_sewa'),
-            'akhir_sewa' => $request->input('akhir_sewa'),
+        ]);
+
+        $pemilik->unit()->attach($request->input('unit_id'), [
+            'awal_huni' => $request->input('awal_huni'),
+            'akhir_huni' => $request->input('akhir_huni'),
         ]);
 
         return redirect()->route('pemilik.index')->with('success', 'pemilik berhasil ditambahkan');
@@ -120,25 +123,68 @@ class PemilikController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pemilik $pemilik)
+    public function show($id)
     {
-        //
+        $pemilik = Pemilik::with('unit', 'detailKewarganegaraan', 'detailAgama', 'detailPerkawinan', 'detailTempatLahir', 'user')->findOrFail($id);
+        return view('pemilik.pemilik-read', compact('pemilik'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pemilik $pemilik)
+    public function edit($id)
     {
-        //
+        $pemilik = Pemilik::findOrFail($id);
+        $units = Unit::all();
+        $detailKewarganegaraans = DetailKewarganegaraan::all();
+        $detailAgamas = DetailAgama::all();
+        $detailPerkawinans = DetailPerkawinan::all();
+        $detailTempatLahirs = DetailTempatLahir::all();
+        $users = User::where('usertype', 'user')->get();
+
+        return view('pemilik.pemilik-update', compact('pemilik', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahirs', 'users'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pemilik $pemilik)
+    public function update(Request $request, $id)
     {
-        //
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'nik' => 'required|string|max:20|unique:pemiliks,nik,' . $id,
+            'unit_id' => 'required|exists:units,id',
+            'warga_negara_id' => 'required|exists:detail_kewarganegaraans,id',
+            'agama_id' => 'required|exists:detail_agamas,id',
+            'perkawinan_id' => 'required|exists:detail_perkawinans,id',
+            'user_id' => 'nullable|exists:users,id',
+            'nama_pemilik' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:15',
+            'tempat_lahir_id' => 'required|exists:detail_tempat_lahirs,id',
+            'tanggal_lahir' => 'required|date',
+            'alamat' => 'required|string|max:255',
+            'awal_huni' => 'required|date',
+            'akhir_huni' => 'nullable|date',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Update pemilik
+        $pemilik = pemilik::findOrFail($id);
+        $pemilik->update($request->all());
+
+        $pemilik->unit()->syncWithoutDetaching([
+            $request->input('unit_id') => [
+                'awal_huni' => $request->input('awal_huni'),
+                'akhir_huni' => $request->input('akhir_huni')
+            ]
+        ]);
+
+        return redirect()->route('pemilik.index')->with('success', 'pemilik berhasil diperbarui');
     }
 
     /**
