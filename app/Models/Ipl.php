@@ -9,22 +9,19 @@ class Ipl extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'unit_id', 
+        'tagihan_air_id',
+        'biaya_admin_id',       
         'nomor_invoice',
         'bulan_ipl',
         'tanggal_invoice',
         'jatuh_tempo',
-        'unit_id',
-        'pemilik_unit_id',
-        'total_tagihan_belum_dibayar',
+        'tagihan_awal',
         'titipan_pengelolaan',
         'titipan_air',
         'iuran_pengelolaan',
         'dana_cadangan',
-        'meter_air_awal',
-        'meter_air_akhir',
-        'tarif_id',
-        'pemakaian_air',
-        'tagihan_air',
+        'tagihan_air_id',
         'denda',
         'total',
         'foto_bukti_pembayaran',
@@ -35,12 +32,12 @@ class Ipl extends Model
     {
         return $this->belongsTo(Unit::class);
     }
-    public function pemilikUnit()
+    public function detailTagihanAir()
     {
-        return $this->belongsTo(PemilikUnit::class);
+        return $this->belongsTo(detailTagihanAir::class);
     }
-    public function tarif()
+    public function detailBiayaAdmin()
     {
-        return $this->belongsTo(Tarif::class);
+        return $this->belongsTo(detailBiayaAdmin::class);
     }
 }

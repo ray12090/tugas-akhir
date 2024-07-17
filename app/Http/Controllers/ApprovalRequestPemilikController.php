@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\hargaAir;
+use App\Models\approvalRequestPemilik;
 use Illuminate\Http\Request;
 
-class HargaAirController extends Controller
+class ApprovalRequestPemilikController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class HargaAirController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(hargaAir $hargaAir)
+    public function show(approvalRequestPemilik $approvalRequestPemilik)
     {
         //
     }
@@ -42,7 +42,7 @@ class HargaAirController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(hargaAir $hargaAir)
+    public function edit(approvalRequestPemilik $approvalRequestPemilik)
     {
         //
     }
@@ -50,7 +50,7 @@ class HargaAirController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, hargaAir $hargaAir)
+    public function update(Request $request, approvalRequestPemilik $approvalRequestPemilik)
     {
         //
     }
@@ -58,7 +58,7 @@ class HargaAirController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(hargaAir $hargaAir)
+    public function destroy(approvalRequestPemilik $approvalRequestPemilik)
     {
         //
     }

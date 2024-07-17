@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('harga_airs', function (Blueprint $table) {
+        Schema::create('detail_biaya_airs', function (Blueprint $table) {
             $table->id();
-            $table->decimal('harga_air', 15, 2);
+            $table->decimal('biaya_air', 15, 2);
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('harga_air');
+        Schema::dropIfExists('detail_biaya_airs');
     }
 };

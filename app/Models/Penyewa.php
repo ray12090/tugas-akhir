@@ -24,4 +24,9 @@ class Penyewa extends Model
     {
         return $this->belongsTo(detailPerkawinan::class);
     }
+
+    public function approvalRequestPenyewa()
+    {
+        return $this->hasMany(approvalRequestPenyewa::class);
+    }
 }

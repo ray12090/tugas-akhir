@@ -23,4 +23,13 @@ class Unit extends Model
     {
         return $this->hasMany(Komplain::class, 'unit_id');
     }
+
+    public function detailTagihanAir()
+    {
+        return $this->hasMany(detailTagihanAir::class, 'unit_id');
+    }
+    public function Ipl()
+    {
+        return $this->hasMany(detailTagihanAir::class);
+    }
 }

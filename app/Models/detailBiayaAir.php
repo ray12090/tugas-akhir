@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class biayaAdmin extends Model
+class detailBiayaAir extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'biaya_admin',
+        'biaya_air',
     ];
+
+    public function detailTagihanAir()
+    {
+        return $this->hasMany(detailTagihanAir::class);
+    }
 }

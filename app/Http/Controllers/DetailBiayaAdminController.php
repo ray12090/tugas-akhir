@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\biayaAdmin;
+use App\Models\detailBiayaAdmin;
 use Illuminate\Http\Request;
 
-class BiayaAdminController extends Controller
+class DetailBiayaAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class BiayaAdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(biayaAdmin $biayaAdmin)
+    public function show(detailBiayaAdmin $detailBiayaAdmin)
     {
         //
     }
@@ -42,7 +42,7 @@ class BiayaAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(biayaAdmin $biayaAdmin)
+    public function edit(detailBiayaAdmin $detailBiayaAdmin)
     {
         //
     }
@@ -50,7 +50,7 @@ class BiayaAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, biayaAdmin $biayaAdmin)
+    public function update(Request $request, detailBiayaAdmin $detailBiayaAdmin)
     {
         //
     }
@@ -58,7 +58,7 @@ class BiayaAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(biayaAdmin $biayaAdmin)
+    public function destroy(detailBiayaAdmin $detailBiayaAdmin)
     {
         //
     }

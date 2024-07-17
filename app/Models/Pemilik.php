@@ -30,4 +30,8 @@ class Pemilik extends Model
     {
         return $this->belongsTo(detailPerkawinan::class);
     }
+    public function approvalRequestPemilik()
+    {
+        return $this->hasMany(approvalRequestPemilik::class);
+    }
 }
