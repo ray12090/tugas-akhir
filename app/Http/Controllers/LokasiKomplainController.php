@@ -10,9 +10,20 @@ class LokasiKomplainController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('lokasi_komplain.lokasi_komplain');
+        $search = $request->input('search');
+        $sort_by = $request->input('sort_by', 'nama_lokasi_komplain');
+        $sort_order = $request->input('sort_order', 'asc');
+
+        $lokasies = lokasiKomplain::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('nama_lokasi_komplain', 'like', "%{$search}%");
+            })
+            ->orderBy($sort_by, $sort_order)
+            ->paginate(10);
+
+        return view('lokasi_komplain.lokasi_komplain', compact('lokasies', 'sort_by', 'sort_order'));
     }
 
     /**
@@ -20,7 +31,7 @@ class LokasiKomplainController extends Controller
      */
     public function create()
     {
-        //
+        return view('lokasi_komplain.lokasi_komplain-create');
     }
 
     /**
@@ -28,7 +39,11 @@ class LokasiKomplainController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        lokasiKomplain::create([
+            'nama_bagian' => $request->input('nama_lokasi_komplain'),
+        ]);
+
+        return redirect()->route('lokasi_komplain.index')->with('success', 'Lokasi Komplain berhasil ditambahkan');
     }
 
     /**
@@ -36,7 +51,7 @@ class LokasiKomplainController extends Controller
      */
     public function show(lokasiKomplain $lokasiKomplain)
     {
-        //
+        return view('lokasi_komplain.lokasi_komplain-read', compact('lokasiKomplain'));
     }
 
     /**
@@ -44,7 +59,7 @@ class LokasiKomplainController extends Controller
      */
     public function edit(lokasiKomplain $lokasiKomplain)
     {
-        //
+        return view('lokasi_komplain.lokasi_komplain-update', compact('lokasiKomplain'));
     }
 
     /**
@@ -52,7 +67,11 @@ class LokasiKomplainController extends Controller
      */
     public function update(Request $request, lokasiKomplain $lokasiKomplain)
     {
-        //
+        $lokasiKomplain->update([
+            'nama_bagian' => $request->input('nama_lokasi_komplain'),
+        ]);
+
+        return redirect()->route('lokasi_komplain.index')->with('success', 'Lokasi Komplain berhasil diubah');
     }
 
     /**
@@ -60,6 +79,11 @@ class LokasiKomplainController extends Controller
      */
     public function destroy(lokasiKomplain $lokasiKomplain)
     {
-        //
+        try {
+            $lokasiKomplain->delete();
+            return redirect()->route('lokasi_komplain.index')->with('danger', 'Data Lokasi Komplain berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('lokasi_komplain.index')->withErrors(['msg' => 'Error deleting lokasi komplain. Please try again.']);
+        }
     }
 }

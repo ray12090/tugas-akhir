@@ -37,4 +37,5 @@ class Komplain extends Model
     {
         return $this->hasMany(Penanganan::class, 'komplain_id');
     }
+
 }

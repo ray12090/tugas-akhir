@@ -133,6 +133,10 @@
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Perkawinan') }}</a>
                         </li>
                         <li>
+                            <a href="{{ route('detail_kewarganegaraan.index') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Kewarganegaraan') }}</a>
+                        </li>
+                        <li>
                             <a href="{{ route('detail_tempat_lahir.index') }}"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Tempat Lahir') }}</a>
                         </li>
@@ -170,6 +174,10 @@
                         <li>
                             <a href="{{ route('detail_perkawinan.index') }}"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Perkawinan') }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('detail_kewarganegaraan.index') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Kewarganegaraan') }}</a>
                         </li>
                         <li>
                             <a href="{{ route('detail_tempat_lahir.index') }}"
@@ -212,10 +220,10 @@
                                 <a href="{{ route('lokasi_komplain.index') }}"
                                     class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Lokasi') }}</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('kategori_komplain.index') }}"
                                     class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Kategori') }}</a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ route('status_komplain.index') }}"
                                     class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Status') }}</a>

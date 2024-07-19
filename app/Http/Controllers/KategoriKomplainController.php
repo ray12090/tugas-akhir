@@ -10,9 +10,20 @@ class KategoriKomplainController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('kategori_komplain.kategori_komplain');
+        $search = $request->input('search');
+        $sort_by = $request->input('sort_by', 'nama_kategori_komplain');
+        $sort_order = $request->input('sort_order', 'asc');
+
+        $kategoris = kategoriKomplain::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('nama_kategori_komplain', 'like', "%{$search}%");
+            })
+            ->orderBy($sort_by, $sort_order)
+            ->paginate(10);
+
+        return view('kategori_komplain.kategori_komplain', compact('kategoris', 'sort_by', 'sort_order'));
     }
 
     /**

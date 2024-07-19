@@ -10,9 +10,20 @@ class JenisKomplainController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('jenis_komplain.jenis_komplain');
+        $search = $request->input('search');
+        $sort_by = $request->input('sort_by', 'nama_jenis_komplain');
+        $sort_order = $request->input('sort_order', 'asc');
+
+        $jenises = jenisKomplain::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('nama_jenis_komplain', 'like', "%{$search}%");
+            })
+            ->orderBy($sort_by, $sort_order)
+            ->paginate(10);
+
+        return view('jenis_komplain.jenis_komplain', compact('jenises', 'sort_by', 'sort_order'));
     }
 
     /**
@@ -20,7 +31,7 @@ class JenisKomplainController extends Controller
      */
     public function create()
     {
-        //
+        return view('jenis_komplain.jenis_komplain-create');
     }
 
     /**
@@ -28,7 +39,11 @@ class JenisKomplainController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        jenisKomplain::create([
+            'nama_jenis_komplain' => $request->input('nama_jenis_komplain'),
+        ]);
+
+        return redirect()->route('jenis_komplain.index')->with('success', 'Jenis Komplain berhasil ditambahkan');
     }
 
     /**
@@ -36,7 +51,7 @@ class JenisKomplainController extends Controller
      */
     public function show(jenisKomplain $jenisKomplain)
     {
-        //
+        return view('jenis_komplain.jenis_komplain-read', compact('jenisKomplain'));
     }
 
     /**
@@ -44,7 +59,7 @@ class JenisKomplainController extends Controller
      */
     public function edit(jenisKomplain $jenisKomplain)
     {
-        //
+        return view('jenis_komplain.jenis_komplain-update', compact('jenisKomplain'));
     }
 
     /**
@@ -52,7 +67,11 @@ class JenisKomplainController extends Controller
      */
     public function update(Request $request, jenisKomplain $jenisKomplain)
     {
-        //
+        $jenisKomplain->update([
+            'nama_jenis_komplain' => $request->input('nama_jenis_komplain'),
+        ]);
+
+        return redirect()->route('jenis_komplain.index')->with('success', 'Jenis Komplain berhasil diubah');
     }
 
     /**
@@ -60,6 +79,11 @@ class JenisKomplainController extends Controller
      */
     public function destroy(jenisKomplain $jenisKomplain)
     {
-        //
+        try {
+            $jenisKomplain->delete();
+            return redirect()->route('jenis_komplain.index')->with('danger', 'Data Jenis Komplain berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('jenis_komplain.index')->withErrors(['msg' => 'Error deleting jenis komplain. Please try again.']);
+        }
     }
 }

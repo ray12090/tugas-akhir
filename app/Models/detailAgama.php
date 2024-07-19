@@ -9,7 +9,7 @@ class detailAgama extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'agama',
+        'nama_agama',
     ];
 
     public function pemilik()

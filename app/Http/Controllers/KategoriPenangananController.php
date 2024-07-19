@@ -10,9 +10,20 @@ class KategoriPenangananController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('kategori_penanganan.kategori_penanganan');
+        $search = $request->input('search');
+        $sort_by = $request->input('sort_by', 'nama_kategori_penanganan');
+        $sort_order = $request->input('sort_order', 'asc');
+
+        $kategoris = kategoriPenanganan::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('nama_kategori_penanganan', 'like', "%{$search}%");
+            })
+            ->orderBy($sort_by, $sort_order)
+            ->paginate(10);
+
+        return view('kategori_penanganan.kategori_penanganan', compact('kategoris', 'sort_by', 'sort_order'));
     }
 
     /**
@@ -20,7 +31,7 @@ class KategoriPenangananController extends Controller
      */
     public function create()
     {
-        //
+        return view('kategori_penanganan.kategori_penanganan-create');
     }
 
     /**
@@ -28,7 +39,14 @@ class KategoriPenangananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_kategori_penanganan' => 'required',
+        ]);
+
+        kategoriPenanganan::create($request->all());
+
+        return redirect()->route('kategori_penanganan.index')
+            ->with('success', 'Kategori Penanganan created successfully.');
     }
 
     /**
@@ -36,7 +54,7 @@ class KategoriPenangananController extends Controller
      */
     public function show(kategoriPenanganan $kategoriPenanganan)
     {
-        //
+        return view('kategori_penanganan.kategori_penanganan-read', compact('kategoriPenanganan'));
     }
 
     /**
@@ -44,7 +62,7 @@ class KategoriPenangananController extends Controller
      */
     public function edit(kategoriPenanganan $kategoriPenanganan)
     {
-        //
+        return view('kategori_penanganan.kategori_penanganan-update', compact('kategoriPenanganan'));
     }
 
     /**
@@ -52,7 +70,14 @@ class KategoriPenangananController extends Controller
      */
     public function update(Request $request, kategoriPenanganan $kategoriPenanganan)
     {
-        //
+        $request->validate([
+            'nama_kategori_penanganan' => 'required',
+        ]);
+
+        $kategoriPenanganan->update($request->all());
+
+        return redirect()->route('kategori_penanganan.index')
+            ->with('success', 'Kategori Penanganan updated successfully');
     }
 
     /**
@@ -60,6 +85,11 @@ class KategoriPenangananController extends Controller
      */
     public function destroy(kategoriPenanganan $kategoriPenanganan)
     {
-        //
+        try {
+            $kategoriPenanganan->delete();
+            return redirect()->route('kategori_penanganan.index')->with('danger', 'Data Kategori Penanganan berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('kategori_penanganan.index')->withErrors(['msg' => 'Error deleting kategori penanganan. Please try again.']);
+        }
     }
 }

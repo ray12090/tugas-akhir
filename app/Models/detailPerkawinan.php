@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class detailPerkawinan extends Model
 {
     protected $fillable = [
-        'perkawinan'
+        'status_perkawinan'
     ];
 
     public function pemilik()
