@@ -12,7 +12,7 @@ class DetailPerkawinanController extends Controller
      */
     public function index()
     {
-        //
+        return view('detail_perkawinan.detail_perkawinan');
     }
 
     /**

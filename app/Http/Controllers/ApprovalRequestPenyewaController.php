@@ -12,7 +12,7 @@ class ApprovalRequestPenyewaController extends Controller
      */
     public function index()
     {
-        //
+        return view('approval_request_penyewa.approval_request_penyewa');
     }
 
     /**

@@ -12,7 +12,7 @@ class StatusKomplainController extends Controller
      */
     public function index()
     {
-        //
+        return view('status_komplain.status_komplain');
     }
 
     /**

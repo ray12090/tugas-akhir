@@ -12,7 +12,7 @@ class DetailKewarganegaraanController extends Controller
      */
     public function index()
     {
-        //
+        return view('detail_kewarganegaraan.detail_kewarganegaraan');
     }
 
     /**

@@ -12,7 +12,7 @@ class DetailTagihanAirController extends Controller
      */
     public function index()
     {
-        //
+        return view('detail_tagihan_air.detail_tagihan_air');
     }
 
     /**

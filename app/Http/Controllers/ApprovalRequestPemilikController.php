@@ -12,7 +12,7 @@ class ApprovalRequestPemilikController extends Controller
      */
     public function index()
     {
-        //
+        return view('approval_request_pemilik.approval_request_pemilik');
     }
 
     /**

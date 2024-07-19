@@ -12,7 +12,7 @@ class DetailBiayaAdminController extends Controller
      */
     public function index()
     {
-        //
+        return view('detail_biaya_admin.detail_biaya_admin');
     }
 
     /**

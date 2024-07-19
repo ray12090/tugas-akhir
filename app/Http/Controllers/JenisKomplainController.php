@@ -12,7 +12,7 @@ class JenisKomplainController extends Controller
      */
     public function index()
     {
-        //
+        return view('jenis_komplain.jenis_komplain');
     }
 
     /**

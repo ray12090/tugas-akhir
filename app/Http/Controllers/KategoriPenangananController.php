@@ -12,7 +12,7 @@ class KategoriPenangananController extends Controller
      */
     public function index()
     {
-        //
+        return view('kategori_penanganan.kategori_penanganan');
     }
 
     /**

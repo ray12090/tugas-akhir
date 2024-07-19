@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\bagianKomplain;
+use App\Models\lokasiKomplain;
 use Illuminate\Http\Request;
 
-class BagianKomplainController extends Controller
+class LokasiKomplainController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('lokasi_komplain.lokasi_komplain');
     }
 
     /**
@@ -34,7 +34,7 @@ class BagianKomplainController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(bagianKomplain $bagianKomplain)
+    public function show(lokasiKomplain $lokasiKomplain)
     {
         //
     }
@@ -42,7 +42,7 @@ class BagianKomplainController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(bagianKomplain $bagianKomplain)
+    public function edit(lokasiKomplain $lokasiKomplain)
     {
         //
     }
@@ -50,7 +50,7 @@ class BagianKomplainController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, bagianKomplain $bagianKomplain)
+    public function update(Request $request, lokasiKomplain $lokasiKomplain)
     {
         //
     }
@@ -58,7 +58,7 @@ class BagianKomplainController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(bagianKomplain $bagianKomplain)
+    public function destroy(lokasiKomplain $lokasiKomplain)
     {
         //
     }

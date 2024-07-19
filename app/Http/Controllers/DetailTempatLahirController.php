@@ -12,7 +12,7 @@ class DetailTempatLahirController extends Controller
      */
     public function index()
     {
-        //
+        return view('detail_tempat_lahir.detail_tempat_lahir');
     }
 
     /**

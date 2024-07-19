@@ -12,7 +12,7 @@ class KategoriKomplainController extends Controller
      */
     public function index()
     {
-        //
+        return view('kategori_komplain.kategori_komplain');
     }
 
     /**

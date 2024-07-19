@@ -12,7 +12,7 @@ class DetailAgamaController extends Controller
      */
     public function index()
     {
-        //
+        return view('detail_agama.detail_agama');
     }
 
     /**

@@ -13,6 +13,20 @@ use App\Http\Controllers\KomplainController;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\IplController;
 use App\Http\Controllers\PenangananController;
+use App\Http\Controllers\DetailAgamaController;
+use App\Http\Controllers\DetailKewarganegaraanController;
+use App\Http\Controllers\DetailPerkawinanController;
+use App\Http\Controllers\ApprovalRequestPenyewaController;
+use App\Http\Controllers\ApprovalRequestPemilikController;
+use App\Http\Controllers\JenisKomplainController;
+use App\Http\Controllers\StatusKomplainController;
+use App\Http\Controllers\LokasiKomplainController;
+use App\Http\Controllers\DetailBiayaAdminController;
+use App\Http\Controllers\DetailBiayaAirController;
+use App\Http\Controllers\DetailTagihanAirController;
+use App\Http\Controllers\DetailTempatLahirController;
+use App\Http\Controllers\KategoriKomplainController;
+use App\Http\Controllers\KategoriPenangananController;
 use Illuminate\Support\Facades\Route;
 
 // Redirect to login if not authenticated
@@ -56,6 +70,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('ipl', IplController::class);
     Route::resource('penanganan', PenangananController::class);
     Route::resource('dashboard', DashboardController::class);
+    Route::resource('detail_agama', DetailAgamaController::class);
+    Route::resource('detail_kewarganegaraan', DetailKewarganegaraanController::class);
+    Route::resource('detail_perkawinan', DetailPerkawinanController::class);
+    Route::resource('approval_request_penyewa', ApprovalRequestPenyewaController::class);
+    Route::resource('approval_request_pemilik', ApprovalRequestPemilikController::class);
+    Route::resource('jenis_komplain', JenisKomplainController::class);
+    Route::resource('status_komplain', StatusKomplainController::class);
+    Route::resource('lokasi_komplain', LokasiKomplainController::class);
+    Route::resource('detail_biaya_admin', DetailBiayaAdminController::class);
+    Route::resource('detail_biaya_air', DetailBiayaAirController::class);
+    Route::resource('detail_tagihan_air', DetailTagihanAirController::class);
+    Route::resource('detail_tempat_lahir', DetailTempatLahirController::class);
+    Route::resource('kategori_komplain', KategoriKomplainController::class);
+    Route::resource('kategori_penanganan', KategoriPenangananController::class);
 });
 
 // Additional routes

@@ -12,7 +12,7 @@ class DetailBiayaAirController extends Controller
      */
     public function index()
     {
-        //
+        return view('detail_biaya_air.detail_biaya_air');
     }
 
     /**
