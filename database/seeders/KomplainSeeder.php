@@ -42,7 +42,6 @@ class KomplainSeeder extends Seeder
                 'status_komplain_id' => $statusKomplain->id,
                 'nama_pelapor' => 'Pelapor ' . ($i + 1),
                 'no_hp' => '08123456789' . rand(0, 9),
-                'uraian_komplain' => 'Uraian komplain ' . ($i + 1),
             ]);
 
             $randomLokasiKomplains = $lokasiKomplains->random(rand(1, 3))->pluck('id')->toArray();

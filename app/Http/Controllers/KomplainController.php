@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateKomplainRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class KomplainController extends Controller
 {
@@ -53,91 +54,98 @@ class KomplainController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nomor_laporan' => 'required|string|unique:komplains,nomor_laporan',
+        $request->validate([
+            'jenis_komplain_id' => 'required',
+            'nomor_laporan' => 'required',
             'tanggal_laporan' => 'required|date',
-            'unit_id' => 'required|exists:units,id',
-            'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
-            'status_komplain_id' => 'required|exists:status_komplains,id',
-            'nama_pelapor' => 'required|string',
-            'no_hp' => 'required|numeric',
-            'uraian_komplain' => 'nullable|string',
-            'lokasi_komplain_id' => 'required|array',
-            'lokasi_komplain_id.*' => 'exists:lokasi_komplains,id',
-            'foto_komplain' => 'nullable|image'
+            'unit_id' => 'required',
+            'nama_pelapor' => 'required',
+            'no_hp' => 'required',
         ]);
 
-        $data = $request->except('foto_komplain');
+        $komplain = Komplain::create([
+            'jenis_komplain_id' => $request->jenis_komplain_id,
+            'nomor_laporan' => $request->nomor_laporan,
+            'tanggal_laporan' => $request->tanggal_laporan,
+            'unit_id' => $request->unit_id,
+            'nama_pelapor' => $request->nama_pelapor,
+            'no_hp' => $request->no_hp,
+        ]);
 
-        if ($request->hasFile('foto_komplain')) {
-            $image = $request->file('foto_komplain');
-            $image->storeAs('public/foto_komplain', $image->hashName());
-            $data['foto_komplain'] = $image->hashName();
+        if ($request->has('uraian_komplain')) {
+            foreach ($request->uraian_komplain as $lokasiId => $uraian) {
+                $fotoPath = null;
+                if ($request->hasFile("foto_komplain.$lokasiId")) {
+                    $image = $request->file("foto_komplain.$lokasiId");
+                    $image->storeAs('public/foto_komplain', $image->hashName());
+                    $fotoPath = $image->hashName();
+                }
+
+                DB::table('komplain_lokasi_pivot')->insert([
+                    'komplain_id' => $komplain->id,
+                    'lokasi_komplain_id' => $lokasiId,
+                    'uraian_komplain' => $uraian,
+                    'foto_komplain' => $fotoPath,
+                ]);
+            }
         }
 
-        $komplain = Komplain::create($data);
-
-        $komplain->lokasiKomplains()->sync($request->lokasi_komplain_id);
-
-        return redirect()->route('komplain.create')->with('success', 'Komplain berhasil ditambahkan.');
+        return redirect()->route('komplain.index')->with('success', 'Komplain berhasil ditambahkan');
     }
+
+
 
 
 
     /**
      * Display the specified resource.
      */
-    public function show(Komplain $komplain)
+    public function show($id)
     {
-        return view('komplain.komplain-read', compact('komplain'));
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Komplain $komplain)
-    {
-        $units = Unit::all();
+        $komplain = Komplain::with('lokasiKomplains')->findOrFail($id);
         $jenisKomplains = JenisKomplain::all();
-        $lokasiKomplains = LokasiKomplain::all();
-        return view('komplain.komplain-edit', compact('komplain', 'units', 'jenisKomplains', 'lokasiKomplains'));
+        return view('komplain.komplain-read', compact('komplain', 'jenisKomplains'));
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function edit($id)
     {
-        $validatedData = $request->validate([
+        $komplain = Komplain::with('lokasiKomplains')->findOrFail($id);
+        $jenisKomplains = JenisKomplain::all();
+        return view('komplain.komplain-edit', compact('komplain', 'jenisKomplains'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
             'nomor_laporan' => 'required|string|unique:komplains,nomor_laporan,' . $id,
             'tanggal_laporan' => 'required|date',
             'unit_id' => 'required|exists:units,id',
             'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
-            'status_komplain_id' => 'required|exists:status_komplains,id', // 'status_komplain_id' => 'required|exists:status_komplains,id
             'nama_pelapor' => 'required|string',
-            'no_hp' => 'required|numeric',
-            'uraian_komplain' => 'nullable|string',
-            'lokasi_komplain_id' => 'required|array',
-            'lokasi_komplain_id.*' => 'exists:lokasi_komplains,id',
-            'foto_komplain' => 'nullable|image'
+            'no_hp' => 'required|string',
+            'lokasi_komplain.*.uraian_komplain' => 'nullable|string',
+            'lokasi_komplain.*.foto_komplain' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->except('foto_komplain');
+        $komplain = Komplain::findOrFail($id);
+        $komplain->update($request->only(['nomor_laporan', 'tanggal_laporan', 'unit_id', 'jenis_komplain_id', 'nama_pelapor', 'no_hp']));
 
-        if ($request->hasFile('foto_komplain')) {
-            $image = $request->file('foto_komplain');
-            $image->storeAs('public/foto_komplain', $image->hashName());
-            $data['foto_komplain'] = $image->hashName();
+        foreach ($request->lokasi_komplain as $lokasiId => $data) {
+            $lokasiData = ['uraian_komplain' => $data['uraian_komplain'] ?? null];
+
+            if ($request->hasFile("lokasi_komplain.$lokasiId.foto_komplain")) {
+                $image = $request->file("lokasi_komplain.$lokasiId.foto_komplain");
+                $image->storeAs('public/foto_komplain', $image->hashName());
+                $lokasiData['foto_komplain'] = $image->hashName();
+            }
+
+            $komplain->lokasiKomplains()->updateExistingPivot($lokasiId, $lokasiData);
         }
 
-        $komplain = Komplain::findOrFail($id);
-        $komplain->update($data);
-
-        $komplain->lokasiKomplains()->sync($request->lokasi_komplain_id);
-
-        return back()->with('success', 'Komplain berhasil diperbarui.');
+        return redirect()->route('komplain.show', $komplain->id)->with('success', 'Komplain updated successfully');
     }
-
 
     /**
      * Remove the specified resource from storage.

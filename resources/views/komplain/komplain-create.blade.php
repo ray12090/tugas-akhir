@@ -49,24 +49,29 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-2">
-                                    <label for="tanggal_laporan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    <label for="tanggal_laporan"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Tanggal Laporan') }}
                                     </label>
                                     <div class="relative max-w">
-                                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                <path fill-rule="evenodd" d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z" clip-rule="evenodd" />
+                                        <div
+                                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                <path fill-rule="evenodd"
+                                                    d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
+                                                    clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <input id="tanggal_laporan" name="tanggal_laporan" type="text" datepicker datepicker-format="yyyy-mm-dd" datepicker-buttons
+                                        <input id="tanggal_laporan" name="tanggal_laporan" type="text" datepicker
+                                            datepicker-format="yyyy-mm-dd" datepicker-buttons
                                             datepicker-autoselect-today
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="Pilih tanggal">
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-2">
                                     <label for="unit_name"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -85,8 +90,6 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-4"></div>
                                 <div class="sm:col-span-4">
                                     <div class=" text-gray-900 text-lg font-semibold">
                                         {{ __('Identitas Pelapor') }}
@@ -110,7 +113,6 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-2">
                                     <label for="no_hp"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -129,52 +131,35 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-4"></div>
                                 <div class="sm:col-span-4">
                                     <div class=" text-gray-900 text-lg font-semibold">
                                         {{ __('Isi Komplain') }}
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2">
-                                    <label for="lokasi_komplain"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ __('Lokasi') }}
+                                <div class="sm:col-span-1">
+                                    <label for="lokasi_komplain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ __('Lokasi (tekan ctrl untuk memilih lebih dari satu)') }}
                                     </label>
-                                    <ul
-                                        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                    <select multiple id="lokasi_komplain" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected disabled>Choose countries</option>
                                         @foreach ($lokasiKomplains as $lokasi)
-                                            <li
-                                                class="border-b border-gray-200 sm:border-b sm:border-r dark:border-gray-600 py-1 px-4">
-                                                <div class="flex items-center">
-                                                    <input id="lokasi_komplain_{{ $lokasi->id }}" type="checkbox"
-                                                        value="{{ $lokasi->id }}" name="lokasi_komplain_id[]"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 items-end rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                    <label for="lokasi_komplain_{{ $lokasi->id }}"
-                                                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                        {{ $lokasi->nama_lokasi_komplain }}
-                                                    </label>
-                                                </div>
-                                            </li>
+                                            <option id="lokasi_komplain_{{ $lokasi->id }}" name="lokasi_komplain_id[]" value="{{ $lokasi->id }}">{{ $lokasi->nama_lokasi_komplain }}</option>
                                         @endforeach
-                                    </ul>
+                                    </select>
                                 </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-2">
-                                    <label for="uraian_komplain"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Uraian Komplain') }}</label>
-                                    <textarea name="uraian_komplain" id="uraian_komplain" rows="4"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="Uraikan komplain (opsional)"></textarea>
+                                <div class="sm:col-span-1">
+                                    <label for="lokasi_komplain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ __('Lokasi:') }}
+                                    </label>
+                                    <div class='span-container bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'>
+                                        <!-- Spans will be dynamically added here -->
+                                    </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-2">
-                                    <label for="foto_komplain"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Komplain') }}</label>
-                                    <input type="file" name="foto_komplain" id="foto_komplain"
-                                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                        aria-describedby="foto_komplain">
-                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG
-                                        (MAX. 5MB).</p>
+                                <div class="sm:col-span-2" id="uraian-komplain-container">
+                                    <!-- Uraian komplain inputs will be dynamically added here -->
+                                </div>
+                                <div class="sm:col-span-1" id="foto-komplain-container">
+                                    <!-- Foto komplain inputs will be dynamically added here -->
                                 </div>
                                 <div class="sm:col-span-4">
                                     <a href="{{ route('komplain.index') }}"
@@ -209,10 +194,19 @@
         </div>
         @include('components.modal', ['type' => 'confirmation'])
     </div>
+    <style>
+        .span-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 10px;
+        }
 
-
-
-
+        .uraian-container,
+        .foto-container {
+            margin-top: 10px;
+        }
+    </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dropdownButton = document.getElementById('dropdownRadioButton');
@@ -249,6 +243,44 @@
                     const [id, unit] = matchedUnit;
                     unitIdInput.value = id;
                 }
+            });
+        });
+
+        document.getElementById('lokasi_komplain').addEventListener('change', function() {
+            var selectedOptions = Array.from(this.selectedOptions).map(option => ({
+                id: option.value,
+                text: option.text
+            }));
+            var spanContainer = document.querySelector('.span-container');
+            var uraianContainer = document.getElementById('uraian-komplain-container');
+            var fotoContainer = document.getElementById('foto-komplain-container');
+
+            // Clear previous spans and inputs
+            spanContainer.innerHTML = '';
+            uraianContainer.innerHTML = '';
+            fotoContainer.innerHTML = '';
+
+            selectedOptions.forEach(function(option) {
+                // Add spans
+                var span = document.createElement('span');
+                span.className = 'bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-400 border border-gray-500';
+                span.textContent = option.text;
+                spanContainer.appendChild(span);
+
+                // Add uraian komplain input
+                var uraianDiv = document.createElement('div');
+                uraianDiv.className = 'uraian-container';
+                uraianDiv.innerHTML = `<label for="uraian_komplain_${option.id}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Uraian Komplain untuk ${option.text}</label>
+                                       <textarea id="uraian_komplain_${option.id}" name="uraian_komplain[${option.id}]" rows="2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>`;
+                uraianContainer.appendChild(uraianDiv);
+
+                // Add foto komplain input
+                var fotoDiv = document.createElement('div');
+                fotoDiv.className = 'foto-container';
+                fotoDiv.innerHTML = `<label for="foto_komplain_${option.id}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Komplain untuk ${option.text}</label>
+                                     <input type="file" id="foto_komplain_${option.id}" name="foto_komplain[${option.id}]" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="foto_komplain_${option.id}">
+                                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG (MAX. 5MB).</p>`;
+                fotoContainer.appendChild(fotoDiv);
             });
         });
     </script>

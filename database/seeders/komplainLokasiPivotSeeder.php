@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Komplain;
 use App\Models\LokasiKomplain;
+use Illuminate\Support\Facades\DB;
 
 class komplainLokasiPivotSeeder extends Seeder
 {
@@ -18,9 +19,15 @@ class komplainLokasiPivotSeeder extends Seeder
         $lokasiKomplains = LokasiKomplain::all();
 
         foreach ($komplains as $komplain) {
-            $randomLokasiKomplains = $lokasiKomplains->random(rand(1, 3))->pluck('id')->toArray();
+            $randomLokasiKomplains = $lokasiKomplains->random(rand(1, 3));
 
-            $komplain->lokasiKomplains()->sync($randomLokasiKomplains);
+            foreach ($randomLokasiKomplains as $lokasiKomplain) {
+                DB::table('komplain_lokasi_pivot')->insert([
+                    'komplain_id' => $komplain->id,
+                    'lokasi_komplain_id' => $lokasiKomplain->id,
+                    'uraian_komplain' => 'Uraian komplain untuk lokasi ' . $lokasiKomplain->nama_lokasi_komplain,
+                ]);
+            }
         }
     }
 }

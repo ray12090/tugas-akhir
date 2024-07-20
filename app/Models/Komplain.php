@@ -24,9 +24,11 @@ class Komplain extends Model
     }
 
     public function lokasiKomplains()
-    {
-        return $this->belongsToMany(LokasiKomplain::class, 'komplain_lokasi_pivot', 'komplain_id', 'lokasi_komplain_id');
-    }
+{
+    return $this->belongsToMany(LokasiKomplain::class, 'komplain_lokasi_pivot')
+                ->withPivot('uraian_komplain', 'foto_komplain');
+}
+
 
     public function statusKomplain()
     {

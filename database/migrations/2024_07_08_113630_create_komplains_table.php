@@ -17,11 +17,9 @@ return new class extends Migration
             $table->date('tanggal_laporan');
             $table->unsignedBigInteger('unit_id');
             $table->unsignedBigInteger('jenis_komplain_id');
-            $table->unsignedBigInteger('status_komplain_id');
+            $table->unsignedBigInteger('status_komplain_id')->default(1);
             $table->text('nama_pelapor');
             $table->string('no_hp');
-            $table->text('uraian_komplain')->nullable();
-            $table->string('foto_komplain')->nullable();
             $table->timestamps();
 
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');

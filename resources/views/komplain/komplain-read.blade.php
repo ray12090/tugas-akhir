@@ -1,22 +1,14 @@
+
 <x-app-layout>
     <div>
-        <div class="">
-            @include('components.alert')
-            {{-- @include('components.breadcrumbs', [
-                'breadcrumbs' => [
-                    ['title' => 'Dashboard', 'url' => Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard')],
-                    ['title' => 'Data Komplain', 'url' => route('komplain.index')],
-                    ['title' => 'Detail Komplain', 'url' => '']
-                ]
-            ]) --}}
-        </div>
+        @include('components.alert')
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                     {{ __('Detail Komplain') }}
                 </div>
                 <div class="text-gray-500 text-sm font-reguler">
-                    {{ __('Di bawah merupakan detail komplain yang dipilih.') }}
+                    {{ __('Detail komplain ini tidak bisa diubah.') }}
                 </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
@@ -28,11 +20,14 @@
                             <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
                                     <div class="sm:col-span-1">
-                                        <label for="jenis_komplain"
+                                        <label for="jenis_komplain_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kategori Laporan') }}</label>
-                                        <input type="text" name="jenis_komplain" id="jenis_komplain"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            value="{{ $komplain->jenisKomplain->nama_jenis_komplain }}" readonly>
+                                        <select name="jenis_komplain_id" id="jenis_komplain_id"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" readonly disabled>
+                                            @foreach ($jenisKomplains as $jenis)
+                                                <option value="{{ $jenis->id }}" {{ $jenis->id == $komplain->jenis_komplain_id ? 'selected' : '' }}>{{ $jenis->nama_jenis_komplain }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="sm:col-span-3">
                                         <label for="nomor_laporan"
@@ -42,7 +37,7 @@
                                         <div class="relative">
                                             <input type="text" name="nomor_laporan" id="nomor_laporan"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Nomor Laporan" value="{{ $komplain->nomor_laporan }}" readonly>
+                                                value="{{ $komplain->nomor_laporan }}" readonly>
                                             <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -53,35 +48,39 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-2">
-                                    <label for="tanggal_laporan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    <label for="tanggal_laporan"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Tanggal Laporan') }}
                                     </label>
                                     <div class="relative max-w">
-                                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                <path fill-rule="evenodd" d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z" clip-rule="evenodd" />
+                                        <div
+                                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                <path fill-rule="evenodd"
+                                                    d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
+                                                    clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <input id="tanggal_laporan" name="tanggal_laporan" type="text" datepicker datepicker-format="yyyy-mm-dd" datepicker-buttons
+                                        <input id="tanggal_laporan" name="tanggal_laporan" type="text" datepicker
+                                            datepicker-format="yyyy-mm-dd" datepicker-buttons
                                             datepicker-autoselect-today
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Pilih tanggal" value="{{ $komplain->tanggal_laporan }}" disabled>
+                                            value="{{ $komplain->tanggal_laporan }}" readonly>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-2">
                                     <label for="unit_name"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Unit') }}
                                     </label>
                                     <div class="relative">
-                                        <input type="text" id="unit_name" name="unit_name"
+                                        <input type="text" id="unit_name" name="unit_name" placeholder="X-1234"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            value="{{ $komplain->unit->nama_unit ?? '' }}" readonly>
-                                        <input type="hidden" id="unit_id" name="unit_id"
-                                            value="{{ $komplain->unit_id }}">
+                                            value="{{ $komplain->unit->nama_unit }}" readonly>
+                                        <input type="hidden" id="unit_id" name="unit_id" value="{{ $komplain->unit_id }}">
                                         <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -91,7 +90,6 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-4">
                                     <div class=" text-gray-900 text-lg font-semibold">
                                         {{ __('Identitas Pelapor') }}
@@ -115,7 +113,6 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-2">
                                     <label for="no_hp"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -139,38 +136,50 @@
                                         {{ __('Isi Komplain') }}
                                     </div>
                                 </div>
+                                {{-- <div class="sm:col-span-1">
+                                    <label for="lokasi_komplain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ __('Lokasi') }}
+                                    </label>
+                                    <select multiple id="lokasi_komplain" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" readonly disabled>
+                                        @foreach ($komplain->lokasiKomplains as $lokasi)
+                                            <option id="lokasi_komplain_{{ $lokasi->id }}" name="lokasi_komplain_id[]" value="{{ $lokasi->id }}" selected>{{ $lokasi->nama_lokasi_komplain }}</option>
+                                        @endforeach
+                                    </select>
+                                </div> --}}
                                 <div class="sm:col-span-2">
-                                    <label for="lokasi_komplain"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Lokasi') }}</label>
-                                        <div class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'>
-                                            @foreach ($komplain->lokasiKomplains as $lokasi)
-                                            <span
-                                                class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
-                                                {{ $lokasi->nama_lokasi_komplain }}
-                                            </span>
-                                            @endforeach
-                                        </div>
+                                    <label for="lokasi_komplain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ __('Lokasi:') }}
+                                    </label>
+                                    <div class='span-container bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'>
+                                        @foreach ($komplain->lokasiKomplains as $lokasi)
+                                            <span class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-400 border border-gray-500">{{ $lokasi->nama_lokasi_komplain }}</span>
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-2">
-                                    <label for="uraian_komplain"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Uraian Komplain') }}</label>
-                                    <textarea name="uraian_komplain" id="uraian_komplain" rows="4"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        readonly>{{ $komplain->uraian_komplain }}</textarea>
-                                </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="w-full">
-                                    <label for="foto_komplain"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Komplain') }}</label>
-                                    @if ($komplain->foto_komplain)
-                                        <div>
-                                            <img src="{{ asset('storage/foto_komplain/' . $komplain->foto_komplain) }}"
-                                                alt="Foto Komplain" class="w-full h-auto rounded-lg">
+                                <div class="sm:col-span-2" id="uraian-komplain-container">
+                                    @foreach ($komplain->lokasiKomplains as $lokasi)
+                                        <div class="uraian-container">
+                                            <label for="uraian_komplain_{{ $lokasi->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                Uraian Komplain untuk {{ $lokasi->nama_lokasi_komplain }}
+                                            </label>
+                                            <textarea id="uraian_komplain_{{ $lokasi->id }}" name="uraian_komplain[{{ $lokasi->id }}]" rows="2"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" readonly>{{ $lokasi->pivot->uraian_komplain }}</textarea>
                                         </div>
-                                    @else
-                                        <p class="text-gray-500">{{ __('Tidak ada foto komplain.') }}</p>
-                                    @endif
+                                    @endforeach
+                                </div>
+                                <div class="grid gap-4 sm:col-span-4 sm:grid-cols-4 sm:gap-6 id="foto-komplain-container">
+                                    @foreach ($komplain->lokasiKomplains as $lokasi)
+                                        <div class="sm:col-span-1">
+                                            <label for="foto_komplain_{{ $lokasi->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                Foto Komplain untuk {{ $lokasi->nama_lokasi_komplain }}
+                                            </label>
+                                            @if ($lokasi->pivot->foto_komplain)
+                                                <img src="{{ asset('storage/foto_komplain/' . $lokasi->pivot->foto_komplain) }}" alt="Foto Komplain" class="block w-full h-auto rounded-lg">
+                                            @else
+                                                <p class="text-gray-500 dark:text-gray-300">Tidak ada foto yang diunggah.</p>
+                                            @endif
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <div class="sm:col-span-4">
                                     <a href="{{ route('komplain.index') }}"
@@ -191,5 +200,19 @@
                 </div>
             </div>
         </div>
+        @include('components.modal', ['type' => 'confirmation'])
     </div>
+    <style>
+        .span-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .uraian-container,
+        .foto-container {
+            margin-top: 10px;
+        }
+    </style>
 </x-app-layout>
