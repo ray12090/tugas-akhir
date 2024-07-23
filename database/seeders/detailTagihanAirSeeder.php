@@ -30,7 +30,6 @@ class detailTagihanAirSeeder extends Seeder
 
             DetailTagihanAir::create([
                 'biaya_air_id' => $detailBiayaAir->id,
-                'unit_id' => $unit->id,
                 'meter_air_awal' => $meter_air_awal,
                 'meter_air_akhir' => $meter_air_akhir,
                 'pemakaian_air' => $pemakaian_air,

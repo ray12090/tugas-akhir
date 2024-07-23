@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Ipl;
 use App\Models\Unit;
-use App\Models\Kepenghunian;
-use App\Models\Tarif;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+
 use App\Http\Requests\StoreIplRequest;
 use App\Http\Requests\UpdateIplRequest;
 
@@ -55,8 +54,6 @@ class IplController extends Controller
             $nextInvoiceNumber = $this->generateInitialInvoiceNumber();
         }
 
-        // Ambil tarif terbaru
-        $tarif = Tarif::orderBy('created_at', 'desc')->first();
 
         $units = Unit::all();
         $kepenghunians = Kepenghunian::all();
