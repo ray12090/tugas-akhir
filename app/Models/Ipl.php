@@ -21,7 +21,6 @@ class Ipl extends Model
         'titipan_air_id',
         'iuran_pengelolaan_id',
         'dana_cadangan_id',
-        'tagihan_air_id',
         'denda_id',
         'total',
         'foto_bukti_pembayaran',
@@ -51,7 +50,7 @@ class Ipl extends Model
     }
     public function detailIuranPengelolaan()
     {
-        return $this->hasOne(detailIuranPengelolaan::class,'iuarn_pengelolaan_id');
+        return $this->hasOne(detailIuranPengelolaan::class,'iuran_pengelolaan_id');
     }
     public function detailTitipanAir()
     {
