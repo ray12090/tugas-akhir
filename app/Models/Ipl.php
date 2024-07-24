@@ -21,6 +21,7 @@ class Ipl extends Model
         'titipan_air_id',
         'iuran_pengelolaan_id',
         'dana_cadangan_id',
+        'tagihan_air_id',
         'denda_id',
         'total',
         'foto_bukti_pembayaran',
@@ -38,30 +39,30 @@ class Ipl extends Model
     
     public function detailBiayaAdmin()
     {
-        return $this->belongsTo(detailBiayaAdmin::class);
+        return $this->belongsTo(detailBiayaAdmin::class, 'biaya_admin_id');
     }
     public function detailTagihanAwal()
     {
-        return $this->hasOne(detailTagihanAwal::class,'ipl_id');
+        return $this->hasOne(detailTagihanAwal::class,'tagihan_awal_id');
     }
     public function detailTitipanPengelolaan()
     {
-        return $this->hasOne(detailTitipanPengelolaan::class,'ipl_id');
+        return $this->hasOne(detailTitipanPengelolaan::class, 'titipan_pengelolaan_id');
     }
     public function detailIuranPengelolaan()
     {
-        return $this->hasOne(detailIuranPengelolaan::class,'ipl_id');
+        return $this->hasOne(detailIuranPengelolaan::class,'iuarn_pengelolaan_id');
     }
     public function detailTitipanAir()
     {
-        return $this->hasOne(detailTitipanAir::class,'ipl_id');
+        return $this->hasOne(detailTitipanAir::class,'titipan_air_id');
     }
     public function detailDanaCadangan()
     {
-        return $this->hasOne(detailDanaCadangan::class,'ipl_id');
+        return $this->hasOne(detailDanaCadangan::class,'dana_cadangan_id');
     }
     public function detailDenda()
     {
-        return $this->hasOne(detailDenda::class,'ipl_id');
+        return $this->hasOne(detailDenda::class,'denda_id');
     }
 }
