@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Ipl;
 use App\Models\Unit;
 use App\Models\detailTagihanAir;
@@ -14,6 +15,7 @@ use App\Models\detailDenda;
 use App\Models\detailTitipanPengelolaan;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class IplController extends Controller
 {
@@ -111,9 +113,15 @@ class IplController extends Controller
             'foto_bukti_pembayaran' => 'nullable|image|max:5120', // Maks 5MB
         ]);
 
-        // Ambil data tagihan air dari detail_tagihan_airs
-        $detailTagihanAir = detailTagihanAir::find($request->tagihan_air_id);
-        $tagihanAir = $detailTagihanAir ? $detailTagihanAir->tagihan_air : 0;
+        DB::transaction(function () use ($request) {
+            // Simpan data ke tabel detail_tagihan_airs
+            $detailTagihanAir = detailTagihanAir::create([
+                'biaya_air_id' => $request->biaya_air_id,
+                'meter_air_awal' => $request->meter_air_awal,
+                'meter_air_akhir' => $request->meter_air_akhir,
+                'pemakaian_air' => $request->pemakaian_air,
+                'tagihan_air' => $request->tagihan_air,
+            ]);
 
         // Ambil biaya admin dari tabel detail_biaya_admin
         $biayaAdmin = detailBiayaAdmin::first()->biaya_admin;
@@ -124,7 +132,7 @@ class IplController extends Controller
             ($request->titipan_air_id ?? 0) +
             ($request->iuran_pengelolaan_id ?? 0) +
             ($request->dana_cadangan_id ?? 0) +
-            $tagihanAir +
+            $detailTagihanAir->tagihan_air +
             $biayaAdmin +
             ($request->denda_id ?? 0);
 
@@ -204,6 +212,7 @@ class IplController extends Controller
                 ['jumlah' => $request->denda_id]
             );
         }
+    });
 
         return redirect()->route('ipl.index')->with('success', 'Data pembayaran IPL berhasil ditambahkan.');
     }
@@ -228,31 +237,40 @@ class IplController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Ipl $ipl): RedirectResponse
-    {
-        // Validate the form
-        $request->validate([
-            'nomor_invoice' => 'required|string',
-            'bulan_ipl' => 'required|string',
-            'tanggal_invoice' => 'required|date',
-            'jatuh_tempo' => 'required|date',
-            'unit_id' => 'required|exists:units,id',
-            'tagihan_awal_id' => 'nullable|numeric',
-            'titipan_pengelolaan_id' => 'nullable|numeric',
-            'titipan_air_id' => 'nullable|numeric',
-            'iuran_pengelolaan_id' => 'nullable|numeric',
-            'dana_cadangan_id' => 'nullable|numeric',
-            'tagihan_air_id' => 'nullable|exists:detail_tagihan_airs,id',
-            'denda_id' => 'nullable|numeric',
-            'status' => 'required|string',
-            'foto_bukti_pembayaran' => 'nullable|image|max:5120', // Maks 5MB
-        ]);
+{
+    // Validasi input dari form
+    $request->validate([
+        'nomor_invoice' => 'required|string',
+        'bulan_ipl' => 'required|string',
+        'tanggal_invoice' => 'required|date',
+        'jatuh_tempo' => 'required|date',
+        'unit_id' => 'required|exists:units,id',
+        'tagihan_awal_id' => 'nullable|numeric',
+        'titipan_pengelolaan_id' => 'nullable|numeric',
+        'titipan_air_id' => 'nullable|numeric',
+        'iuran_pengelolaan_id' => 'nullable|numeric',
+        'dana_cadangan_id' => 'nullable|numeric',
+        'tagihan_air_id' => 'nullable|exists:detail_tagihan_airs,id',
+        'denda_id' => 'nullable|numeric',
+        'status' => 'required|string',
+        'foto_bukti_pembayaran' => 'nullable|image|max:5120', // Maks 5MB
+    ]);
 
-        // Ambil data tagihan air dari detail_tagihan_airs
-        $detailTagihanAir = detailTagihanAir::find($request->tagihan_air_id);
-        $tagihanAir = $detailTagihanAir ? $detailTagihanAir->tagihan_air : 0;
+    DB::transaction(function () use ($request, $ipl) {
+        // Perbarui atau buat data di tabel detail_tagihan_airs
+        $detailTagihanAir = DetailTagihanAir::updateOrCreate(
+            ['id' => $request->tagihan_air_id],
+            [
+                'biaya_air_id' => $request->biaya_air_id,
+                'meter_air_awal' => $request->meter_air_awal,
+                'meter_air_akhir' => $request->meter_air_akhir,
+                'pemakaian_air' => $request->pemakaian_air,
+                'tagihan_air' => $request->tagihan_air,
+            ]
+        );
 
         // Ambil biaya admin dari tabel detail_biaya_admin
-        $biayaAdmin = detailBiayaAdmin::first()->biaya_admin;
+        $biayaAdmin = DetailBiayaAdmin::first()->biaya_admin;
 
         // Hitung total akhir
         $totalAkhir = ($request->tagihan_awal_id ?? 0) +
@@ -260,7 +278,7 @@ class IplController extends Controller
             ($request->titipan_air_id ?? 0) +
             ($request->iuran_pengelolaan_id ?? 0) +
             ($request->dana_cadangan_id ?? 0) +
-            $tagihanAir +
+            $detailTagihanAir->tagihan_air +
             $biayaAdmin +
             ($request->denda_id ?? 0);
 
@@ -292,9 +310,60 @@ class IplController extends Controller
         // Update IPL record
         $ipl->update($data);
 
-        // Redirect with success message
-        return redirect()->route('ipl.index')->with('success', 'Data pembayaran IPL berhasil diperbarui.');
-    }
+        // Perbarui atau buat detail tagihan terkait
+        if ($request->tagihan_awal_id) {
+            DetailTagihanAwal::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->tagihan_awal_id]
+            );
+        }
+
+        if ($request->titipan_pengelolaan_id) {
+            DetailTitipanPengelolaan::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->titipan_pengelolaan_id]
+            );
+        }
+
+        if ($request->iuran_pengelolaan_id) {
+            DetailIuranPengelolaan::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->iuran_pengelolaan_id]
+            );
+        }
+
+        if ($request->titipan_air_id) {
+            DetailTitipanAir::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->titipan_air_id]
+            );
+        }
+
+        if ($request->dana_cadangan_id) {
+            DetailDanaCadangan::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->dana_cadangan_id]
+            );
+        }
+
+        if ($request->tagihan_air_id) {
+            DetailTagihanAir::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->tagihan_air_id]
+            );
+        }
+
+        if ($request->denda_id) {
+            DetailDenda::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->denda_id]
+            );
+        }
+    });
+
+    return redirect()->route('ipl.index')->with('success', 'Data pembayaran IPL berhasil diperbarui.');
+}
+
 
     /**
      * Remove the specified resource from storage.
