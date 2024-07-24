@@ -88,9 +88,9 @@
                                     </th>
                                     <th class="w-1/6 p-4">
                                         <a
-                                            href="{{ route('ipl.index', ['sort_by' => 'kepenghunian_id', 'sort_order' => $sort_by === 'kepenghunian_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                            href="{{ route('ipl.index', ['sort_by' => 'pemilik_id', 'sort_order' => $sort_by === 'pemilik_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
                                             {{ __('Nama') }}
-                                            @if ($sort_by === 'kepenghunian_id')
+                                            @if ($sort_by === 'pemilik_id')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -172,10 +172,10 @@
                                             {{ $ipl->nomor_invoice }}</td>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $ipl->unit->unit }}</td>
+                                            {{ $ipl->unit->nama_unit }}</td>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $ipl->kepenghunian->nama }}</td>
+                                            {{ $ipl->pemilik->nama_pemilik }}</td>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $ipl->tanggal_invoice }}</td>

@@ -9,12 +9,11 @@ class detailTagihanAwal extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'ipl_id',
         'jumlah',
     ];
 
     public function Ipl()
     {
-        return $this->belongsTo(Ipl::class, 'ipl_id');
+        return $this->hasOne(Ipl::class, 'tagihan_awal_id');
     }
 }

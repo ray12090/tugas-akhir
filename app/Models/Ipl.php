@@ -49,26 +49,26 @@ class Ipl extends Model
     }
     public function detailTagihanAwal()
     {
-        return $this->hasOne(detailTagihanAwal::class,'tagihan_awal_id');
+        return $this->belongsTo(detailTagihanAwal::class,'tagihan_awal_id')->withTrashed();
     }
     public function detailTitipanPengelolaan()
     {
-        return $this->hasOne(detailTitipanPengelolaan::class, 'titipan_pengelolaan_id');
+        return $this->belongsTo(detailTitipanPengelolaan::class, 'titipan_pengelolaan_id')->withTrashed();
     }
     public function detailIuranPengelolaan()
     {
-        return $this->hasOne(detailIuranPengelolaan::class,'iuran_pengelolaan_id');
+        return $this->belongsTo(detailIuranPengelolaan::class,'iuran_pengelolaan_id')->withTrashed();
     }
     public function detailTitipanAir()
     {
-        return $this->hasOne(detailTitipanAir::class,'titipan_air_id');
+        return $this->belongsTo(detailTitipanAir::class,'titipan_air_id')->withTrashed();
     }
     public function detailDanaCadangan()
     {
-        return $this->hasOne(detailDanaCadangan::class,'dana_cadangan_id');
+        return $this->belongsTo(detailDanaCadangan::class,'dana_cadangan_id')->withTrashed();
     }
     public function detailDenda()
     {
-        return $this->hasOne(detailDenda::class,'denda_id');
+        return $this->belongsTo(detailDenda::class,'denda_id')->withTrashed();
     }
 }
