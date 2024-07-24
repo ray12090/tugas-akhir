@@ -90,6 +90,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/get-units/{unit}', [KomplainController::class, 'getUnits']);
 Route::get('/get-lantais/{tower_id}', [UnitController::class, 'getLantais']);
 Route::get('/get-owner-info-by-name/{unitName}', [IplController::class, 'getOwnerInfoByName']);
+Route::get('/api/pemilik/{pemilikId}/units', [IplController::class, 'getUnitsByPemilik']);
+
 
 // Default route for handling unknown routes
 Route::fallback(function () {

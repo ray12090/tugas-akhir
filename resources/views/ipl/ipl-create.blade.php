@@ -75,83 +75,34 @@
                                 </div>
                                 <div class="sm:col-span-2">
                                     <div class="grid gap-4 sm:grid-cols-3 sm:gap-6">
-                                        <div class="w-full">
-                                            <label for="unit_name"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                {{ __('Unit') }}
-                                            </label>
-                                            <div class="relative">
-                                                <input type="text" id="unit_name" name="unit_name" placeholder="X-1234"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                <input type="hidden" id="unit_id" name="unit_id">
-                                                <input type="hidden" id="kepenghunian_id" name="kepenghunian_id">
-                                                <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M4 4a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2v14a1 1 0 1 1 0 2H5a1 1 0 1 1 0-2V5a1 1 0 0 1-1-1Zm5 2a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-1Zm-5 4a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-1Zm-3 4a2 2 0 0 0-2 2v3h2v-3h2v3h2v-3a2 2 0 0 0-2-2h-2Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="w-full">
-                                            <label for="unit_size"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                {{ __('Luas Unit') }}
-                                            </label>
-                                            <div class="relative">
-                                                <input type="text" id="unit_size" name="unit_size" placeholder="XX m2"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                    disabled>
-                                                <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M4 4a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2v14a1 1 0 1 1 0 2H5a1 1 0 1 1 0-2V5a1 1 0 0 1-1-1Zm5 2a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-1Zm-5 4a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-1Zm-3 4a2 2 0 0 0-2 2v3h2v-3h2v3h2v-3a2 2 0 0 0-2-2h-2Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="w-full"></div>
                                     </div>
                                 </div>
                                 <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-2">
                                     <div class="grid gap-4 sm:grid-cols-3 sm:gap-6">
                                         <div class="w-full">
-                                            <label for="nama"
+                                            <label for="pemilik_id"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                {{ __('Nama') }}
+                                                {{ __('Pemilik') }}
                                             </label>
-                                            <div class="relative">
-                                                <input type="text" id="nama" name="nama"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                    readonly>
-                                                <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
+                                            <select id="pemilik_id" name="pemilik_id"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                                <option value="">{{ __('Pilih Pemilik') }}</option>
+                                                @foreach($pemiliks as $pemilik)
+                                                    <option value="{{ $pemilik->id }}">{{ $pemilik->nama_pemilik }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="w-full">
-                                            <label for="alamat"
+                                            <label for="unit_id"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                {{ __('Alamat') }}
+                                                {{ __('Unit') }}
                                             </label>
-                                            <div class="relative">
-                                                <input type="text" id="alamat" name="alamat" disabled
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
+                                            <select id="unit_id" name="unit_id"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                                <option value="">{{ __('Pilih Unit') }}</option>
+                                                <!-- Unit akan dimuat secara dinamis berdasarkan pemilik yang dipilih -->
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -163,11 +114,11 @@
                                         </div>
                                     </div>
                                     <div class="w-full">
-                                        <label for="total_tagihan_belum_dibayar"
+                                        <label for="tagihan_awal"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             {{ __('Total Tagihan yang Belum Dibayar') }}
                                         </label>
-                                        <input type="number" id="total_tagihan_belum_dibayar" name="total_tagihan_belum_dibayar"
+                                        <input type="number" id="tagihan_awal" name="tagihan_awal"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
                                     </div>
                                     <div class="w-full">
@@ -231,19 +182,21 @@
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                     {{ __('Pemakaian (m³)') }}
                                                 </label>
-                                                <input type="text" id="pemakaian_air"
+                                                <input type="text" id="pemakaian_air" name="pemakaian_air"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                     readonly>
                                             </div>
                                             <div class="w-full">
-                                                <label for="harga_air"
+                                                <label for="biaya_air"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                     {{ __('Harga Air per m³') }}
                                                 </label>
-                                                <input type="text" id="harga_air" name="harga_air"
+                                                <input type="text" id="biaya_air" name="biaya_air"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                    value="{{ number_format($tarif->harga_air, 2, ',', '.') }}"
+                                                    value="{{ number_format($biaya_air->biaya_air, 2, ',', '.') }}"
                                                     readonly>
+                                                <input type="hidden" id="biaya_air_id" name="biaya_air_id"
+                                                    value="{{ $biaya_air->id }}">
                                             </div>
                                             <div class="w-full">
                                                 <label for="tagihan_air"
@@ -268,10 +221,11 @@
                                                 </label>
                                                 <input type="text" id="biaya_admin" name="biaya_admin"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                    value="{{ number_format($tarif->biaya_admin, 2, ',', '.') }}"
+                                                    value="{{ number_format($biaya_admin->biaya_admin, 2, ',', '.') }}"
                                                     disabled>
+                                                <input type="hidden" id="biaya_admin_id" name="biaya_admin_id"
+                                                    value="{{ $biaya_admin->id }}">
                                             </div>
-                                            <input type="hidden" name="tarif_id" value="{{ $tarif->id }}">
                                             <div class="w-full">
                                                 <label for="denda"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -347,26 +301,34 @@
             </div>
         </div>
     </div>
-    </div>
+    <!-- </div>
     @include('components.modal', ['type' => 'confirmation'])
-    </div>
+    </div> -->
     <script>
-        function debounce(func, wait) {
-            let timeout;
-            return function (...args) {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(this, args), wait);
-            };
-        }
-
         document.addEventListener('DOMContentLoaded', function () {
-            const unitInput = document.getElementById('unit_name');
-            const unitIdInput = document.getElementById('unit_id');
-            const namaInput = document.getElementById('nama');
-            const kepenghunianIdInput = document.getElementById('kepenghunian_id');
-            const alamatInput = document.getElementById('alamat');
+            // Fetching units when the owner is selected
+            document.getElementById('pemilik_id').addEventListener('change', function () {
+                var pemilikId = this.value;
+                var unitSelect = document.getElementById('unit_id');
+                unitSelect.innerHTML = '<option value="">Pilih Unit</option>';
 
-            const totalTagihanBelumDibayarInput = document.getElementById('total_tagihan_belum_dibayar');
+                if (pemilikId) {
+                    fetch(`/api/pemilik/${pemilikId}/units`)
+                        .then(response => response.json())
+                        .then(data => {
+                            data.units.forEach(unit => {
+                                var option = document.createElement('option');
+                                option.value = unit.id;
+                                option.text = unit.nama_unit;
+                                unitSelect.add(option);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching units:', error));
+                }
+            });
+
+            // Initializing variables
+            const tagihanAwalInput = document.getElementById('tagihan_awal');
             const titipanPengelolaanInput = document.getElementById('titipan_pengelolaan');
             const titipanAirInput = document.getElementById('titipan_air');
             const iuranPengelolaanInput = document.getElementById('iuran_pengelolaan');
@@ -374,59 +336,17 @@
             const meterAirAwalInput = document.getElementById('meter_air_awal');
             const meterAirAkhirInput = document.getElementById('meter_air_akhir');
             const dendaInput = document.getElementById('denda');
-            const hargaAir = {{ $tarif->harga_air }}; // Ambil dari database
-            const biayaAdmin = {{ $tarif->biaya_admin }}; // Ambil dari database
+            const biayaAir = {{ $biaya_air->biaya_air }}; // Ambil dari database
+            const biayaAdmin = {{ $biaya_admin->biaya_admin }}; // Ambil dari database
 
-            // Fungsi format angka ke format xx.xxx,xx
+            // Format number to Indonesian currency style
             function formatNumber(num) {
                 return num.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             }
 
-            function setUnitIdAndFetchOwnerInfo(unitName) {
-                unitIdInput.value = ''; // Clear previous value
-                kepenghunianIdInput.value = ''; // Clear previous value
-                namaInput.value = ''; // Clear previous value
-                alamatInput.value = ''; // Clear previous value
-
-                if (unitName.trim().length < 6) {
-                    return; // Skip if less than 6 characters
-                }
-
-                fetch(`/get-owner-info-by-name/${unitName}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            unitIdInput.value = data.unit.id;
-                            kepenghunianIdInput.value = data.kepenghunian.id;
-                            namaInput.value = data.nama;
-                            alamatInput.value = data.alamat;
-                        } else {
-                            alert(data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching owner info:', error);
-                    });
-            }
-
-            const debouncedFetch = debounce(setUnitIdAndFetchOwnerInfo, 500);
-
-            unitInput.addEventListener('input', function () {
-                debouncedFetch(unitInput.value.trim());
-            });
-
-            unitInput.addEventListener('blur', function () {
-                if (unitInput.value.trim().length >= 6) {
-                    setUnitIdAndFetchOwnerInfo(unitInput.value.trim());
-                } else {
-                    alert('Unit ID tidak ditemukan. Pastikan unit name yang dimasukkan benar.');
-                }
-            });
-
-            // Fungsi untuk menghitung dan memperbarui Total Akhir
+            // Update total cost calculation
             function updateTotalAkhir() {
-                // Ambil nilai dari setiap input
-                const totalTagihan = parseFloat(totalTagihanBelumDibayarInput.value) || 0;
+                const tagihanAwal = parseFloat(tagihanAwalInput.value) || 0;
                 const titipanPengelolaan = parseFloat(titipanPengelolaanInput.value) || 0;
                 const titipanAir = parseFloat(titipanAirInput.value) || 0;
                 const iuranPengelolaan = parseFloat(iuranPengelolaanInput.value) || 0;
@@ -435,35 +355,25 @@
                 const meterAkhir = parseFloat(meterAirAkhirInput.value) || 0;
                 const denda = parseFloat(dendaInput.value) || 0;
 
-                // Hitung pemakaian air
+                // Calculate water usage and bill
                 const pemakaianAir = meterAkhir - meterAwal;
+                const tagihanAir = pemakaianAir * biayaAir;
 
-                // Hitung tagihan air
-                const tagihanAir = pemakaianAir * hargaAir;
+                // Calculate total cost
+                const totalAkhir = tagihanAwal + titipanPengelolaan + titipanAir + iuranPengelolaan + danaCadangan + tagihanAir + biayaAdmin + denda;
 
-                // Hitung total biaya admin
-                const totalBiayaAdmin = biayaAdmin;
-
-                // Hitung total akhir
-                const totalAkhir = totalTagihan + titipanPengelolaan + titipanAir + iuranPengelolaan + danaCadangan + tagihanAir + totalBiayaAdmin + denda;
-
-                // Perbarui nilai pada elemen Total Akhir
+                // Update display values
                 document.getElementById('total_akhir').textContent = formatNumber(totalAkhir);
-
-                // Perbarui nilai pada elemen Pemakaian Air
                 document.getElementById('pemakaian_air').value = formatNumber(pemakaianAir);
-
-                // Perbarui nilai pada elemen Tagihan Air
                 document.getElementById('tagihan_air').value = formatNumber(tagihanAir);
             }
 
-            // Tambahkan event listener pada semua input untuk memanggil fungsi updateTotalAkhir
-            const inputFields = document.querySelectorAll('input[type="number"]');
-            inputFields.forEach(input => {
+            // Add event listener to all relevant inputs
+            document.querySelectorAll('input[type="number"]').forEach(input => {
                 input.addEventListener('input', updateTotalAkhir);
             });
 
-            // Panggil updateTotalAkhir untuk inisialisasi
+            // Initial calculation
             updateTotalAkhir();
         });
     </script>

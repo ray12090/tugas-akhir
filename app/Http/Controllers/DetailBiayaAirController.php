@@ -12,8 +12,11 @@ class DetailBiayaAirController extends Controller
      */
     public function index()
     {
-        return view('detail_biaya_air.detail_biaya_air');
+        $biayaAirList = detailBiayaAir::orderBy('created_at', 'desc')->get();
+
+        return view('detail_biaya_air.detail_biaya_air', compact('biayaAirList'));
     }
+
 
     /**
      * Show the form for creating a new resource.
