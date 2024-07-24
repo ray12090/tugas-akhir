@@ -6,6 +6,12 @@ use App\Models\Ipl;
 use App\Models\Unit;
 use App\Models\detailTagihanAir;
 use App\Models\detailBiayaAdmin;
+use App\Models\detailTagihanAwal;
+use App\Models\detailTitipanAir;
+use App\Models\detailIuranPengelolaan;
+use App\Models\detailDanaCadangan;
+use App\Models\detailDenda;
+use App\Models\detailTitipanPengelolaan;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
@@ -73,7 +79,7 @@ class IplController extends Controller
         $lastNumber = end($parts);
 
         // Increment the numeric part of the invoice number
-        $nextNumber = str_pad((int)$lastNumber + 1, 5, '0', STR_PAD_LEFT);
+        $nextNumber = str_pad((int) $lastNumber + 1, 5, '0', STR_PAD_LEFT);
 
         // Get the current month and year
         $currentMonth = now()->format('m');
@@ -114,13 +120,13 @@ class IplController extends Controller
 
         // Hitung total akhir
         $totalAkhir = ($request->tagihan_awal_id ?? 0) +
-                    ($request->titipan_pengelolaan_id ?? 0) +
-                    ($request->titipan_air_id ?? 0) +
-                    ($request->iuran_pengelolaan_id ?? 0) +
-                    ($request->dana_cadangan_id ?? 0) +
-                    $tagihanAir +
-                    $biayaAdmin +
-                    ($request->denda_id ?? 0);
+            ($request->titipan_pengelolaan_id ?? 0) +
+            ($request->titipan_air_id ?? 0) +
+            ($request->iuran_pengelolaan_id ?? 0) +
+            ($request->dana_cadangan_id ?? 0) +
+            $tagihanAir +
+            $biayaAdmin +
+            ($request->denda_id ?? 0);
 
         // Simpan bukti pembayaran jika ada
         if ($request->hasFile('foto_bukti_pembayaran')) {
@@ -131,7 +137,7 @@ class IplController extends Controller
         }
 
         // Simpan data ke dalam tabel `ipls`
-        Ipl::create([
+        $ipl = Ipl::create([
             'nomor_invoice' => $request->nomor_invoice,
             'bulan_ipl' => $request->bulan_ipl,
             'tanggal_invoice' => $request->tanggal_invoice,
@@ -148,6 +154,56 @@ class IplController extends Controller
             'foto_bukti_pembayaran' => $fotoBuktiPembayaran,
             'status' => $request->status,
         ]);
+
+        // Simpan detail tagihan terkait
+        if ($request->tagihan_awal_id) {
+            detailTagihanAwal::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->tagihan_awal_id]
+            );
+        }
+
+        if ($request->titipan_pengelolaan_id) {
+            detailTitipanPengelolaan::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->titipan_pengelolaan_id]
+            );
+        }
+
+        if ($request->iuran_pengelolaan_id) {
+            detailIuranPengelolaan::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->iuran_pengelolaan_id]
+            );
+        }
+
+        if ($request->titipan_air_id) {
+            detailTitipanAir::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->titipan_air_id]
+            );
+        }
+
+        if ($request->dana_cadangan_id) {
+            detailDanaCadangan::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->dana_cadangan_id]
+            );
+        }
+
+        if ($request->tagihan_air_id) {
+            detailTagihanAir::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->tagihan_air_id]
+            );
+        }
+
+        if ($request->denda_id) {
+            detailDenda::updateOrCreate(
+                ['ipl_id' => $ipl->id],
+                ['jumlah' => $request->denda_id]
+            );
+        }
 
         return redirect()->route('ipl.index')->with('success', 'Data pembayaran IPL berhasil ditambahkan.');
     }
@@ -200,13 +256,13 @@ class IplController extends Controller
 
         // Hitung total akhir
         $totalAkhir = ($request->tagihan_awal_id ?? 0) +
-                    ($request->titipan_pengelolaan_id ?? 0) +
-                    ($request->titipan_air_id ?? 0) +
-                    ($request->iuran_pengelolaan_id ?? 0) +
-                    ($request->dana_cadangan_id ?? 0) +
-                    $tagihanAir +
-                    $biayaAdmin +
-                    ($request->denda_id ?? 0);
+            ($request->titipan_pengelolaan_id ?? 0) +
+            ($request->titipan_air_id ?? 0) +
+            ($request->iuran_pengelolaan_id ?? 0) +
+            ($request->dana_cadangan_id ?? 0) +
+            $tagihanAir +
+            $biayaAdmin +
+            ($request->denda_id ?? 0);
 
         // Prepare data for update
         $data = $request->only([
