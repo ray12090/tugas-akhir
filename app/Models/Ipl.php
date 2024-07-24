@@ -10,6 +10,7 @@ class Ipl extends Model
     use HasFactory;
     protected $fillable = [
         'unit_id', 
+        'pemilik_id',
         'tagihan_air_id',
         'biaya_admin_id',       
         'nomor_invoice',
@@ -29,8 +30,14 @@ class Ipl extends Model
 
     public function unit()
     {
-        return $this->belongsTo(Unit::class);
+        return $this->belongsTo(Unit::class, 'unit_id');
     }
+
+    public function pemilik()
+    {
+        return $this->belongsTo(Pemilik::class, 'pemilik_id');
+    }
+
     public function detailTagihanAir()
     {
         return $this->belongsTo(detailTagihanAir::class, 'tagihan_air_id');

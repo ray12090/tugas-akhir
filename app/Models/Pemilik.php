@@ -17,6 +17,10 @@ class Pemilik extends Model
         return $this->belongsToMany(Unit::class, 'pemilik_units', 'pemilik_id', 'unit_id')
                     ->withPivot('awal_huni', 'akhir_huni');
     }
+    public function ipl()
+    {
+        return $this->hasMany(Ipl::class);
+    }
     public function detailKewarganegaraan()
     {
         return $this->belongsTo(detailKewarganegaraan::class, 'warga_negara_id');

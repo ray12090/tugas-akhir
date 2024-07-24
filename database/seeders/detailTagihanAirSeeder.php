@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Unit;
+use App\Models\Pemilik;
 use App\Models\detailBiayaAir;
 use App\Models\detailTagihanAir;
 
@@ -17,11 +17,11 @@ class detailTagihanAirSeeder extends Seeder
     public function run(): void
     {
         // Get all units and detail_biaya_airs
-        $units = Unit::all();
+        $pemiliks = Pemilik::all();
         $detailBiayaAirs = DetailBiayaAir::all();
 
         // Iterate through each unit and create a detail_tagihan_air record
-        foreach ($units as $unit) {
+        foreach ($pemiliks as $pemilik) {
             $detailBiayaAir = $detailBiayaAirs->random(); // Assuming random biaya_air_id for each unit
             $meter_air_awal = rand(1, 1000); // Random initial meter reading
             $meter_air_akhir = $meter_air_awal + rand(1, 100); // Random final meter reading greater than initial

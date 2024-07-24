@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ipls', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('unit_id');
+            $table->unsignedBigInteger('pemilik_id');
             $table->unsignedBigInteger('tagihan_air_id')->nullable();
             $table->unsignedBigInteger('biaya_admin_id')->nullable();
             $table->string('nomor_invoice');
@@ -32,6 +33,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
+            $table->foreign('pemilik_id')->references('id')->on('pemiliks')->onDelete('cascade');
             $table->foreign('tagihan_air_id')->references('id')->on('detail_tagihan_airs')->onDelete('cascade');
             $table->foreign('biaya_admin_id')->references('id')->on('detail_biaya_admins')->onDelete('cascade');
             $table->foreign('tagihan_awal_id')->references('id')->on('detail_tagihan_awals')->onDelete('cascade');
