@@ -67,9 +67,10 @@ class PenangananController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $nomorPenanganan = Penanganan::generateNomorPenanganan();
         $validatedData = $request->validate([
             'komplain_id' => 'required',
-            'nomor_penanganan' => 'required|string|max:255',
+            // 'nomor_penanganan' => 'required|string|max:255',
             'tanggal_penanganan' => 'required|date',
             'time' => 'required',
             'kategori_penanganan_id' => 'nullable|array',
@@ -83,7 +84,7 @@ class PenangananController extends Controller
 
         $penanganan = Penanganan::create([
             'komplain_id' => $validatedData['komplain_id'],
-            'nomor_penanganan' => $validatedData['nomor_penanganan'],
+            'nomor_penanganan' => $nomorPenanganan,
             'tanggal_penanganan' => $validatedData['tanggal_penanganan'] . ' ' . $validatedData['time'],
             'respon_awal' => $validatedData['respon_awal'],
             'pemeriksaan_awal' => $validatedData['pemeriksaan_awal'],

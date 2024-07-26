@@ -82,7 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('detail_biaya_air', DetailBiayaAirController::class);
     Route::resource('detail_tagihan_air', DetailTagihanAirController::class);
     Route::resource('detail_tempat_lahir', DetailTempatLahirController::class);
-    Route::resource('kategori_komplain', KategoriKomplainController::class);
+    // Route::resource('kategori_komplain', KategoriKomplainController::class);
     Route::resource('kategori_penanganan', KategoriPenangananController::class);
 });
 
@@ -91,7 +91,14 @@ Route::get('/get-units/{unit}', [KomplainController::class, 'getUnits']);
 Route::get('/get-lantais/{tower_id}', [UnitController::class, 'getLantais']);
 Route::get('/get-owner-info-by-name/{unitName}', [IplController::class, 'getOwnerInfoByName']);
 Route::get('/api/pemilik/{pemilikId}/units', [IplController::class, 'getUnitsByPemilik']);
-
+Route::get('/generate-nomor-laporan', function () {
+    $nomorLaporan = \App\Models\Komplain::generateNomorLaporan();
+    return response()->json(['nomor_laporan' => $nomorLaporan]);
+});
+Route::get('/generate-nomor-penanganan', function () {
+    $nomorPenanganan = \App\Models\Penanganan::generateNomorPenanganan();
+    return response()->json(['nomor_penanganan' => $nomorPenanganan]);
+});
 
 // Default route for handling unknown routes
 Route::fallback(function () {

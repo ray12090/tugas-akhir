@@ -42,7 +42,6 @@
                                                 </svg>
                                             </div>
                                         </div>
-
                                         <div class="w-full">
                                             <label for="tanggal_invoice"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -61,7 +60,6 @@
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                 required>
                                         </div>
-
                                         <div class="w-full">
                                             <label for="bulan_ipl"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Pembayaran Bulan') }}</label>
@@ -99,8 +97,9 @@
                                             <select id="pemilik_id" name="pemilik_id"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                                 <option value="">{{ __('Pilih Pemilik') }}</option>
-                                                @foreach($pemiliks as $pemilik)
-                                                    <option value="{{ $pemilik->id }}">{{ $pemilik->nama_pemilik }}</option>
+                                                @foreach ($pemiliks as $pemilik)
+                                                    <option value="{{ $pemilik->id }}">{{ $pemilik->nama_pemilik }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -283,8 +282,8 @@
                                     <a href="{{ route('ipl.index') }}"
                                         class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-GRAY-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                         <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white mr-2"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
                                                 clip-rule="evenodd" />
@@ -294,8 +293,8 @@
                                     <button type="submit"
                                         class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                                         <svg class="w-[16px] h-[16px] text-white dark:text-white mr-2"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7.414A2 2 0 0 0 20.414 6L18 3.586A2 2 0 0 0 16.586 3H5Zm3 11a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6H8v-6Zm1-7V5h6v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1Z"
                                                 clip-rule="evenodd" />
@@ -316,9 +315,9 @@
     @include('components.modal', ['type' => 'confirmation'])
     </div> -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // Fetching units when the owner is selected
-            document.getElementById('pemilik_id').addEventListener('change', function () {
+            document.getElementById('pemilik_id').addEventListener('change', function() {
                 var pemilikId = this.value;
                 var unitSelect = document.getElementById('unit_id');
                 unitSelect.innerHTML = '<option value="">Pilih Unit</option>';
@@ -352,7 +351,10 @@
 
             // Format number to Indonesian currency style
             function formatNumber(num) {
-                return num.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                return num.toLocaleString('id-ID', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
             }
 
             // Update total cost calculation
@@ -371,7 +373,8 @@
                 const tagihanAir = pemakaianAir * biayaAir;
 
                 // Calculate total cost
-                const totalAkhir = tagihanAwal + titipanPengelolaan + titipanAir + iuranPengelolaan + danaCadangan + tagihanAir + biayaAdmin + denda;
+                const totalAkhir = tagihanAwal + titipanPengelolaan + titipanAir + iuranPengelolaan + danaCadangan +
+                    tagihanAir + biayaAdmin + denda;
 
                 // Update display values
                 document.getElementById('total_akhir').textContent = formatNumber(totalAkhir);
@@ -386,6 +389,30 @@
 
             // Initial calculation
             updateTotalAkhir();
+        });
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var today = new Date();
+            var day = ("0" + today.getDate()).slice(-2);
+            var month = ("0" + (today.getMonth() + 1)).slice(-2);
+            var dateToday = today.getFullYear() + "-" + month + "-" + day;
+            document.getElementById("tanggal_invoice").value = dateToday;
+        });
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var today = new Date();
+            today.setDate(today.getDate() + 10);
+            var day = ("0" + today.getDate()).slice(-2);
+            var month = ("0" + (today.getMonth() + 1)).slice(-2);
+            var dateDue = today.getFullYear() + "-" + month + "-" + day;
+            document.getElementById("jatuh_tempo").value = dateDue;
+        });
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var today = new Date();
+            var month = today.getMonth(); // getMonth() returns 0-11, where 0 is January and 11 is December
+            var select = document.getElementById("bulan_ipl");
+            select.selectedIndex = month; // Set the selected index to the current month
         });
     </script>
 </x-app-layout>

@@ -4,15 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Ipl extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'unit_id', 
+        'unit_id',
         'pemilik_id',
         'tagihan_air_id',
-        'biaya_admin_id',       
+        'biaya_admin_id',
         'nomor_invoice',
         'bulan_ipl',
         'tanggal_invoice',
@@ -42,33 +43,33 @@ class Ipl extends Model
     {
         return $this->belongsTo(detailTagihanAir::class, 'tagihan_air_id');
     }
-    
+
     public function detailBiayaAdmin()
     {
         return $this->belongsTo(detailBiayaAdmin::class, 'biaya_admin_id');
     }
     public function detailTagihanAwal()
     {
-        return $this->belongsTo(detailTagihanAwal::class,'tagihan_awal_id')->withTrashed();
+        return $this->belongsTo(detailTagihanAwal::class,'tagihan_awal_id');
     }
     public function detailTitipanPengelolaan()
     {
-        return $this->belongsTo(detailTitipanPengelolaan::class, 'titipan_pengelolaan_id')->withTrashed();
+        return $this->belongsTo(detailTitipanPengelolaan::class, 'titipan_pengelolaan_id');
     }
     public function detailIuranPengelolaan()
     {
-        return $this->belongsTo(detailIuranPengelolaan::class,'iuran_pengelolaan_id')->withTrashed();
+        return $this->belongsTo(detailIuranPengelolaan::class,'iuran_pengelolaan_id');
     }
     public function detailTitipanAir()
     {
-        return $this->belongsTo(detailTitipanAir::class,'titipan_air_id')->withTrashed();
+        return $this->belongsTo(detailTitipanAir::class,'titipan_air_id');
     }
     public function detailDanaCadangan()
     {
-        return $this->belongsTo(detailDanaCadangan::class,'dana_cadangan_id')->withTrashed();
+        return $this->belongsTo(detailDanaCadangan::class,'dana_cadangan_id');
     }
     public function detailDenda()
     {
-        return $this->belongsTo(detailDenda::class,'denda_id')->withTrashed();
+        return $this->belongsTo(detailDenda::class,'denda_id');
     }
 }

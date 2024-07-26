@@ -56,9 +56,9 @@ class KomplainController extends Controller
      */
     public function store(Request $request)
     {
+        $nomorLaporan = Komplain::generateNomorLaporan();
         $request->validate([
             'jenis_komplain_id' => 'required',
-            'nomor_laporan' => 'required',
             'tanggal_laporan' => 'required|date',
             'unit_id' => 'required',
             'nama_pelapor' => 'required',
@@ -67,7 +67,7 @@ class KomplainController extends Controller
 
         $komplain = Komplain::create([
             'jenis_komplain_id' => $request->jenis_komplain_id,
-            'nomor_laporan' => $request->nomor_laporan,
+            'nomor_laporan' => $nomorLaporan,
             'tanggal_laporan' => $request->tanggal_laporan,
             'unit_id' => $request->unit_id,
             'nama_pelapor' => $request->nama_pelapor,
@@ -94,10 +94,6 @@ class KomplainController extends Controller
 
         return redirect()->route('komplain.index')->with('success', 'Komplain berhasil ditambahkan');
     }
-
-
-
-
 
     /**
      * Display the specified resource.

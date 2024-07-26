@@ -130,7 +130,10 @@
                                 </a>
                             </th>
                             <th class="p-4">
-                                {{ __('Bagian Komplain') }}
+                                {{ __('Lokasi Komplain') }}
+                            </th>
+                            <th class="p-4">
+                                {{ __('Status') }}
                             </th>
                             <th class="p-4 text-center">{{ __('Aksi') }}</th>
                         </tr>
@@ -158,6 +161,8 @@
                                         </span><br>
                                     @endforeach
                                 </td>
+                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $komplain->statusKomplain->nama_status_komplain }}</td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="flex items-center space-x-4 justify-center">
                                         <a href="{{ route('komplain.edit', $komplain->id) }}"

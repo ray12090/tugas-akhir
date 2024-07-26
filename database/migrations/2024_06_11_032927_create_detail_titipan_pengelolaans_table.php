@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('detail_titipan_pengelolaans', function (Blueprint $table) {
             $table->id();
-            $table->decimal('jumlah', 15, 2);
+            $table->decimal('jumlah', 15, 2)->nullable();
             $table->timestamps();
 
 

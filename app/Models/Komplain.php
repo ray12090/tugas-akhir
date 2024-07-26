@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Komplain extends Model
 {
@@ -24,12 +25,10 @@ class Komplain extends Model
     }
 
     public function lokasiKomplains()
-{
-    return $this->belongsToMany(LokasiKomplain::class, 'komplain_lokasi_pivot')
-                ->withPivot('uraian_komplain', 'foto_komplain');
-}
-
-
+    {
+        return $this->belongsToMany(LokasiKomplain::class, 'komplain_lokasi_pivot')
+            ->withPivot('uraian_komplain', 'foto_komplain');
+    }
     public function statusKomplain()
     {
         return $this->belongsTo(StatusKomplain::class);
@@ -39,5 +38,18 @@ class Komplain extends Model
     {
         return $this->hasMany(Penanganan::class, 'komplain_id');
     }
+    public static function generateNomorLaporan()
+    {
+        $lastKomplain = DB::table('komplains')->latest('id')->first();
+        $today = now()->format('Y/m/d');
+        $number = 1;
 
+        if ($lastKomplain) {
+            $lastNomor = $lastKomplain->nomor_laporan;
+            $lastNumber = (int) substr($lastNomor, -6);
+            $number = $lastNumber + 1;
+        }
+
+        return 'KOMP/' . now()->format('Ymd') . '/' . str_pad($number, 6, '0', STR_PAD_LEFT);
+    }
 }

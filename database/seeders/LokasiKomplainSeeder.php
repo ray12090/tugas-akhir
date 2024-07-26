@@ -14,13 +14,13 @@ class LokasiKomplainSeeder extends Seeder
     public function run(): void
     {
         DB::table('lokasi_komplains')->insert([
+            ['nama_lokasi_komplain' => 'Balkon'],
+            ['nama_lokasi_komplain' => 'Dapur'],
             ['nama_lokasi_komplain' => 'Kamar Tidur'],
             ['nama_lokasi_komplain' => 'Kamar Mandi'],
             ['nama_lokasi_komplain' => 'Ruang Tamu'],
-            ['nama_lokasi_komplain' => 'Dapur'],
             ['nama_lokasi_komplain' => 'Teras'],
             ['nama_lokasi_komplain' => 'Taman'],
-            ['nama_lokasi_komplain' => 'Lainnya'],
         ]);
     }
 }

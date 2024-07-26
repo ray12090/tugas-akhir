@@ -38,12 +38,12 @@
                                         <div class="relative">
                                             <input type="text" name="nomor_laporan" id="nomor_laporan"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Nomor Laporan" required>
+                                                placeholder="Nomor Laporan" required readonly>
                                             <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" fill="currentColor" viewBox="0 0 24 24">
                                                 <path fill-rule="evenodd"
-                                                    d="M7 2a2 2 0 0 0-2 2v1a1 1 0 0 0 0 2v1a1 1 0 0 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7Zm3 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1Z"
+                                                    d="M7 2a2 2 0 0 0-2 2v1a1 1 0 0 0 0 2v1a1 1 0 0 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7Zm3 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1Z"
                                                     clip-rule="evenodd" />
                                             </svg>
                                         </div>
@@ -137,21 +137,27 @@
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
-                                    <label for="lokasi_komplain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    <label for="lokasi_komplain"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Lokasi (tekan ctrl untuk memilih lebih dari satu)') }}
                                     </label>
-                                    <select multiple id="lokasi_komplain" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <select multiple id="lokasi_komplain" rows="4"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option selected disabled>Choose countries</option>
                                         @foreach ($lokasiKomplains as $lokasi)
-                                            <option id="lokasi_komplain_{{ $lokasi->id }}" name="lokasi_komplain_id[]" value="{{ $lokasi->id }}">{{ $lokasi->nama_lokasi_komplain }}</option>
+                                            <option id="lokasi_komplain_{{ $lokasi->id }}"
+                                                name="lokasi_komplain_id[]" value="{{ $lokasi->id }}">
+                                                {{ $lokasi->nama_lokasi_komplain }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="sm:col-span-1">
-                                    <label for="lokasi_komplain" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    <label for="lokasi_komplain"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Lokasi:') }}
                                     </label>
-                                    <div class='span-container bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'>
+                                    <div
+                                        class='span-container bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'>
                                         <!-- Spans will be dynamically added here -->
                                     </div>
                                 </div>
@@ -263,25 +269,45 @@
             selectedOptions.forEach(function(option) {
                 // Add spans
                 var span = document.createElement('span');
-                span.className = 'bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-400 border border-gray-500';
+                span.className =
+                    'bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-400 border border-gray-500';
                 span.textContent = option.text;
                 spanContainer.appendChild(span);
 
                 // Add uraian komplain input
                 var uraianDiv = document.createElement('div');
                 uraianDiv.className = 'uraian-container';
-                uraianDiv.innerHTML = `<label for="uraian_komplain_${option.id}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Uraian Komplain untuk ${option.text}</label>
+                uraianDiv.innerHTML =
+                    `<label for="uraian_komplain_${option.id}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Uraian Komplain untuk ${option.text}</label>
                                        <textarea id="uraian_komplain_${option.id}" name="uraian_komplain[${option.id}]" rows="2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>`;
                 uraianContainer.appendChild(uraianDiv);
 
                 // Add foto komplain input
                 var fotoDiv = document.createElement('div');
                 fotoDiv.className = 'foto-container';
-                fotoDiv.innerHTML = `<label for="foto_komplain_${option.id}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Komplain untuk ${option.text}</label>
+                fotoDiv.innerHTML =
+                    `<label for="foto_komplain_${option.id}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Komplain untuk ${option.text}</label>
                                      <input type="file" id="foto_komplain_${option.id}" name="foto_komplain[${option.id}]" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="foto_komplain_${option.id}">
                                      <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG (MAX. 5MB).</p>`;
                 fotoContainer.appendChild(fotoDiv);
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/generate-nomor-laporan')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('nomor_laporan').value = data.nomor_laporan;
+                })
+                .catch(error => console.error('Error fetching nomor laporan:', error));
+        });
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var today = new Date();
+            var day = ("0" + today.getDate()).slice(-2);
+            var month = ("0" + (today.getMonth() + 1)).slice(-2);
+            var dateToday = today.getFullYear() + "-" + month + "-" + day;
+            document.getElementById("tanggal_laporan").value = dateToday;
         });
     </script>
 </x-app-layout>
