@@ -31,7 +31,7 @@ class Komplain extends Model
     }
     public function statusKomplain()
     {
-        return $this->belongsTo(StatusKomplain::class);
+        return $this->belongsTo(StatusKomplain::class, 'status_komplain_id');
     }
 
     public function penanganan()

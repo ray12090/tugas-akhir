@@ -7,7 +7,7 @@
                     {{ __('Ubah Nama Negara') }}
                 </div>
                 <div class="text-gray-500 text-sm font-reguler">
-                    {{ __('Di bawah merupakan formulir untuk mengubah data negara. Isi formulir ini dapat diisi oleh Tenant Relation') }}
+                    {{ __('Di bawah merupakan formulir untuk mengubah data negara. Isi formulir ini dapat diisi oleh Admin') }}
                 </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">

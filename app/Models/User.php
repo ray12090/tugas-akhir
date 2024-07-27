@@ -20,7 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'usertype',
+        'tipe_user_id',
     ];
 
     /**
@@ -61,10 +61,14 @@ class User extends Authenticatable
     }
     public function Pemilik()
     {
-        return $this->hasOne(Pemilik::class);
+        return $this->hasOne(Pemilik::class, 'user_id');
     }
     public function Penyewa()
     {
-        return $this->hasOne(Penyewa::class);
+        return $this->hasOne(Penyewa::class, 'user_id');
+    }
+    public function tipeUser()
+    {
+        return $this->belongsTo(TipeUser::class, 'tipe_user_id');
     }
 }

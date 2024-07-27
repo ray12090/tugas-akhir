@@ -15,10 +15,14 @@ class penangananUserPivotSeeder extends Seeder
     public function run(): void
     {
         $penanganans = Penanganan::all();
-        $users = User::all();
+        $users = User::whereNotIn('tipe_user_id', [11, 12])->pluck('id')->toArray();
 
         foreach ($penanganans as $penanganan) {
-            $randomUsers = $users->random(rand(1, 3))->pluck('id')->toArray();
+            $randomUsers = array_rand(array_flip($users), rand(1, 3));
+
+            if (!is_array($randomUsers)) {
+                $randomUsers = [$randomUsers];
+            }
 
             $penanganan->users()->sync($randomUsers);
         }

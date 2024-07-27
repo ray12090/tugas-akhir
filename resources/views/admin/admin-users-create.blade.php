@@ -1,19 +1,6 @@
 <x-app-layout>
     <div>
-        <div class="pb-6">
-            @include('components.alert')
-            @include('components.breadcrumbs', [
-                'breadcrumbs' => [
-                    [
-                        'title' => 'Dashboard',
-                        'url' =>
-                            Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard'),
-                    ],
-                    ['title' => 'Data Akun', 'url' => route('akun.index')],
-                    ['title' => 'Tambah Akun', 'url' => ''],
-                ],
-            ])
-        </div>
+        @include('components.alert')
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
@@ -74,14 +61,13 @@
                                 </div>
                                 <div class="sm:col-span-3"></div>
                                 <div class="w-full">
-                                    <label for="usertype" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Tipe Akun') }}</label>
-                                    <select name="usertype" id="usertype" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected disabled class="text-gray-400">Pilih Tipe Akun</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="eg">Engineering</option>
-                                        <option value="fa">Finance</option>
-                                        <option value="tr">Tenant Relation</option>
-                                        <option value="user">Pemilik/Penyewa</option>
+                                    <label for="tipe_user_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Tipe Akun') }}</label>
+                                    <select name="tipe_user_id" id="tipe_user_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        @foreach ($tipeUsers as $tipe)
+                                            <option id="tipe_user_{{ $tipe->id }}"
+                                                name="tipe_user_id[]" value="{{ $tipe->id }}">
+                                                {{ $tipe->nama_tipe_user }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="sm:col-span-3"></div>

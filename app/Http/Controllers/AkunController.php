@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\Users;
+use App\Models\tipeUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -16,18 +17,18 @@ class AkunController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $sort_by = $request->input('sort_by', 'name');
-        $sort_order = $request->input('sort_order', 'desc');
+        $sort_by = $request->input('sort_by', 'id');
+        $sort_order = $request->input('sort_order', 'asc');
 
         $users = User::query()
             ->when($search, function ($query, $search) {
                 return $query->where('id', 'like', "%{$search}%")
                     ->orWhere('name', 'like', "%{$search}%")
                     ->orWhere('email', 'like', "%{$search}%")
-                    ->orWhere('usertype', 'like', "%{$search}%");
+                    ->orWhere('tipe_user_id', 'like', "%{$search}%");
             })
             ->orderBy($sort_by, $sort_order)
-            ->paginate(5);
+            ->paginate(10);
         // dd($users);
 
         return view('admin.admin-users', compact('users', 'sort_by', 'sort_order'));
@@ -39,7 +40,8 @@ class AkunController extends Controller
      */
     public function create()
     {
-        return view('admin.admin-users-create');
+        $tipeUsers = tipeUser::all();
+        return view('admin.admin-users-create', compact('tipeUsers'));
     }
 
     /**
@@ -51,7 +53,7 @@ class AkunController extends Controller
             'name' => 'required',
             'email' => 'required|string|max:255|unique:users',
             'password' => 'required',
-            'usertype' => 'required',
+            'tipe_user_id' => 'required',
         ]);
 
         User::create($request->all());
@@ -64,8 +66,9 @@ class AkunController extends Controller
      */
     public function show($id)
     {
+        $tipeUsers = tipeUser::all();
         $user = User::findOrFail($id);
-        return view('admin.admin-users-read', compact('user'));
+        return view('admin.admin-users-read', compact('user', 'tipeUsers'));
     }
 
     /**
@@ -73,8 +76,9 @@ class AkunController extends Controller
      */
     public function edit($id)
     {
+        $tipeUsers = tipeUser::all();
         $user = User::findOrFail($id);
-        return view('admin.admin-users-edit', compact('user'));
+        return view('admin.admin-users-edit', compact('user', 'tipeUsers'));
     }
 
     /**
@@ -92,7 +96,7 @@ class AkunController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $data->id],
                 'password' => ['nullable', 'string', 'min:8'],
-                'usertype' => ['required', 'string']
+                'tipe_user_id' => ['required', 'exists:tipe_users,id'],
             ], [
                 'email.unique' => 'Email sudah digunakan. Silakan pilih email lain.',
             ]);
@@ -102,7 +106,7 @@ class AkunController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => $request->password ? bcrypt($request->password) : $data->password,
-                'usertype' => $request->usertype,
+                'tipe_user_id' => $request->tipe_user_id,
             ]);
 
             return redirect()->route('akun.index')->with(['success' => 'Detail akun berhasil diubah!']);
@@ -121,7 +125,7 @@ class AkunController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        if ($user->usertype == 'admin') {
+        if ($user->tipe_user_id == '1') {
             return redirect()->back()->with('danger', 'Tipe akun "Admin" tidak bisa dihapus');
         }
         $user->delete();

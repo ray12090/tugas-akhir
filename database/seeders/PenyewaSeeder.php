@@ -21,7 +21,7 @@ class PenyewaSeeder extends Seeder
         $agamaIds = DetailAgama::pluck('id')->toArray();
         $perkawinanIds = DetailPerkawinan::pluck('id')->toArray();
         $namaUser = User::all();
-        $userIds = User::where('usertype', 'user')->pluck('id')->toArray();
+        $userIds = User::where('tipe_user_id', '12')->pluck('id')->toArray();
 
     Penyewa::create([
         'nik' => $faker->unique()->numerify('##########'),

@@ -4,16 +4,16 @@
         <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
             <div class="px-6 pt-6">
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Data Perkawinan') }}
+                    {{ __('Data Tipe User') }}
                 </div>
                 <div class="text-gray-500 text-sm font-regular">
-                    {{ __('Di bawah merupakan tabel data perkawinan. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Admin.') }}
+                    {{ __('Di bawah merupakan tabel data tipe user. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Admin.') }}
                 </div>
             </div>
             <div
                 class="flex flex-col md:flex-row items-stretch md:items-center px-2 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
                 <div class="w-full md:w-1/2">
-                    <form method="GET" action="{{ route('detail_perkawinan.index') }}" class="flex items-center">
+                    <form method="GET" action="{{ route('tipe_user.index') }}" class="flex items-center">
                         <div class="relative w-full">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
@@ -31,7 +31,7 @@
                 </div>
                 <div
                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                    <a href = "{{ route('detail_perkawinan.create') }} "type="button" id="createProductButton"
+                    <a href = "{{ route('tipe_user.create') }} "type="button" id="createProductButton"
                         data-modal-toggle="createProductModal"
                         class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                         <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
@@ -39,7 +39,7 @@
                             <path clip-rule="evenodd" fill-rule="evenodd"
                                 d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                         </svg>
-                        {{ __('Tambah Data Perkawinan') }}
+                        {{ __('Tambah Tipe User') }}
                     </a>
                 </div>
             </div>
@@ -49,9 +49,9 @@
                         <tr>
                             <th class="p-4">
                                 <a
-                                    href="{{ route('detail_perkawinan.index', ['sort_by' => 'status_perkawinan', 'sort_order' => $sort_by === 'status_perkawinan' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                    {{ __('Status Perkawinan') }}
-                                    @if ($sort_by === 'status_perkawinan')
+                                    href="{{ route('tipe_user.index', ['sort_by' => 'nama_tipe_user', 'sort_order' => $sort_by === 'nama_tipe_user' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                    {{ __('Tipe User') }}
+                                    @if ($sort_by === 'nama_tipe_user')
                                         <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -65,14 +65,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($perkawinans as $perkawinan)
+                        @foreach ($tipeUser as $tipe)
                             <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $perkawinan->status_perkawinan }}
+                                    {{ $tipe->nama_tipe_user }}
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="flex items-center space-x-4 justify-center">
-                                        <a href="{{ route('detail_perkawinan.edit', $perkawinan->id) }}"
+                                        <a href="{{ route('tipe_user.edit', $tipe->id) }}"
                                             class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
                                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -84,7 +84,7 @@
                                             </svg>
                                             {{ __('Ubah') }}
                                         </a>
-                                        <a href="{{ route('detail_perkawinan.show', $perkawinan->id) }}"
+                                        <a href="{{ route('tipe_user.show', $tipe->id) }}"
                                             class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                 fill="currentColor" class="w-4 h-4 mr-2 -ml-0.5">
@@ -94,8 +94,8 @@
                                             </svg>
                                             {{ __('Lihat') }}
                                         </a>
-                                        <form action="{{ route('detail_perkawinan.destroy', $perkawinan->id) }}" method="POST"
-                                            onsubmit="return confirmDelete(this, '{{ $perkawinan->status_perkawinan }}');">
+                                        <form action="{{ route('tipe_user.destroy', $tipe->id) }}" method="POST"
+                                            onsubmit="return confirmDelete(this, '{{ $tipe->nama_tipe_user }}');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
@@ -124,16 +124,16 @@
                 aria-label="Table navigation">
                 <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                     Showing
-                    <span class="font-semibold text-gray-900 dark:text-white">{{ $perkawinans->firstItem() }}</span>
+                    <span class="font-semibold text-gray-900 dark:text-white">{{ $tipeUser->firstItem() }}</span>
                     to
-                    <span class="font-semibold text-gray-900 dark:text-white">{{ $perkawinans->lastItem() }}</span>
+                    <span class="font-semibold text-gray-900 dark:text-white">{{ $tipeUser->lastItem() }}</span>
                     of
-                    <span class="font-semibold text-gray-900 dark:text-white">{{ $perkawinans->total() }}</span>
+                    <span class="font-semibold text-gray-900 dark:text-white">{{ $tipeUser->total() }}</span>
                 </span>
 
                 <ul class="inline-flex items-stretch -space-x-px">
                     <!-- Previous Page Link -->
-                    @if ($perkawinans->onFirstPage())
+                    @if ($tipeUser->onFirstPage())
                         <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
                             <span
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -147,7 +147,7 @@
                         </li>
                     @else
                         <li>
-                            <a href="{{ $perkawinans->previousPageUrl() }}" rel="prev"
+                            <a href="{{ $tipeUser->previousPageUrl() }}" rel="prev"
                                 class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -160,8 +160,8 @@
                     @endif
 
                     <!-- Pagination Elements -->
-                    @foreach ($perkawinans->links()->elements[0] as $page => $url)
-                        @if ($page == $perkawinans->currentPage())
+                    @foreach ($tipeUser->links()->elements[0] as $page => $url)
+                        @if ($page == $tipeUser->currentPage())
                             <li>
                                 <a href="#" aria-current="page"
                                     class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
@@ -179,9 +179,9 @@
                     @endforeach
 
                     <!-- Next Page Link -->
-                    @if ($perkawinans->hasMorePages())
+                    @if ($tipeUser->hasMorePages())
                         <li>
-                            <a href="{{ $perkawinans->nextPageUrl() }}" rel="next"
+                            <a href="{{ $tipeUser->nextPageUrl() }}" rel="next"
                                 class="flex items-center justify-center h-full py-1.5 px-3 text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">

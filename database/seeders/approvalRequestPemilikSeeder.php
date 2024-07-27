@@ -15,7 +15,7 @@ class approvalRequestPemilikSeeder extends Seeder
         $faker = Faker::create();
 
         $pemiliks = Pemilik::all();
-        $trUsers = User::where('usertype', 'tr')->get();
+        $trUsers = User::where('tipe_user_id', '2')->get();
 
         foreach ($pemiliks as $pemilik) {
             $status = (rand(1, 100) <= 95) ? 'Diterima' : 'Ditolak';

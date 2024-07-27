@@ -25,8 +25,8 @@ use App\Http\Controllers\DetailBiayaAdminController;
 use App\Http\Controllers\DetailBiayaAirController;
 use App\Http\Controllers\DetailTagihanAirController;
 use App\Http\Controllers\DetailTempatLahirController;
-use App\Http\Controllers\KategoriKomplainController;
 use App\Http\Controllers\KategoriPenangananController;
+use App\Http\Controllers\TipeUserController;
 use Illuminate\Support\Facades\Route;
 
 // Redirect to login if not authenticated
@@ -82,8 +82,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('detail_biaya_air', DetailBiayaAirController::class);
     Route::resource('detail_tagihan_air', DetailTagihanAirController::class);
     Route::resource('detail_tempat_lahir', DetailTempatLahirController::class);
-    // Route::resource('kategori_komplain', KategoriKomplainController::class);
     Route::resource('kategori_penanganan', KategoriPenangananController::class);
+    Route::resource('tipe_user', TipeUserController::class);
 });
 
 // Additional routes

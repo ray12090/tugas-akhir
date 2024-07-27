@@ -6,6 +6,7 @@ use App\Models\Komplain;
 use App\Models\Unit;
 use App\Models\JenisKomplain;
 use App\Models\LokasiKomplain;
+use App\Models\StatusKomplain;
 use App\Http\Requests\StoreKomplainRequest;
 use App\Http\Requests\UpdateKomplainRequest;
 use Illuminate\Http\Request;
@@ -109,7 +110,8 @@ class KomplainController extends Controller
     {
         $komplain = Komplain::with('lokasiKomplains')->findOrFail($id);
         $jenisKomplains = JenisKomplain::all();
-        return view('komplain.komplain-edit', compact('komplain', 'jenisKomplains'));
+        $statusKomplains = StatusKomplain::all();
+        return view('komplain.komplain-edit', compact('komplain', 'jenisKomplains', 'statusKomplains'));
     }
 
     public function update(Request $request, $id)
@@ -119,6 +121,7 @@ class KomplainController extends Controller
             'tanggal_laporan' => 'required|date',
             'unit_id' => 'required|exists:units,id',
             'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
+            'status_komplain_id' => 'required|exists:status_komplains,id',
             'nama_pelapor' => 'required|string',
             'no_hp' => 'required|string',
             'lokasi_komplain.*.uraian_komplain' => 'nullable|string',
@@ -126,7 +129,7 @@ class KomplainController extends Controller
         ]);
 
         $komplain = Komplain::findOrFail($id);
-        $komplain->update($request->only(['nomor_laporan', 'tanggal_laporan', 'unit_id', 'jenis_komplain_id', 'nama_pelapor', 'no_hp']));
+        $komplain->update($request->only(['nomor_laporan', 'tanggal_laporan', 'unit_id', 'jenis_komplain_id', 'status_komplain_id', 'nama_pelapor', 'no_hp']));
 
         foreach ($request->lokasi_komplain as $lokasiId => $data) {
             $lokasiData = ['uraian_komplain' => $data['uraian_komplain'] ?? null];

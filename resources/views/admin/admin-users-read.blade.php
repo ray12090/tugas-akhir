@@ -1,31 +1,6 @@
-@php
-    // Mapping array for usertype
-    $usertypeLabels = [
-        'admin' => 'Admin',
-        'eg' => 'Engineer',
-        'fa' => 'Finance',
-        'tr' => 'Tenant Relation'
-    ];
-
-    // Get the human-readable label for the usertype
-    $usertypeLabel = $usertypeLabels[$user->usertype] ?? 'Unknown';
-@endphp
 <x-app-layout>
     <div>
-        <div class="pb-6">
-            @include('components.alert')
-            @include('components.breadcrumbs', [
-                'breadcrumbs' => [
-                    [
-                        'title' => 'Dashboard',
-                        'url' =>
-                            Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard'),
-                    ],
-                    ['title' => 'Data Akun', 'url' => route('akun.index')],
-                    ['title' => 'Detail Akun', 'url' => ''],
-                ],
-            ])
-        </div>
+        @include('components.alert')
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
@@ -77,12 +52,12 @@
                                 </div>
                                 <div class="sm:col-span-3"></div>
                                 <div class="w-full">
-                                    <label for="usertype"
+                                    <label for="tipe_user_id"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Tipe Akun') }}</label>
                                     <div class="relative">
-                                        <input type="text" id="usertype" name="usertype"
+                                        <input type="text" id="tipe_user_id" name="tipe_user_id"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            value="{{ $usertypeLabel }}" readonly>
+                                            value="{{ $user->tipeUser->nama_tipe_user }}" readonly>
                                     </div>
                                 </div>
                                 <div class="sm:col-span-3"></div>

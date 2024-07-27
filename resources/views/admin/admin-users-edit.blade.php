@@ -1,19 +1,6 @@
 <x-app-layout>
     <div>
-        <div class="pb-6">
-            @include('components.alert')
-            @include('components.breadcrumbs', [
-                'breadcrumbs' => [
-                    [
-                        'title' => 'Dashboard',
-                        'url' =>
-                            Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard'),
-                    ],
-                    ['title' => 'Data Akun', 'url' => route('akun.index')],
-                    ['title' => 'Ubah Akun', 'url' => ''],
-                ],
-            ])
-        </div>
+        @include('components.alert')
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
@@ -32,7 +19,7 @@
                             @csrf
                             @method('PUT')
                             <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
-                                <div class="w-full">
+                                <div class="sm:col-span-1">
                                     <label for="name"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Nama') }}
@@ -43,8 +30,7 @@
                                             value="{{ old('name', $user->name) }}" required>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-3"></div>
-                                <div class="w-full">
+                                <div class="sm:col-span-1">
                                     <label for="email"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Email') }}
@@ -53,8 +39,7 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         value="{{ old('email', $user->email) }}" required>
                                 </div>
-                                <div class="sm:col-span-3"></div>
-                                <div class="w-full">
+                                <div class="sm:col-span-1">
                                     <label for="password"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Password') }}
@@ -63,15 +48,16 @@
                                         <input type="password" id="password" name="password"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         <p class="text-xs text-red-600">
-                                            {{ __('Kosongkan password jika tidak ingin diubah') }}</p>
+                                            {{ __('Kosongkan password jika tidak ingin diubah') }}
+                                        </p>
                                         @if ($errors->has('password'))
-                                            <p class="text-red-500 text-xs italic mt-2">
-                                                {{ $errors->first('password') }}
-                                            </p>
+                                        <p class="text-red-500 text-xs italic mt-2">
+                                            {{ $errors->first('password') }}
+                                        </p>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="w-full">
+                                <div class="sm:col-span-1">
                                     <label for="password_confirmation"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Konfirmasi Password') }}
@@ -87,28 +73,17 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="sm:col-span-3"></div>
-                                <div class="w-full">
-                                    <label for="usertype"
+                                <div class="sm:col-span-1">
+                                    <label for="tipe_user_id"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Tipe Akun') }}</label>
-                                    <select name="usertype" id="usertype"
+                                    <select name="tipe_user_id" id="tipe_user_id"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option value="admin"
-                                            {{ old('usertype', $user->usertype) == 'admin' ? 'selected' : '' }}>Admin
-                                        </option>
-                                        <option value="eg"
-                                            {{ old('usertype', $user->usertype) == 'eg' ? 'selected' : '' }}>
-                                            Engineering</option>
-                                        <option value="fa"
-                                            {{ old('usertype', $user->usertype) == 'fa' ? 'selected' : '' }}>Finance
-                                        </option>
-                                        <option value="tr"
-                                            {{ old('usertype', $user->usertype) == 'tr' ? 'selected' : '' }}>Tenant
-                                            Relation</option>
+                                        @foreach ($tipeUsers as $tipe)
+                                            <option value="{{ $tipe->id }}" {{ $tipe->id == $user->tipe_user_id ? 'selected' : '' }}>{{ $tipe->nama_tipe_user }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                <div class="sm:col-span-3"></div>
-                                <div class="sm:col-span-3">
+                                <div class="sm:col-span-4">
                                     <a href="{{ route('akun.index') }}"
                                         class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-GRAY-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                         <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white mr-2"
@@ -141,4 +116,9 @@
         </div>
     </div>
     @include('components.modal', ['type' => 'confirmation'])
+    <script>
+        document.getElementById('password').addEventListener('input', function () {
+            document.getElementById('password_confirmation').setAttribute('pattern', this.value);
+        });
+    </script>
 </x-app-layout>

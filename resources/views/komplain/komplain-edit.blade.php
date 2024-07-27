@@ -38,7 +38,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2">
+                                <div class="sm:col-span-1">
                                     <label for="tanggal_laporan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Tanggal Laporan') }}
                                     </label>
@@ -50,6 +50,14 @@
                                         </div>
                                         <input id="tanggal_laporan" name="tanggal_laporan" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $komplain->tanggal_laporan }}">
                                     </div>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <label for="status_komplain_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Status Komplain') }}</label>
+                                    <select name="status_komplain_id" id="status_komplain_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        @foreach ($statusKomplains as $status)
+                                            <option value="{{ $status->id }}" {{ $status->id == $komplain->status_komplain_id ? 'selected' : '' }}>{{ $status->nama_status_komplain }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="sm:col-span-2">
                                     <label for="unit_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

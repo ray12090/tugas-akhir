@@ -7,7 +7,7 @@
                     {{ __('Data Agama') }}
                 </div>
                 <div class="text-gray-500 text-sm font-regular">
-                    {{ __('Di bawah merupakan tabel data agama. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Tenant Relation.') }}
+                    {{ __('Di bawah merupakan tabel data agama. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Admin.') }}
                 </div>
             </div>
             <div

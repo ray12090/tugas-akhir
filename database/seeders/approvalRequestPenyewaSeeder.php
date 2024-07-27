@@ -18,7 +18,7 @@ class approvalRequestPenyewaSeeder extends Seeder
     {
         $faker = Faker::create();
         $penyewas = Penyewa::all();
-        $trUsers = User::where('usertype', 'tr')->get();
+        $trUsers = User::where('tipe_user_id', '2')->get();
 
         foreach ($penyewas as $penyewa) {
             $status = (rand(1, 100) <= 95) ? 'Diterima' : 'Ditolak';

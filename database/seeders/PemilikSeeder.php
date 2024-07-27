@@ -24,7 +24,7 @@ class PemilikSeeder extends Seeder
         $agamas = DetailAgama::all();
         $perkawinans = DetailPerkawinan::all();
         $namaUser = User::all();
-        $users = User::where('usertype', 'user')->get();
+        $users = User::where('tipe_user_id', '11')->get();
 
         Pemilik::create([
             'nama_pemilik' => 'Pemilik 1',
