@@ -39,7 +39,7 @@ php artisan migrate
 php artisan db:seed
 ```
 
-### 7. Install node.js dependencies (if haven't)
+### 7. Install npm
 
 ```
 npm install
