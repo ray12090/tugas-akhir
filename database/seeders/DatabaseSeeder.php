@@ -5,6 +5,10 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Vermaysha\Wilayah\Seeds\CitySeeder;
+use Vermaysha\Wilayah\Seeds\DistrictSeeder;
+use Vermaysha\Wilayah\Seeds\ProvinceSeeder;
+use Vermaysha\Wilayah\Seeds\VillageSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +17,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(ProvinceSeeder::class);
+        $this->call(CitySeeder::class);
+        $this->call(DistrictSeeder::class);
+        $this->call(VillageSeeder::class);
         $this->call([
             tipeUserSeeder::class,
             detailBiayaAirSeeder::class,

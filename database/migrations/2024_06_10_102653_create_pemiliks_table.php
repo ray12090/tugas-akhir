@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('agama_id');
             $table->unsignedBigInteger('perkawinan_id');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('tempat_lahir_id');
+            $table->unsignedBigInteger('village_id');
             $table->string('nama_pemilik');
             $table->string('no_hp');
             $table->date('tanggal_lahir');
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->foreign('agama_id')->references('id')->on('detail_agamas')->onDelete('cascade');
             $table->foreign('perkawinan_id')->references('id')->on('detail_perkawinans')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('tempat_lahir_id')->references('id')->on('detail_tempat_lahirs')->onDelete('cascade');
+            $table->foreign('village_id')->references('id')->on('villages')->onDelete('cascade');
         });
     }
 

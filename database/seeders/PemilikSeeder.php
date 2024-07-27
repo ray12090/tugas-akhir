@@ -29,7 +29,7 @@ class PemilikSeeder extends Seeder
         Pemilik::create([
             'nama_pemilik' => 'Pemilik 1',
             'no_hp' => $faker->phoneNumber,
-            'tempat_lahir_id' => 1,
+            'village_id' => 1,
             'tanggal_lahir' => $faker->date(),
             'warga_negara_id' => $kewarganegaraans->random()->id,
             'user_id' => 8,
@@ -41,7 +41,7 @@ class PemilikSeeder extends Seeder
         Pemilik::create([
             'nama_pemilik' => 'Pemilik 2',
             'no_hp' => $faker->phoneNumber,
-            'tempat_lahir_id' => 1,
+            'village_id' => 2,
             'tanggal_lahir' => $faker->date(),
             'warga_negara_id' => $kewarganegaraans->random()->id,
             'user_id' => 9,

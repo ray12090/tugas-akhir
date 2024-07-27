@@ -32,7 +32,7 @@ class PenyewaSeeder extends Seeder
         'perkawinan_id' => $faker->randomElement($perkawinanIds),
         'nama_penyewa' => 'Penyewa 1',
         'no_hp' => $faker->phoneNumber,
-        'tempat_lahir_id' => 1,
+        'village_id' => 1,
         'tanggal_lahir' => $faker->date,
         'alamat' => $faker->address,
         'awal_sewa' => $faker->dateTimeBetween('-2 years', 'now'),
