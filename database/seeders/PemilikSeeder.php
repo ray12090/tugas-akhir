@@ -31,7 +31,7 @@ class PemilikSeeder extends Seeder
             'no_hp' => $faker->phoneNumber,
             'tempat_lahir_id' => 1,
             'tanggal_lahir' => $faker->date(),
-            'warga_negara_id' => $kewarganegaraans->random()->id,
+            'warga_negara_id' => 1,
             'user_id' => 8,
             'nik' => $faker->unique()->numerify('################'),
             'agama_id' => $agamas->random()->id,
@@ -39,20 +39,26 @@ class PemilikSeeder extends Seeder
             'alamat' => $faker->address,
             'jenis_kelamin' => 'Laki-laki',
             'alamat_village_id' => 1,
+            'alamat_kecamatan_id' => 1,
+            'alamat_kabupaten_id' => 1,
+            'alamat_provinsi_id' => 1,
         ]);
         Pemilik::create([
             'nama_pemilik' => 'Pemilik 2',
             'no_hp' => $faker->phoneNumber,
-            'tempat_lahir_id' => 2,
+            'tempat_lahir_id' => 1,
             'tanggal_lahir' => $faker->date(),
-            'warga_negara_id' => $kewarganegaraans->random()->id,
+            'warga_negara_id' => 1,
             'user_id' => 9,
             'nik' => $faker->unique()->numerify('################'),
             'agama_id' => $agamas->random()->id,
             'perkawinan_id' => $perkawinans->random()->id,
             'alamat' => $faker->address,
             'jenis_kelamin' => 'Perempuan',
-            'alamat_village_id' => 2,
+            'alamat_village_id' => 1,
+            'alamat_kecamatan_id' => 1,
+            'alamat_kabupaten_id' => 1,
+            'alamat_provinsi_id' => 1,
         ]);
     }
 }

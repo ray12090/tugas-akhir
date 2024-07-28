@@ -38,7 +38,10 @@ class PenyewaSeeder extends Seeder
         'awal_sewa' => $faker->dateTimeBetween('-2 years', 'now'),
         'akhir_sewa' => $faker->dateTimeBetween('now', '+2 years'),
         'jenis_kelamin' => 'Laki-laki',
-        'alamat_village_id' => 30,
+        'alamat_village_id' => 1,
+        'alamat_kecamatan_id' => 1,
+        'alamat_kabupaten_id' => 1,
+        'alamat_provinsi_id' => 1,
     ]);
 
 

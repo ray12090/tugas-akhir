@@ -9,6 +9,10 @@ use App\Models\DetailAgama;
 use App\Models\DetailPerkawinan;
 use App\Models\DetailTempatLahir;
 use App\Models\User;
+use Vermaysha\Wilayah\Models\City;
+use Vermaysha\Wilayah\Models\District;
+use Vermaysha\Wilayah\Models\Province;
+use Vermaysha\Wilayah\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -67,7 +71,11 @@ class PenyewaController extends Controller
         $detailPerkawinans = DetailPerkawinan::all();
         $detailTempatLahirs = DetailTempatLahir::all();
         $users = User::all();
-        return view('penyewa.penyewa-create', compact('penyewas', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahirs', 'users'));
+        $detailAlamatVillages = Village::all();
+        $detailAlamatProvinsi = Province::all();
+        $detailAlamatKabupaten = City::all();
+        $detailAlamatKecamatan = District::all();
+        return view('penyewa.penyewa-create', compact('penyewas', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahirs', 'users', 'detailAlamatVillages', 'detailAlamatProvinsi', 'detailAlamatKabupaten', 'detailAlamatKecamatan'));
     }
 
     /**
@@ -90,6 +98,10 @@ class PenyewaController extends Controller
             'alamat' => 'required|string|max:255',
             'awal_sewa' => 'required|date',
             'akhir_sewa' => 'required|date|after:awal_sewa',
+            'alamat_village_id' => 'required|exists:villages,id',
+            'alamat_kecamatan_id' => 'required|exists:districts,id',
+            'alamat_kabupaten_id' => 'required|exists:cities,id',
+            'alamat_provinsi_id' => 'required|exists:provinces,id',
         ]);
 
         if ($validator->fails()) {
@@ -113,6 +125,10 @@ class PenyewaController extends Controller
             'alamat' => $request->input('alamat'),
             'awal_sewa' => $request->input('awal_sewa'),
             'akhir_sewa' => $request->input('akhir_sewa'),
+            'alamat_village_id' => $request->input('alamat_village_id'),
+            'alamat_kecamatan_id' => $request->input('alamat_kecamatan_id'),
+            'alamat_kabupaten_id' => $request->input('alamat_kabupaten_id'),
+            'alamat_provinsi_id' => $request->input('alamat_provinsi_id'),
         ]);
 
         return redirect()->route('penyewa.index')->with('success', 'Penyewa berhasil ditambahkan');

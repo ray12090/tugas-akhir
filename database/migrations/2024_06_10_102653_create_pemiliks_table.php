@@ -19,6 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('perkawinan_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('tempat_lahir_id');
+            $table->unsignedBigInteger('alamat_provinsi_id');
+            $table->unsignedBigInteger('alamat_kabupaten_id');
+            $table->unsignedBigInteger('alamat_kecamatan_id');
             $table->unsignedBigInteger('alamat_village_id');
             $table->string('jenis_kelamin');
             $table->string('nama_pemilik');
@@ -33,6 +36,9 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('tempat_lahir_id')->references('id')->on('cities')->onDelete('cascade');
             $table->foreign('alamat_village_id')->references('id')->on('villages')->onDelete('cascade');
+            $table->foreign('alamat_kecamatan_id')->references('id')->on('districts')->onDelete('cascade');
+            $table->foreign('alamat_kabupaten_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('alamat_provinsi_id')->references('id')->on('provinces')->onDelete('cascade');
         });
     }
 

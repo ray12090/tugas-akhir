@@ -20,14 +20,52 @@
                             <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
                                     <div class="sm:col-span-1">
-                                        <label for="unit_id"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Unit') }}</label>
-                                        <select name="unit_id" id="unit_id"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            @foreach ($units as $unit)
-                                                <option value="{{ $unit->id }}">{{ $unit->nama_unit }}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="unit_id" id="labelUnit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            {{ __('Unit') }}
+                                        </label>
+                                        <button id="dropdownSearchButtonUnit" data-dropdown-toggle="dropdownSearchUnit"
+                                            class="w-full text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
+                                            type="button">{{ __('Pilih Unit') }}
+                                            <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="m1 1 4 4 4-4" />
+                                            </svg>
+                                        </button>
+                                        <div id="dropdownSearchUnit" class="z-10 hidden bg-white rounded-lg w-60 dark:bg-gray-700 outline-gray-300 outline outline-1">
+                                            <div class="p-3">
+                                                <label for="unit_id_search" class="sr-only">{{ __('Search') }}</label>
+                                                <div class="relative">
+                                                    <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                                        </svg>
+                                                    </div>
+                                                    <input type="text" id="unit_search"
+                                                        class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        placeholder="Cari Unit">
+                                                </div>
+                                            </div>
+                                            <ul id="selectedUnitsList" class="px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200 border-b">
+                                                <!-- Selected units will be shown here -->
+                                            </ul>
+                                            <ul id="unitList" class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
+                                                @foreach ($units as $unit)
+                                                    <li class="unit-item" data-unit-id="{{ $unit->id }}" data-unit-name="{{ $unit->nama_unit }}">
+                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                                            <input id="unit_id_{{ $unit->id }}" type="checkbox" value="{{ $unit->id }}"
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                            <label for="unit_id_{{ $unit->id }}"
+                                                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                                                                {{ $unit->nama_unit }}
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div class="sm:col-span-3">
                                         <label for="nik"
@@ -140,8 +178,8 @@
                                         </label>
                                         <button id="dropdownSearchButtonTempatLahir"
                                             data-dropdown-toggle="dropdownSearchTempatLahir"
-                                            class="w-full  text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
-                                            type="button">{{ __('Tempat Lahir') }}
+                                            class="w-full text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
+                                            type="button">{{ __('Pilih Tempat Lahir') }}
                                             <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                                 <path stroke="currentColor" stroke-linecap="round"
@@ -149,7 +187,7 @@
                                             </svg>
                                         </button>
                                         <div id="dropdownSearchTempatLahir"
-                                            class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700">
+                                            class="z-10 hidden bg-white rounded-lg w-60 dark:bg-gray-700 outline-gray-300 outline outline-1">
                                             <div class="p-3">
                                                 <label for="tempat_lahir_search"
                                                     class="sr-only">{{ __('Search') }}</label>
@@ -351,10 +389,23 @@
             // Search functionality for "Tempat Lahir"
             const searchInputTempatLahir = document.getElementById('tempat_lahir_search');
             const listItemsTempatLahir = document.querySelectorAll('#dropdownSearchTempatLahir ul li');
+            const searchInputUnit = document.getElementById('unit_search');
+            const listItemsUnit = document.querySelectorAll('#dropdownSearchUnit ul li');
 
             searchInputTempatLahir.addEventListener('input', function () {
                 const filter = searchInputTempatLahir.value.toLowerCase();
                 listItemsTempatLahir.forEach(function (item) {
+                    const text = item.textContent || item.innerText;
+                    if (text.toLowerCase().includes(filter)) {
+                        item.style.display = "";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            });
+            searchInputUnit.addEventListener('input', function () {
+                const filter = searchInputUnit.value.toLowerCase();
+                listItemsUnit.forEach(function (item) {
                     const text = item.textContent || item.innerText;
                     if (text.toLowerCase().includes(filter)) {
                         item.style.display = "";
@@ -394,7 +445,7 @@
                                 '<option value="">{{ __('Pilih Kabupaten') }}</option>';
                             data.forEach(kabupaten => {
                                 kabupatenSelect.innerHTML +=
-                                    `<option value="${kabupaten.code}">${kabupaten.name}</option>`;
+                                    `<option value="${kabupaten.id}">${kabupaten.name}</option>`;
                             });
                             kabupatenSelect.disabled = false;
                         })
@@ -427,7 +478,7 @@
                             if (Array.isArray(data)) {
                                 data.forEach(kecamatan => {
                                     kecamatanSelect.innerHTML +=
-                                        `<option value="${kecamatan.code}">${kecamatan.name}</option>`;
+                                        `<option value="${kecamatan.id}">${kecamatan.name}</option>`;
                                 });
                             } else {
                                 console.error('Data is not an array:', data);
@@ -481,5 +532,34 @@
             });
 
         });
+        document.addEventListener("DOMContentLoaded", function () {
+        const unitSearchInput = document.getElementById('unit_search');
+        const unitList = document.getElementById('unitList');
+        const selectedUnitsList = document.getElementById('selectedUnitsList');
+
+        unitSearchInput.addEventListener('input', function () {
+            const filter = unitSearchInput.value.toLowerCase();
+            const items = unitList.querySelectorAll('.unit-item');
+            items.forEach(item => {
+                const text = item.dataset.unitName.toLowerCase();
+                item.style.display = text.includes(filter) ? '' : 'none';
+            });
+        });
+
+        unitList.addEventListener('change', function (event) {
+            if (event.target.type === 'checkbox') {
+                updateSelectedUnits();
+            }
+        });
+
+        function updateSelectedUnits() {
+            selectedUnitsList.innerHTML = '';
+            const selectedItems = unitList.querySelectorAll('input[type="checkbox"]:checked');
+            selectedItems.forEach(item => {
+                const unitName = item.parentElement.querySelector('label').innerText;
+                selectedUnitsList.innerHTML += `<li class="ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300 ">${unitName}</li>`;
+            });
+        }
+    });
     </script>
 </x-app-layout>
