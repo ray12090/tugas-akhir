@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\detailKewarganegaraan;
 use App\Models\detailAgama;
 use App\Models\detailPerkawinan;
+use Vermaysha\Wilayah\Models\City;
+use Vermaysha\Wilayah\Models\Village;
 
 class Pemilik extends Model
 {
-    protected $fillable = ['nama_pemilik', 'no_hp', 'tempat_lahir_id', 'tanggal_lahir', 'warga_negara_id', 'user_id', 'nik', 'agama_id', 'perkawinan_id', 'alamat'];
+    protected $fillable = ['nama_pemilik', 'no_hp', 'tempat_lahir_id', 'tanggal_lahir', 'warga_negara_id', 'user_id', 'nik', 'agama_id', 'perkawinan_id', 'alamat', 'jenis_kelamin', 'alamat_village_id'];
 
     public function unit()
     {
@@ -36,10 +38,6 @@ class Pemilik extends Model
         return $this->belongsTo(detailPerkawinan::class, 'perkawinan_id');
     }
 
-    public function detailTempatLahir()
-    {
-        return $this->belongsTo(detailTempatLahir::class, 'tempat_lahir_id');
-    }
     public function approvalRequestPemilik()
     {
         return $this->hasMany(approvalRequestPemilik::class);
@@ -47,5 +45,13 @@ class Pemilik extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function detailTempatLahir()
+    {
+        return $this->belongsTo(City::class, 'tempat_lahir_id');
+    }
+    public function detailAlamatVillage()
+    {
+        return $this->belongsTo(Village::class, 'alamat_village_id');
     }
 }

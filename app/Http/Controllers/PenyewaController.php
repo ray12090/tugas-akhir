@@ -28,7 +28,7 @@ class PenyewaController extends Controller
                 return $query->where('nik', 'like', "%{$search}%")
                     ->orWhere('nama_penyewa', 'like', "%{$search}%")
                     ->orWhere('no_hp', 'like', "%{$search}%")
-                    ->orWhere('tempat_lahir', 'like', "%{$search}%")
+                    ->orWhere('tempat_lahir_id', 'like', "%{$search}%")
                     ->orWhere('tanggal_lahir', 'like', "%{$search}%")
                     ->orWhere('alamat', 'like', "%{$search}%")
                     ->orWhere('awal_sewa', 'like', "%{$search}%")
@@ -83,7 +83,7 @@ class PenyewaController extends Controller
             'agama_id' => 'required|exists:detail_agamas,id',
             'perkawinan_id' => 'required|exists:detail_perkawinans,id',
             'user_id' => 'nullable|exists:users,id',
-            'tempat_lahir_id' => 'required|exists:detail_tempat_lahirs,id',
+            'tempat_lahir_id' => 'required|exists:cities,id',
             'nama_penyewa' => 'required|string|max:255',
             'no_hp' => 'required|string|max:15',
             'tanggal_lahir' => 'required|date',
@@ -155,7 +155,7 @@ class PenyewaController extends Controller
             'user_id' => 'nullable|exists:users,id',
             'nama_penyewa' => 'required|string|max:255',
             'no_hp' => 'required|string|max:15',
-            'tempat_lahir_id' => 'required|exists:detail_tempat_lahirs,id',
+            'tempat_lahir_id' => 'required|exists:cities,id',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'awal_sewa' => 'required|date',
@@ -182,7 +182,7 @@ class PenyewaController extends Controller
     {
         try {
             $penyewa->delete();
-            return redirect()->route('penyewa.index')->with('danger', 'Data Peyewa berhasil dihapus.');
+            return redirect()->route('penyewa.index')->with('danger', 'Data Penyewa berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('penyewa.index')->withErrors(['msg' => 'Error deleting komplain. Please try again.']);
         }

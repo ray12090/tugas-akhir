@@ -69,7 +69,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('akun', AkunController::class);
     Route::resource('ipl', IplController::class);
     Route::resource('penanganan', PenangananController::class);
-    Route::resource('dashboard', DashboardController::class);
     Route::resource('detail_agama', DetailAgamaController::class);
     Route::resource('detail_kewarganegaraan', DetailKewarganegaraanController::class);
     Route::resource('detail_perkawinan', DetailPerkawinanController::class);
@@ -84,6 +83,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('detail_tempat_lahir', DetailTempatLahirController::class);
     Route::resource('kategori_penanganan', KategoriPenangananController::class);
     Route::resource('tipe_user', TipeUserController::class);
+    Route::resource('dashboard', DashboardController::class);
 });
 
 // Additional routes
@@ -99,6 +99,12 @@ Route::get('/generate-nomor-penanganan', function () {
     $nomorPenanganan = \App\Models\Penanganan::generateNomorPenanganan();
     return response()->json(['nomor_penanganan' => $nomorPenanganan]);
 });
+
+// routes/web.php
+Route::get('/api/get-kabupaten/{provinceCode}', [PemilikController::class, 'getKabupaten']);
+Route::get('/api/get-kecamatan/{cityCode}', [PemilikController::class, 'getKecamatan']);
+Route::get('/api/get-kelurahan/{districtCode}', [PemilikController::class, 'getKelurahan']);
+
 
 // Default route for handling unknown routes
 Route::fallback(function () {

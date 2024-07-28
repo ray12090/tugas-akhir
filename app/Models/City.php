@@ -5,6 +5,8 @@ namespace Vermaysha\Wilayah\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use App\Models\Pemilik;
+use App\Models\Penyewa;
 
 class City extends Model
 {
@@ -65,5 +67,13 @@ class City extends Model
             'code',
             'code'
         );
+    }
+    public function pemilik()
+    {
+        return $this->hasMany(Pemilik::class);
+    }
+    public function penyewa()
+    {
+        return $this->hasMany(Penyewa::class);
     }
 }

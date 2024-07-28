@@ -16,7 +16,7 @@ class Users
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->usertype != 'tr' && Auth::user()->usertype != 'eg' && Auth::user()->usertype != 'fa')
+        if(Auth::user()->tipe_user_id != '2' && Auth::user()->tipe_user_id != '3' && Auth::user()->tipe_user_id != '4')
         {
             return redirect('404');
         }

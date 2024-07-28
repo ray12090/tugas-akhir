@@ -78,7 +78,7 @@
                         <span class="flex-1 ms-4 text-left rtl:text-right whitespace-nowrap">{{ __('Beranda') }}</span>
                     </a>
                 </li>
-                @if (Auth::user()->tipe_user_id === '1')
+                @if (Auth::user()->tipe_user_id === '1' || Auth::user()->tipe_user_id === '1')
                     <li>
                         <button type="button"
                             class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full"
@@ -150,7 +150,7 @@
                         </ul>
                     </li>
                 @endif
-                @if (Auth::user()->tipe_user_id === '2')
+                @if (Auth::user()->tipe_user_id === '2' || Auth::user()->tipe_user_id === '1')
                     <li>
                         <button type="button"
                             class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full"
@@ -233,11 +233,11 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('jenis_komplain.index') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Jenis') }}</a>
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Jenis Komplain') }}</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('lokasi_komplain.index') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Lokasi') }}</a>
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Lokasi Komplain') }}</a>
                                 </li>
                                 {{-- <li>
                                 <a href="{{ route('kategori_komplain.index') }}"
@@ -245,7 +245,7 @@
                             </li> --}}
                                 <li>
                                     <a href="{{ route('status_komplain.index') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Status') }}</a>
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Status Komplain') }}</a>
                                 </li>
                             </ul>
                         </li>
@@ -277,12 +277,12 @@
                             </li>
                             <li>
                                 <a href="{{ route('kategori_penanganan.index') }}"
-                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Kategori') }}</a>
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Kategori Penanganan') }}</a>
                             </li>
                         </ul>
                     </li>
                 @endif
-                @if (Auth::user()->tipe_user_id === '3')
+                @if (Auth::user()->tipe_user_id === '3' || Auth::user()->tipe_user_id === '1')
                     <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
                         <li>
                             <button href="{{ route('ipl.index') }}"
@@ -321,7 +321,7 @@
                         </li>
                     </ul>
                 @endif
-                @if (Auth::user()->tipe_user_id === '2')
+                @if (Auth::user()->tipe_user_id === '2' || Auth::user()->tipe_user_id === '1')
                     <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
                         <li>
                             <button type="button"
@@ -345,15 +345,15 @@
                             <ul id="data-bangunan" class="hidden py-2 space-y-2">
                                 <li>
                                     <a href="{{ route('tower.index') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Tower') }}</a>
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Tower') }}</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('lantai.index') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Lantai') }}</a>
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Lantai') }}</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('unit.index') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Unit') }}</a>
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Unit') }}</a>
                                 </li>
                             </ul>
                         </li>

@@ -186,9 +186,9 @@
                                     </th>
                                     <th class="w-1/6 p-4">
                                         <a
-                                            href="{{ route('penyewa.index', ['sort_by' => 'tempat_lahir', 'sort_order' => $sort_by === 'tempat_lahir' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                            href="{{ route('penyewa.index', ['sort_by' => 'village_id', 'sort_order' => $sort_by === 'village_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
                                             {{ __('Tempat Lahir') }}
-                                            @if ($sort_by === 'tempat_lahir')
+                                            @if ($sort_by === 'village_id')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -248,8 +248,7 @@
                                         {{ $penyewa->no_hp }}
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->detailTempatLahir->nama_kota }}
-                                    </td>
+                                        {{ $penyewa->city->name }}
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $penyewa->tanggal_lahir }}
                                     </td>

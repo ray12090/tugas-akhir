@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Vermaysha\Wilayah\Models\City;
+use Vermaysha\Wilayah\Models\Village;
 
 class Penyewa extends Model
 {
     use HasFactory;
-    protected $fillable = ['nik', 'unit_id', 'warga_negara_id', 'agama_id', 'perkawinan_id', 'user_id', 'nama_penyewa', 'no_hp', 'tempat_lahir_id', 'tanggal_lahir', 'alamat', 'awal_sewa', 'akhir_sewa'];
+    protected $fillable = ['nik', 'unit_id', 'warga_negara_id', 'agama_id', 'perkawinan_id', 'user_id', 'nama_penyewa', 'no_hp', 'tempat_lahir_id', 'tanggal_lahir', 'alamat', 'awal_sewa', 'akhir_sewa', 'jenis_kelamin', 'alamat_village_id'];
 
     public function detailKewarganegaraan()
     {
@@ -24,11 +26,6 @@ class Penyewa extends Model
     {
         return $this->belongsTo(detailPerkawinan::class, 'perkawinan_id', 'id');
     }
-
-    public function detailTempatLahir()
-    {
-        return $this->belongsTo(detailTempatLahir::class, 'tempat_lahir_id', 'id');
-    }
     public function approvalRequestPenyewa()
     {
         return $this->hasMany(approvalRequestPenyewa::class);
@@ -41,5 +38,13 @@ class Penyewa extends Model
     public function unit()
     {
         return $this->belongsTo(Unit::class, 'unit_id', 'id');
+    }
+    public function detailTempatLahir()
+    {
+        return $this->belongsTo(City::class, 'tempat_lahir_id', 'id');
+    }
+    public function detailAlamatVillage()
+    {
+        return $this->belongsTo(Village::class, 'alamat_village_id', 'id');
     }
 }

@@ -7,7 +7,10 @@ use App\Models\Pemilik;
 use App\Models\DetailKewarganegaraan;
 use App\Models\DetailAgama;
 use App\Models\DetailPerkawinan;
-use App\Models\DetailTempatLahir;
+use Vermaysha\Wilayah\Models\City;
+use Vermaysha\Wilayah\Models\District;
+use Vermaysha\Wilayah\Models\Province;
+use Vermaysha\Wilayah\Models\Village;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -64,9 +67,12 @@ class PemilikController extends Controller
         $detailKewarganegaraans = DetailKewarganegaraan::all();
         $detailAgamas = DetailAgama::all();
         $detailPerkawinans = DetailPerkawinan::all();
-        $detailTempatLahirs = DetailTempatLahir::all();
+        $detailTempatLahir = City::all();
         $users = User::all();
-        return view('pemilik.pemilik-create', compact('pemiliks', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahirs', 'users'));
+        $detailAlamatProvinsi = Province::all();
+        $detailAlamatKabupaten = City::all();
+        $detailAlamatKecamatan = District::all();
+        return view('pemilik.pemilik-create', compact('pemiliks', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahir', 'users','detailAlamatProvinsi', 'detailAlamatKabupaten', 'detailAlamatKecamatan'));
     }
 
     /**
@@ -82,13 +88,15 @@ class PemilikController extends Controller
             'agama_id' => 'required|exists:detail_agamas,id',
             'perkawinan_id' => 'required|exists:detail_perkawinans,id',
             'user_id' => 'nullable|exists:users,id',
-            'tempat_lahir_id' => 'required|exists:detail_tempat_lahirs,id',
+            'tempat_lahir_id' => 'required|exists:cities,id',
             'nama_pemilik' => 'required|string|max:255',
             'no_hp' => 'required|string|max:15',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'awal_huni' => 'required|date',
-            'akhir_huni' => 'nullable|date' ,
+            'akhir_huni' => 'nullable|date',
+            'jenis_kelamin' => 'required|string|max:10',
+            'alamat_village_id' => 'required|exists:villages,id',
         ]);
 
         if ($validator->fails()) {
@@ -110,6 +118,8 @@ class PemilikController extends Controller
             'no_hp' => $request->input('no_hp'),
             'tanggal_lahir' => $request->input('tanggal_lahir'),
             'alamat' => $request->input('alamat'),
+            'jenis_kelamin' => $request->input('jenis_kelamin'),
+            'alamat_village_id' => $request->input('alamat_village_id'),
         ]);
 
         $pemilik->unit()->attach($request->input('unit_id'), [
@@ -125,7 +135,7 @@ class PemilikController extends Controller
      */
     public function show($id)
     {
-        $pemilik = Pemilik::with('unit', 'detailKewarganegaraan', 'detailAgama', 'detailPerkawinan', 'detailTempatLahir', 'user')->findOrFail($id);
+        $pemilik = Pemilik::with('unit', 'detailKewarganegaraan', 'detailAgama', 'detailPerkawinan', 'detailTempatLahir', 'user', 'detailAlamatVillages')->findOrFail($id);
         return view('pemilik.pemilik-read', compact('pemilik'));
     }
 
@@ -139,10 +149,10 @@ class PemilikController extends Controller
         $detailKewarganegaraans = DetailKewarganegaraan::all();
         $detailAgamas = DetailAgama::all();
         $detailPerkawinans = DetailPerkawinan::all();
-        $detailTempatLahirs = DetailTempatLahir::all();
+        $detailTempatLahir = City::all();
         $users = User::where('usertype', 'user')->get();
-
-        return view('pemilik.pemilik-update', compact('pemilik', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahirs', 'users'));
+        $detailAlamatVillages = Village::all();
+        return view('pemilik.pemilik-update', compact('pemilik', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahir', 'users', 'detailAlamatVillages'));
     }
 
     /**
@@ -160,11 +170,13 @@ class PemilikController extends Controller
             'user_id' => 'nullable|exists:users,id',
             'nama_pemilik' => 'required|string|max:255',
             'no_hp' => 'required|string|max:15',
-            'tempat_lahir_id' => 'required|exists:detail_tempat_lahirs,id',
+            'tempat_lahir_id' => 'required|exists:city,id',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'awal_huni' => 'required|date',
             'akhir_huni' => 'nullable|date',
+            'jenis_kelamin' => 'required|string|max:10',
+            'alamat_village_id' => 'required|exists:villages,id',
         ]);
 
         if ($validator->fails()) {
@@ -192,6 +204,28 @@ class PemilikController extends Controller
      */
     public function destroy(Pemilik $pemilik)
     {
-        //
+        try {
+            $pemilik->delete();
+            return redirect()->route('penyewa.index')->with('danger', 'Data Pembeli berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('penyewa.index')->withErrors(['msg' => 'Error deleting komplain. Please try again.']);
+        }
+    }
+    public function getKabupaten($provinceCode)
+    {
+        $cities = City::where('province_code', $provinceCode)->get();
+        return response()->json($cities);
+    }
+
+    public function getKecamatan($cityCode)
+    {
+        $districts = District::where('city_code', $cityCode)->get();
+        return response()->json($districts);
+    }
+
+    public function getKelurahan($districtCode)
+    {
+        $villages = Village::where('district_code', $districtCode)->get();
+        return response()->json($villages);
     }
 }
