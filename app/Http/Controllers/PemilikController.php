@@ -72,7 +72,7 @@ class PemilikController extends Controller
         $detailAlamatProvinsi = Province::all();
         $detailAlamatKabupaten = City::all();
         $detailAlamatKecamatan = District::all();
-        return view('pemilik.pemilik-create', compact('pemiliks', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahir', 'users','detailAlamatProvinsi', 'detailAlamatKabupaten', 'detailAlamatKecamatan'));
+        return view('pemilik.pemilik-create', compact('pemiliks', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahir', 'users', 'detailAlamatProvinsi', 'detailAlamatKabupaten', 'detailAlamatKecamatan'));
     }
 
     /**
@@ -211,21 +211,33 @@ class PemilikController extends Controller
             return redirect()->route('penyewa.index')->withErrors(['msg' => 'Error deleting komplain. Please try again.']);
         }
     }
-    public function getKabupaten($provinceCode)
+    public function getKabupaten($provinsiId)
     {
-        $cities = City::where('province_code', $provinceCode)->get();
-        return response()->json($cities);
+        // Cari provinsi berdasarkan ID untuk mendapatkan kode provinsi
+        $province = Province::find($provinsiId);
+
+        // Jika provinsi ditemukan, cari kabupaten berdasarkan kode provinsi
+        if ($province) {
+            $provinceCode = $province->code;
+            $cities = City::where('province_code', $provinceCode)->get(['code', 'name']);
+            return response()->json($cities);
+        } else {
+            // Jika tidak ditemukan, kembalikan pesan error
+            return response()->json(['error' => 'Provinsi tidak ditemukan'], 404);
+        }
     }
 
     public function getKecamatan($cityCode)
     {
-        $districts = District::where('city_code', $cityCode)->get();
+        // Mengambil data kecamatan berdasarkan city_code
+        $districts = District::where('city_code', $cityCode)->get(['code', 'name']);
         return response()->json($districts);
     }
 
     public function getKelurahan($districtCode)
     {
-        $villages = Village::where('district_code', $districtCode)->get();
+        // Mengambil data kelurahan berdasarkan district_code
+        $villages = Village::where('district_code', $districtCode)->get(['code', 'name']);
         return response()->json($villages);
     }
 }

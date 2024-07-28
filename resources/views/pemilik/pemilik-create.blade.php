@@ -207,108 +207,47 @@
                                             placeholder="YYYY/MM/DD" required>
                                     </div>
                                 </div>
-                                <!-- Provinsi Dropdown -->
-                                <div class="sm:col-span-1">
-                                    <label for="alamat_provinsi_id" id="labelAlamatProvinsi"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ __('Provinsi') }}
-                                    </label>
-                                    <button id="dropdownSearchButtonAlamatProvinsi"
-                                        data-dropdown-toggle="dropdownSearchAlamatProvinsi"
-                                        class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
-                                        type="button">{{ __('Pilih Provinsi') }}
-                                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                                        </svg>
-                                    </button>
-                                    <div id="dropdownSearchAlamatProvinsi"
-                                        class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700">
-                                        <div class="p-3">
-                                            <label for="alamat_provinsi_search"
-                                                class="sr-only">{{ __('Search') }}</label>
-                                            <div class="relative">
-                                                <div
-                                                    class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="none" viewBox="0 0 20 20">
-                                                        <path stroke="currentColor" stroke-linecap="round"
-                                                            stroke-linejoin="round" stroke-width="2"
-                                                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                                    </svg>
-                                                </div>
-                                                <input type="text" id="alamat_provinsi_search"
-                                                    class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    placeholder="Cari Provinsi">
-                                            </div>
-                                        </div>
-                                        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="dropdownSearchButtonAlamatProvinsi">
+                                <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
+                                    <div class="sm:col-span-1">
+                                        <label for="alamat_provinsi_id" id="labelAlamatProvinsi"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Alamat') }}</label>
+                                        <select name="alamat_provinsi_id" id="alamat_provinsi_id"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                            <option value="">{{ __('Pilih Provinsi') }}</option>
                                             @foreach ($detailAlamatProvinsi as $provinsi)
-                                                <li>
-                                                    <div
-                                                        class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                                        <input id="alamat_provinsi_id_{{ $provinsi->id }}"
-                                                            type="radio" value="{{ $provinsi->id }}"
-                                                            name="alamat_provinsi_id"
-                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                        <label for="alamat_provinsi_id_{{ $provinsi->id }}"
-                                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
-                                                            {{ $provinsi->name }}
-                                                        </label>
-                                                    </div>
-                                                </li>
+                                                <option value="{{ $provinsi->id }}">{{ $provinsi->name }}
+                                                </option>
                                             @endforeach
-                                        </ul>
+                                        </select>
+                                    </div>
+                                    <div class="sm:col-span-1">
+                                        <label for="alamat_kabupaten_id" id="labelAlamatKabupaten"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
+                                        <select name="alamat_kabupaten_id" id="alamat_kabupaten_id"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            disabled>
+                                            <option value="">{{ __('Pilih Kabupaten') }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="sm:col-span-1">
+                                        <label for="alamat_kecamatan_id" id="labelAlamatKecamatan"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
+                                        <select name="alamat_kecamatan_id" id="alamat_kecamatan_id"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            disabled>
+                                            <option value="">{{ __('Pilih Kecamatan') }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="sm:col-span-1">
+                                        <label for="alamat_kelurahan_id" id="labelAlamatKelurahan"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
+                                        <select name="alamat_kelurahan_id" id="alamat_kelurahan_id"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            disabled>
+                                            <option value="">{{ __('Pilih Kelurahan') }}</option>
+                                        </select>
                                     </div>
                                 </div>
-
-                                <!-- Kabupaten Dropdown -->
-                                <div class="sm:col-span-1">
-                                    <label for="alamat_kabupaten_id" id="labelAlamatKabupaten"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ __('Kabupaten/Kota') }}
-                                    </label>
-                                    <button id="dropdownSearchButtonAlamatKabupaten"
-                                        data-dropdown-toggle="dropdownSearchAlamatKabupaten"
-                                        class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
-                                        type="button">{{ __('Pilih Kabupaten/Kota') }}
-                                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                                        </svg>
-                                    </button>
-                                    <div id="dropdownSearchAlamatKabupaten"
-                                        class="z-10 hidden bg-white rounded-lg shadow w-60 dark:bg-gray-700">
-                                        <div class="p-3">
-                                            <label for="alamat_kabupaten_search"
-                                                class="sr-only">{{ __('Search') }}</label>
-                                            <div class="relative">
-                                                <div
-                                                    class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="none" viewBox="0 0 20 20">
-                                                        <path stroke="currentColor" stroke-linecap="round"
-                                                            stroke-linejoin="round" stroke-width="2"
-                                                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                                    </svg>
-                                                </div>
-                                                <input type="text" id="alamat_kabupaten_search"
-                                                    class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    placeholder="Cari Kabupaten/Kota">
-                                            </div>
-                                        </div>
-                                        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-                                            aria-labelledby="dropdownSearchButtonAlamatKabupaten">
-                                            <!-- Kabupaten/Kota akan dimuat di sini berdasarkan Provinsi yang dipilih -->
-                                        </ul>
-                                    </div>
-                                </div>
-
                                 <div class="sm:col-span-2">
                                     <label for="alamat"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Alamat Sesuai KTP') }}</label>
@@ -392,8 +331,8 @@
         @include('components.modal', ['type' => 'confirmation'])
     </div>
     <script>
-        // Fungsi untuk pencarian dan pemilihan Tempat Lahir
         document.addEventListener("DOMContentLoaded", function() {
+            // Search functionality for "Tempat Lahir"
             const searchInputTempatLahir = document.getElementById('tempat_lahir_search');
             const listItemsTempatLahir = document.querySelectorAll('#dropdownSearchTempatLahir ul li');
 
@@ -408,9 +347,8 @@
                     }
                 });
             });
-        });
 
-        document.addEventListener("DOMContentLoaded", function() {
+            // Dropdown for "Tempat Lahir"
             const dropdownButtonTempatLahir = document.getElementById('dropdownSearchButtonTempatLahir');
             const radiosTempatLahir = document.getElementsByName('tempat_lahir_id');
 
@@ -422,88 +360,110 @@
                     }
                 });
             });
-        });
 
-        // Fungsi untuk pencarian dan pemilihan Provinsi
-        document.addEventListener("DOMContentLoaded", function() {
-            const searchInputProvinsi = document.getElementById('alamat_provinsi_search');
-            const listItemsProvinsi = document.querySelectorAll('#dropdownSearchAlamatProvinsi ul li');
+            // Pastikan script ini diletakkan di bagian bawah halaman, sebelum tag </body>
 
-            searchInputProvinsi.addEventListener('input', function() {
-                const filter = searchInputProvinsi.value.toLowerCase();
-                listItemsProvinsi.forEach(function(item) {
-                    const text = item.textContent || item.innerText;
-                    if (text.toLowerCase().includes(filter)) {
-                        item.style.display = "";
-                    } else {
-                        item.style.display = "none";
-                    }
-                });
-            });
+            const provinsiSelect = document.getElementById('alamat_provinsi_id');
+            const kabupatenSelect = document.getElementById('alamat_kabupaten_id');
+            const kecamatanSelect = document.getElementById('alamat_kecamatan_id');
+            const kelurahanSelect = document.getElementById('alamat_kelurahan_id');
 
-            const dropdownButtonProvinsi = document.getElementById('dropdownSearchButtonAlamatProvinsi');
-            const radiosProvinsi = document.getElementsByName('alamat_provinsi_id');
-            const dropdownKabupaten = document.getElementById('dropdownSearchAlamatKabupaten ul');
-
-            radiosProvinsi.forEach(function(radio) {
-                radio.addEventListener('change', function() {
-                    if (this.checked) {
-                        dropdownButtonProvinsi.innerHTML = this.nextElementSibling.textContent +
-                            ' <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" /></svg>';
-
-                        // Fetch data kabupaten berdasarkan provinsi yang dipilih
-                        fetch(`/api/get-kabupaten/${this.value}`)
-                            .then(response => response.json())
-                            .then(data => {
-                                dropdownKabupaten.innerHTML = ''; // Kosongkan daftar sebelumnya
-                                data.forEach(kabupaten => {
-                                    dropdownKabupaten.innerHTML +=
-                                        `<li>
-                                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                                <input id="alamat_kabupaten_id_${kabupaten.id}" type="radio" value="${kabupaten.id}" name="alamat_kabupaten_id"
-                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                <label for="alamat_kabupaten_id_${kabupaten.id}"
-                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
-                                                    ${kabupaten.name}
-                                                </label>
-                                            </div>
-                                        </li>`;
-                                });
+            provinsiSelect.addEventListener('change', function() {
+                const provinsiId = this.value;
+                if (provinsiId) {
+                    fetch(`/api/get-kabupaten/${provinsiId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            kabupatenSelect.innerHTML =
+                                '<option value="">{{ __('Pilih Kabupaten') }}</option>';
+                            data.forEach(kabupaten => {
+                                kabupatenSelect.innerHTML +=
+                                    `<option value="${kabupaten.code}">${kabupaten.name}</option>`;
                             });
-                    }
-                });
-            });
-        });
-
-        // Fungsi untuk pencarian dan pemilihan Kabupaten
-        document.addEventListener("DOMContentLoaded", function() {
-            const searchInputKabupaten = document.getElementById('alamat_kabupaten_search');
-            const dropdownKabupaten = document.getElementById('dropdownSearchAlamatKabupaten ul');
-            const dropdownButtonKabupaten = document.getElementById('dropdownSearchButtonAlamatKabupaten');
-
-            searchInputKabupaten.addEventListener('input', function() {
-                const filter = searchInputKabupaten.value.toLowerCase();
-                const listItemsKabupaten = dropdownKabupaten.querySelectorAll('li');
-                listItemsKabupaten.forEach(function(item) {
-                    const text = item.textContent || item.innerText;
-                    if (text.toLowerCase().includes(filter)) {
-                        item.style.display = "";
-                    } else {
-                        item.style.display = "none";
-                    }
-                });
-            });
-
-            dropdownKabupaten.addEventListener('change', function(event) {
-                if (event.target.name === 'alamat_kabupaten_id') {
-                    dropdownButtonKabupaten.innerHTML = event.target.nextElementSibling.textContent +
-                        ' <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" /></svg>';
+                            kabupatenSelect.disabled = false;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching kabupaten:', error);
+                            kabupatenSelect.innerHTML =
+                                '<option value="">{{ __('Error fetching data') }}</option>';
+                            kabupatenSelect.disabled = true;
+                        });
+                } else {
+                    kabupatenSelect.innerHTML = '<option value="">{{ __('Pilih Kabupaten') }}</option>';
+                    kabupatenSelect.disabled = true;
+                    kecamatanSelect.innerHTML = '<option value="">{{ __('Pilih Kecamatan') }}</option>';
+                    kecamatanSelect.disabled = true;
+                    kelurahanSelect.innerHTML = '<option value="">{{ __('Pilih Kelurahan') }}</option>';
+                    kelurahanSelect.disabled = true;
                 }
             });
+
+            kabupatenSelect.addEventListener('change', function() {
+                const kabupatenId = this.value;
+                console.log("Selected kabupaten code:", kabupatenId); // Debug
+                if (kabupatenId) {
+                    fetch(`/api/get-kecamatan/${kabupatenId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log("Fetched kecamatans:", data); // Debug
+                            kecamatanSelect.innerHTML =
+                                '<option value="">{{ __('Pilih Kecamatan') }}</option>';
+                            if (Array.isArray(data)) {
+                                data.forEach(kecamatan => {
+                                    kecamatanSelect.innerHTML +=
+                                        `<option value="${kecamatan.code}">${kecamatan.name}</option>`;
+                                });
+                            } else {
+                                console.error('Data is not an array:', data);
+                            }
+                            kecamatanSelect.disabled = false;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching kecamatan:', error);
+                            kecamatanSelect.innerHTML =
+                                '<option value="">{{ __('Error fetching data') }}</option>';
+                            kecamatanSelect.disabled = true;
+                        });
+                } else {
+                    kecamatanSelect.innerHTML = '<option value="">{{ __('Pilih Kecamatan') }}</option>';
+                    kecamatanSelect.disabled = true;
+                    kelurahanSelect.innerHTML = '<option value="">{{ __('Pilih Kelurahan') }}</option>';
+                    kelurahanSelect.disabled = true;
+                }
+            });
+
+            kecamatanSelect.addEventListener('change', function() {
+                const kecamatanId = this.value;
+                console.log("Selected kecamatan code:", kecamatanId); // Debug
+                if (kecamatanId) {
+                    fetch(`/api/get-kelurahan/${kecamatanId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log("Fetched kelurahans:", data); // Debug
+                            kelurahanSelect.innerHTML =
+                                '<option value="">{{ __('Pilih Kelurahan') }}</option>';
+                            if (Array.isArray(data)) {
+                                data.forEach(kelurahan => {
+                                    kelurahanSelect.innerHTML +=
+                                        `<option value="${kelurahan.code}">${kelurahan.name}</option>`;
+                                });
+                            } else {
+                                console.error('Data is not an array:', data);
+                            }
+                            kelurahanSelect.disabled = false;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching kelurahan:', error);
+                            kelurahanSelect.innerHTML =
+                                '<option value="">{{ __('Error fetching data') }}</option>';
+                            kelurahanSelect.disabled = true;
+                        });
+                } else {
+                    kelurahanSelect.innerHTML = '<option value="">{{ __('Pilih Kelurahan') }}</option>';
+                    kelurahanSelect.disabled = true;
+                }
+            });
+
         });
     </script>
-
-
-
-
 </x-app-layout>
