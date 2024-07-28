@@ -99,6 +99,8 @@ class PemilikController extends Controller
             'alamat_village_id' => 'required|exists:villages,id',
         ]);
 
+        
+
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
@@ -150,9 +152,13 @@ class PemilikController extends Controller
         $detailAgamas = DetailAgama::all();
         $detailPerkawinans = DetailPerkawinan::all();
         $detailTempatLahir = City::all();
-        $users = User::where('usertype', 'user')->get();
+        $users = User::where('tipe_user_id', '11')->get();
         $detailAlamatVillages = Village::all();
-        return view('pemilik.pemilik-update', compact('pemilik', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahir', 'users', 'detailAlamatVillages'));
+        $detailAlamatProvinsi = Province::all();
+        $detailAlamatKabupaten = City::all();
+        $detailAlamatKecamatan = District::all();
+
+        return view('pemilik.pemilik-update', compact('pemilik', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahir', 'users', 'detailAlamatVillages', 'detailAlamatProvinsi', 'detailAlamatKabupaten', 'detailAlamatKecamatan'));
     }
 
     /**
@@ -237,7 +243,7 @@ class PemilikController extends Controller
     public function getKelurahan($districtCode)
     {
         // Mengambil data kelurahan berdasarkan district_code
-        $villages = Village::where('district_code', $districtCode)->get(['code', 'name']);
+        $villages = Village::where('district_code', $districtCode)->get(['id', 'name']);
         return response()->json($villages);
     }
 }
