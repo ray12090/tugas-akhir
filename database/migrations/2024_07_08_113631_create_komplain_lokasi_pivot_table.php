@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('komplain_lokasi_pivot', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('komplain_id');
             $table->unsignedBigInteger('lokasi_komplain_id');
             $table->text('uraian_komplain')->nullable();

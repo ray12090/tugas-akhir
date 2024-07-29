@@ -149,7 +149,8 @@
                                         {{ __('Isi Komplain') }}
                                     </div>
                                 </div>
-                                <div id="lokasi-komplain-container" class="sm:col-span-3">
+                                <div id="lokasi-komplain-container"
+                                    class="grid gap-4 sm:gap-6 sm:col-span-4 sm:grid-cols-1 bg-gray-100 rounded-lg p-6 shadow-md sm:rounded-2xl">
                                     @foreach ($komplain->lokasiKomplains as $index => $lokasi)
                                         <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 lokasi-komplain-row">
                                             <div class="sm:col-span-1">
@@ -157,8 +158,17 @@
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                     {{ __('Lokasi') }}
                                                 </label>
-                                                <select id="lokasi_komplain_{{ $index }}"
-                                                    name="lokasi_komplain[{{ $index }}][lokasi_id]"
+                                                <input type="hidden"
+                                                    name="lokasi_komplain[{{ $index }}][lokasi_komplain_id]"
+                                                    value="{{ $lokasi->pivot->lokasi_komplain_id }}">
+                                                <select id="lokasi_komplain_id{{ $index }}" disabled
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    <option value="{{ $lokasi->pivot->lokasi_komplain_id }}">
+                                                        {{ $lokasiKomplains->firstWhere('id', $lokasi->pivot->lokasi_komplain_id)->nama_lokasi_komplain }}
+                                                    </option>
+                                                </select>
+                                                {{-- <select id="lokasi_komplain_id{{ $index }}" readonly
+                                                    name="lokasi_komplain[{{ $index }}][lokasi_komplain_id]"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     @foreach ($lokasiKomplains as $lokasiOption)
                                                         <option value="{{ $lokasiOption->id }}"
@@ -166,43 +176,53 @@
                                                             {{ $lokasiOption->nama_lokasi_komplain }}
                                                         </option>
                                                     @endforeach
-                                                </select>
+                                                </select> --}}
                                             </div>
+                                            {{-- <label for="unitid{{ $index }}" id="labelUnit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ _('Unit') }}
+                                            </label>
+                                            <select name="units[{{ $index }}][unit_id]" id="unit_id{{ $index }}"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                                <option value="{{ $unit->id }}" selected>{{ $unit->nama_unit }}</option>
+                                                @foreach ($units as $unit)
+                                                    <option value="{{ $unit->id }}">{{ $unit->nama_unit }}</option>
+                                                @endforeach
+                                            </select> --}}
                                             <div class="sm:col-span-1">
                                                 <label for="uraian_komplain_{{ $index }}"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Uraian Komplain') }}</label>
-                                                <textarea id="uraian_komplain_{{ $index }}" name="lokasi_komplain[{{ $index }}][uraian_komplain]"
+                                                <textarea id="uraian_komplain_id{{ $index }}" name="lokasi_komplain[{{ $index }}][uraian_komplain]"
                                                     rows="2"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">{{ $lokasi->pivot->uraian_komplain }}</textarea>
                                             </div>
                                             <div class="sm:col-span-1">
                                                 <label for="foto_komplain_{{ $index }}"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto') }}</label>
-                                                    @if ($lokasi->pivot->foto_komplain)
-                                                        <div>
-                                                            <img src="{{ asset('storage/foto_komplain/' . $lokasi->pivot->foto_komplain) }}"
-                                                                alt="Foto Komplain"
-                                                                class="w-auto h-48 rounded-lg hover:object-scale-down">
-                                                        </div>
-                                                    @else
-                                                        <p class="text-gray-500">
-                                                            {{ __('Tidak ada foto komplain.') }}
-                                                        </p>
-                                                    @endif
-                                                <input type="file" id="foto_komplain_{{ $index }}"
+                                                @if ($lokasi->pivot->foto_komplain)
+                                                    <div>
+                                                        <img src="{{ asset('storage/foto_komplain/' . $lokasi->pivot->foto_komplain) }}"
+                                                            alt="Foto Komplain"
+                                                            class="w-auto h-48 rounded-lg hover:object-scale-down">
+                                                    </div>
+                                                @else
+                                                    <p class="text-gray-500">
+                                                        {{ __('Tidak ada foto komplain.') }}
+                                                    </p>
+                                                @endif
+                                                <input type="file" id="foto_komplain_id{{ $index }}"
                                                     name="lokasi_komplain[{{ $index }}][foto_komplain]"
                                                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-2">
                                             </div>
+                                            {{-- <div class="sm:col-span-1">
+                                                <label for=""
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
+                                                <button type="button" id="tambah-lokasi-btn"
+                                                    class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                                    {{ __('Tambah lokasi lainnya') }}
+                                                </button>
+                                            </div> --}}
                                         </div>
                                     @endforeach
-                                </div>
-                                <div class="sm:col-span-1">
-                                    <label for=""
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
-                                    <button type="button" id="tambah-lokasi-btn"
-                                        class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                                        {{ __('Tambah lokasi lainnya') }}
-                                    </button>
                                 </div>
                                 <div class="sm:col-span-4">
                                     <a href="{{ route('komplain.index') }}"
@@ -296,10 +316,21 @@
                     <input type="file" id="foto_komplain_${index}" name="lokasi_komplain[${index}][foto_komplain]"
                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-2">
                 </div>
+                <div class="sm:col-span-1">
+                    <label for=""
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
+                    <button type="button" id="tambah-lokasi-btn"
+                        class="hapus-lokasi-btn flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                        {{ __('Hapus') }}
+                    </button>
+                </div>
             `;
 
             newRow.innerHTML = newLokasi;
             container.appendChild(newRow);
+            newRow.querySelector('.hapus-lokasi-btn').addEventListener('click', function() {
+                newRow.remove();
+            });
         });
 
         document.addEventListener('DOMContentLoaded', function() {
