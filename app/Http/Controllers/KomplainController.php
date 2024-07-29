@@ -58,6 +58,7 @@ class KomplainController extends Controller
     public function store(Request $request)
     {
         $nomorLaporan = Komplain::generateNomorLaporan();
+        // dd($request->all());
         $request->validate([
             'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
             'tanggal_laporan' => 'required|date',
@@ -114,7 +115,11 @@ class KomplainController extends Controller
     {
         $komplain = Komplain::with('lokasiKomplains')->findOrFail($id);
         $jenisKomplains = JenisKomplain::all();
-        return view('komplain.komplain-read', compact('komplain', 'jenisKomplains'));
+        $statusKomplains = StatusKomplain::all();
+        $units = Unit::all();
+        $lokasiKomplains = LokasiKomplain::all();
+        $jenisKomplains = JenisKomplain::all();
+        return view('komplain.komplain-read', compact('komplain', 'jenisKomplains', 'statusKomplains', 'units', 'lokasiKomplains'));
     }
 
     public function edit($id)
@@ -122,7 +127,9 @@ class KomplainController extends Controller
         $komplain = Komplain::with('lokasiKomplains')->findOrFail($id);
         $jenisKomplains = JenisKomplain::all();
         $statusKomplains = StatusKomplain::all();
-        return view('komplain.komplain-edit', compact('komplain', 'jenisKomplains', 'statusKomplains'));
+        $units = Unit::all();
+        $lokasiKomplains = LokasiKomplain::all();
+        return view('komplain.komplain-edit', compact('komplain', 'jenisKomplains', 'statusKomplains', 'units', 'lokasiKomplains'));
     }
 
     public function update(Request $request, $id)
