@@ -35,6 +35,7 @@ class PenyewaController extends Controller
                     ->orWhere('tempat_lahir_id', 'like', "%{$search}%")
                     ->orWhere('tanggal_lahir', 'like', "%{$search}%")
                     ->orWhere('alamat', 'like', "%{$search}%")
+                    ->orWhere('jenis_kelamin', 'like', "%{$search}%")
                     ->orWhere('awal_sewa', 'like', "%{$search}%")
                     ->orWhere('akhir_sewa', 'like', "%{$search}%")
                     ->orWhereHas('unit', function ($query) use ($search) {
@@ -69,13 +70,13 @@ class PenyewaController extends Controller
         $detailKewarganegaraans = DetailKewarganegaraan::all();
         $detailAgamas = DetailAgama::all();
         $detailPerkawinans = DetailPerkawinan::all();
-        $detailTempatLahirs = DetailTempatLahir::all();
+        $detailTempatLahir = City::all();
         $users = User::all();
         $detailAlamatVillages = Village::all();
         $detailAlamatProvinsi = Province::all();
         $detailAlamatKabupaten = City::all();
         $detailAlamatKecamatan = District::all();
-        return view('penyewa.penyewa-create', compact('penyewas', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahirs', 'users', 'detailAlamatVillages', 'detailAlamatProvinsi', 'detailAlamatKabupaten', 'detailAlamatKecamatan'));
+        return view('penyewa.penyewa-create', compact('penyewas', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahir', 'users', 'detailAlamatVillages', 'detailAlamatProvinsi', 'detailAlamatKabupaten', 'detailAlamatKecamatan'));
     }
 
     /**
@@ -93,6 +94,7 @@ class PenyewaController extends Controller
             'user_id' => 'nullable|exists:users,id',
             'tempat_lahir_id' => 'required|exists:cities,id',
             'nama_penyewa' => 'required|string|max:255',
+            'jenis_kelamin' => 'required|string|max:10',
             'no_hp' => 'required|string|max:15',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
@@ -120,6 +122,7 @@ class PenyewaController extends Controller
             'user_id' => $request->input('user_id'),
             'tempat_lahir_id' => $request->input('tempat_lahir_id'),
             'nama_penyewa' => $request->input('nama_penyewa'),
+            'jenis_kelamin' => $request->input('jenis_kelamin'),
             'no_hp' => $request->input('no_hp'),
             'tanggal_lahir' => $request->input('tanggal_lahir'),
             'alamat' => $request->input('alamat'),
@@ -139,7 +142,7 @@ class PenyewaController extends Controller
      */
     public function show($id)
     {
-        $penyewa = Penyewa::with('unit', 'detailKewarganegaraan', 'detailAgama', 'detailPerkawinan', 'detailTempatLahir', 'user')->findOrFail($id);
+        $penyewa = Penyewa::with('unit', 'detailKewarganegaraan', 'detailAgama' ,'detailPerkawinan', 'detailTempatLahir', 'user', 'detailAlamatVillage', 'detailAlamatKecamatan', 'detailAlamatKabupaten', 'detailAlamatProvinsi')->findOrFail($id);
         return view('penyewa.penyewa-read', compact('penyewa'));
     }
 
@@ -153,10 +156,15 @@ class PenyewaController extends Controller
         $detailKewarganegaraans = DetailKewarganegaraan::all();
         $detailAgamas = DetailAgama::all();
         $detailPerkawinans = DetailPerkawinan::all();
-        $detailTempatLahirs = DetailTempatLahir::all();
-        $users = User::where('usertype', 'user')->get();
+        $detailTempatLahir = City::all();
+        $users = User::where('tipe_user_id', '12')->get();
+        $detailAlamatVillages = Village::all();
+        $detailAlamatProvinsi = Province::all();
+        $detailAlamatKabupaten = City::all();
+        $detailAlamatKecamatan = District::all();
 
-        return view('penyewa.penyewa-update', compact('penyewa', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahirs', 'users'));
+
+        return view('penyewa.penyewa-update', compact('penyewa', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahir', 'users','detailAlamatVillages', 'detailAlamatProvinsi', 'detailAlamatKabupaten', 'detailAlamatKecamatan'));
     }
 
     public function update(Request $request, $id)
@@ -170,12 +178,18 @@ class PenyewaController extends Controller
             'perkawinan_id' => 'required|exists:detail_perkawinans,id',
             'user_id' => 'nullable|exists:users,id',
             'nama_penyewa' => 'required|string|max:255',
+            'jenis_kelamin' => 'required|string|max:10',
             'no_hp' => 'required|string|max:15',
             'tempat_lahir_id' => 'required|exists:cities,id',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'awal_sewa' => 'required|date',
             'akhir_sewa' => 'required|date|after:awal_sewa',
+            'alamat_village_id' => 'required|exists:villages,id',
+            'alamat_kecamatan_id' => 'required|exists:districts,id',
+            'alamat_kabupaten_id' => 'required|exists:cities,id',
+            'alamat_provinsi_id' => 'required|exists:provinces,id',
+            
         ]);
 
         if ($validator->fails()) {

@@ -62,7 +62,7 @@ class Penyewa extends Model
     }
     public function detailTempatLahir()
     {
-        return $this->belongsTo(City::class, 'tempat_lahir_id', 'id');
+        return $this->belongsTo(City::class, 'tempat_lahir_id');
     }
     public function detailAlamatVillage()
     {

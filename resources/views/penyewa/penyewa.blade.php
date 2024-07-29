@@ -33,7 +33,7 @@
                         </div>
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <a href = "{{ route('penyewa.create') }} "type="button" id="createProductButton"
+                            <a href="{{ route('penyewa.create') }} " type="button" id="createProductButton"
                                 data-modal-toggle="createProductModal"
                                 class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                                 <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
@@ -52,13 +52,12 @@
                                 <tr>
                                     <th class="w-1/6 p-4">
                                         <a
-                                            href="{{ route('penyewa.index', ['sort_by' => 'nik', 'sort_order' => $sort_by === 'nik' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('NIK') }}
-                                            @if ($sort_by === 'nik')
+                                            href="{{ route('penyewa.index', ['sort_by' => 'nama_penyewa', 'sort_order' => $sort_by === 'nama_penyewa' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                            {{ __('Nama Lengkap') }}
+                                            @if ($sort_by === 'nama_penyewa')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
@@ -72,97 +71,7 @@
                                             @if ($sort_by === 'unit')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
-                                                    </path>
-                                                </svg>
-                                            @endif
-                                        </a>
-                                    </th>
-                                    <th class="w-1/6 p-4">
-                                        <a
-                                            href="{{ route('penyewa.index', ['sort_by' => 'awal_sewa', 'sort_order' => $sort_by === 'awal_sewa' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('Awal Sewa') }}
-                                            @if ($sort_by === 'awal_sewa')
-                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
-                                                    </path>
-                                                </svg>
-                                            @endif
-                                        </a>
-                                    </th>
-                                    <th class="w-1/6 p-4">
-                                        <a
-                                            href="{{ route('penyewa.index', ['sort_by' => 'akhir_sewa', 'sort_order' => $sort_by === 'akhir_sewa' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('Akhir Sewa') }}
-                                            @if ($sort_by === 'akhir_sewa')
-                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
-                                                    </path>
-                                                </svg>
-                                            @endif
-                                        </a>
-                                    </th>
-                                    <th class="w-1/6 p-4">
-                                        <a
-                                            href="{{ route('penyewa.index', ['sort_by' => 'warga_negara_id', 'sort_order' => $sort_by === 'warga_negara_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('Status Kewarganegaraan') }}
-                                            @if ($sort_by === 'warga_negara_id')
-                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}" />
-                                                </svg>
-                                            @endif
-                                        </a>
-                                    </th>
-                                    <th class="w-1/6 p-4">
-                                        <a
-                                            href="{{ route('penyewa.index', ['sort_by' => 'agama_id', 'sort_order' => $sort_by === 'agama_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('Agama') }}
-                                            @if ($sort_by === 'agama_id')
-                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
-                                                    </path>
-                                                </svg>
-                                            @endif
-                                        </a>
-                                    </th>
-                                    <th class="w-1/6 p-4">
-                                        <a
-                                            href="{{ route('penyewa.index', ['sort_by' => 'perkawinan_id', 'sort_order' => $sort_by === 'perkawinan_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('Status Perkawinan') }}
-                                            @if ($sort_by === 'perkawinan_id')
-                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
-                                                    </path>
-                                                </svg>
-                                            @endif
-                                        </a>
-                                    </th>
-                                    <th class="w-1/6 p-4">
-                                        <a
-                                            href="{{ route('penyewa.index', ['sort_by' => 'nama_penyewa', 'sort_order' => $sort_by === 'nama_penyewa' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('Nama Lengkap') }}
-                                            @if ($sort_by === 'nama_penyewa')
-                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
@@ -176,8 +85,7 @@
                                             @if ($sort_by === 'no_hp')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
@@ -186,13 +94,12 @@
                                     </th>
                                     <th class="w-1/6 p-4">
                                         <a
-                                            href="{{ route('penyewa.index', ['sort_by' => 'village_id', 'sort_order' => $sort_by === 'village_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('Tempat Lahir') }}
-                                            @if ($sort_by === 'village_id')
+                                            href="{{ route('penyewa.index', ['sort_by' => 'awal_sewa', 'sort_order' => $sort_by === 'awal_sewa' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                            {{ __('Awal Sewa') }}
+                                            @if ($sort_by === 'awal_sewa')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
@@ -201,65 +108,97 @@
                                     </th>
                                     <th class="w-1/6 p-4">
                                         <a
-                                            href="{{ route('penyewa.index', ['sort_by' => 'tanggal_lahir', 'sort_order' => $sort_by === 'tanggal_lahir' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                            {{ __('Tanggal Lahir') }}
-                                            @if ($sort_by === 'tanggal_lahir')
+                                            href="{{ route('penyewa.index', ['sort_by' => 'akhir_sewa', 'sort_order' => $sort_by === 'akhir_sewa' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                            {{ __('Akhir Sewa') }}
+                                            @if ($sort_by === 'akhir_sewa')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
                                             @endif
                                         </a>
                                     </th>
+                                    <th class="w-1/6 p-4">
+                                        <a
+                                            href="{{ route('penyewa.index', ['sort_by' => 'warga_negara_id', 'sort_order' => $sort_by === 'warga_negara_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                            {{ __('Status Kewarganegaraan') }}
+                                            @if ($sort_by === 'warga_negara_id')
+                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}" />
+                                                </svg>
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th class="w-1/6 p-4">
+                                        <a
+                                            href="{{ route('penyewa.index', ['sort_by' => 'agama_id', 'sort_order' => $sort_by === 'agama_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                            {{ __('Agama') }}
+                                            @if ($sort_by === 'agama_id')
+                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
+                                                    </path>
+                                                </svg>
+                                            @endif
+                                        </a>
+                                    </th>
+                                    <th class="w-1/6 p-4">
+                                        <a
+                                            href="{{ route('penyewa.index', ['sort_by' => 'perkawinan_id', 'sort_order' => $sort_by === 'perkawinan_id' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                            {{ __('Status Perkawinan') }}
+                                            @if ($sort_by === 'perkawinan_id')
+                                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
+                                                    </path>
+                                                </svg>
+                                            @endif
+                                        </a>
+                                    </th>
+
                                     <th class="w-1/6 p-4 text-center">{{ __('Aksi') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($penyewas as $penyewa)
-                                <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->nik }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->unit->nama_unit }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->awal_sewa }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->akhir_sewa }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->detailKewarganegaraan->status_kewarganegaraan }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->detailAgama->nama_agama }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->detailPerkawinan->status_perkawinan }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->nama_penyewa }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->no_hp }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->city->name }}
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penyewa->tanggal_lahir }}
-                                    </td>
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
+
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $penyewa->nama_penyewa }}
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $penyewa->unit->nama_unit }}
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $penyewa->no_hp }}
+                                        </td>   
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $penyewa->awal_sewa }}
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $penyewa->akhir_sewa }}
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $penyewa->detailKewarganegaraan->status_kewarganegaraan }}
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $penyewa->detailAgama->nama_agama }}
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $penyewa->detailPerkawinan->status_perkawinan }}
+                                        </td>
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             <div class="flex items-center space-x-4 justify-center">
                                                 <a href="{{ route('penyewa.edit', $penyewa->id) }}"
                                                     class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="h-4 w-4 mr-2 -ml-0.5" viewBox="0 0 20 20"
-                                                        fill="currentColor" aria-hidden="true">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
+                                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                         <path
                                                             d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                                                         <path fill-rule="evenodd"
@@ -278,16 +217,14 @@
                                                     </svg>
                                                     {{ __('Lihat') }}
                                                 </a>
-                                                <form action="{{ route('penyewa.destroy', $penyewa->id) }}"
-                                                    method="POST"
+                                                <form action="{{ route('penyewa.destroy', $penyewa->id) }}" method="POST"
                                                     onsubmit="return confirmDelete(this, '{{ $penyewa->nama_penyewa }}');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-4 w-4 mr-2 -ml-0.5" viewBox="0 0 20 20"
-                                                            fill="currentColor" aria-hidden="true">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
+                                                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                             <path fill-rule="evenodd"
                                                                 d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                                                                 clip-rule="evenodd" />
@@ -313,11 +250,9 @@
                             <span
                                 class="font-semibold text-gray-900 dark:text-white">{{ $penyewas->firstItem() }}</span>
                             to
-                            <span
-                                class="font-semibold text-gray-900 dark:text-white">{{ $penyewas->lastItem() }}</span>
+                            <span class="font-semibold text-gray-900 dark:text-white">{{ $penyewas->lastItem() }}</span>
                             of
-                            <span
-                                class="font-semibold text-gray-900 dark:text-white">{{ $penyewas->total() }}</span>
+                            <span class="font-semibold text-gray-900 dark:text-white">{{ $penyewas->total() }}</span>
                         </span>
 
                         <ul class="inline-flex items-stretch -space-x-px">
@@ -326,8 +261,8 @@
                                 <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
                                     <span
                                         class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
                                                 d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                                 clip-rule="evenodd" />
@@ -338,8 +273,8 @@
                                 <li>
                                     <a href="{{ $penyewas->previousPageUrl() }}" rel="prev"
                                         class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
                                                 d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                                 clip-rule="evenodd" />
@@ -372,8 +307,8 @@
                                 <li>
                                     <a href="{{ $penyewas->nextPageUrl() }}" rel="next"
                                         class="flex items-center justify-center h-full py-1.5 px-3 text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
                                                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                                 clip-rule="evenodd" />
@@ -384,8 +319,8 @@
                                 <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
                                     <span
                                         class="flex items-center justify-center h-full py-1.5 px-3 text-gray-500 bg-white rounded-r-lg border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
                                                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                                 clip-rule="evenodd" />
@@ -411,7 +346,7 @@
                         deleteModalText.textContent = `{{ __('Hapus Data ') }}${namaPenghuni}`;
                         toggleModal('deleteModal'); // Show the modal
 
-                        confirmDeleteButton.onclick = function() {
+                        confirmDeleteButton.onclick = function () {
                             form.submit();
                         };
                         return false; // Prevent the default form submission
