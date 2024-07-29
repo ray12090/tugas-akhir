@@ -176,7 +176,7 @@ class KomplainController extends Controller
     }
     public function getUnits($unit)
     {
-        $units = Unit::where('unit', $unit)->get();
-        return response()->json(['units' => $units]);
+        $units = Unit::where('id', $unit)->get();
+        return response()->json(['id' => $units]);
     }
 }

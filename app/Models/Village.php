@@ -37,4 +37,6 @@ class Village extends Model
             'code'
         );
     }
+
+    
 }

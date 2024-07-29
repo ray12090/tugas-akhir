@@ -16,8 +16,7 @@
                     <div class="w-full">
                         <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
                             <div class="sm:col-span-2">
-                                <label for="nik"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                <label for="nik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     {{ __('NIK') }}
                                 </label>
                                 <p
@@ -78,8 +77,7 @@
                                 </p>
                             </div>
                             <div class="sm:col-span-1">
-                                <label for="no_hp"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                <label for="no_hp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     {{ __('No. HP') }}
                                 </label>
                                 <p
@@ -123,7 +121,7 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Provinsi') }}</label>
                                     <p
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                        {{ $pemilik->detailAlamatProvinsi->name }}
+                                        {{ optional($pemilik->detailAlamatProvinsi)->name ?? 'Tidak ada data' }}
                                     </p>
                                 </div>
                                 <div class="sm:col-span-1">
@@ -131,7 +129,7 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kabupaten') }}</label>
                                     <p
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                        {{ $pemilik->detailAlamatKabupaten->name }}
+                                        {{ optional($pemilik->detailAlamatKabupaten)->name ?? 'Tidak ada data' }}
                                     </p>
                                 </div>
                                 <div class="sm:col-span-1">
@@ -139,7 +137,7 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kecamatan') }}</label>
                                     <p
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                        {{ $pemilik->detailAlamatKecamatan->name }}
+                                        {{ optional($pemilik->detailAlamatKecamatan)->name ?? 'Tidak ada data' }}
                                     </p>
                                 </div>
                                 <div class="sm:col-span-1">
@@ -147,7 +145,7 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kelurahan') }}</label>
                                     <p
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                        {{ $pemilik->detailAlamatVillages->name }}
+                                        {{ optional($pemilik->detailAlamatVillages)->name ?? 'Tidak ada data' }}
                                     </p>
                                 </div>
                             </div>
@@ -197,8 +195,8 @@
                                 <a href="{{ route('pemilik.index') }}"
                                     class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-GRAY-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                     <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white mr-2" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        fill="currentColor" viewBox="0 0 24 24">
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        viewBox="0 0 24 24">
                                         <path fill-rule="evenodd"
                                             d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
                                             clip-rule="evenodd" />
