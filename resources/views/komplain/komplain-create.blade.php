@@ -49,7 +49,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2">
+                                <div class="sm:col-span-1">
                                     <label for="tanggal_laporan"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Tanggal Laporan') }}
@@ -72,7 +72,7 @@
                                             placeholder="Pilih tanggal">
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2">
+                                {{-- <div class="sm:col-span-1">
                                     <label for="unit_name"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Unit') }}
@@ -89,6 +89,17 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </div>
+                                </div> --}}
+                                <div class="sm:col-span-1">
+                                    <label for="unit_name" id="labelUnit"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Nama Unit')}}</label>
+                                    <select name="unit_name" id="unit_name"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->id }}">{{ $unit->nama_unit }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="sm:col-span-4">
                                     <div class=" text-gray-900 text-lg font-semibold">
@@ -136,36 +147,44 @@
                                         {{ __('Isi Komplain') }}
                                     </div>
                                 </div>
-                                <div class="sm:col-span-1">
-                                    <label for="lokasi_komplain"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ __('Lokasi (tekan ctrl untuk memilih lebih dari satu)') }}
-                                    </label>
-                                    <select multiple id="lokasi_komplain" rows="4"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option selected disabled>{{ __('Choose countries')}}</option>
-                                        @foreach ($lokasiKomplains as $lokasi)
-                                            <option id="lokasi_komplain_{{ $lokasi->id }}"
-                                                name="lokasi_komplain_id[]" value="{{ $lokasi->id }}">
-                                                {{ $lokasi->nama_lokasi_komplain }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="sm:col-span-1">
-                                    <label for="lokasi_komplain"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ __('Lokasi:') }}
-                                    </label>
-                                    <div
-                                        class='span-container bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'>
-                                        <!-- Spans will be dynamically added here -->
+                                <div id="lokasi-komplain-container" class="sm:col-span-3">
+                                    <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 lokasi-komplain-row">
+                                        <div class="sm:col-span-1">
+                                            <label for="lokasi_komplain_0"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ __('Lokasi') }}
+                                            </label>
+                                            <select id="lokasi_komplain_0" name="lokasi_komplain[0][lokasi_id]"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <option selected disabled>{{ __('Pilih lokasi') }}</option>
+                                                @foreach ($lokasiKomplains as $lokasi)
+                                                    <option value="{{ $lokasi->id }}">
+                                                        {{ $lokasi->nama_lokasi_komplain }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="sm:col-span-1">
+                                            <label for="uraian_komplain_0"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Uraian Komplain') }}</label>
+                                            <textarea id="uraian_komplain_0" name="lokasi_komplain[0][uraian_komplain]"
+                                                rows="2"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
+                                        </div>
+                                        <div class="sm:col-span-1">
+                                            <label for="foto_komplain_0"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto') }}</label>
+                                            <input type="file" id="foto_komplain_0" name="lokasi_komplain[0][foto_komplain]"
+                                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-2">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2" id="uraian-komplain-container">
-                                    <!-- Uraian komplain inputs will be dynamically added here -->
-                                </div>
-                                <div class="sm:col-span-1" id="foto-komplain-container">
-                                    <!-- Foto komplain inputs will be dynamically added here -->
+                                <div class="sm:col-span-1">
+                                    <label for=""
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
+                                    <button type="button" id="tambah-lokasi-btn"
+                                        class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                        {{ __('Tambah lokasi lainnya') }}
+                                    </button>
                                 </div>
                                 <div class="sm:col-span-4">
                                     <a href="{{ route('komplain.index') }}"
@@ -252,45 +271,41 @@
             });
         });
 
-        document.getElementById('lokasi_komplain').addEventListener('change', function() {
-            var selectedOptions = Array.from(this.selectedOptions).map(option => ({
-                id: option.value,
-                text: option.text
-            }));
-            var spanContainer = document.querySelector('.span-container');
-            var uraianContainer = document.getElementById('uraian-komplain-container');
-            var fotoContainer = document.getElementById('foto-komplain-container');
+        // Handle the addition of new complaint locations
+        document.getElementById('tambah-lokasi-btn').addEventListener('click', function() {
+            var container = document.getElementById('lokasi-komplain-container');
+            var index = container.children.length; // Get current index based on number of existing children
 
-            // Clear previous spans and inputs
-            spanContainer.innerHTML = '';
-            uraianContainer.innerHTML = '';
-            fotoContainer.innerHTML = '';
+            // Create new elements for a new location complaint
+            var newRow = document.createElement('div');
+            newRow.classList.add('grid', 'gap-4', 'sm:grid-cols-3', 'sm:gap-6', 'lokasi-komplain-row');
 
-            selectedOptions.forEach(function(option) {
-                // Add spans
-                var span = document.createElement('span');
-                span.className =
-                    'bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-400 border border-gray-500';
-                span.textContent = option.text;
-                spanContainer.appendChild(span);
+            var newLokasi = `
+                <div class="sm:col-span-1">
+                    <label for="lokasi_komplain_${index}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Lokasi') }}</label>
+                    <select id="lokasi_komplain_${index}" name="lokasi_komplain[${index}][lokasi_id]"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected disabled>{{ __('Pilih lokasi') }}</option>
+                        @foreach ($lokasiKomplains as $lokasi)
+                            <option value="{{ $lokasi->id }}">{{ $lokasi->nama_lokasi_komplain }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="sm:col-span-1">
+                    <label for="uraian_komplain_${index}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Uraian Komplain') }}</label>
+                    <textarea id="uraian_komplain_${index}" name="lokasi_komplain[${index}][uraian_komplain]"
+                        rows="2"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
+                </div>
+                <div class="sm:col-span-1">
+                    <label for="foto_komplain_${index}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto') }}</label>
+                    <input type="file" id="foto_komplain_${index}" name="lokasi_komplain[${index}][foto_komplain]"
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-2">
+                </div>
+            `;
 
-                // Add uraian komplain input
-                var uraianDiv = document.createElement('div');
-                uraianDiv.className = 'uraian-container';
-                uraianDiv.innerHTML =
-                    `<label for="uraian_komplain_${option.id}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Uraian Komplain untuk ${option.text}</label>
-                                       <textarea id="uraian_komplain_${option.id}" name="uraian_komplain[${option.id}]" rows="2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>`;
-                uraianContainer.appendChild(uraianDiv);
-
-                // Add foto komplain input
-                var fotoDiv = document.createElement('div');
-                fotoDiv.className = 'foto-container';
-                fotoDiv.innerHTML =
-                    `<label for="foto_komplain_${option.id}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Foto Komplain untuk ${option.text}</label>
-                                     <input type="file" id="foto_komplain_${option.id}" name="foto_komplain[${option.id}]" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="foto_komplain_${option.id}">
-                                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG (MAX. 5MB).</p>`;
-                fotoContainer.appendChild(fotoDiv);
-            });
+            newRow.innerHTML = newLokasi;
+            container.appendChild(newRow);
         });
 
         document.addEventListener('DOMContentLoaded', function() {

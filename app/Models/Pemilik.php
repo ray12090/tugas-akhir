@@ -68,7 +68,7 @@ class Pemilik extends Model
     {
         return $this->belongsTo(City::class, 'tempat_lahir_id');
     }
-    public function detailAlamatVillage()
+    public function detailAlamatVillages()
     {
         return $this->belongsTo(Village::class, 'alamat_village_id');
     }

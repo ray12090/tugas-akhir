@@ -48,7 +48,12 @@
                                                 <path fill-rule="evenodd" d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z" clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <input id="tanggal_laporan" name="tanggal_laporan" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $komplain->tanggal_laporan }}">
+                                        <input id="tanggal_laporan" name="tanggal_laporan" type="text" datepicker
+                                            datepicker-format="yyyy-mm-dd" datepicker-buttons
+                                            datepicker-autoselect-today
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="Pilih tanggal"
+                                            value='{{ $komplain->tanggal_laporan }}'>
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">

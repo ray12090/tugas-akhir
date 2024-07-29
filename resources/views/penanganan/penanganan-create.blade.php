@@ -94,26 +94,63 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2">
-                                    <label for="kategori_penanganan"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kategori') }}</label>
-                                    <ul
-                                        class="gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 text-sm font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white">
-                                        @foreach ($kategoriPenanganans as $kategori)
-                                            <li
-                                                class="border border-gray-200 dark:border-gray-600 py-1 px-4 rounded-lg">
-                                                <div class="flex items-center">
-                                                    <input id="kategori_penanganan_{{ $kategori->id }}" type="checkbox"
-                                                        value="{{ $kategori->id }}" name="kategori_penanganan_id[]"
-                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 items-end rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                    <label for="kategori_penanganan_{{ $kategori->id }}"
-                                                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $kategori->nama_kategori_penanganan }}</label>
+                                <div class="sm:col-span-1">
+                                    <label for="kategori_penanganan_id" id="labelKategoriPenanganan"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ __('Kategori Penanganan') }}
+                                    </label>
+                                    <button id="dropdownSearchButtonKategoriPenanganan"
+                                        data-dropdown-toggle="dropdownSearchKategoriPenanganan"
+                                        class="text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
+                                        type="button">{{ __('Pilih Kategori') }}
+                                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="m1 1 4 4 4-4" />
+                                        </svg>
+                                    </button>
+                                    <div id="dropdownSearchKategoriPenanganan"
+                                        class="z-10 hidden bg-white rounded-lg w-60 dark:bg-gray-700 outline-gray-300 outline outline-1">
+                                        <div class="p-3">
+                                            <label for="kategori_penanganan_search"
+                                                class="sr-only">{{ __('Search') }}</label>
+                                            <div class="relative">
+                                                <div
+                                                    class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none" viewBox="0 0 20 20">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                                    </svg>
                                                 </div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                                <input type="text" id="kategori_penanganan_search"
+                                                    class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    placeholder="Cari Kategori">
+                                            </div>
+                                        </div>
+                                        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+                                            aria-labelledby="dropdownSearchButtonKategoriPenanganan">
+                                            @foreach ($kategoriPenanganans as $kategori)
+                                                <li>
+                                                    <div
+                                                        class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                                        <input id="kategori_penanganan_id_{{ $kategori->id }}"
+                                                            type="checkbox" value="{{ $kategori->id }}"
+                                                            name="kategori_penanganan_id[]"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                        <label for="kategori_penanganan_id_{{ $kategori->id }}"
+                                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                                                            {{ $kategori->nama_kategori_penanganan }}
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="sm:col-span-2">
+                                <div class="sm:col-span-3">
                                     <label for="respon_awal"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Respon Awal') }}</label>
                                     <div class="relative">
@@ -121,84 +158,96 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2">
-                                    <div class="grid gap-4 sm:col-span-2 sm:grid-cols-1 sm:gap-6">
-                                        <div class="sm:col-span-2 text-gray-900 text-lg font-semibold">
-                                            {{ __('Penugasan') }}</div>
-                                        <div class="sm:row-span-2">
-                                            <label for="users"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Penanganan Ditugaskan Kepada') }}</label>
-                                            <ul
-                                                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 text-sm font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white">
-                                                @foreach ($groupedUsers as $usertype => $users)
-                                                    <div class="mb-2 col-span-5">
-                                                        <div
-                                                            class="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                                                            {{ $usertype }}</div>
-                                                        <ul
-                                                            class="gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 text-sm font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white">
-                                                            @foreach ($users as $user)
-                                                                <li
-                                                                    class="border border-gray-200 dark:border-gray-600 py-1 px-4 rounded-lg">
-                                                                    <div class="items-center flex">
-                                                                        <input id="users_{{ $user->id }}"
-                                                                            type="checkbox"
-                                                                            value="{{ $user->id }}"
-                                                                            name="users_id[]"
-                                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 items-end rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                                                        <label for="users_{{ $user->id }}"
-                                                                            class="w-full h-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ $user->name }}</label>
-                                                                    </div>
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
-                                                @endforeach
-                                            </ul>
+                                <div class="sm:col-span-4 text-gray-900 text-lg font-semibold">
+                                    {{ __('Penugasan') }}</div>
+                                <div class="sm:col-span-1">
+                                    <label for="users_id" id="labelUsers"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ __('Penanganan ini ditugaskan kepada') }}
+                                    </label>
+                                    <button id="dropdownSearchButtonUsers" data-dropdown-toggle="dropdownSearchUsers"
+                                        class="text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
+                                        type="button">{{ __('Pilih User') }}
+                                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                        </svg>
+                                    </button>
+                                    <div id="dropdownSearchUsers"
+                                        class="z-10 hidden bg-white rounded-lg w-60 dark:bg-gray-700 outline-gray-300 outline outline-1">
+                                        <div class="p-3">
+                                            <label for="users_search" class="sr-only">{{ __('Search') }}</label>
+                                            <div class="relative">
+                                                <div
+                                                    class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none" viewBox="0 0 20 20">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                                    </svg>
+                                                </div>
+                                                <input type="text" id="users_search"
+                                                    class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    placeholder="Cari Nama">
+                                            </div>
                                         </div>
+                                        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+                                            aria-labelledby="dropdownSearchButtonUsers">
+                                            @foreach ($users as $user)
+                                                <li>
+                                                    <div
+                                                        class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                                        <input id="users_id_{{ $user->id }}" type="checkbox"
+                                                            value="{{ $user->id }}" name="users_id[]"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                        <label for="users_id_{{ $user->id }}"
+                                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                                                            {{ $user->name }}
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="sm:col-span-4 text-gray-900 text-lg font-semibold">
+                                    {{ __('Pengerjaan') }}</div>
+                                <div class="sm:col-span-2">
+                                    <label for="pemeriksaan_awal"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Pemeriksaan Awal') }}</label>
+                                    <div class="relative">
+                                        <textarea id="pemeriksaan_awal" name="pemeriksaan_awal" rows="4"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
                                     </div>
                                 </div>
                                 <div class="sm:col-span-2">
-                                    <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
-                                        <div class="sm:col-span-2 text-gray-900 text-lg font-semibold">
-                                            {{ __('Pengerjaan') }}</div>
-                                        <div class="sm:col-span-4">
-                                            <label for="pemeriksaan_awal"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Pemeriksaan Awal') }}</label>
-                                            <div class="relative">
-                                                <textarea id="pemeriksaan_awal" name="pemeriksaan_awal" rows="4"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="sm:col-span-4">
-                                            <label for="penyelesaian_komplain"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Penyelesaian Komplain') }}</label>
-                                            <div class="relative">
-                                                <textarea name="penyelesaian_komplain" id="penyelesaian_komplain" rows="4"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="sm:col-span-2">
-                                            <label for="foto_pemeriksaan_awal"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Pemeriksaan Awal') }}</label>
-                                            <input type="file" name="foto_pemeriksaan_awal"
-                                                id="foto_pemeriksaan_awal"
-                                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                                aria-describedby="foto_pemeriksaan_awal">
-                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG
-                                                (MAX. 5MB).</p>
-                                        </div>
-                                        <div class="sm:col-span-2">
-                                            <label for="foto_hasil_perbaikan"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Hasil Perbaikan') }}</label>
-                                            <input type="file" name="foto_hasil_perbaikan"
-                                                id="foto_hasil_perbaikan"
-                                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                                aria-describedby="foto_hasil_perbaikan">
-                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG
-                                                (MAX. 5MB).</p>
-                                        </div>
+                                    <label for="penyelesaian_komplain"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Penyelesaian Komplain') }}</label>
+                                    <div class="relative">
+                                        <textarea name="penyelesaian_komplain" id="penyelesaian_komplain" rows="4"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
                                     </div>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="foto_pemeriksaan_awal"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Pemeriksaan Awal') }}</label>
+                                    <input type="file" name="foto_pemeriksaan_awal" id="foto_pemeriksaan_awal"
+                                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                        aria-describedby="foto_pemeriksaan_awal">
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG
+                                        (MAX. 5MB).</p>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="foto_hasil_perbaikan"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto Hasil Perbaikan') }}</label>
+                                    <input type="file" name="foto_hasil_perbaikan" id="foto_hasil_perbaikan"
+                                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                        aria-describedby="foto_hasil_perbaikan">
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG
+                                        (MAX. 5MB).</p>
                                 </div>
                                 <div class="grid gap-4 sm:col-span-4 sm:grid-cols-2 sm:gap-6">
                                     <div class="sm:col-span-2 text-gray-900 text-lg font-semibold">
@@ -265,6 +314,34 @@
     </div>
 
     <script>
+        const searchInputKategoriPenanganan = document.getElementById('kategori_penanganan_search');
+        const listItemsKategoriPenanganan = document.querySelectorAll('#dropdownSearchKategoriPenanganan ul li');
+
+        searchInputKategoriPenanganan.addEventListener('input', function() {
+            const filter = searchInputKategoriPenanganan.value.toLowerCase();
+            listItemsKategoriPenanganan.forEach(function(item) {
+                const text = item.textContent || item.innerText;
+                if (text.toLowerCase().includes(filter)) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+        const searchInputUser = document.getElementById('users_search');
+        const listItemsUser = document.querySelectorAll('#dropdownSearchUsers ul li');
+
+        searchInputUser.addEventListener('input', function() {
+            const filter = searchInputUser.value.toLowerCase();
+            listItemsUser.forEach(function(item) {
+                const text = item.textContent || item.innerText;
+                if (text.toLowerCase().includes(filter)) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
         document.addEventListener('DOMContentLoaded', function() {
             fetch('/generate-nomor-penanganan')
                 .then(response => response.json())

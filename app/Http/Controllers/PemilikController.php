@@ -82,7 +82,7 @@ class PemilikController extends Controller
     {
         // Validasi input
         $validator = Validator::make($request->all(), [
-            'nik' => 'required|string|max:20|unique:pemiliks',
+            'nik' => 'required|string|max:20',
             'unit_id' => 'required|exists:units,id',
             'warga_negara_id' => 'required|exists:detail_kewarganegaraans,id',
             'agama_id' => 'required|exists:detail_agamas,id',
@@ -102,7 +102,7 @@ class PemilikController extends Controller
             'alamat_provinsi_id' => 'required|exists:provinces,id',
         ]);
 
-        dd($request->all());
+        // dd($request->all());
 
         if ($validator->fails()) {
             return redirect()->back()

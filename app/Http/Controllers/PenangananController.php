@@ -54,7 +54,7 @@ class PenangananController extends Controller
     public function create()
     {
         $komplains = Komplain::all();
-        $users = User::all();
+        $users = User::whereNotIn('tipe_user_id', [11, 12])->get();
         $kategoriPenanganans = KategoriPenanganan::all();
 
         $groupedUsers = $users->groupBy('usertype');
@@ -68,9 +68,9 @@ class PenangananController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $nomorPenanganan = Penanganan::generateNomorPenanganan();
+        // dd($request->all());
         $validatedData = $request->validate([
-            'komplain_id' => 'required',
-            // 'nomor_penanganan' => 'required|string|max:255',
+            'komplain_id' => 'required|exists:komplains,id',
             'tanggal_penanganan' => 'required|date',
             'time' => 'required',
             'kategori_penanganan_id' => 'nullable|array',
@@ -80,15 +80,17 @@ class PenangananController extends Controller
             'penyelesaian_komplain' => 'nullable|string',
             'foto_pemeriksaan_awal' => 'nullable|file|mimes:jpeg,jpg,png|max:5120',
             'foto_hasil_perbaikan' => 'nullable|file|mimes:jpeg,jpg,png|max:5120',
+            'users_id' => 'nullable|array',
+            'users_id.*' => 'exists:users,id',
         ]);
 
         $penanganan = Penanganan::create([
             'komplain_id' => $validatedData['komplain_id'],
             'nomor_penanganan' => $nomorPenanganan,
             'tanggal_penanganan' => $validatedData['tanggal_penanganan'] . ' ' . $validatedData['time'],
-            'respon_awal' => $validatedData['respon_awal'],
-            'pemeriksaan_awal' => $validatedData['pemeriksaan_awal'],
-            'penyelesaian_komplain' => $validatedData['penyelesaian_komplain'],
+            'respon_awal' => $validatedData['respon_awal'] ?? null,
+            'pemeriksaan_awal' => $validatedData['pemeriksaan_awal'] ?? null,
+            'penyelesaian_komplain' => $validatedData['penyelesaian_komplain'] ?? null,
             'created_by' => Auth::id(),
             'updated_by' => Auth::id(),
         ]);
@@ -96,13 +98,13 @@ class PenangananController extends Controller
         if ($request->hasFile('foto_pemeriksaan_awal')) {
             $image = $request->file('foto_pemeriksaan_awal');
             $image->storeAs('public/foto_pemeriksaan_awal', $image->hashName());
-            $penanganan['foto_pemeriksaan_awal'] = $image->hashName();
+            $penanganan->foto_pemeriksaan_awal = $image->hashName();
         }
 
         if ($request->hasFile('foto_hasil_perbaikan')) {
             $image = $request->file('foto_hasil_perbaikan');
             $image->storeAs('public/foto_hasil_perbaikan', $image->hashName());
-            $penanganan['foto_hasil_perbaikan'] = $image->hashName();
+            $penanganan->foto_hasil_perbaikan = $image->hashName();
         }
 
         if ($request->has('kategori_penanganan_id')) {
@@ -117,6 +119,7 @@ class PenangananController extends Controller
 
         return redirect()->route('penanganan.index')->with('success', 'Penanganan berhasil ditambahkan');
     }
+
 
     /**
      * Display the specified resource.
@@ -137,10 +140,12 @@ class PenangananController extends Controller
         $penanganan = Penanganan::with('kategoriPenanganan', 'users', 'komplain')->findOrFail($id);
         $komplains = Komplain::all();
         $kategoriPenanganans = KategoriPenanganan::all();
-        $groupedUsers = User::all()->groupBy('usertype');
+        $users = User::whereNotIn('tipe_user_id', [11, 12])->get();
+        $groupedUsers = $users->groupBy('usertype');
 
-        return view('penanganan.penanganan-edit', compact('penanganan', 'komplains', 'kategoriPenanganans', 'groupedUsers'));
+        return view('penanganan.penanganan-edit', compact('penanganan', 'komplains', 'kategoriPenanganans', 'groupedUsers', 'users'));
     }
+
 
 
     /**
@@ -150,7 +155,7 @@ class PenangananController extends Controller
     {
         $request->validate([
             'nomor_penanganan' => 'required|unique:penanganans,nomor_penanganan,' . $id,
-            'komplain_id' => 'required',
+            'komplain_id' => 'required|exists:komplains,id',
             'tanggal_penanganan' => 'required|date',
             'time' => 'required|date_format:H:i',
             'kategori_penanganan_id' => 'nullable|array',
@@ -165,22 +170,26 @@ class PenangananController extends Controller
             'persetujuan_selesai_tr' => 'nullable|boolean',
             'persetujuan_selesai_pelaksana' => 'nullable|boolean',
         ]);
+        // dd($request->all());
 
         $penanganan = Penanganan::findOrFail($id);
         $penanganan->fill($request->except('time', 'kategori_penanganan_id', 'users_id'));
         $penanganan->tanggal_penanganan = \Carbon\Carbon::parse($request->tanggal_penanganan . ' ' . $request->time);
         $penanganan->updated_by = Auth::user()->id;
+        $penanganan->persetujuan_selesai_tr = $request->input('persetujuan_selesai_tr', false);
+        $penanganan->persetujuan_selesai_pelaksana = $request->input('persetujuan_selesai_pelaksana', false);
+
 
         if ($request->hasFile('foto_pemeriksaan_awal')) {
             $image = $request->file('foto_pemeriksaan_awal');
-            $image->storeAs('public/foto_pemeriksaan_awal', $image->hashName());
-            $penanganan['foto_pemeriksaan_awal'] = $image->hashName();
+            $imagePath = $image->storeAs('public/foto_pemeriksaan_awal', $image->hashName());
+            $penanganan->foto_pemeriksaan_awal = $image->hashName();
         }
 
         if ($request->hasFile('foto_hasil_perbaikan')) {
             $image = $request->file('foto_hasil_perbaikan');
-            $image->storeAs('public/foto_hasil_perbaikan', $image->hashName());
-            $penanganan['foto_hasil_perbaikan'] = $image->hashName();
+            $imagePath = $image->storeAs('public/foto_hasil_perbaikan', $image->hashName());
+            $penanganan->foto_hasil_perbaikan = $image->hashName();
         }
 
         $penanganan->save();
@@ -192,10 +201,10 @@ class PenangananController extends Controller
         if (is_array($request->users_id)) {
             $penanganan->users()->sync($request->users_id);
         }
-        // dd($penanganan);
 
         return redirect()->route('penanganan.index')->with('success', 'Penanganan berhasil diubah.');
     }
+
 
 
     /**
