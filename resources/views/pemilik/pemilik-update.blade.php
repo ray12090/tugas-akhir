@@ -278,68 +278,58 @@
                                     </div>
                                 </div>
                                 <div id="unit-container" class="sm:col-span-3">
-                                    <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 tambah-unit-row">
-                                        <div class="mb-4 text-lg font-bold text-gray-900 dark:text-white sm:col-span-4">
-                                            {{ __('Unit Pemilik') }}
-                                            </div>
-
-                                                <div class="sm:col-span-1">
-                                                    <label for="unit_id_0" id="labelUnit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                        {{ __('Unit') }}
-                                                    </label>
-                                                    <select name="unit_id[0][unit_id]" id="unit_id_0"
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                        @foreach ($pemilik->unit as $unit)
-                                                            <option value="{{ $unit->id }}" class="border-b" {{ $unit->unit_id == $unit->id ? 'selected' : '' }}>
-                                                                {{ $unit->nama_unit }}</option>
-                                                        @endforeach
-                                                        @foreach ($units as $unit)
-                                                            <option value="{{ $unit->id }}">{{ $unit->nama_unit }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="sm:col-span-1">
-                                                    <label for="awal_huni_0" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                        {{ __('Awal Huni') }}
-                                                    </label>
-                                                    <div class="relative max-w">
-                                                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                                <path fill-rule="evenodd" d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z" clip-rule="evenodd" />
-                                                            </svg>
-                                                        </div>
-                                                        <input id="awal_huni_0" name="unit_id[0][awal_huni]" type="text" datepicker datepicker-format="yyyy-mm-dd"
-                                                            datepicker-buttons datepicker-orientation="{auto}"
-                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            placeholder="YYYY/MM/DD" value="{{ old('awal_huni', $pemilik->unit->first()->pivot->awal_huni) }}" required>
-                                                    </div>
-                                                </div>
-                                                <div class="sm:col-span-1">
-                                                    <label for="akhir_huni_0" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                        {{ __('Akhir Huni') }}
-                                                    </label>
-                                                    <div class="relative max-w">
-                                                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                                <path fill-rule="evenodd" d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z" clip-rule="evenodd" />
-                                                            </svg>
-                                                        </div>
-                                                        <input id="akhir_huni_0" name="unit_id[0][akhir_huni]" type="text" datepicker datepicker-format="yyyy-mm-dd"
-                                                            datepicker-buttons datepicker-orientation="{auto}"
-                                                            rows="2"
-                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            placeholder="YYYY/MM/DD" value="{{ old('akhir_huni', $pemilik->unit->first()->pivot->akhir_huni) }}">
-                                                    </div>
-                                                </div>
-                                                <div class="sm:col-span-1">
-                                            <label for=""
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
-                                            <button type="button" id="tambah-unit-btn"
-                                                class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                                                {{ __('Tambah unit baru') }}
-                                            </button>
+                                    <div class="mb-4 text-lg font-bold text-gray-900 dark:text-white sm:col-span-4">
+                                        {{ __('Unit Pemilik') }}
+                                    </div>
+                                    @foreach ($pemilik->unit as $index => $unit)
+                                <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 mb-4">
+                                    <div class="sm:col-span-1">
+                                        <label for="unit_id_{{ $index }}" id="labelUnit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            {{ __('Unit') }}
+                                        </label>
+                                        <select name="units[{{ $index }}][unit_id]" id="unit_id_{{ $index }}"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                            <option value="{{ $unit->id }}" selected>{{ $unit->nama_unit }}</option>
+                                            @foreach ($units as $unitOption)
+                                                <option value="{{ $unitOption->id }}" {{ $unitOption->id == $unit->id ? 'selected' : '' }}>
+                                                    {{ $unitOption->nama_unit }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="sm:col-span-1">
+                                        <label for="awal_huni_{{ $index }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            {{ __('Awal Huni') }}
+                                        </label>
+                                        <div class="relative">
+                                            <input id="awal_huni_{{ $index }}" name="units[{{ $index }}][awal_huni]" type="text" datepicker datepicker-format="yyyy-mm-dd"
+                                                datepicker-buttons datepicker-orientation="{auto}"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="YYYY/MM/DD" value="{{ old('units.' . $index . '.awal_huni', $unit->pivot->awal_huni) }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="sm:col-span-1">
+                                        <label for="akhir_huni_{{ $index }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            {{ __('Akhir Huni') }}
+                                        </label>
+                                        <div class="relative">
+                                            <input id="akhir_huni_{{ $index }}" name="units[{{ $index }}][akhir_huni]" type="text" datepicker datepicker-format="yyyy-mm-dd"
+                                                datepicker-buttons datepicker-orientation="{auto}"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="YYYY/MM/DD" value="{{ old('units.' . $index . '.akhir_huni', $unit->pivot->akhir_huni) }}">
+                                        </div>
                                     </div>
                                 </div>
+                                @endforeach
+
+                                    <div class="sm:col-span-4 flex justify-end">
+                                        <button type="button" id="tambah-unit-btn" class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                            {{ __('Tambah unit baru') }}
+                                        </button>
+                                    </div>
+                                </div>
+
+
                                 </div>
 
                                 <div class="sm:col-span-4 items-end">
