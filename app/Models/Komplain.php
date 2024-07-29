@@ -26,7 +26,7 @@ class Komplain extends Model
 
     public function lokasiKomplains()
     {
-        return $this->belongsToMany(LokasiKomplain::class, 'komplain_lokasi_pivot')
+        return $this->belongsToMany(LokasiKomplain::class, 'komplain_lokasi_pivot', 'komplain_id', 'lokasi_komplain_id')
             ->withPivot('uraian_komplain', 'foto_komplain');
     }
     public function statusKomplain()
