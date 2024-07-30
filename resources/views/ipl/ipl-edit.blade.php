@@ -8,8 +8,8 @@
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                     {{ __('Edit Pembayaran IPL') }}
                 </div>
-                <div class="text-gray-500 text-sm font-reguler">
-                    {{ __('Di bawah merupakan formulir untuk mengedit data pembayaran IPL.') }}
+                <div class="text-gray-500 text-sm font-regular">
+                    {{ __('Di bawah merupakan formulir untuk mengedit data pembayaran IPL. Hanya dapat diubah oleh Finance.') }}
                 </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
@@ -30,7 +30,6 @@
                                             </label>
                                             <div class="relative">
                                                 <input type="text" id="nomor_invoice" name="nomor_invoice"
-                                                    placeholder="IPL/MM/YY/NNNNN"
                                                     value="{{ old('nomor_invoice', $ipl->nomor_invoice) }}"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                     readonly>
@@ -43,60 +42,69 @@
                                                 </svg>
                                             </div>
                                         </div>
-
                                         <div class="w-full">
                                             <label for="tanggal_invoice"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                 {{ __('Tanggal Invoice') }}
                                             </label>
-                                            <input type="date" name="tanggal_invoice" id="tanggal_invoice"
-                                                value="{{ old('tanggal_invoice', $ipl->tanggal_invoice) }}"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                required>
+                                            <div class="relative max-w sm:col-span-1">
+                                                <div
+                                                    class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                    <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        width="24" height="24" fill="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill-rule="evenodd"
+                                                            d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                                <input id="tanggal_invoice" name="tanggal_invoice" type="text"
+                                                    datepicker datepicker-format="yyyy-mm-dd" datepicker-buttons
+                                                    datepicker-autoselect-today
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    value="{{ $ipl->tanggal_invoice }}">
+                                            </div>
                                         </div>
                                         <div class="w-full">
                                             <label for="jatuh_tempo"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                 {{ __('Jatuh Tempo') }}
                                             </label>
-                                            <input type="date" name="jatuh_tempo" id="jatuh_tempo"
-                                                value="{{ old('jatuh_tempo', $ipl->jatuh_tempo) }}"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                required>
+                                            <div class="relative max-w sm:col-span-1">
+                                                <div
+                                                    class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                    <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        width="24" height="24" fill="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill-rule="evenodd"
+                                                            d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                                <input id="jatuh_tempo" name="jatuh_tempo" type="text" datepicker
+                                                    datepicker-format="yyyy-mm-dd" datepicker-buttons
+                                                    datepicker-autoselect-today
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    value="{{ $ipl->jatuh_tempo }}">
+                                            </div>
                                         </div>
-
-                                        <div class="w-full">
+                                        <div class="w-full sm:col-span-1">
                                             <label for="bulan_ipl"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Pembayaran Bulan') }}</label>
                                             <select name="bulan_ipl" id="bulan_ipl"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                <option value="Januari" {{ $ipl->bulan_ipl == 'Januari' ? 'selected' : '' }}>Januari</option>
-                                                <option value="Februari" {{ $ipl->bulan_ipl == 'Februari' ? 'selected' : '' }}>Februari</option>
-                                                <option value="Maret" {{ $ipl->bulan_ipl == 'Maret' ? 'selected' : '' }}>
-                                                    Maret</option>
-                                                <option value="April" {{ $ipl->bulan_ipl == 'April' ? 'selected' : '' }}>
-                                                    April</option>
-                                                <option value="Mei" {{ $ipl->bulan_ipl == 'Mei' ? 'selected' : '' }}>Mei
-                                                </option>
-                                                <option value="Juni" {{ $ipl->bulan_ipl == 'Juni' ? 'selected' : '' }}>
-                                                    Juni</option>
-                                                <option value="Juli" {{ $ipl->bulan_ipl == 'Juli' ? 'selected' : '' }}>
-                                                    Juli</option>
-                                                <option value="Agustus" {{ $ipl->bulan_ipl == 'Agustus' ? 'selected' : '' }}>Agustus</option>
-                                                <option value="September" {{ $ipl->bulan_ipl == 'September' ? 'selected' : '' }}>September</option>
-                                                <option value="Oktober" {{ $ipl->bulan_ipl == 'Oktober' ? 'selected' : '' }}>Oktober</option>
-                                                <option value="November" {{ $ipl->bulan_ipl == 'November' ? 'selected' : '' }}>November</option>
-                                                <option value="Desember" {{ $ipl->bulan_ipl == 'Desember' ? 'selected' : '' }}>Desember</option>
+                                                @foreach (['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'] as $bulan)
+                                                    <option value="{{ $bulan }}"
+                                                        {{ old('bulan_ipl', $ipl->bulan_ipl) == $bulan ? 'selected' : '' }}>
+                                                        {{ $bulan }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
-                                        <div class="sm:col-span-2"></div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2">
-                                    <div class="grid gap-4 sm:grid-cols-3 sm:gap-6">
-                                    </div>
-                                </div>
-                                <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-2">
                                     <div class="grid gap-4 sm:grid-cols-3 sm:gap-6">
                                         <div class="w-full">
@@ -107,8 +115,11 @@
                                             <select id="pemilik_id" name="pemilik_id"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                                 <option value="">{{ __('Pilih Pemilik') }}</option>
-                                                @foreach($pemiliks as $pemilik)
-                                                    <option value="{{ $pemilik->id }}" {{ $ipl->pemilik_id == $pemilik->id ? 'selected' : '' }}>{{ $pemilik->nama_pemilik }}</option>
+                                                @foreach ($pemiliks as $pemilik)
+                                                    <option value="{{ $pemilik->id }}"
+                                                        {{ old('pemilik_id', $ipl->pemilik_id) == $pemilik->id ? 'selected' : '' }}>
+                                                        {{ $pemilik->nama_pemilik }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -120,203 +131,182 @@
                                             <select id="unit_id" name="unit_id"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                                 <option value="">{{ __('Pilih Unit') }}</option>
-                                                @foreach($units as $unit)
-                                                    <option value="{{ $unit->id }}" {{ $ipl->unit_id == $unit->id ? 'selected' : '' }}>{{ $unit->nama_unit }}</option>
+                                                @foreach ($units as $unit)
+                                                    <option value="{{ $unit->id }}"
+                                                        {{ old('unit_id', $ipl->unit_id) == $unit->id ? 'selected' : '' }}>
+                                                        {{ $unit->nama_unit }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
-                                <form id="billingForm">
-                                    <div class="sm:col-span-4">
-                                        <div class="text-gray-900 text-lg font-semibold">
-                                            {{ __('Rincian Tagihan') }}
-                                        </div>
+                                <div class="sm:col-span-4">
+                                    <div class="text-gray-900 text-md font-semibold">
+                                        {{ __('Pemakaian Air Bersih') }}
                                     </div>
-                                    <div class="w-full">
-                                        <label for="tagihan_awal"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Total Tagihan yang Belum Dibayar') }}
-                                        </label>
-                                        <input type="number" id="tagihan_awal" name="tagihan_awal"
-                                            value="{{ old('tagihan_awal', $ipl->detailTagihanAwal->jumlah ?? '') }}"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                    </div>
-                                    <div class="w-full">
-                                        <label for="titipan_pengelolaan"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Titipan Pengelolaan dan Sinking Fund') }}
-                                        </label>
-                                        <input type="number" id="titipan_pengelolaan" name="titipan_pengelolaan"
-                                            value="{{ old('titipan_pengelolaan', $ipl->detailTitipanPengelolaan->jumlah ?? '') }}"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                    </div>
-                                    <div class="w-full">
-                                        <label for="titipan_air"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Titipan Air') }}
-                                        </label>
-                                        <input type="number" id="titipan_air" name="titipan_air"
-                                            value="{{ old('titipan_air', $ipl->detailTitipanAir->jumlah ?? '') }}"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                    </div>
-                                    <div class="sm:col-span-1"></div>
-                                    <div class="w-full">
-                                        <label for="iuran_pengelolaan"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Iuran Pengelolaan') }}
-                                        </label>
-                                        <input type="number" id="iuran_pengelolaan" name="iuran_pengelolaan"
-                                            value="{{ old('iuran_pengelolaan', $ipl->detailIuranPengelolaan->jumlah ?? '') }}"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                    </div>
-                                    <div class="w-full">
-                                        <label for="dana_cadangan"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Dana Cadangan') }}
-                                        </label>
-                                        <input type="number" id="dana_cadangan" name="dana_cadangan"
-                                            value="{{ old('dana_cadangan', $ipl->detailDanaCadangan->jumlah ?? '') }}"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                    </div>
-                                    <div class="sm:col-span-4">
-                                        <div class="text-gray-900 text-md font-semibold">
-                                            {{ __('Pemakaian Air Bersih') }}
-                                        </div>
-                                    </div>
-                                    <div class="sm:col-span-4">
-                                        <div class="grid gap-4 sm:grid-cols-6 sm:gap-6">
-                                            <div class="w-full">
-                                                <label for="meter_air_awal"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    {{ __('Meter Awal (m³)') }}
-                                                </label>
-                                                <input type="number" id="meter_air_awal" name="meter_air_awal"
-                                                    value="{{ old('meter_air_awal', $ipl->detailTagihanAir->meter_air_awal ?? '') }}"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                            </div>
-                                            <div class="w-full">
-                                                <label for="meter_air_akhir"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    {{ __('Meter Akhir (m³)') }}
-                                                </label>
-                                                <input type="number" id="meter_air_akhir" name="meter_air_akhir"
-                                                    value="{{ old('meter_air_akhir', $ipl->detailTagihanAir->meter_air_akhir ?? '') }}"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                            </div>
-                                            <div class="w-full">
-                                                <label for="pemakaian_air"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    {{ __('Pemakaian (m³)') }}
-                                                </label>
-                                                <input type="text" id="pemakaian_air" name="pemakaian_air"
-                                                    value="{{ old('pemakaian_air', $ipl->detailTagihanAir->pemakaian_air ?? '') }}"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                    readonly>
-                                            </div>
-                                            <div class="w-full">
-                                                <label for="biaya_air"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    {{ __('Harga Air per m³') }}
-                                                </label>
-                                                <input type="text" id="biaya_air" name="biaya_air"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                    value="{{ number_format($biaya_air->biaya_air, 2, ',', '.') }}"
-                                                    readonly>
-                                                <input type="hidden" id="biaya_air_id" name="biaya_air_id"
-                                                    value="{{ $ipl->detailTagihanAir->detailBiayaAir->biaya_air }}">
-                                            </div>
-                                            <div class="w-full">
-                                                <label for="tagihan_air"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    {{ __('Jumlah Tagihan Air') }}
-                                                </label>
-                                                <input type="text" id="tagihan_air" name="tagihan_air"
-                                                    value="{{ old('tagihan_air', $ipl->detailTagihanAir->tagihan_air ?? '') }}"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                    readonly>
-                                            </div>
-                                            <div class="sm:col-span-1"></div>
-                                        </div>
-                                        <div class="sm:col-span-2"></div>
-                                        <div class="sm:col-span-2"></div>
-                                    </div>
-                                    <div class="sm:col-span-2">
-                                        <div class="grid gap-4 sm:grid-cols-3 sm:gap-6">
-                                            <div class="w-full">
-                                                <label for="biaya_admin"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    {{ __('Biaya Admin') }}
-                                                </label>
-                                                <input type="text" id="biaya_admin" name="biaya_admin"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                    value="{{ number_format($biaya_admin->biaya_admin, 2, ',', '.') }}"
-                                                    disabled>
-                                                <input type="hidden" id="biaya_admin_id" name="biaya_admin_id"
-                                                    value="{{ $ipl->detailBiayaAdmin->biaya_admin }}">
-                                            </div>
-                                            <div class="w-full">
-                                                <label for="denda"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    {{ __('Denda') }}
-                                                </label>
-                                                <input type="number" id="denda" name="denda"
-                                                    value="{{ old('denda', $ipl->detailDenda->jumlah ?? '') }}"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                            </div>
-                                            <div class="sm:col-span-2"></div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="sm:col-span-2"></div>
-                                <div class="text-gray-900 text-lg font-bold">
-                                    {{ __('Total Akhir') }}: <span
-                                        id="total_akhir">{{ number_format($ipl->total, 2, ',', '.') }}</span>
                                 </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-1"></div>
+                                <div class="sm:col-span-4">
+                                    <div class="grid gap-4 sm:grid-cols-6 sm:gap-6">
+                                        <div class="w-full">
+                                            <label for="meter_air_awal"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ __('Meter Awal (m³)') }}
+                                            </label>
+                                            <input type="number" id="meter_air_awal" name="meter_air_awal"
+                                                step="0.01"
+                                                value="{{ old('meter_air_awal', $detailTagihanAir->meter_air_awal) }}"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        </div>
+                                        <div class="w-full">
+                                            <label for="meter_air_akhir"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ __('Meter Akhir (m³)') }}
+                                            </label>
+                                            <input type="number" id="meter_air_akhir" name="meter_air_akhir"
+                                                step="0.01"
+                                                value="{{ old('meter_air_akhir', $detailTagihanAir->meter_air_akhir) }}"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        </div>
+                                        <div class="w-full">
+                                            <label for="pemakaian_air"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ __('Pemakaian (m³)') }}
+                                            </label>
+                                            <input type="text" id="pemakaian_air" name="pemakaian_air"
+                                                value="{{ old('pemakaian_air', $detailTagihanAir->pemakaian_air) }}"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                readonly>
+                                        </div>
+                                        <div class="w-full">
+                                            <label for="biaya_air"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ __('Harga Air per m³') }}
+                                            </label>
+                                            <input type="text" id="biaya_air" name="biaya_air"
+                                                value="{{ number_format($biaya_air->biaya_air, 2, ',', '.') }}"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                readonly>
+                                            <input type="hidden" id="biaya_air_id" name="biaya_air_id"
+                                                value="{{ $biaya_air->id }}">
+                                        </div>
+                                        <div class="w-full">
+                                            <label for="tagihan_air"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ __('Jumlah Tagihan Air (Rp)') }}
+                                            </label>
+                                            <input type="text" id="tagihan_air" name="tagihan_air"
+                                                value="{{ old('tagihan_air', $detailTagihanAir->tagihan_air) }}"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <div class="grid gap-4 sm:grid-cols-3 sm:gap-6">
+                                        <div class="w-full">
+                                            <label for="biaya_admin"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ __('Biaya Admin') }}
+                                            </label>
+                                            <input type="text" id="biaya_admin" name="biaya_admin"
+                                                value="{{ number_format($biaya_admin->biaya_admin, 2, ',', '.') }}"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                disabled>
+                                            <input type="hidden" id="biaya_admin_id" name="biaya_admin_id"
+                                                value="{{ $biaya_admin->id }}">
+                                        </div>
+                                        <div class="sm:col-span-2"></div>
+                                    </div>
+                                </div>
+                                <div class="sm:col-span-4">
+                                    <div class="text-gray-900 text-lg font-semibold">
+                                        {{ __('Rincian Tagihan') }}
+                                    </div>
+                                </div>
+                                <div id="tagihan-container"
+                                    class="grid gap-4 sm:gap-6 sm:col-span-4 sm:grid-cols-1 rounded-lg p-6 shadow-md sm:rounded-2xl bg-gray-100">
+                                    @foreach ($detailTagihans as $index => $detailTagihan)
+                                        <div class="grid gap-4 sm:grid-cols-4 sm:gap-6 tagihan-row">
+                                            <div class="sm:col-span-1">
+                                                <label for="jenis_tagihan_{{ $index }}"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    {{ __('Jenis Tagihan') }}
+                                                </label>
+                                                <select id="jenis_tagihan_{{ $index }}"
+                                                    name="jenis_tagihan[{{ $index }}][jenis_tagihan_id]"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    <option selected disabled>{{ __('Pilih jenis tagihan') }}
+                                                    </option>
+                                                    @foreach ($jenisTagihans as $tagihan)
+                                                        <option value="{{ $tagihan->id }}"
+                                                            {{ $detailTagihan->jenis_tagihan_id == $tagihan->id ? 'selected' : '' }}>
+                                                            {{ $tagihan->nama_jenis_tagihan }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <label for="jumlah_{{ $index }}"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    {{ __('Jumlah (Rp)') }}
+                                                </label>
+                                                <input type="text" id="jumlah_{{ $index }}" name="jenis_tagihan[{{ $index }}][jumlah]"
+                                                    value="{{ (old('jenis_tagihan.' . $index . '.jumlah', $detailTagihan->jumlah)) }}"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 jumlah-input">
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="text-gray-900 text-lg font-bold sm:col-span-4">
+                                    {{ __('Total Akhir') }}: <span
+                                        id="total_akhir">Rp{{ number_format($ipl->total, 2, ',', '.') }}</span>
+                                </div>
                                 <div class="w-full">
                                     <label for="foto_bukti_pembayaran"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('Bukti Pembayaran') }}
                                     </label>
-
-                                    <img src="{{ asset('storage/bukti_pembayaran/' . $ipl->foto_bukti_pembayaran) }}"
-                                        alt="Bukti Pembayaran" class="w-40 h-40 object-cover rounded-lg">
-
-                                    <label for="foto_bukti_pembayaran"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        {{ __('Ubah Bukti Pembayaran') }}
-                                    </label>
-
+                                    @if ($ipl->foto_bukti_pembayaran)
+                                        <div>
+                                            <img src="{{ asset('storage/bukti_pembayaran/' . $ipl->foto_bukti_pembayaran) }}"
+                                                alt="Foto Bukti Pembayaran"
+                                                class="w-auto h-48 rounded-lg hover:object-scale-down">
+                                        </div>
+                                    @else
+                                        <p class="text-gray-500">
+                                            {{ __('Tidak ada foto bukti pembayaran.') }}
+                                        </p>
+                                    @endif
+                                    </br>
                                     <input type="file" name="foto_bukti_pembayaran" id="foto_bukti_pembayaran"
                                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                         aria-describedby="foto_bukti_pembayaran">
                                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG (MAX.
-                                        5MB).</p>
+                                        5MB).
+                                    </p>
                                 </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-1"></div>
                                 <div class="w-full">
                                     <label for="status"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Status Pembayaran') }}</label>
                                     <select name="status" id="status"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option value="Belum Lunas" {{ $ipl->status == 'Belum Lunas' ? 'selected' : '' }}>
-                                            Belum Lunas</option>
-                                        <option value="Lunas" {{ $ipl->status == 'Lunas' ? 'selected' : '' }}>Lunas
+                                        <option value="Belum Lunas"
+                                            {{ old('status', $ipl->status) == 'Belum Lunas' ? 'selected' : '' }}>
+                                            Belum
+                                            Lunas</option>
+                                        <option value="Lunas"
+                                            {{ old('status', $ipl->status) == 'Lunas' ? 'selected' : '' }}>Lunas
                                         </option>
                                     </select>
                                 </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-1"></div>
-                                <div class="sm:col-span-3">
+                                <input type="hidden" id="total" name="total" value="{{ $ipl->total }}">
+                                <div class="sm:col-span-4">
                                     <a href="{{ route('ipl.index') }}"
-                                        class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-GRAY-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                        class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                         <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white mr-2"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
                                                 clip-rule="evenodd" />
@@ -326,8 +316,8 @@
                                     <button type="submit"
                                         class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                                         <svg class="w-[16px] h-[16px] text-white dark:text-white mr-2"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7.414A2 2 0 0 0 20.414 6L18 3.586A2 2 0 0 0 16.586 3H5Zm3 11a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6H8v-6Zm1-7V5h6v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1Z"
                                                 clip-rule="evenodd" />
@@ -340,84 +330,147 @@
                         </form>
                     </div>
                 </div>
-                </form>
             </div>
         </div>
     </div>
-    <!-- </div>
-    @include('components.modal', ['type' => 'confirmation'])
-    </div> -->
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Fetching units when the owner is selected
-            document.getElementById('pemilik_id').addEventListener('change', function () {
-                var pemilikId = this.value;
-                var unitSelect = document.getElementById('unit_id');
-                unitSelect.innerHTML = '<option value="">Pilih Unit</option>';
+        document.getElementById('pemilik_id').addEventListener('change', function() {
+            var pemilikId = this.value;
+            var unitSelect = document.getElementById('unit_id');
+            unitSelect.innerHTML = '<option value="">Pilih Unit</option>';
 
-                if (pemilikId) {
-                    fetch(`/api/pemilik/${pemilikId}/units`)
-                        .then(response => response.json())
-                        .then(data => {
-                            data.units.forEach(unit => {
-                                var option = document.createElement('option');
-                                option.value = unit.id;
-                                option.text = unit.nama_unit;
-                                unitSelect.add(option);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching units:', error));
-                }
-            });
+            if (pemilikId) {
+                fetch(`/api/pemilik/${pemilikId}/units`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.units.forEach(unit => {
+                            var option = document.createElement('option');
+                            option.value = unit.id;
+                            option.text = unit.nama_unit;
+                            unitSelect.add(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching units:', error));
+            }
+        });
 
-            // Initializing variables
-            const tagihanAwalInput = document.getElementById('tagihan_awal');
-            const titipanPengelolaanInput = document.getElementById('titipan_pengelolaan');
-            const titipanAirInput = document.getElementById('titipan_air');
-            const iuranPengelolaanInput = document.getElementById('iuran_pengelolaan');
-            const danaCadanganInput = document.getElementById('dana_cadangan');
+        document.addEventListener('DOMContentLoaded', function() {
             const meterAirAwalInput = document.getElementById('meter_air_awal');
             const meterAirAkhirInput = document.getElementById('meter_air_akhir');
-            const dendaInput = document.getElementById('denda');
-            const biayaAir = {{ $biaya_air->biaya_air }}; // Ambil dari database
-            const biayaAdmin = {{ $biaya_admin->biaya_admin }}; // Ambil dari database
+            const pemakaianAirInput = document.getElementById('pemakaian_air');
+            const tagihanAirInput = document.getElementById('tagihan_air');
+            const totalAkhirSpan = document.getElementById('total_akhir');
+            const totalTagihanInput = document.getElementById('total');
+            const biayaAir = parseFloat('{{ $biaya_air->biaya_air }}'); // Dari database
+            const biayaAdmin = parseFloat('{{ $biaya_admin->biaya_admin }}'); // Dari database
 
-            // Format number to Indonesian currency style
             function formatNumber(num) {
-                return num.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                return num.toLocaleString('id-ID', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
             }
 
-            // Update total cost calculation
-            function updateTotalAkhir() {
-                const tagihanAwal = parseFloat(tagihanAwalInput.value) || 0;
-                const titipanPengelolaan = parseFloat(titipanPengelolaanInput.value) || 0;
-                const titipanAir = parseFloat(titipanAirInput.value) || 0;
-                const iuranPengelolaan = parseFloat(iuranPengelolaanInput.value) || 0;
-                const danaCadangan = parseFloat(danaCadanganInput.value) || 0;
+            function hitungPemakaianAir() {
                 const meterAwal = parseFloat(meterAirAwalInput.value) || 0;
                 const meterAkhir = parseFloat(meterAirAkhirInput.value) || 0;
-                const denda = parseFloat(dendaInput.value) || 0;
-
-                // Calculate water usage and bill
-                const pemakaianAir = meterAkhir - meterAwal;
-                const tagihanAir = pemakaianAir * biayaAir;
-
-                // Calculate total cost
-                const totalAkhir = tagihanAwal + titipanPengelolaan + titipanAir + iuranPengelolaan + danaCadangan + tagihanAir + biayaAdmin + denda;
-
-                // Update display values
-                document.getElementById('total_akhir').textContent = formatNumber(totalAkhir);
-                document.getElementById('pemakaian_air').value = formatNumber(pemakaianAir);
-                document.getElementById('tagihan_air').value = formatNumber(tagihanAir);
+                return meterAkhir - meterAwal;
             }
 
-            // Add event listener to all relevant inputs
-            document.querySelectorAll('input[type="number"]').forEach(input => {
-                input.addEventListener('input', updateTotalAkhir);
+            function hitungTagihanAir(pemakaianAir) {
+                return pemakaianAir * biayaAir;
+            }
+
+            function hitungTotalAkhir() {
+                const pemakaianAir = hitungPemakaianAir();
+                const tagihanAir = hitungTagihanAir(pemakaianAir);
+                let totalAkhir = tagihanAir + biayaAdmin;
+
+                document.querySelectorAll('.tagihan-row').forEach((row, index) => {
+                    const jumlahInput = row.querySelector(`input[name="jenis_tagihan[${index}][jumlah]"]`);
+                    const jumlah = parseFloat(jumlahInput.value) || 0;
+                    totalAkhir += jumlah;
+                });
+
+                pemakaianAirInput.value = formatNumber(pemakaianAir);
+                tagihanAirInput.value = formatNumber(tagihanAir);
+                totalAkhirSpan.textContent = formatNumber(totalAkhir);
+                totalTagihanInput.value = totalAkhir; // Set hidden input value
+            }
+
+            meterAirAwalInput.addEventListener('input', hitungTotalAkhir);
+            meterAirAkhirInput.addEventListener('input', hitungTotalAkhir);
+            document.querySelectorAll('.tagihan-row input[type="number"]').forEach(input => {
+                input.addEventListener('input', hitungTotalAkhir);
             });
 
-            // Initial calculation
-            updateTotalAkhir();
+            document.getElementById('tambah-tagihan-btn').addEventListener('click', function() {
+                var container = document.getElementById('tagihan-container');
+                var index = container.children.length;
+
+                var newRow = document.createElement('div');
+                newRow.classList.add('grid', 'gap-4', 'sm:grid-cols-4', 'sm:gap-6', 'tagihan-row');
+                var newTagihan = `
+                    <div class="sm:col-span-1">
+                        <label for="jenis_tagihan_${index}"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            {{ __('Jenis Tagihan') }}
+                        </label>
+                        <select id="jenis_tagihan_${index}" name="jenis_tagihan[${index}][jenis_tagihan_id]"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected disabled>{{ __('Pilih jenis tagihan') }}</option>
+                            @foreach ($jenisTagihans as $tagihan)
+                                <option value="{{ $tagihan->id }}">
+                                    {{ $tagihan->nama_jenis_tagihan }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label for="jumlah_${index}"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Jumlah') }}</label>
+                        <input type="number" id="jumlah_${index}" name="jenis_tagihan[${index}][jumlah]" rows="2"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label for=""
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
+                        <button type="button" class="hapus-tagihan-btn flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                            {{ __('Hapus') }}
+                        </button>
+                    </div>
+                `;
+                newRow.innerHTML = newTagihan;
+                container.appendChild(newRow);
+
+                newRow.querySelector('.hapus-tagihan-btn').addEventListener('click', function() {
+                    newRow.remove();
+                    hitungTotalAkhir();
+                });
+
+                newRow.querySelector(`input[name="jenis_tagihan[${index}][jumlah]"]`).addEventListener(
+                    'input', hitungTotalAkhir);
+            });
+
+            hitungTotalAkhir();
+        });
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var today = new Date();
+            var day = ("0" + today.getDate()).slice(-2);
+            var month = ("0" + (today.getMonth() + 1)).slice(-2);
+            var dateToday = today.getFullYear() + "-" + month + "-" + day;
+            document.getElementById("tanggal_invoice").value = dateToday;
+
+            today.setDate(today.getDate() + 10);
+            var dayDue = ("0" + today.getDate()).slice(-2);
+            var monthDue = ("0" + (today.getMonth() + 1)).slice(-2);
+            var dateDue = today.getFullYear() + "-" + monthDue + "-" + dayDue;
+            document.getElementById("jatuh_tempo").value = dateDue;
+
+            var monthSelect = document.getElementById("bulan_ipl");
+            monthSelect.selectedIndex = today.getMonth(); // Set bulan IPL ke bulan saat ini
         });
     </script>
 </x-app-layout>

@@ -141,9 +141,9 @@ class PenangananController extends Controller
         $komplains = Komplain::all();
         $kategoriPenanganans = KategoriPenanganan::all();
         $users = User::whereNotIn('tipe_user_id', [11, 12])->get();
-        $groupedUsers = $users->groupBy('usertype');
+        // $groupedUsers = $users->groupBy('usertype');
 
-        return view('penanganan.penanganan-edit', compact('penanganan', 'komplains', 'kategoriPenanganans', 'groupedUsers', 'users'));
+        return view('penanganan.penanganan-edit', compact('penanganan', 'komplains', 'kategoriPenanganans', 'users'));
     }
 
 

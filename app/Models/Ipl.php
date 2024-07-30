@@ -18,12 +18,7 @@ class Ipl extends Model
         'bulan_ipl',
         'tanggal_invoice',
         'jatuh_tempo',
-        'tagihan_awal_id',
-        'titipan_pengelolaan_id',
-        'titipan_air_id',
-        'iuran_pengelolaan_id',
-        'dana_cadangan_id',
-        'denda_id',
+        'detail_tagihan_id',
         'total',
         'foto_bukti_pembayaran',
         'status'
@@ -48,28 +43,13 @@ class Ipl extends Model
     {
         return $this->belongsTo(detailBiayaAdmin::class, 'biaya_admin_id');
     }
-    public function detailTagihanAwal()
+
+
+    public function detailJenisTagihan()
     {
-        return $this->belongsTo(detailTagihanAwal::class,'tagihan_awal_id');
+        return $this->belongsToMany(detailJenisTagihan::class, 'ipl_jenis_tagihan_pivot', 'ipl_id', 'jenis_tagihan_id')
+            ->withPivot('jumlah');
     }
-    public function detailTitipanPengelolaan()
-    {
-        return $this->belongsTo(detailTitipanPengelolaan::class, 'titipan_pengelolaan_id');
-    }
-    public function detailIuranPengelolaan()
-    {
-        return $this->belongsTo(detailIuranPengelolaan::class,'iuran_pengelolaan_id');
-    }
-    public function detailTitipanAir()
-    {
-        return $this->belongsTo(detailTitipanAir::class,'titipan_air_id');
-    }
-    public function detailDanaCadangan()
-    {
-        return $this->belongsTo(detailDanaCadangan::class,'dana_cadangan_id');
-    }
-    public function detailDenda()
-    {
-        return $this->belongsTo(detailDenda::class,'denda_id');
-    }
+
+
 }

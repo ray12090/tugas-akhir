@@ -39,12 +39,6 @@ class DatabaseSeeder extends Seeder
             ApprovalRequestPemilikSeeder::class,
             ApprovalRequestPenyewaSeeder::class,
             detailTagihanAirSeeder::class,
-            detailTagihanAwalSeeder::class,
-            detailTitipanPengelolaanSeeder::class,
-            detailIuranPengelolaanSeeder::class,
-            detailTitipanAirSeeder::class,
-            detailDanaCadanganSeeder::class,
-            detailDendaSeeder::class,
             JenisKomplainSeeder::class,
             LokasiKomplainSeeder::class,
             StatusKomplainSeeder::class,
@@ -54,6 +48,7 @@ class DatabaseSeeder extends Seeder
             PenangananSeeder::class,
             penangananUserPivotSeeder::class,
             kategoriPenangananPivotSeeder::class,
+            detailJenisTagihanSeeder::class,
         ]);
     }
 }

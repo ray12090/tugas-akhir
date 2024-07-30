@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\detailTagihanAwal;
+use App\Models\detailJenisTagihan;
 use Illuminate\Http\Request;
 
-class DetailTagihanAwalController extends Controller
+class DetailJenisTagihanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class DetailTagihanAwalController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(detailTagihanAwal $detailTagihanAwal)
+    public function show(detailJenisTagihan $detailJenisTagihan)
     {
         //
     }
@@ -42,7 +42,7 @@ class DetailTagihanAwalController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(detailTagihanAwal $detailTagihanAwal)
+    public function edit(detailJenisTagihan $detailJenisTagihan)
     {
         //
     }
@@ -50,7 +50,7 @@ class DetailTagihanAwalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, detailTagihanAwal $detailTagihanAwal)
+    public function update(Request $request, detailJenisTagihan $detailJenisTagihan)
     {
         //
     }
@@ -58,7 +58,7 @@ class DetailTagihanAwalController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(detailTagihanAwal $detailTagihanAwal)
+    public function destroy(detailJenisTagihan $detailJenisTagihan)
     {
         //
     }

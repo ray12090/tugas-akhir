@@ -79,14 +79,8 @@
                                                 <option value="Desember">Desember</option>
                                             </select>
                                         </div>
-                                        <div class="sm:col-span-2"></div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2">
-                                    <div class="grid gap-4 sm:grid-cols-3 sm:gap-6">
-                                    </div>
-                                </div>
-                                <div class="sm:col-span-2"></div>
                                 <div class="sm:col-span-2">
                                     <div class="grid gap-4 sm:grid-cols-3 sm:gap-6">
                                         <div class="w-full">
@@ -116,54 +110,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2"></div>
                                 <form id="billingForm">
-                                    <div class="sm:col-span-4">
-                                        <div class="text-gray-900 text-lg font-semibold">
-                                            {{ __('Rincian Tagihan') }}
-                                        </div>
-                                    </div>
-                                    <div class="w-full">
-                                        <label for="tagihan_awal"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Total Tagihan yang Belum Dibayar') }}
-                                        </label>
-                                        <input type="number" id="tagihan_awal" name="tagihan_awal"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                    </div>
-                                    <div class="w-full">
-                                        <label for="titipan_pengelolaan"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Titipan Pengelolaan dan Sinking Fund') }}
-                                        </label>
-                                        <input type="number" id="titipan_pengelolaan" name="titipan_pengelolaan"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                    </div>
-                                    <div class="w-full">
-                                        <label for="titipan_air"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Titipan Air') }}
-                                        </label>
-                                        <input type="number" id="titipan_air" name="titipan_air"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                    </div>
-                                    <div class="sm:col-span-1"></div>
-                                    <div class="w-full">
-                                        <label for="iuran_pengelolaan"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Iuran Pengelolaan') }}
-                                        </label>
-                                        <input type="number" id="iuran_pengelolaan" name="iuran_pengelolaan"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                    </div>
-                                    <div class="w-full">
-                                        <label for="dana_cadangan"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Dana Cadangan') }}
-                                        </label>
-                                        <input type="number" id="dana_cadangan" name="dana_cadangan"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                    </div>
                                     <div class="sm:col-span-4">
                                         <div class="text-gray-900 text-md font-semibold">
                                             {{ __('Pemakaian Air Bersih') }}
@@ -177,6 +124,7 @@
                                                     {{ __('Meter Awal (m³)') }}
                                                 </label>
                                                 <input type="number" id="meter_air_awal" name="meter_air_awal"
+                                                    step="0.01"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
                                             </div>
                                             <div class="w-full">
@@ -185,6 +133,7 @@
                                                     {{ __('Meter Akhir (m³)') }}
                                                 </label>
                                                 <input type="number" id="meter_air_akhir" name="meter_air_akhir"
+                                                    step="0.01"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
                                             </div>
                                             <div class="w-full">
@@ -217,10 +166,7 @@
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                     readonly>
                                             </div>
-                                            <div class="sm:col-span-1"></div>
                                         </div>
-                                        <div class="sm:col-span-2"></div>
-                                        <div class="sm:col-span-2"></div>
                                     </div>
                                     <div class="sm:col-span-2">
                                         <div class="grid gap-4 sm:grid-cols-3 sm:gap-6">
@@ -236,24 +182,54 @@
                                                 <input type="hidden" id="biaya_admin_id" name="biaya_admin_id"
                                                     value="{{ $biaya_admin->id }}">
                                             </div>
-                                            <div class="w-full">
-                                                <label for="denda"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    {{ __('Denda') }}
-                                                </label>
-                                                <input type="number" id="denda" name="denda"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                            </div>
                                             <div class="sm:col-span-2"></div>
                                         </div>
                                     </div>
+                                    <div class="sm:col-span-4">
+                                        <div class="text-gray-900 text-lg font-semibold">
+                                            {{ __('Rincian Tagihan') }}
+                                        </div>
+                                    </div>
+                                    <div id="tagihan-container"
+                                        class="grid gap-4 sm:gap-6 sm:col-span-4 sm:grid-cols-1 rounded-lg p-6 shadow-md sm:rounded-2xl bg-gray-100">
+                                        <div class="grid gap-4 sm:grid-cols-4 sm:gap-6 tagihan-row">
+                                            <div class="sm:col-span-1">
+                                                <label for="jenis_tagihan_0"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    {{ __('Jenis Tagihan') }}
+                                                </label>
+                                                <select id="jenis_tagihan_0" name="jenis_tagihan[0][jenis_tagihan_id]"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    <option selected disabled>{{ __('Pilih jenis tagihan') }}</option>
+                                                    @foreach ($jenisTagihans as $tagihan)
+                                                        <option value="{{ $tagihan->id }}">
+                                                            {{ $tagihan->nama_jenis_tagihan }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <label for="jumlah_0"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    {{ __('Jumlah') }}
+                                                </label>
+                                                <input type="number" id="jumlah_0" name="jenis_tagihan[0][jumlah]"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <label for=""
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
+                                                <button type="button" id="tambah-tagihan-btn"
+                                                    class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                                    {{ __('Tambah tagihan lainnya') }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
-                                <div class="sm:col-span-2"></div>
-                                <div class="text-gray-900 text-lg font-bold">
+                                <div class="text-gray-900 text-lg font-bold sm:col-span-4">
                                     {{ __('Total Akhir') }}: <span id="total_akhir">0</span>
                                 </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-1"></div>
                                 <div class="w-full">
                                     <label for="foto_bukti_pembayaran"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -265,8 +241,6 @@
                                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG (MAX.
                                         5MB).</p>
                                 </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-1"></div>
                                 <div class="w-full">
                                     <label for="status"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Status Pembayaran') }}</label>
@@ -276,9 +250,8 @@
                                         <option value="Lunas">Lunas</option>
                                     </select>
                                 </div>
-                                <div class="sm:col-span-2"></div>
-                                <div class="sm:col-span-1"></div>
-                                <div class="sm:col-span-3">
+                                <input type="hidden" id="total" name="total" value="">
+                                <div class="sm:col-span-4">
                                     <a href="{{ route('ipl.index') }}"
                                         class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-GRAY-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                         <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white mr-2"
@@ -315,41 +288,36 @@
     @include('components.modal', ['type' => 'confirmation'])
     </div> -->
     <script>
+        document.getElementById('pemilik_id').addEventListener('change', function() {
+            var pemilikId = this.value;
+            var unitSelect = document.getElementById('unit_id');
+            unitSelect.innerHTML = '<option value="">Pilih Unit</option>';
+
+            if (pemilikId) {
+                fetch(`/api/pemilik/${pemilikId}/units`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.units.forEach(unit => {
+                            var option = document.createElement('option');
+                            option.value = unit.id;
+                            option.text = unit.nama_unit;
+                            unitSelect.add(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching units:', error));
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Fetching units when the owner is selected
-            document.getElementById('pemilik_id').addEventListener('change', function() {
-                var pemilikId = this.value;
-                var unitSelect = document.getElementById('unit_id');
-                unitSelect.innerHTML = '<option value="">Pilih Unit</option>';
-
-                if (pemilikId) {
-                    fetch(`/api/pemilik/${pemilikId}/units`)
-                        .then(response => response.json())
-                        .then(data => {
-                            data.units.forEach(unit => {
-                                var option = document.createElement('option');
-                                option.value = unit.id;
-                                option.text = unit.nama_unit;
-                                unitSelect.add(option);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching units:', error));
-                }
-            });
-
-            // Initializing variables
-            const tagihanAwalInput = document.getElementById('tagihan_awal');
-            const titipanPengelolaanInput = document.getElementById('titipan_pengelolaan');
-            const titipanAirInput = document.getElementById('titipan_air');
-            const iuranPengelolaanInput = document.getElementById('iuran_pengelolaan');
-            const danaCadanganInput = document.getElementById('dana_cadangan');
             const meterAirAwalInput = document.getElementById('meter_air_awal');
             const meterAirAkhirInput = document.getElementById('meter_air_akhir');
-            const dendaInput = document.getElementById('denda');
-            const biayaAir = {{ $biaya_air->biaya_air }}; // Ambil dari database
-            const biayaAdmin = {{ $biaya_admin->biaya_admin }}; // Ambil dari database
+            const pemakaianAirInput = document.getElementById('pemakaian_air');
+            const tagihanAirInput = document.getElementById('tagihan_air');
+            const totalAkhirSpan = document.getElementById('total_akhir');
+            const totalTagihanInput = document.getElementById('total');
+            const biayaAir = parseFloat('{{ $biaya_air->biaya_air }}'); // Dari database
+            const biayaAdmin = parseFloat('{{ $biaya_admin->biaya_admin }}'); // Dari database
 
-            // Format number to Indonesian currency style
             function formatNumber(num) {
                 return num.toLocaleString('id-ID', {
                     minimumFractionDigits: 2,
@@ -357,38 +325,88 @@
                 });
             }
 
-            // Update total cost calculation
-            function updateTotalAkhir() {
-                const tagihanAwal = parseFloat(tagihanAwalInput.value) || 0;
-                const titipanPengelolaan = parseFloat(titipanPengelolaanInput.value) || 0;
-                const titipanAir = parseFloat(titipanAirInput.value) || 0;
-                const iuranPengelolaan = parseFloat(iuranPengelolaanInput.value) || 0;
-                const danaCadangan = parseFloat(danaCadanganInput.value) || 0;
+            function hitungPemakaianAir() {
                 const meterAwal = parseFloat(meterAirAwalInput.value) || 0;
                 const meterAkhir = parseFloat(meterAirAkhirInput.value) || 0;
-                const denda = parseFloat(dendaInput.value) || 0;
-
-                // Calculate water usage and bill
-                const pemakaianAir = meterAkhir - meterAwal;
-                const tagihanAir = pemakaianAir * biayaAir;
-
-                // Calculate total cost
-                const totalAkhir = tagihanAwal + titipanPengelolaan + titipanAir + iuranPengelolaan + danaCadangan +
-                    tagihanAir + biayaAdmin + denda;
-
-                // Update display values
-                document.getElementById('total_akhir').textContent = formatNumber(totalAkhir);
-                document.getElementById('pemakaian_air').value = formatNumber(pemakaianAir);
-                document.getElementById('tagihan_air').value = formatNumber(tagihanAir);
+                return meterAkhir - meterAwal;
             }
 
-            // Add event listener to all relevant inputs
-            document.querySelectorAll('input[type="number"]').forEach(input => {
-                input.addEventListener('input', updateTotalAkhir);
+            function hitungTagihanAir(pemakaianAir) {
+                return pemakaianAir * biayaAir;
+            }
+
+            function hitungTotalAkhir() {
+                const pemakaianAir = hitungPemakaianAir();
+                const tagihanAir = hitungTagihanAir(pemakaianAir);
+                let totalAkhir = tagihanAir + biayaAdmin;
+
+                document.querySelectorAll('.tagihan-row').forEach((row, index) => {
+                    const jumlahInput = row.querySelector(`input[name="jenis_tagihan[${index}][jumlah]"]`);
+                    const jumlah = parseFloat(jumlahInput.value) || 0;
+                    totalAkhir += jumlah;
+                });
+
+                pemakaianAirInput.value = formatNumber(pemakaianAir);
+                tagihanAirInput.value = formatNumber(tagihanAir);
+                totalAkhirSpan.textContent = formatNumber(totalAkhir);
+                totalTagihanInput.value = totalAkhir; // Set hidden input value
+            }
+
+            meterAirAwalInput.addEventListener('input', hitungTotalAkhir);
+            meterAirAkhirInput.addEventListener('input', hitungTotalAkhir);
+            document.querySelectorAll('.tagihan-row input[type="number"]').forEach(input => {
+                input.addEventListener('input', hitungTotalAkhir);
             });
 
-            // Initial calculation
-            updateTotalAkhir();
+            document.getElementById('tambah-tagihan-btn').addEventListener('click', function() {
+                var container = document.getElementById('tagihan-container');
+                var index = container.children.length;
+
+                var newRow = document.createElement('div');
+                newRow.classList.add('grid', 'gap-4', 'sm:grid-cols-4', 'sm:gap-6', 'tagihan-row');
+                var newTagihan = `
+                    <div class="sm:col-span-1">
+                        <label for="jenis_tagihan_${index}"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            {{ __('Jenis Tagihan') }}
+                        </label>
+                        <select id="jenis_tagihan_${index}" name="jenis_tagihan[${index}][jenis_tagihan_id]"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected disabled>{{ __('Pilih jenis tagihan') }}</option>
+                            @foreach ($jenisTagihans as $tagihan)
+                                <option value="{{ $tagihan->id }}">
+                                    {{ $tagihan->nama_jenis_tagihan }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label for="jumlah_${index}"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Jumlah') }}</label>
+                        <input type="number" id="jumlah_${index}" name="jenis_tagihan[${index}][jumlah]" rows="2"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    </div>
+                    <div class="sm:col-span-1">
+                        <label for=""
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
+                        <button type="button" class="hapus-tagihan-btn flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                            {{ __('Hapus') }}
+                        </button>
+                    </div>
+                `;
+                newRow.innerHTML = newTagihan;
+                container.appendChild(newRow);
+
+                newRow.querySelector('.hapus-tagihan-btn').addEventListener('click', function() {
+                    newRow.remove();
+                    hitungTotalAkhir();
+                });
+
+                newRow.querySelector(`input[name="jenis_tagihan[${index}][jumlah]"]`).addEventListener(
+                    'input', hitungTotalAkhir);
+            });
+
+            hitungTotalAkhir();
         });
 
         document.addEventListener('DOMContentLoaded', (event) => {
@@ -397,22 +415,17 @@
             var month = ("0" + (today.getMonth() + 1)).slice(-2);
             var dateToday = today.getFullYear() + "-" + month + "-" + day;
             document.getElementById("tanggal_invoice").value = dateToday;
-        });
 
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var today = new Date();
             today.setDate(today.getDate() + 10);
-            var day = ("0" + today.getDate()).slice(-2);
-            var month = ("0" + (today.getMonth() + 1)).slice(-2);
-            var dateDue = today.getFullYear() + "-" + month + "-" + day;
+            var dayDue = ("0" + today.getDate()).slice(-2);
+            var monthDue = ("0" + (today.getMonth() + 1)).slice(-2);
+            var dateDue = today.getFullYear() + "-" + monthDue + "-" + dayDue;
             document.getElementById("jatuh_tempo").value = dateDue;
-        });
 
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var today = new Date();
-            var month = today.getMonth(); // getMonth() returns 0-11, where 0 is January and 11 is December
-            var select = document.getElementById("bulan_ipl");
-            select.selectedIndex = month; // Set the selected index to the current month
+            var monthSelect = document.getElementById("bulan_ipl");
+            monthSelect.selectedIndex = today.getMonth(); // Set bulan IPL ke bulan saat ini
         });
     </script>
+
+
 </x-app-layout>
