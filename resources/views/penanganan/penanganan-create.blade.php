@@ -19,7 +19,7 @@
                             @csrf
                             <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
-                                    <div class="sm:col-span-1">
+                                    <div class="sm:col-span-2">
                                         <label for="komplain_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Nomor Komplain') }}</label>
                                         <select name="komplain_id" id="komplain_id"
@@ -30,7 +30,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="sm:col-span-3">
+                                    <div class="sm:col-span-2">
                                         <label for="nomor_penanganan"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             {{ __('Nomor Penanganan Komplain') }}
