@@ -12,6 +12,8 @@ use Vermaysha\Wilayah\Models\District;
 use Vermaysha\Wilayah\Models\Province;
 use Vermaysha\Wilayah\Models\Village;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -53,7 +55,11 @@ class PemilikController extends Controller
             ->orderBy($sort_by, $sort_order)
             ->paginate(10);
 
-        return view('pemilik.pemilik', compact('pemiliks', 'sort_by', 'sort_order'));
+            if(Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 3){
+                return view('pemilik.pemilik', compact('pemiliks', 'sort_by', 'sort_order'));
+            }else{
+                return redirect('/dashboard');
+            }
     }
 
 
@@ -69,6 +75,7 @@ class PemilikController extends Controller
         $detailPerkawinans = DetailPerkawinan::all();
         $detailTempatLahir = City::all();
         $users = User::all();
+
         $detailAlamatProvinsi = Province::all();
         $detailAlamatKabupaten = City::all();
         $detailAlamatKecamatan = District::all();
@@ -82,8 +89,7 @@ class PemilikController extends Controller
     {
         // Validasi input
         $validator = Validator::make($request->all(), [
-            'nik' => 'required|string|max:20',
-            'unit_id' => 'required|exists:units,id',
+            'nik' => 'required|string|max:20|unique:pemiliks,nik',
             'warga_negara_id' => 'required|exists:detail_kewarganegaraans,id',
             'agama_id' => 'required|exists:detail_agamas,id',
             'perkawinan_id' => 'required|exists:detail_perkawinans,id',
@@ -93,16 +99,15 @@ class PemilikController extends Controller
             'no_hp' => 'required|string|max:15',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
-            'awal_huni' => 'required|date',
-            'akhir_huni' => 'nullable|date',
             'jenis_kelamin' => 'required|string|max:10',
             'alamat_village_id' => 'required|exists:villages,id',
             'alamat_kecamatan_id' => 'required|exists:districts,id',
             'alamat_kabupaten_id' => 'required|exists:cities,id',
             'alamat_provinsi_id' => 'required|exists:provinces,id',
+            'unit_id.*.unit_id' => 'required|exists:units,id',
+            'unit_id.*.awal_huni' => 'required|date',
+            'unit_id.*.akhir_huni' => 'nullable|date|after:unit_id.*.awal_huni',
         ]);
-
-        // dd($request->all());
 
         if ($validator->fails()) {
             return redirect()->back()
@@ -113,7 +118,6 @@ class PemilikController extends Controller
         // Buat pemilik baru
         $pemilik = Pemilik::create([
             'nik' => $request->input('nik'),
-            'unit_id' => $request->input('unit_id'),
             'warga_negara_id' => $request->input('warga_negara_id'),
             'agama_id' => $request->input('agama_id'),
             'perkawinan_id' => $request->input('perkawinan_id'),
@@ -130,13 +134,28 @@ class PemilikController extends Controller
             'alamat_provinsi_id' => $request->input('alamat_provinsi_id'),
         ]);
 
-        $pemilik->unit()->attach($request->input('unit_id'), [
-            'awal_huni' => $request->input('awal_huni'),
-            'akhir_huni' => $request->input('akhir_huni'),
-        ]);
+        if ($request->has('unit_id')) {
+            foreach ($request->unit_id as $index => $data) {
+                $awal_huni = $data['awal_huni'] ?? null;
+                $akhir_huni = $data['akhir_huni'] ?? null;
+                $unitId = $data['unit_id']; // Ambil unit_id dari array
 
-        return redirect()->route('pemilik.index')->with('success', 'pemilik berhasil ditambahkan');
+                DB::table('pemilik_units')->insert([
+                    'pemilik_id' => $pemilik->id,
+                    'unit_id' => $unitId,
+                    'awal_huni' => $awal_huni,
+                    'akhir_huni' => $akhir_huni,
+                ]);
+            }
+        };
+        if(Auth::user()->tipe_user_id == 11){
+            return redirect('/dashboard')->with('success', 'Datamu berhasil ditambah.');
+        }else{
+            return redirect()->route('pemilik.index')->with('success', 'Pemilik berhasil ditambahkan.');
+        }
     }
+
+
 
     /**
      * Display the specified resource.
@@ -309,6 +328,3 @@ class PemilikController extends Controller
         }
     }
 }
-
-
-

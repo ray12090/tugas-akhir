@@ -19,25 +19,25 @@
                             @csrf
                             <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
                                 {{-- <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6"> --}}
-                                    <div class="sm:col-span-2">
-                                        <label for="nik"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('NIK') }}
-                                        </label>
-                                        <div class="relative">
-                                            <input type="text" name="nik" id="nik"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="Nomor Induk Kependudukan Penyewa" required>
-                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                <path fill-rule="evenodd"
-                                                    d="M7 2a2 2 0 0 0-2 2v1a1 1 0 0 0 0 2v1a1 1 0 0 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7Zm3 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1Z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
+                                <div class="sm:col-span-2">
+                                    <label for="nik"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ __('NIK') }}
+                                    </label>
+                                    <div class="relative">
+                                        <input type="text" name="nik" id="nik"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Nomor Induk Kependudukan Penyewa" required>
+                                        <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd"
+                                                d="M7 2a2 2 0 0 0-2 2v1a1 1 0 0 0 0 2v1a1 1 0 0 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7Zm3 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
                                     </div>
-                                    {{--
+                                </div>
+                                {{--
                                 </div> --}}
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
                                     <div class="sm:col-span-1">
@@ -63,7 +63,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="sm:col-span-1">
+                                    <div class="sm:col-span-2">
                                         <label for="perkawinan_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Status Perkawinan') }}</label>
                                         <select name="perkawinan_id" id="perkawinan_id"
@@ -75,17 +75,11 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="sm:col-span-1">
-                                        <label for="user_id"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Email Penyewa') }}</label>
-                                        <select name="user_id" id="user_id"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            <option value="" textonly>{{ __('Belum ada akun') }}</option>
-                                            @foreach ($users as $user)
-                                                <option value="{{ $user->id }}">{{ $user->email }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                    @if ( Auth::user()->tipe_user_id == 12 )
+                                    <input type="hidden" name="user_id" id="user_id"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        value="{{ Auth::user()->id }}">
+                                    @endif
                                 </div>
                                 <div class="sm:col-span-1">
                                     <label for="nama_penyewa"
@@ -95,10 +89,10 @@
                                     <div class="relative">
                                         <input type="text" name="nama_penyewa" id="nama_penyewa"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Nama lengkap penyewa" required>
+                                            value="{{ Auth::user()->name }}" required>
                                         <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M7 2a2 2 0 0 0-2 2v1a1 1 0 0 0 0 2v1a1 1 0 0 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a1 1 0 1 0 0 2v1a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H7Zm3 8a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1 7a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3 1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1Z"
                                                 clip-rule="evenodd" />
@@ -115,8 +109,8 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             placeholder="Nomor handphone penyewa" required>
                                         <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z"
                                                 clip-rule="evenodd" />
@@ -166,8 +160,9 @@
                                                     <li>
                                                         <div
                                                             class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                                            <input id="tempat_lahir_id_{{ $kota->id }}" type="radio"
-                                                                value="{{ $kota->id }}" name="tempat_lahir_id"
+                                                            <input id="tempat_lahir_id_{{ $kota->id }}"
+                                                                type="radio" value="{{ $kota->id }}"
+                                                                name="tempat_lahir_id"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                             <label for="tempat_lahir_id_{{ $kota->id }}"
                                                                 class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
@@ -184,11 +179,33 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             {{ __('Jenis Kelamin') }}
                                         </label>
-                                        <select name="jenis_kelamin" id="jenis_kelamin"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            <option value="Laki-laki">{{ __('Laki-laki') }}</option>
-                                            <option value="Perempuan">{{ __('Perempuan') }}</option>
-                                        </select>
+                                        <ul
+                                            class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                            <li
+                                                class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                                <div class="flex items-center ps-3">
+                                                    <input id="laki-laki" type="radio" value="Laki-laki"
+                                                        name="jenis_kelamin"
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                    <label for="laki-laki"
+                                                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        {{ __('Laki-laki') }}
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li
+                                                class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                                <div class="flex items-center ps-3">
+                                                    <input id="perempuan" type="radio" value="Perempuan"
+                                                        name="jenis_kelamin"
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                    <label for="perempuan"
+                                                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        {{ __('Perempuan') }}
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="sm:col-span-1">
@@ -209,7 +226,7 @@
                                             datepicker-format="yyyy-mm-dd" datepicker-buttons
                                             datepicker-autoselect-today
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="YYYY/MM/DD" required>
+                                            placeholder="YYYY-MM-DD" required>
                                     </div>
                                 </div>
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
@@ -283,8 +300,9 @@
                                             <div
                                                 class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                                 <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" fill="currentColor"
+                                                    viewBox="0 0 24 24">
                                                     <path fill-rule="evenodd"
                                                         d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
                                                         clip-rule="evenodd" />
@@ -294,7 +312,7 @@
                                                 datepicker-format="yyyy-mm-dd" datepicker-buttons
                                                 datepicker-autoselect-today datepicker-orientation="{auto}"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="YYYY/MM/DD" required>
+                                                placeholder="YYYY-MM-DD" required>
                                         </div>
                                     </div>
                                     <div class="sm:col-span-1">
@@ -304,8 +322,9 @@
                                             <div
                                                 class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                                 <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                    height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" fill="currentColor"
+                                                    viewBox="0 0 24 24">
                                                     <path fill-rule="evenodd"
                                                         d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
                                                         clip-rule="evenodd" />
@@ -315,7 +334,7 @@
                                                 datepicker-format="yyyy-mm-dd" datepicker-buttons
                                                 datepicker-autoselect-today datepicker-orientation="{auto}"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="YYYY/MM/DD">
+                                                placeholder="YYYY-MM-DD">
                                         </div>
                                     </div>
                                 </div>
@@ -323,8 +342,8 @@
                                     <a href="{{ route('penyewa.index') }}"
                                         class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-GRAY-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                         <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white mr-2"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
                                                 clip-rule="evenodd" />
@@ -334,8 +353,8 @@
                                     <button type="submit"
                                         class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
                                         <svg class="w-[16px] h-[16px] text-white dark:text-white mr-2"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7.414A2 2 0 0 0 20.414 6L18 3.586A2 2 0 0 0 16.586 3H5Zm3 11a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6H8v-6Zm1-7V5h6v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1Z" />
                                             <path fill-rule="evenodd" d="M14 17h-4v-2h4v2Z" clip-rule="evenodd" />
@@ -352,16 +371,16 @@
         @include('components.modal', ['type' => 'confirmation'])
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             // Search functionality for "Tempat Lahir"
             const searchInputTempatLahir = document.getElementById('tempat_lahir_search');
             const listItemsTempatLahir = document.querySelectorAll('#dropdownSearchTempatLahir ul li');
             // const searchInputUnit = document.getElementById('unit_search');
             // const listItemsUnit = document.querySelectorAll('#dropdownSearchUnit ul li');
 
-            searchInputTempatLahir.addEventListener('input', function () {
+            searchInputTempatLahir.addEventListener('input', function() {
                 const filter = searchInputTempatLahir.value.toLowerCase();
-                listItemsTempatLahir.forEach(function (item) {
+                listItemsTempatLahir.forEach(function(item) {
                     const text = item.textContent || item.innerText;
                     if (text.toLowerCase().includes(filter)) {
                         item.style.display = "";
@@ -386,8 +405,8 @@
             const dropdownButtonTempatLahir = document.getElementById('dropdownSearchButtonTempatLahir');
             const radiosTempatLahir = document.getElementsByName('tempat_lahir_id');
 
-            radiosTempatLahir.forEach(function (radio) {
-                radio.addEventListener('change', function () {
+            radiosTempatLahir.forEach(function(radio) {
+                radio.addEventListener('change', function() {
                     if (this.checked) {
                         dropdownButtonTempatLahir.innerHTML = this.nextElementSibling.textContent +
                             ' <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" /></svg>';
@@ -398,8 +417,8 @@
             const dropdownButtonUnit = document.getElementById('dropdownSearchButtonUnit');
             const radiosUnit = document.getElementsByName('unit_id');
 
-            radiosUnit.forEach(function (radio) {
-                radio.addEventListener('change', function () {
+            radiosUnit.forEach(function(radio) {
+                radio.addEventListener('change', function() {
                     if (this.checked) {
                         dropdownButtonUnit.innerHTML = this.nextElementSibling.textContent +
                             ' <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" /></svg>';
@@ -412,7 +431,7 @@
             const kecamatanSelect = document.getElementById('alamat_kecamatan_id');
             const kelurahanSelect = document.getElementById('alamat_village_id');
 
-            provinsiSelect.addEventListener('change', function () {
+            provinsiSelect.addEventListener('change', function() {
                 const provinsiId = this.value;
                 if (provinsiId) {
                     fetch(`/api/get-kabupaten/${provinsiId}`)
@@ -442,7 +461,7 @@
                 }
             });
 
-            kabupatenSelect.addEventListener('change', function () {
+            kabupatenSelect.addEventListener('change', function() {
                 const kabupatenId = this.value;
                 console.log("Selected kabupaten code:", kabupatenId); // Debug
                 if (kabupatenId) {
@@ -476,7 +495,7 @@
                 }
             });
 
-            kecamatanSelect.addEventListener('change', function () {
+            kecamatanSelect.addEventListener('change', function() {
                 const kecamatanId = this.value;
                 console.log("Selected kecamatan code:", kecamatanId); // Debug
                 if (kecamatanId) {
@@ -532,12 +551,12 @@
         //             'p-2.5', 'dark:bg-gray-700', 'dark:border-gray-600', 'dark:placeholder-gray-400',
         //             'dark:text-white', 'dark:focus:ring-primary-500', 'dark:focus:border-primary-500');
         //         @foreach ($units as $unit)
-            //             {
-            //                 let option = document.createElement('option');
-            //                 option.value = "{{ $unit->id }}";
-            //                 option.text = "{{ $unit->nama_unit }}";
-            //                 unitSelect.appendChild(option);
-            //             }
+        //             {
+        //                 let option = document.createElement('option');
+        //                 option.value = "{{ $unit->id }}";
+        //                 option.text = "{{ $unit->nama_unit }}";
+        //                 unitSelect.appendChild(option);
+        //             }
         //         @endforeach
 
         //         // Membuat input untuk awal huni
@@ -555,7 +574,7 @@
         //             'rounded-lg', 'focus:ring-blue-500', 'focus:border-blue-500', 'block', 'w-full', 'ps-10',
         //             'p-2.5', 'dark:bg-gray-700', 'dark:border-gray-600', 'dark:placeholder-gray-400',
         //             'dark:text-white', 'dark:focus:ring-blue-500', 'dark:focus:border-blue-500');
-        //         awalHuniInput.placeholder = 'YYYY/MM/DD';
+        //         awalHuniInput.placeholder = 'YYYY-MM-DD';
 
         //         // Membuat input untuk akhir huni
         //         const akhirHuniInput = document.createElement('input');
@@ -567,7 +586,7 @@
         //             'rounded-lg', 'focus:ring-blue-500', 'focus:border-blue-500', 'block', 'w-full', 'ps-10',
         //             'p-2.5', 'dark:bg-gray-700', 'dark:border-gray-600', 'dark:placeholder-gray-400',
         //             'dark:text-white', 'dark:focus:ring-blue-500', 'dark:focus:border-blue-500');
-        //         akhirHuniInput.placeholder = 'YYYY/MM/DD';
+        //         akhirHuniInput.placeholder = 'YYYY-MM-DD';
 
         //         // Menambahkan elemen ke div
         //         unitDiv.appendChild(unitSelect);

@@ -38,7 +38,7 @@
                 {{ __('Register Here') }}
             </a>
 
-            <x-primary-button class="ms-3 bg-[#016452] hover:bg-[#014F41] text-white font-bold py-2 px-4 rounded-full">
+            <x-primary-button class="ms-3 bg-[#016452] hover:bg-[#014F41] focus:ring-[#014f415e] text-white font-bold py-2 px-4 rounded-full">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>

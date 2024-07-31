@@ -114,10 +114,11 @@
                                     <div class="relative">
                                         <input type="text" name="nama_pelapor" id="nama_pelapor"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Nama lengkap pelapor" required>
+                                            placeholder="Nama lengkap pelapor" value="{{ auth()->user()->name }}"
+                                            required>
                                         <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
                                                 clip-rule="evenodd" />
@@ -134,8 +135,8 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             placeholder="Nomor handphone pelapor" required>
                                         <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z"
                                                 clip-rule="evenodd" />
@@ -192,8 +193,8 @@
                                     <a href="{{ route('komplain.index') }}"
                                         class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-GRAY-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                         <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white mr-2"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
                                                 clip-rule="evenodd" />
@@ -203,8 +204,8 @@
                                     <button type="submit"
                                         class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
                                         <svg class="w-[16px] h-[16px] text-white dark:text-white mr-2"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            fill="currentColor" viewBox="0 0 24 24">
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd"
                                                 d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7.414A2 2 0 0 0 20.414 6L18 3.586A2 2 0 0 0 16.586 3H5Zm3 11a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6H8v-6Zm1-7V5h6v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1Z"
                                                 clip-rule="evenodd" />
@@ -235,27 +236,27 @@
         }
     </style>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const dropdownButton = document.getElementById('dropdownRadioButton');
             const dropdownMenu = document.getElementById('dropdownDefaultRadio');
 
-            dropdownButton.addEventListener('click', function () {
+            dropdownButton.addEventListener('click', function() {
                 dropdownMenu.classList.toggle('hidden');
             });
 
-            document.addEventListener('click', function (event) {
+            document.addEventListener('click', function(event) {
                 if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
                     dropdownMenu.classList.add('hidden');
                 }
             });
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const unitInput = document.getElementById('unit_name');
             const unitIdInput = document.getElementById('unit_id');
             const units = {!! $units->pluck('nama_unit', 'id') !!};
 
-            unitInput.addEventListener('input', function () {
+            unitInput.addEventListener('input', function() {
                 const inputValue = unitInput.value.trim().toLowerCase();
 
                 // Clear previous value
@@ -274,7 +275,7 @@
         });
 
         // Handle the addition of new complaint locations
-        document.getElementById('tambah-lokasi-btn').addEventListener('click', function () {
+        document.getElementById('tambah-lokasi-btn').addEventListener('click', function() {
             var container = document.getElementById('lokasi-komplain-container');
             var index = container.children.length; // Get current index based on number of existing children
 
@@ -321,7 +322,7 @@
             });
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             fetch('/generate-nomor-laporan')
                 .then(response => response.json())
                 .then(data => {

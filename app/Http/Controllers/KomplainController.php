@@ -61,6 +61,7 @@ class KomplainController extends Controller
     public function store(Request $request)
     {
         $nomorLaporan = Komplain::generateNomorLaporan();
+        dd($request->all());
         // dd($request->all());
         $request->validate([
             'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
