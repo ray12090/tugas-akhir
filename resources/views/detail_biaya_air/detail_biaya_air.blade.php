@@ -8,7 +8,7 @@
                 </div>
                 <div class="text-gray-500 text-sm font-regular">
                     {{ __('Di bawah merupakan tabel data biaya air. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Finance.') }}<br>
-                    {{ __('Biaya air yang dihitung adalah biaya air yang berlaku pada tanggal tertentu.') }}
+                    {{ __('Biaya air yang dihitung adalah biaya air yang berlaku.') }}
                 </div>
             </div>
             <div class="flex flex-col md:flex-row items-stretch md:items-center px-2 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">

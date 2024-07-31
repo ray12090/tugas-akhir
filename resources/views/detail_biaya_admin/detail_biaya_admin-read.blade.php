@@ -7,7 +7,7 @@
                     {{ __('Detail Biaya Admin') }}
                 </div>
                 <div class="text-gray-500 text-sm font-reguler">
-                    {{ __('Di bawah merupakan detail data biaya admin yang dapat dibaca oleh Admin.') }}
+                    {{ __('Di bawah merupakan detail data biaya admin yang dipilih.') }}
                 </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">

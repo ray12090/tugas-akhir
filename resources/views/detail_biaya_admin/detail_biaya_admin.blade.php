@@ -8,7 +8,7 @@
                 </div>
                 <div class="text-gray-500 text-sm font-regular">
                     {{ __('Di bawah merupakan tabel data biaya admin. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Finance.') }}<br>
-                    {{ __('Biaya admin yang akan digunakan adalah yang dibuat terbaru.') }}
+                    {{ __('Biaya admin yang digunakan adalah biaya admin yang berlaku.') }}
                 </div>
             </div>
             <div class="flex flex-col md:flex-row items-stretch md:items-center px-2 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
