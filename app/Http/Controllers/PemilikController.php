@@ -55,11 +55,11 @@ class PemilikController extends Controller
             ->orderBy($sort_by, $sort_order)
             ->paginate(10);
 
-            if(Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 3){
-                return view('pemilik.pemilik', compact('pemiliks', 'sort_by', 'sort_order'));
-            }else{
-                return redirect('/dashboard');
-            }
+        if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 3) {
+            return view('pemilik.pemilik', compact('pemiliks', 'sort_by', 'sort_order'));
+        } else {
+            return redirect('/dashboard');
+        }
     }
 
 
@@ -70,6 +70,7 @@ class PemilikController extends Controller
     {
         $pemiliks = Pemilik::all();
         $units = Unit::all();
+        $pemilik_units_ids = Pemilik::with('unit')->get()->pluck('unit.id')->flatten()->toArray();
         $detailKewarganegaraans = DetailKewarganegaraan::all();
         $detailAgamas = DetailAgama::all();
         $detailPerkawinans = DetailPerkawinan::all();
@@ -79,7 +80,7 @@ class PemilikController extends Controller
         $detailAlamatProvinsi = Province::all();
         $detailAlamatKabupaten = City::all();
         $detailAlamatKecamatan = District::all();
-        return view('pemilik.pemilik-create', compact('pemiliks', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahir', 'users', 'detailAlamatProvinsi', 'detailAlamatKabupaten', 'detailAlamatKecamatan'));
+        return view('pemilik.pemilik-create', compact('pemiliks', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahir', 'users', 'detailAlamatProvinsi', 'detailAlamatKabupaten', 'detailAlamatKecamatan', 'pemilik_units_ids'));
     }
 
     /**
@@ -138,7 +139,7 @@ class PemilikController extends Controller
             foreach ($request->unit_id as $index => $data) {
                 $awal_huni = $data['awal_huni'] ?? null;
                 $akhir_huni = $data['akhir_huni'] ?? null;
-                $unitId = $data['unit_id']; // Ambil unit_id dari array
+                $unitId = $data['unit_id'];
 
                 DB::table('pemilik_units')->insert([
                     'pemilik_id' => $pemilik->id,
@@ -147,13 +148,15 @@ class PemilikController extends Controller
                     'akhir_huni' => $akhir_huni,
                 ]);
             }
-        };
-        if(Auth::user()->tipe_user_id == 11){
+        }
+
+        if (Auth::user()->tipe_user_id == 11) {
             return redirect('/dashboard')->with('success', 'Datamu berhasil ditambah.');
-        }else{
+        } else {
             return redirect()->route('pemilik.index')->with('success', 'Pemilik berhasil ditambahkan.');
         }
     }
+
 
 
 
@@ -171,7 +174,7 @@ class PemilikController extends Controller
      */
     public function edit($id)
     {
-        $pemilik = Pemilik::findOrFail($id);
+        $pemilik = Pemilik::with('unit')->findOrFail($id);
         $units = Unit::all();
         $detailKewarganegaraans = DetailKewarganegaraan::all();
         $detailAgamas = DetailAgama::all();
@@ -183,8 +186,26 @@ class PemilikController extends Controller
         $detailAlamatKabupaten = City::all();
         $detailAlamatKecamatan = District::all();
 
-        return view('pemilik.pemilik-update', compact('pemilik', 'units', 'detailKewarganegaraans', 'detailAgamas', 'detailPerkawinans', 'detailTempatLahir', 'users', 'detailAlamatVillages', 'detailAlamatProvinsi', 'detailAlamatKabupaten', 'detailAlamatKecamatan'));
+        // Ambil id unit yang sudah dipilih oleh pemilik
+        $selectedUnitIds = $pemilik->unit->pluck('id')->toArray();
+
+        return view('pemilik.pemilik-update', compact(
+            'pemilik',
+            'units',
+            'detailKewarganegaraans',
+            'detailAgamas',
+            'detailPerkawinans',
+            'detailTempatLahir',
+            'users',
+            'detailAlamatVillages',
+            'detailAlamatProvinsi',
+            'detailAlamatKabupaten',
+            'detailAlamatKecamatan',
+            'selectedUnitIds' // Ditambahkan untuk di view
+        )
+        );
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -243,13 +264,11 @@ class PemilikController extends Controller
         $unitData = [];
         if ($request->has('units')) {
             foreach ($request->input('units') as $unit) {
-                // Cek jika unit sudah ada di pivot table, maka update data tersebut
                 $unitData[$unit['unit_id']] = [
                     'awal_huni' => $unit['awal_huni'],
                     'akhir_huni' => $unit['akhir_huni'],
                 ];
             }
-            // Sync data unit yang baru atau diupdate
             $pemilik->unit()->sync($unitData);
         }
 

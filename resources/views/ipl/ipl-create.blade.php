@@ -11,7 +11,6 @@
                 <div class="text-gray-500 text-sm font-reguler">
                     {{ __('Di bawah merupakan formulir untuk menambah data pembayaran IPL. Isi formulir ini dapat diisi oleh Finance') }}
                 </div>
-                
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
                 <div
