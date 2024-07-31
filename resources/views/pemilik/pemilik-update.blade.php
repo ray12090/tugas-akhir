@@ -46,8 +46,8 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                             @foreach ($detailKewarganegaraans as $detailKewarganegaraan)
                                                 <option value="{{ $detailKewarganegaraan->id }}"
-                                                {{ $pemilik->warga_negara_id == $detailKewarganegaraan->id ? 'selected' : '' }}>
-                                                {{ $detailKewarganegaraan->status_kewarganegaraan }}
+                                                    {{ $pemilik->warga_negara_id == $detailKewarganegaraan->id ? 'selected' : '' }}>
+                                                    {{ $detailKewarganegaraan->status_kewarganegaraan }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -224,7 +224,7 @@
                                             datepicker-format="yyyy-mm-dd" datepicker-buttons
                                             datepicker-autoselect-today
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="YYYY/MM/DD" value="{{ $pemilik->tanggal_lahir }}" required>
+                                            placeholder="YYYY-MM-DD" value="{{ $pemilik->tanggal_lahir }}" required>
                                     </div>
                                 </div>
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
@@ -277,92 +277,128 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">{{ $pemilik->alamat }}</textarea>
                                     </div>
                                 </div>
-                                <div id="unit-container" class="sm:col-span-3">
+                                <div id="unit-container" class="sm:col-span-2">
                                     <div class="mb-4 text-lg font-bold text-gray-900 dark:text-white sm:col-span-4">
                                         {{ __('Unit Pemilik') }}
                                     </div>
                                     @foreach ($pemilik->unit as $index => $unit)
-                                <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 mb-4">
-                                    <div class="sm:col-span-1">
-                                        <label for="unit_id_{{ $index }}" id="labelUnit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Unit') }}
-                                        </label>
-                                        <select name="units[{{ $index }}][unit_id]" id="unit_id_{{ $index }}"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            <option value="{{ $unit->id }}" selected>{{ $unit->nama_unit }}</option>
-                                            @foreach ($units as $unitOption)
-                                                <option value="{{ $unitOption->id }}" {{ $unitOption->id == $unit->id ? 'selected' : '' }}>
-                                                    {{ $unitOption->nama_unit }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="sm:col-span-1">
-                                        <label for="awal_huni_{{ $index }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Awal Huni') }}
-                                        </label>
-                                        <div class="relative">
-                                            <input id="awal_huni_{{ $index }}" name="units[{{ $index }}][awal_huni]" type="text" datepicker datepicker-format="yyyy-mm-dd"
-                                                datepicker-buttons datepicker-orientation="{auto}"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="YYYY/MM/DD" value="{{ old('units.' . $index . '.awal_huni', $unit->pivot->awal_huni) }}" required>
+                                        <div class="grid gap-4 sm:grid-cols-4 sm:gap-6 mb-4">
+                                            <div class="sm:col-span-1">
+                                                <label for="unit_id_{{ $index }}" id="labelUnit"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    {{ __('Unit') }}
+                                                </label>
+                                                <select name="units[{{ $index }}][unit_id]"
+                                                    id="unit_id_{{ $index }}"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                                    <option value="{{ $unit->id }}" selected>
+                                                        {{ $unit->nama_unit }}</option>
+                                                    @foreach ($units as $unitOption)
+                                                        <option value="{{ $unitOption->id }}"
+                                                            {{ $unitOption->id == $unit->id ? 'selected' : '' }}>
+                                                            {{ $unitOption->nama_unit }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <label for="awal_huni_{{ $index }}"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    {{ __('Awal Huni') }}
+                                                </label>
+                                                <div class="relative max-w">
+                                                    <div
+                                                        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                        <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white"
+                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                            width="24" height="24" fill="currentColor"
+                                                            viewBox="0 0 24 24">
+                                                            <path fill-rule="evenodd"
+                                                                d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    <input id="awal_huni_{{ $index }}"
+                                                        name="units[{{ $index }}][awal_huni]" type="text"
+                                                        datepicker datepicker-format="yyyy-mm-dd" datepicker-buttons
+                                                        datepicker-orientation="{auto}"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        placeholder="YYYY-MM-DD"
+                                                        value="{{ old('units.' . $index . '.awal_huni', $unit->pivot->awal_huni) }}"
+                                                        required>
+                                                </div>
+                                            </div>
+                                            <div class="sm:col-span-1">
+                                                <label for="akhir_huni_{{ $index }}"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    {{ __('Akhir Huni') }}
+                                                </label>
+                                                <div class="relative max-w">
+                                                    <div
+                                                        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                        <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white"
+                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                            width="24" height="24" fill="currentColor"
+                                                            viewBox="0 0 24 24">
+                                                            <path fill-rule="evenodd"
+                                                                d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    <input id="akhir_huni_{{ $index }}"
+                                                        name="units[{{ $index }}][akhir_huni]" type="text"
+                                                        datepicker datepicker-format="yyyy-mm-dd" datepicker-buttons
+                                                        datepicker-orientation="{auto}"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        placeholder="YYYY-MM-DD"
+                                                        value="{{ old('units.' . $index . '.akhir_huni', $unit->pivot->akhir_huni) }}">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="sm:col-span-1">
-                                        <label for="akhir_huni_{{ $index }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Akhir Huni') }}
-                                        </label>
-                                        <div class="relative">
-                                            <input id="akhir_huni_{{ $index }}" name="units[{{ $index }}][akhir_huni]" type="text" datepicker datepicker-format="yyyy-mm-dd"
-                                                datepicker-buttons datepicker-orientation="{auto}"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="YYYY/MM/DD" value="{{ old('units.' . $index . '.akhir_huni', $unit->pivot->akhir_huni) }}">
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
-
-                                    <div class="sm:col-span-4 flex justify-end">
-                                        <button type="button" id="tambah-unit-btn" class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
-                                            {{ __('Tambah unit baru') }}
-                                        </button>
-                                    </div>
-                                </div>
-
-
-                                </div>
-
-                                <div class="sm:col-span-4 items-end">
-                                    <a href="{{ route('pemilik.index') }}"
-                                        class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-GRAY-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                        <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white mr-2"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd"
-                                                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        {{ __('Kembali') }}
-                                    </a>
-                                    <button type="submit"
+                                <div class="sm:col-span-1">
+                                    <label for=""
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        </br>
+                                    </label>
+                                    <button type="button" id="tambah-unit-btn"
                                         class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
-                                        <svg class="w-[16px] h-[16px] text-white dark:text-white mr-2"
-                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" fill="currentColor" viewBox="0 0 24 24">
-                                            <path fill-rule="evenodd"
-                                                d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7.414A2 2 0 0 0 20.414 6L18 3.586A2 2 0 0 0 16.586 3H5Zm3 11a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6H8v-6Zm1-7V5h6v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1Z" />
-                                            <path fill-rule="evenodd" d="M14 17h-4v-2h4v2Z" clip-rule="evenodd" />
-                                        </svg>
-                                        {{ __('Simpan') }}
+                                        {{ __('Tambah unit baru') }}
                                     </button>
                                 </div>
                             </div>
-                        </form>
+                            <div class="sm:col-span-4 items-end">
+                                <a href="{{ route('pemilik.index') }}"
+                                    class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-GRAY-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white mr-2"
+                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    {{ __('Kembali') }}
+                                </a>
+                                <button type="submit"
+                                    class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
+                                    <svg class="w-[16px] h-[16px] text-white dark:text-white mr-2" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M5 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7.414A2 2 0 0 0 20.414 6L18 3.586A2 2 0 0 0 16.586 3H5Zm3 11a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6H8v-6Zm1-7V5h6v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1Z" />
+                                        <path fill-rule="evenodd" d="M14 17h-4v-2h4v2Z" clip-rule="evenodd" />
+                                    </svg>
+                                    {{ __('Simpan') }}
+                                </button>
+                            </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
-        @include('components.modal', ['type' => 'confirmation'])
+    </div>
+    @include('components.modal', ['type' => 'confirmation'])
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -379,121 +415,121 @@
                         item.style.display = "none";
                     }
                 });
-                });
             });
+        });
 
-            // Dropdown for "Tempat Lahir"
-            const dropdownButtonTempatLahir = document.getElementById('dropdownSearchButtonTempatLahir');
-            const radiosTempatLahir = document.getElementsByName('tempat_lahir_id');
-            radiosTempatLahir.forEach(function(radio) {
-                radio.addEventListener('change', function() {
-                    if (this.checked) {
-                        dropdownButtonTempatLahir.innerHTML = this.nextElementSibling.textContent +
-                            ' <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" /></svg>';
-                    }
-                });
-            });
-
-            // Fetch Kabupaten, Kecamatan, Kelurahan based on selected values
-            const provinsiSelect = document.getElementById('alamat_provinsi_id');
-            const kabupatenSelect = document.getElementById('alamat_kabupaten_id');
-            const kecamatanSelect = document.getElementById('alamat_kecamatan_id');
-            const kelurahanSelect = document.getElementById('alamat_village_id');
-
-            provinsiSelect.addEventListener('change', function() {
-                const provinsiId = this.value;
-                if (provinsiId) {
-                    fetch(`/api/get-kabupaten/${provinsiId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            kabupatenSelect.innerHTML =
-                                '<option value="">{{ __('Pilih Kabupaten') }}</option>';
-                            data.forEach(kabupaten => {
-                                kabupatenSelect.innerHTML +=
-                                    `<option value="${kabupaten.id}">${kabupaten.name}</option>`;
-                            });
-                            kabupatenSelect.disabled = false;
-                        })
-                        .catch(error => {
-                            console.error('Error fetching kabupaten:', error);
-                            kabupatenSelect.innerHTML =
-                                '<option value="">{{ __('Error fetching data') }}</option>';
-                            kabupatenSelect.disabled = true;
-                        });
-                } else {
-                    kabupatenSelect.innerHTML = '<option value="">{{ __('Pilih Kabupaten') }}</option>';
-                    kabupatenSelect.disabled = true;
-                    kecamatanSelect.innerHTML = '<option value="">{{ __('Pilih Kecamatan') }}</option>';
-                    kecamatanSelect.disabled = true;
-                    kelurahanSelect.innerHTML = '<option value="">{{ __('Pilih Kelurahan') }}</option>';
-                    kelurahanSelect.disabled = true;
+        // Dropdown for "Tempat Lahir"
+        const dropdownButtonTempatLahir = document.getElementById('dropdownSearchButtonTempatLahir');
+        const radiosTempatLahir = document.getElementsByName('tempat_lahir_id');
+        radiosTempatLahir.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    dropdownButtonTempatLahir.innerHTML = this.nextElementSibling.textContent +
+                        ' <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" /></svg>';
                 }
             });
+        });
 
-            kabupatenSelect.addEventListener('change', function() {
-                const kabupatenId = this.value;
-                if (kabupatenId) {
-                    fetch(`/api/get-kecamatan/${kabupatenId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            kecamatanSelect.innerHTML =
-                                '<option value="">{{ __('Pilih Kecamatan') }}</option>';
-                            data.forEach(kecamatan => {
-                                kecamatanSelect.innerHTML +=
-                                    `<option value="${kecamatan.id}">${kecamatan.name}</option>`;
-                            });
-                            kecamatanSelect.disabled = false;
-                        })
-                        .catch(error => {
-                            console.error('Error fetching kecamatan:', error);
-                            kecamatanSelect.innerHTML =
-                                '<option value="">{{ __('Error fetching data') }}</option>';
-                            kecamatanSelect.disabled = true;
+        // Fetch Kabupaten, Kecamatan, Kelurahan based on selected values
+        const provinsiSelect = document.getElementById('alamat_provinsi_id');
+        const kabupatenSelect = document.getElementById('alamat_kabupaten_id');
+        const kecamatanSelect = document.getElementById('alamat_kecamatan_id');
+        const kelurahanSelect = document.getElementById('alamat_village_id');
+
+        provinsiSelect.addEventListener('change', function() {
+            const provinsiId = this.value;
+            if (provinsiId) {
+                fetch(`/api/get-kabupaten/${provinsiId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        kabupatenSelect.innerHTML =
+                            '<option value="">{{ __('Pilih Kabupaten') }}</option>';
+                        data.forEach(kabupaten => {
+                            kabupatenSelect.innerHTML +=
+                                `<option value="${kabupaten.id}">${kabupaten.name}</option>`;
                         });
-                } else {
-                    kecamatanSelect.innerHTML = '<option value="">{{ __('Pilih Kecamatan') }}</option>';
-                    kecamatanSelect.disabled = true;
-                    kelurahanSelect.innerHTML = '<option value="">{{ __('Pilih Kelurahan') }}</option>';
-                    kelurahanSelect.disabled = true;
-                }
-            });
+                        kabupatenSelect.disabled = false;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching kabupaten:', error);
+                        kabupatenSelect.innerHTML =
+                            '<option value="">{{ __('Error fetching data') }}</option>';
+                        kabupatenSelect.disabled = true;
+                    });
+            } else {
+                kabupatenSelect.innerHTML = '<option value="">{{ __('Pilih Kabupaten') }}</option>';
+                kabupatenSelect.disabled = true;
+                kecamatanSelect.innerHTML = '<option value="">{{ __('Pilih Kecamatan') }}</option>';
+                kecamatanSelect.disabled = true;
+                kelurahanSelect.innerHTML = '<option value="">{{ __('Pilih Kelurahan') }}</option>';
+                kelurahanSelect.disabled = true;
+            }
+        });
 
-            kecamatanSelect.addEventListener('change', function() {
-                const kecamatanId = this.value;
-                if (kecamatanId) {
-                    fetch(`/api/get-kelurahan/${kecamatanId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            kelurahanSelect.innerHTML =
-                                '<option value="">{{ __('Pilih Kelurahan') }}</option>';
-                            data.forEach(kelurahan => {
-                                kelurahanSelect.innerHTML +=
-                                    `<option value="${kelurahan.id}">${kelurahan.name}</option>`;
-                            });
-                            kelurahanSelect.disabled = false;
-                        })
-                        .catch(error => {
-                            console.error('Error fetching kelurahan:', error);
-                            kelurahanSelect.innerHTML =
-                                '<option value="">{{ __('Error fetching data') }}</option>';
-                            kelurahanSelect.disabled = true;
+        kabupatenSelect.addEventListener('change', function() {
+            const kabupatenId = this.value;
+            if (kabupatenId) {
+                fetch(`/api/get-kecamatan/${kabupatenId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        kecamatanSelect.innerHTML =
+                            '<option value="">{{ __('Pilih Kecamatan') }}</option>';
+                        data.forEach(kecamatan => {
+                            kecamatanSelect.innerHTML +=
+                                `<option value="${kecamatan.id}">${kecamatan.name}</option>`;
                         });
-                } else {
-                    kelurahanSelect.innerHTML = '<option value="">{{ __('Pilih Kelurahan') }}</option>';
-                    kelurahanSelect.disabled = true;
-                }
-            });
+                        kecamatanSelect.disabled = false;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching kecamatan:', error);
+                        kecamatanSelect.innerHTML =
+                            '<option value="">{{ __('Error fetching data') }}</option>';
+                        kecamatanSelect.disabled = true;
+                    });
+            } else {
+                kecamatanSelect.innerHTML = '<option value="">{{ __('Pilih Kecamatan') }}</option>';
+                kecamatanSelect.disabled = true;
+                kelurahanSelect.innerHTML = '<option value="">{{ __('Pilih Kelurahan') }}</option>';
+                kelurahanSelect.disabled = true;
+            }
+        });
 
-            document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById('tambah-unit-btn').addEventListener('click', function () {
-        var container = document.getElementById('unit-container');
-        var index = container.children.length / 4; // Adjust index calculation if needed
+        kecamatanSelect.addEventListener('change', function() {
+            const kecamatanId = this.value;
+            if (kecamatanId) {
+                fetch(`/api/get-kelurahan/${kecamatanId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        kelurahanSelect.innerHTML =
+                            '<option value="">{{ __('Pilih Kelurahan') }}</option>';
+                        data.forEach(kelurahan => {
+                            kelurahanSelect.innerHTML +=
+                                `<option value="${kelurahan.id}">${kelurahan.name}</option>`;
+                        });
+                        kelurahanSelect.disabled = false;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching kelurahan:', error);
+                        kelurahanSelect.innerHTML =
+                            '<option value="">{{ __('Error fetching data') }}</option>';
+                        kelurahanSelect.disabled = true;
+                    });
+            } else {
+                kelurahanSelect.innerHTML = '<option value="">{{ __('Pilih Kelurahan') }}</option>';
+                kelurahanSelect.disabled = true;
+            }
+        });
 
-        // Create new elements for a new unit
-        var newRow = document.createElement('div');
-        newRow.classList.add('grid', 'gap-4', 'sm:grid-cols-4', 'sm:gap-6', 'unit-row');
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('tambah-unit-btn').addEventListener('click', function() {
+                var container = document.getElementById('unit-container');
+                var index = container.children.length / 4; // Adjust index calculation if needed
 
-        var newUnit = `
+                // Create new elements for a new unit
+                var newRow = document.createElement('div');
+                newRow.classList.add('grid', 'gap-4', 'sm:grid-cols-4', 'sm:gap-6', 'mb-4','unit-row');
+
+                var newUnit = `
             <div class="sm:col-span-1">
                 <label for="units_${index}_unit_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Unit') }}</label>
                 <select id="units_${index}_unit_id" name="units[${index}][unit_id]"
@@ -515,7 +551,7 @@
                     <input id="units_${index}_awal_huni" name="units[${index}][awal_huni]" type="text" datepicker datepicker-format="yyyy-mm-dd"
                         datepicker-buttons datepicker-autoselect-today datepicker-orientation="top"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="YYYY/MM/DD" autocomplete="off">
+                        placeholder="YYYY-MM-DD" autocomplete="off">
                 </div>
             </div>
             <div class="sm:col-span-1">
@@ -529,44 +565,46 @@
                     <input id="units_${index}_akhir_huni" name="units[${index}][akhir_huni]" type="text" datepicker datepicker-format="yyyy-mm-dd"
                         datepicker-buttons datepicker-autoselect-today datepicker-orientation="top"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="YYYY/MM/DD" autocomplete="off">
+                        placeholder="YYYY-MM-DD" autocomplete="off">
                 </div>
             </div>
             <div class="sm:col-span-1 flex items-end">
-                <button type="button" class="remove-unit-btn text-red-500 hover:text-red-700">{{ __('Remove') }}</button>
-            </div>
+                    <label for=""
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
+                    <button type="button" id="remove-unit-btn"
+                        class="remove-unit-btn flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                        {{ __('Hapus') }}
+                    </button>
         `;
 
-        newRow.innerHTML = newUnit;
-        container.appendChild(newRow);
+                newRow.innerHTML = newUnit;
+                container.appendChild(newRow);
 
 
-        // Initialize datepicker for new elements
-        const awalHuniInput = document.getElementById(`units_${index}_awal_huni`);
-        const akhirHuniInput = document.getElementById(`units_${index}_akhir_huni`);
+                // Initialize datepicker for new elements
+                const awalHuniInput = document.getElementById(`units_${index}_awal_huni`);
+                const akhirHuniInput = document.getElementById(`units_${index}_akhir_huni`);
 
-        new Datepicker(awalHuniInput, {
-            format: 'yyyy-mm-dd',
-            autohide: true,
-            orientation: 'top',
-            todayBtn: true,
-            clearBtn: true,
+                new Datepicker(awalHuniInput, {
+                    format: 'yyyy-mm-dd',
+                    autohide: true,
+                    orientation: 'top',
+                    todayBtn: true,
+                    clearBtn: true,
+                });
+                new Datepicker(akhirHuniInput, {
+                    format: 'yyyy-mm-dd',
+                    autohide: true,
+                    orientation: 'top',
+                    todayBtn: true,
+                    clearBtn: true,
+                });
+
+                // Add event listener for remove button
+                newRow.querySelector('.remove-unit-btn').addEventListener('click', function() {
+                    newRow.remove();
+                });
+            });
         });
-        new Datepicker(akhirHuniInput, {
-            format: 'yyyy-mm-dd',
-            autohide: true,
-            orientation: 'top',
-            todayBtn: true,
-            clearBtn: true,
-        });
-
-        // Add event listener for remove button
-        newRow.querySelector('.remove-unit-btn').addEventListener('click', function () {
-            newRow.remove();
-        });
-    });
-});
-
-
     </script>
 </x-app-layout>

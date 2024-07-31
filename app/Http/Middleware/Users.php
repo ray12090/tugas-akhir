@@ -15,11 +15,12 @@ class Users
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {
-        if(Auth::user()->tipe_user_id != '2' && Auth::user()->tipe_user_id != '3' && Auth::user()->tipe_user_id != '4')
-        {
-            return redirect('404');
-        }
-        return $next($request);
+{
+    $allowedTypes = [2, 3, 4, 11, 12];
+    if (!in_array(Auth::user()->tipe_user_id, $allowedTypes)) {
+        return redirect('404');
     }
+    return $next($request);
+}
+
 }

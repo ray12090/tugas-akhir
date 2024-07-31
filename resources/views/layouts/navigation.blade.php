@@ -19,9 +19,9 @@
                     </svg>
                     <span class="sr-only">{{ __('Toggle sidebar') }}</span>
                 </button>
-                <a href="{{ route('dashboard.index') }}"
+                <a href="{{ route('dashboard') }}"
                     class="flex items-center text-gray-900 dark:text-white hover:text-gray-900 dark:hover:text-white">
-                    <img class="w-auto h-8" href="{{ route('dashboard.index') }}"
+                    <img class="w-auto h-8" href="{{ route('dashboard') }}"
                         src="{{ asset('storage/images/Landmark-Residence-noCrown.png') }}" alt="landmark logo" />
                 </a>
                 </button>
@@ -72,7 +72,7 @@
         <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
             <ul>
                 <li>
-                    <a href="{{ route('dashboard.index') }}"
+                    <a href="{{ route('dashboard') }}"
                         class="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         <svg class="w-6 h-6 text-[#016452] transition duration-75 group-hover:text-[#014F41]"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -156,7 +156,7 @@
                         </ul>
                     </li>
                 @endif
-                @if (Auth::user()->tipe_user_id === '2' || Auth::user()->tipe_user_id === '1')
+                @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 1)
                     <li>
                         <button type="button"
                             class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full"
@@ -211,55 +211,12 @@
                             </li>
                         </ul>
                     </li>
-                    <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
-                        <li>
-                            <button type="button"
-                                class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full"
-                                aria-controls="data-komplain" data-collapse-toggle="data-komplain">
-                                <svg class="w-6 h-6 text-[#016452] transition duration-75 group-hover:text-[#014F41]"
-                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" fill="currentColor" viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd"
-                                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="flex-1 ms-4 text-left rtl:text-right whitespace-nowrap">
-                                    {{ __('Data Komplain') }}
-                                </span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 4 4 4-4" />
-                                </svg>
-                            </button>
-                            <ul id="data-komplain" class="hidden py-2 space-y-2">
-                                <li>
-                                    <a href="{{ route('komplain.index') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Semua Komplain') }}</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('jenis_komplain.index') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Jenis Komplain') }}</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('lokasi_komplain.index') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Lokasi Komplain') }}</a>
-                                </li>
-                                {{-- <li>
-                                <a href="{{ route('kategori_komplain.index') }}"
-                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Kategori') }}</a>
-                            </li> --}}
-                                <li>
-                                    <a href="{{ route('status_komplain.index') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Status Komplain') }}</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                @endif
+                <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
                     <li>
                         <button type="button"
                             class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full"
-                            aria-controls="data-penanganan" data-collapse-toggle="data-penanganan">
+                            aria-controls="data-komplain" data-collapse-toggle="data-komplain">
                             <svg class="w-6 h-6 text-[#016452] transition duration-75 group-hover:text-[#014F41]"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 fill="currentColor" viewBox="0 0 24 24">
@@ -268,7 +225,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                             <span class="flex-1 ms-4 text-left rtl:text-right whitespace-nowrap">
-                                {{ __('Data Penanganan') }}
+                                {{ __('Data Komplain') }}
                             </span>
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 10 6">
@@ -276,18 +233,61 @@
                                     stroke-width="2" d="m1 1 4 4 4-4" />
                             </svg>
                         </button>
-                        <ul id="data-penanganan" class="hidden py-2 space-y-2">
+                        <ul id="data-komplain" class="hidden py-2 space-y-2">
                             <li>
-                                <a href="{{ route('penanganan.index') }}"
-                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Semua Penanganan') }}</a>
+                                <a href="{{ route('komplain.index') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Semua Komplain') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('kategori_penanganan.index') }}"
-                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Kategori Penanganan') }}</a>
+                                <a href="{{ route('jenis_komplain.index') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Jenis Komplain') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('lokasi_komplain.index') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Lokasi Komplain') }}</a>
+                            </li>
+                            {{-- <li>
+                                <a href="{{ route('kategori_komplain.index') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Kategori') }}</a>
+                            </li> --}}
+                            <li>
+                                <a href="{{ route('status_komplain.index') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Status Komplain') }}</a>
                             </li>
                         </ul>
                     </li>
-                @endif
+                </ul>
+                <li>
+                    <button type="button"
+                        class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full"
+                        aria-controls="data-penanganan" data-collapse-toggle="data-penanganan">
+                        <svg class="w-6 h-6 text-[#016452] transition duration-75 group-hover:text-[#014F41]"
+                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="flex-1 ms-4 text-left rtl:text-right whitespace-nowrap">
+                            {{ __('Data Penanganan') }}
+                        </span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 4 4 4-4" />
+                        </svg>
+                    </button>
+                    <ul id="data-penanganan" class="hidden py-2 space-y-2">
+                        <li>
+                            <a href="{{ route('penanganan.index') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Semua Penanganan') }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('kategori_penanganan.index') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Kategori Penanganan') }}</a>
+                        </li>
+                    </ul>
+                </li>
                 @if (Auth::user()->tipe_user_id === '3' || Auth::user()->tipe_user_id === '1')
                     <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
                         <li>

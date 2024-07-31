@@ -83,10 +83,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('detail_tempat_lahir', DetailTempatLahirController::class);
     Route::resource('kategori_penanganan', KategoriPenangananController::class);
     Route::resource('tipe_user', TipeUserController::class);
-    Route::resource('dashboard', DashboardController::class);
 });
 
 // Additional routes
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
 Route::get('/get-units/{unit}', [KomplainController::class, 'getUnits']);
 Route::get('/get-lantais/{tower_id}', [UnitController::class, 'getLantais']);
 Route::get('/get-owner-info-by-name/{unitName}', [IplController::class, 'getOwnerInfoByName']);

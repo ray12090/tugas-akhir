@@ -9,6 +9,7 @@ use App\Models\DetailAgama;
 use App\Models\DetailPerkawinan;
 use App\Models\DetailTempatLahir;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Vermaysha\Wilayah\Models\City;
 use Vermaysha\Wilayah\Models\District;
 use Vermaysha\Wilayah\Models\Province;
@@ -57,7 +58,11 @@ class PenyewaController extends Controller
             ->orderBy($sort_by, $sort_order)
             ->paginate(10);
 
-        return view('penyewa.penyewa', compact('penyewas', 'sort_by', 'sort_order'));
+            if(Auth::user()->tipe_user_id == 12){
+                return redirect()->route('dashboard')->with('success', 'Datamu berhasil ditambah.');
+            }else{
+                return view('penyewa.penyewa', compact('penyewas', 'sort_by', 'sort_order'));
+            }
     }
 
     /**
@@ -134,7 +139,11 @@ class PenyewaController extends Controller
             'alamat_provinsi_id' => $request->input('alamat_provinsi_id'),
         ]);
 
+        if(Auth::user()->tipe_user_id == 12){
+            return redirect('/dashboard')->with('success', 'Datamu berhasil ditambah.');
+        }else{
         return redirect()->route('penyewa.index')->with('success', 'Penyewa berhasil ditambahkan');
+        }
     }
 
     /**
@@ -189,7 +198,7 @@ class PenyewaController extends Controller
             'alamat_kecamatan_id' => 'required|exists:districts,id',
             'alamat_kabupaten_id' => 'required|exists:cities,id',
             'alamat_provinsi_id' => 'required|exists:provinces,id',
-            
+
         ]);
 
         if ($validator->fails()) {
