@@ -1,2 +1,5 @@
-*
-!.gitignore
+# Ignore everything in the storage folder
+/storage/*
+
+# But not this folder
+!/storage/app/images/
