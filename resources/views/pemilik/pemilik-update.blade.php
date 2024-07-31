@@ -323,7 +323,7 @@
                                 @endforeach
 
                                     <div class="sm:col-span-4 flex justify-end">
-                                        <button type="button" id="tambah-unit-btn" class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                        <button type="button" id="tambah-unit-btn" class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
                                             {{ __('Tambah unit baru') }}
                                         </button>
                                     </div>
@@ -345,7 +345,7 @@
                                         {{ __('Kembali') }}
                                     </a>
                                     <button type="submit"
-                                        class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                        class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
                                         <svg class="w-[16px] h-[16px] text-white dark:text-white mr-2"
                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -539,7 +539,7 @@
 
         newRow.innerHTML = newUnit;
         container.appendChild(newRow);
-        
+
 
         // Initialize datepicker for new elements
         const awalHuniInput = document.getElementById(`units_${index}_awal_huni`);
