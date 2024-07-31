@@ -9,7 +9,7 @@ class detailBiayaAdmin extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'biaya_admin',
+        'biaya_admin','tanggal_awal_berlaku', 'tanggal_akhir_berlaku'
     ];
     public function Ipl()
     {

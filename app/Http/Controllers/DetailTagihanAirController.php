@@ -31,35 +31,39 @@ class DetailTagihanAirController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input dari form
         $request->validate([
             'unit_id' => 'required|exists:units,id',
             'meter_air_awal' => 'required|numeric',
             'meter_air_akhir' => 'required|numeric|gte:meter_air_awal',
-            'biaya_air_id' => 'required|exists:detail_biaya_airs,id',
+            'tanggal_pemakaian' => 'required|date',
         ]);
 
-        // Hitung pemakaian air
         $pemakaianAir = $request->meter_air_akhir - $request->meter_air_awal;
 
-        // Ambil biaya air
-        $biayaAir = detailBiayaAir::find($request->biaya_air_id)->biaya_air;
+        $biayaAir = detailBiayaAir::where('tanggal_awal_berlaku', '<=', $request->tanggal_pemakaian)
+            ->where(function ($query) use ($request) {
+                $query->where('tanggal_akhir_berlaku', '>=', $request->tanggal_pemakaian)
+                    ->orWhereNull('tanggal_akhir_berlaku');
+            })
+            ->orderBy('tanggal_awal_berlaku', 'desc')
+            ->first();
 
-        // Hitung tagihan air
-        $tagihanAir = $pemakaianAir * $biayaAir;
+        $tagihanAir = $pemakaianAir * $biayaAir->biaya_air;
 
-        // Simpan data ke dalam tabel `detail_tagihan_airs`
         detailTagihanAir::create([
             'unit_id' => $request->unit_id,
             'meter_air_awal' => $request->meter_air_awal,
             'meter_air_akhir' => $request->meter_air_akhir,
             'pemakaian_air' => $pemakaianAir,
             'tagihan_air' => $tagihanAir,
-            'biaya_air_id' => $request->biaya_air_id,
+            'biaya_air_id' => $biayaAir->id, // simpan ID biaya air untuk referensi
+            'tanggal_pemakaian' => $request->tanggal_pemakaian,
         ]);
 
         return redirect()->route('detail_tagihan_air.index')->with('success', 'Detail tagihan air berhasil ditambahkan.');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -86,17 +90,23 @@ class DetailTagihanAirController extends Controller
         $request->validate([
             'meter_air_awal' => 'required|numeric',
             'meter_air_akhir' => 'required|numeric|gte:meter_air_awal',
-            'biaya_air_id' => 'required|exists:detail_biaya_airs,id',
+            'tanggal_pemakaian' => 'required|date',
         ]);
 
         // Hitung pemakaian air
         $pemakaianAir = $request->meter_air_akhir - $request->meter_air_awal;
 
-        // Ambil biaya air
-        $biayaAir = detailBiayaAir::find($request->biaya_air_id)->biaya_air;
+        // Ambil biaya air yang berlaku pada tanggal pemakaian
+        $biayaAir = detailBiayaAir::where('tanggal_awal_berlaku', '<=', $request->tanggal_pemakaian)
+            ->where(function ($query) use ($request) {
+                $query->where('tanggal_akhir_berlaku', '>=', $request->tanggal_pemakaian)
+                    ->orWhereNull('tanggal_akhir_berlaku');
+            })
+            ->orderBy('tanggal_awal_berlaku', 'desc')
+            ->first();
 
         // Hitung tagihan air
-        $tagihanAir = $pemakaianAir * $biayaAir;
+        $tagihanAir = $pemakaianAir * $biayaAir->biaya_air;
 
         // Update data di dalam tabel `detail_tagihan_airs`
         $detailTagihanAir->update([
@@ -104,11 +114,14 @@ class DetailTagihanAirController extends Controller
             'meter_air_akhir' => $request->meter_air_akhir,
             'pemakaian_air' => $pemakaianAir,
             'tagihan_air' => $tagihanAir,
-            'biaya_air_id' => $request->biaya_air_id,
+            'biaya_air_id' => $biayaAir->id, // simpan ID biaya air untuk referensi
+            'tanggal_pemakaian' => $request->tanggal_pemakaian,
         ]);
 
         return redirect()->route('detail_tagihan_air.index')->with('success', 'Detail tagihan air berhasil diperbarui.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

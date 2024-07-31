@@ -8,11 +8,10 @@
                 </div>
                 <div class="text-gray-500 text-sm font-regular">
                     {{ __('Di bawah merupakan tabel data biaya air. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Finance.') }}<br>
-                    {{ __('Harga air yang akan digunakan adalah yang dibuat terbaru.') }}
+                    {{ __('Biaya air yang dihitung adalah biaya air yang berlaku pada tanggal tertentu.') }}
                 </div>
             </div>
-            <div
-                class="flex flex-col md:flex-row items-stretch md:items-center px-2 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
+            <div class="flex flex-col md:flex-row items-stretch md:items-center px-2 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
                 <div class="w-full md:w-1/2">
                     <form method="GET" action="{{ route('detail_biaya_air.index') }}" class="flex items-center">
                         <div class="relative w-full">
@@ -32,7 +31,7 @@
                 </div>
                 <div
                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                    <a href = "{{ route('detail_biaya_air.create') }} "type="button" id="createProductButton"
+                    <a href="{{ route('detail_biaya_air.create') }}" type="button" id="createProductButton"
                         data-modal-toggle="createProductModal"
                         class="flex items-center justify-center text-white bg-[#016452] hover:bg-[#014F41] focus:ring-4 focus:ring-[#014f415e] font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-[#016452] focus:outline-none dark:focus:ring-[#014F41]">
                         <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
@@ -49,9 +48,8 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th class="p-4">
-                                <a
-                                    href="{{ route('detail_biaya_air.index', ['sort_by' => 'biaya_air', 'sort_order' => $sort_by === 'biaya_air' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                    {{ __('Harga Air per m³') }}
+                                <a href="{{ route('detail_biaya_air.index', ['sort_by' => 'biaya_air', 'sort_order' => $sort_by === 'biaya_air' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                    {{ __('Biaya Air per m³') }}
                                     @if ($sort_by === 'biaya_air')
                                         <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -63,10 +61,9 @@
                                 </a>
                             </th>
                             <th class="p-4">
-                                <a
-                                    href="{{ route('detail_biaya_air.index', ['sort_by' => 'created_at', 'sort_order' => $sort_by === 'created_at' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                    {{ __('Dibuat Pada (UTC+0)') }}
-                                    @if ($sort_by === 'created_at')
+                                <a href="{{ route('detail_biaya_air.index', ['sort_by' => 'tanggal_awal_berlaku', 'sort_order' => $sort_by === 'tanggal_awal_berlaku' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                    {{ __('Tanggal Awal Berlaku') }}
+                                    @if ($sort_by === 'tanggal_awal_berlaku')
                                         <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -77,10 +74,9 @@
                                 </a>
                             </th>
                             <th class="p-4">
-                                <a
-                                    href="{{ route('detail_biaya_air.index', ['sort_by' => 'updated_at', 'sort_order' => $sort_by === 'updated_at' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                    {{ __('Diperbarui Pada (UTC+0)') }}
-                                    @if ($sort_by === 'updated_at')
+                                <a href="{{ route('detail_biaya_air.index', ['sort_by' => 'tanggal_akhir_berlaku', 'sort_order' => $sort_by === 'tanggal_akhir_berlaku' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                    {{ __('Tanggal Akhir Berlaku') }}
+                                    @if ($sort_by === 'tanggal_akhir_berlaku')
                                         <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -100,12 +96,14 @@
                                     Rp{{ number_format($air->biaya_air, 2, ',', '.') }}
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <div>{{ \Carbon\Carbon::parse($air->created_at)->format('d-m-Y') }}</div>
-                                    <div>{{ \Carbon\Carbon::parse($air->created_at)->format('H:i:s') }}</div>
+                                    <div>{{ \Carbon\Carbon::parse($air->tanggal_awal_berlaku)->format('Y-m-d') }}</div>
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <div>{{ \Carbon\Carbon::parse($air->updated_at)->format('d-m-Y') }}</div>
-                                    <div>{{ \Carbon\Carbon::parse($air->updated_at)->format('H:i:s') }}</div>
+                                    @if($air->tanggal_akhir_berlaku)
+                                        <div>{{ \Carbon\Carbon::parse($air->tanggal_akhir_berlaku)->format('Y-m-d') }}</div>
+                                    @else
+                                        <div>{{ __('Tidak ditentukan') }}</div>
+                                    @endif
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="flex items-center space-x-4 justify-center">
@@ -250,13 +248,13 @@
                 modal.classList.toggle('hidden');
             }
 
-            function confirmDelete(form, namaPenghuni) {
+            function confirmDelete(form, biayaAir) {
                 const deleteModal = document.getElementById('deleteModal');
                 const deleteModalText = document.getElementById('deleteModalText');
                 const confirmDeleteButton = document.getElementById('confirmDeleteButton');
 
                 // Set nomor_laporan in modal text
-                deleteModalText.textContent = `{{ __('Hapus Data ') }}${namaPenghuni}`;
+                deleteModalText.textContent = `{{ __('Hapus Data Biaya Air: ') }}${biayaAir}`;
                 toggleModal('deleteModal'); // Show the modal
 
                 confirmDeleteButton.onclick = function() {
@@ -265,4 +263,5 @@
                 return false; // Prevent the default form submission
             }
         </script>
+    </div>
 </x-app-layout>

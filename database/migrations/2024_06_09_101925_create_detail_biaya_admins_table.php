@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('detail_biaya_admins', function (Blueprint $table) {
             $table->id();
             $table->decimal('biaya_admin', 15, 2);
+            $table->date('tanggal_awal_berlaku');
+            $table->date('tanggal_akhir_berlaku')->nullable();
             $table->timestamps();
         });
     }
