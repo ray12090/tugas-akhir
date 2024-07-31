@@ -14,7 +14,7 @@ class detailJenisTagihan extends Model
     ];
     public function ipl()
     {
-        return $this->belongsToMany(Ipl::class, 'ipl_jenis_tagihan_pivot', 'jenis_tagihan_id', 'ipl_id')
+        return $this->belongsToMany(Ipl::class, 'ipl_jenis_tagihans_pivot', 'jenis_tagihan_id', 'ipl_id')
             ->withPivot('jumlah');
     }
 }
