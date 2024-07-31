@@ -51,7 +51,7 @@ class DetailBiayaAdminController extends Controller
         // Validasi input dari form
         $request->validate([
             'biaya_admin' => 'required|numeric|min:0',
-            'tanggal_awal_berlaku' => 'required|date|before_or_equal:tanggal_akhir_berlaku',
+            'tanggal_awal_berlaku' => 'required|date',
             'tanggal_akhir_berlaku' => 'nullable|date|after_or_equal:tanggal_awal_berlaku',
         ]);
 
@@ -99,7 +99,7 @@ class DetailBiayaAdminController extends Controller
         // Validasi input dari form
         $request->validate([
             'biaya_admin' => 'required|numeric|min:0',
-            'tanggal_awal_berlaku' => 'required|date|before_or_equal:tanggal_akhir_berlaku',
+            'tanggal_awal_berlaku' => 'required|date',
             'tanggal_akhir_berlaku' => 'nullable|date|after_or_equal:tanggal_awal_berlaku',
         ]);
 

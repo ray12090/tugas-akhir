@@ -11,8 +11,7 @@
                     {{ __('Biaya admin yang akan digunakan adalah yang dibuat terbaru.') }}
                 </div>
             </div>
-            <div
-                class="flex flex-col md:flex-row items-stretch md:items-center px-2 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
+            <div class="flex flex-col md:flex-row items-stretch md:items-center px-2 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
                 <div class="w-full md:w-1/2">
                     <form method="GET" action="{{ route('detail_biaya_admin.index') }}" class="flex items-center">
                         <div class="relative w-full">
@@ -63,32 +62,10 @@
                                 </a>
                             </th>
                             <th class="p-4">
-                                <a
-                                    href="{{ route('detail_biaya_admin.index', ['sort_by' => 'created_at', 'sort_order' => $sort_by === 'created_at' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                    {{ __('Dibuat Pada (UTC+0)') }}
-                                    @if ($sort_by === 'created_at')
-                                        <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
-                                            </path>
-                                        </svg>
-                                    @endif
-                                </a>
+                                {{ __('Tanggal Awal Berlaku') }}
                             </th>
                             <th class="p-4">
-                                <a
-                                    href="{{ route('detail_biaya_admin.index', ['sort_by' => 'updated_at', 'sort_order' => $sort_by === 'updated_at' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                    {{ __('Diperbarui Pada (UTC+0)') }}
-                                    @if ($sort_by === 'updated_at')
-                                        <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
-                                            </path>
-                                        </svg>
-                                    @endif
-                                </a>
+                                {{ __('Tanggal Akhir Berlaku') }}
                             </th>
                             <th class="p-4 text-center">{{ __('Aksi') }}</th>
                         </tr>
@@ -100,12 +77,14 @@
                                     Rp{{ number_format($admin->biaya_admin, 2, ',', '.') }}
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <div>{{ \Carbon\Carbon::parse($admin->created_at)->format('d-m-Y') }}</div>
-                                    <div>{{ \Carbon\Carbon::parse($admin->created_at)->format('H:i:s') }}</div>
+                                    {{ \Carbon\Carbon::parse($admin->tanggal_awal_berlaku)->format('Y-m-d') }}
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <div>{{ \Carbon\Carbon::parse($admin->updated_at)->format('d-m-Y') }}</div>
-                                    <div>{{ \Carbon\Carbon::parse($admin->updated_at)->format('H:i:s') }}</div>
+                                    @if ($admin->tanggal_akhir_berlaku)
+                                        {{ \Carbon\Carbon::parse($admin->tanggal_akhir_berlaku)->format('Y-m-d') }}
+                                    @else
+                                        -
+                                    @endif
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="flex items-center space-x-4 justify-center">
@@ -250,13 +229,13 @@
                 modal.classList.toggle('hidden');
             }
 
-            function confirmDelete(form, namaPenghuni) {
+            function confirmDelete(form, biayaAdmin) {
                 const deleteModal = document.getElementById('deleteModal');
                 const deleteModalText = document.getElementById('deleteModalText');
                 const confirmDeleteButton = document.getElementById('confirmDeleteButton');
 
                 // Set nomor_laporan in modal text
-                deleteModalText.textContent = `{{ __('Hapus Data ') }}${namaPenghuni}`;
+                deleteModalText.textContent = `{{ __('Hapus Data ') }}${biayaAdmin}`;
                 toggleModal('deleteModal'); // Show the modal
 
                 confirmDeleteButton.onclick = function() {
