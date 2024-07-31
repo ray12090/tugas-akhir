@@ -193,7 +193,7 @@
                         </div>
                     </div>
                     <div id="tagihan-container"
-                        class="grid gap-4 sm:gap-6 sm:col-span-4 sm:grid-cols-1 rounded-lg p-6 shadow-md sm:rounded-2xl bg-gray-100">
+                        class="grid gap-4 sm:gap-6 sm:col-span-4 sm:grid-cols-1 rounded-lg p-6 shadow-md sm:rounded-2xl bg-[#01645222]">
                         @foreach ($ipl->detailJenisTagihan as $index => $jenisTagihan)
                             <div class="grid gap-4 sm:grid-cols-4 sm:gap-6 tagihan-row">
                                 <div class="sm:col-span-1">

@@ -219,7 +219,7 @@
                                         </div>
                                     </div>
                                     <div id="tagihan-container"
-                                        class="grid gap-4 sm:gap-6 sm:col-span-4 sm:grid-cols-1 rounded-lg p-6 shadow-md sm:rounded-2xl bg-gray-100">
+                                        class="grid gap-4 sm:gap-6 sm:col-span-4 sm:grid-cols-1 rounded-lg p-6 shadow-md sm:rounded-2xl bg-[#01645222]">
                                         <div class="grid gap-4 sm:grid-cols-4 sm:gap-6 tagihan-row">
                                             <div class="sm:col-span-1">
                                                 <label for="jenis_tagihan_0"
@@ -249,8 +249,8 @@
                                                 <label for=""
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
                                                 <button type="button" id="tambah-tagihan-btn"
-                                                    class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                                                    {{ __('Tambah tagihan lainnya') }}
+                                                class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
+                                                {{ __('Tambah tagihan lainnya') }}
                                                 </button>
                                             </div>
                                         </div>

@@ -84,9 +84,10 @@
                                         {{ __('Isi Komplain') }}
                                     </div>
                                 </div>
-                                <div id="lokasi-komplain-container" class="sm:col-span-3">
+                                <div id="lokasi-komplain-container" 
+                                class="grid gap-4 sm:gap-6 sm:col-span-4 sm:grid-cols-1 bg-[#01645222] rounded-lg p-6 shadow-md sm:rounded-2xl" >
                                     @foreach ($komplain->lokasiKomplains as $index => $lokasi)
-                                        <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 lokasi-komplain-row">
+                                        <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 lokasi-komplain-row ">
                                             <div class="sm:col-span-1">
                                                 <label for="lokasi_komplain_{{ $index }}"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

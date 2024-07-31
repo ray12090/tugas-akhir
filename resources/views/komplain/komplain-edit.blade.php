@@ -150,7 +150,7 @@
                                     </div>
                                 </div>
                                 <div id="lokasi-komplain-container"
-                                    class="grid gap-4 sm:gap-6 sm:col-span-4 sm:grid-cols-1 bg-gray-100 rounded-lg p-6 shadow-md sm:rounded-2xl">
+                                    class="grid gap-4 sm:gap-6 sm:col-span-4 sm:grid-cols-1 bg-[#01645222] rounded-lg p-6 shadow-md sm:rounded-2xl">
                                     @foreach ($komplain->lokasiKomplains as $index => $lokasi)
                                         <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 lokasi-komplain-row">
                                             <div class="sm:col-span-1">
