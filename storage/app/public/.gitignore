@@ -2,4 +2,4 @@
 /storage/*
 
 # But not this folder
-!/storage/app/images/
+!/storage/images/
