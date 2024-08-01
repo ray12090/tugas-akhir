@@ -354,7 +354,7 @@
                                         </div>
                                         <div class="sm:col-span-1">
                                             <label for="akhir_huni_0"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Akhir Huni') }}</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Akhir Huni (opsional)') }}</label>
                                             <div class="relative max-w">
                                                 <div
                                                     class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
