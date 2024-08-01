@@ -119,7 +119,7 @@
                         <div
                             class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-4 rounded-lg p-6 shadow-md sm:rounded-2xl bg-[#01645222]">
                             @if (Auth::user()->tipe_user_id == 1)
-                                <a href="{{ route('akun.create') }}"
+                                <a href="{{ route('akun.index') }}"
                                     class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
                                     <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -132,7 +132,7 @@
                                 </a>
                             @endif
                             @if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 3)
-                                <a href="{{ route('pemilik.create') }}"
+                                <a href="{{ route('pemilik.index') }}"
                                     class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
                                     <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -145,7 +145,7 @@
                                 </a>
                             @endif
                             @if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 3)
-                                <a href="{{ route('penyewa.create') }}"
+                                <a href="{{ route('penyewa.index') }}"
                                     class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
                                     <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -157,7 +157,7 @@
                                     <span class="text-sm font-medium text-white">{{ __('Data Penyewa') }}</span>
                                 </a>
                             @endif
-                            <a href="{{ route('komplain.create') }}"
+                            <a href="{{ route('komplain.index') }}"
                                 class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
                                 <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -168,7 +168,7 @@
                                 </svg>
                                 <span class="text-sm font-medium text-white">{{ __('Data Komplain') }}</span>
                             </a>
-                            <a href="{{ route('penanganan.create') }}"
+                            <a href="{{ route('penanganan.index') }}"
                                 class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
                                 <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24"
