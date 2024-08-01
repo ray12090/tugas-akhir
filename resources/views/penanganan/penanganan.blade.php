@@ -102,7 +102,7 @@
                                 <th class="p-4">
                                     <a
                                         href="{{ route('penanganan.index', ['sort_by' => 'tanggal_penanganan', 'sort_order' => $sort_by === 'tanggal_penanganan' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
-                                        {{ __('Tanggal Penanganan Terakhir') }}
+                                        {{ __('Waktu Pengisian Terakhir') }}
                                         @if ($sort_by === 'tanggal_penanganan')
                                             <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -215,7 +215,7 @@
                                                         d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
                                                         clip-rule="evenodd" />
                                                 </svg>
-                                                {{ __('Ubah') }}
+                                                {{ __('Isi Penanganan') }}
                                             </a>
                                             <a href="{{ route('penanganan.show', $penanganan->id) }}"
                                                 class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
@@ -227,6 +227,7 @@
                                                 </svg>
                                                 {{ __('Lihat') }}
                                             </a>
+                                            @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 2)
                                             <form action="{{ route('penanganan.destroy', $penanganan->id) }}"
                                                 method="POST"
                                                 onsubmit="return confirmDelete(this, '{{ $penanganan->nomor_laporan }}');">
@@ -244,6 +245,7 @@
                                                     {{ __('Hapus') }}
                                                 </button>
                                             </form>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

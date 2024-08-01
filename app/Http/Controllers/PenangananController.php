@@ -22,7 +22,7 @@ class PenangananController extends Controller
         $sort_order = $request->input('sort_order', 'desc');
         $user = auth()->user();
 
-        $penanganans = Penanganan::with(['komplain', 'kategoriPenanganan', 'createdBy', 'updatedBy'])
+        $penanganans = Penanganan::with(['komplain', 'kategoriPenanganan', 'createdBy', 'updatedBy', 'users'])
             ->when($search, function ($query, $search) {
                 return $query->where('nomor_penanganan', 'like', "%{$search}%")
                     ->orWhereHas('komplain', function ($query) use ($search) {
@@ -36,7 +36,8 @@ class PenangananController extends Controller
                         $query->where('name', 'like', "%{$search}%");
                     });
             })
-            ->when($user->usertype !== 'tr' && $user->usertype !== 'admin', function ($query) use ($user) {
+            ->when($user->tipe_user_id !== 2 && $user->tipe_user_id !== 1, function ($query) use ($user) {
+                // Filter to only include penanganan where the user is assigned
                 return $query->whereHas('users', function ($query) use ($user) {
                     $query->where('users.id', $user->id);
                 });
@@ -46,6 +47,7 @@ class PenangananController extends Controller
 
         return view('penanganan.penanganan', compact('penanganans', 'sort_by', 'sort_order'));
     }
+
 
 
     /**

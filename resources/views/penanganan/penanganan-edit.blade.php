@@ -4,10 +4,10 @@
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Edit Penanganan') }}
+                    {{ __('Halaman Pengerjaan Penanganan Komplain') }}
                 </div>
                 <div class="text-gray-500 text-sm font-reguler">
-                    {{ __('Formulir di bawah ini digunakan untuk mengedit data penanganan komplain.') }}
+                    {{ __('Formulir di bawah ini digunakan untuk mengisi laporan pengerjaan penanganan komplain.') }}
                 </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
@@ -20,7 +20,7 @@
                             @method('PUT')
                             <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
-                                    <div class="sm:col-span-1">
+                                    <div class="sm:col-span-2">
                                         <label for="komplain_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Nomor Komplain') }}</label>
                                         <select name="komplain_id" id="komplain_id"
@@ -32,7 +32,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="sm:col-span-3">
+                                    <div class="sm:col-span-2">
                                         <label for="nomor_penanganan"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             {{ __('Nomor Penanganan Komplain') }}
@@ -155,7 +155,17 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-3">
+                                <div class="sm:col-span-1">
+                                    <label for="kateogori"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ __('Kategori yang Dipilih:') }}
+                                    </label>
+                                    <div id="selected-category"
+                                        class="relative flex flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                        <!-- Badges will be added here dynamically -->
+                                    </div>
+                                </div>
+                                <div class="sm:col-span-2">
                                     <label for="respon_awal"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Respon Awal') }}</label>
                                     <div class="relative">
@@ -219,6 +229,16 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <div class="sm:col-span-3">
+                                    <label for="penanganan_by"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ __('Penanganan Oleh:') }}
+                                    </label>
+                                    <div id="selected-users"
+                                        class="relative flex flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                        <!-- Badges will be added here dynamically -->
+                                    </div>
+                                </div>
                                 <div class="sm:col-span-4 text-gray-900 text-lg font-semibold">
                                     {{ __('Pengerjaan') }}</div>
                                 <div class="sm:col-span-2">
@@ -272,26 +292,54 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Oleh Tenant Relation') }}</label>
                                         <div class="flex items-center">
                                             <input type="hidden" name="persetujuan_selesai_tr" value="0">
-                                            <input id="persetujuan_selesai_tr" type="checkbox" value="1" name="persetujuan_selesai_tr"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                                {{ $penanganan->persetujuan_selesai_tr ? 'checked' : '' }}>
-                                            <label for="persetujuan_selesai_tr"
-                                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ __('Tenant Relation menyetujui bahwa komplain telah diselesaikan') }}</label>
+                                            @if (Auth::user()->tipe_user_id == 2)
+                                                <input id="persetujuan_selesai_tr" type="checkbox" value="1"
+                                                    name="persetujuan_selesai_tr"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                    {{ $penanganan->persetujuan_selesai_tr ? 'checked' : '' }}>
+                                                <label for="persetujuan_selesai_tr"
+                                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    {{ __('Tenant Relation menyetujui bahwa komplain telah diselesaikan') }}
+                                                </label>
+                                            @else
+                                                <input id="persetujuan_selesai_tr" type="checkbox" value="1"
+                                                    disabled name="persetujuan_selesai_tr"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                    {{ $penanganan->persetujuan_selesai_tr ? 'checked' : '' }}>
+                                                <label for="persetujuan_selesai_tr"
+                                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    {{ __('Tenant Relation menyetujui bahwa komplain telah diselesaikan') }}
+                                                </label>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="sm:row-span-2">
                                         <label for="persetujuan_selesai_pelaksana"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Oleh Pelaksana') }}</label>
                                         <div class="flex items-center">
-                                            <input type="hidden" name="persetujuan_selesai_pelaksana" value="0">
-                                            <input id="persetujuan_selesai_pelaksana" type="checkbox" value="1" name="persetujuan_selesai_pelaksana"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                                {{ $penanganan->persetujuan_selesai_pelaksana ? 'checked' : '' }}>
-                                            <label for="persetujuan_selesai_pelaksana"
-                                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ __('Pelaksana menyetujui bahwa komplain telah diselesaikan') }}</label>
+                                            <input type="hidden" name="persetujuan_selesai_pelaksana"
+                                                value="0">
+                                            @if (in_array(Auth::user()->id, $penanganan->users->pluck('id')->toArray()))
+                                                <input id="persetujuan_selesai_pelaksana" type="checkbox"
+                                                    value="1" name="persetujuan_selesai_pelaksana"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                    {{ $penanganan->persetujuan_selesai_pelaksana ? 'checked' : '' }}>
+                                                <label for="persetujuan_selesai_pelaksana"
+                                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    {{ __('Pelaksana menyetujui bahwa komplain telah diselesaikan') }}
+                                                </label>
+                                            @else
+                                                <input id="persetujuan_selesai_pelaksana" type="checkbox"
+                                                    value="1" disabled name="persetujuan_selesai_pelaksana"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                    {{ $penanganan->persetujuan_selesai_pelaksana ? 'checked' : '' }}>
+                                                <label for="persetujuan_selesai_pelaksana"
+                                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    {{ __('Pelaksana menyetujui bahwa komplain telah diselesaikan') }}
+                                                </label>
+                                            @endif
                                         </div>
                                     </div>
-
                                 </div>
                                 <input type="hidden" id="created_by" name="created_by"
                                     value="{{ $penanganan->created_by }}">
@@ -381,5 +429,93 @@
             var currentTime = hours + ':' + minutes;
             document.getElementById('time').value = currentTime;
         });
+        // Function to update the selected users
+        function updateSelectedUsers(userId, userName, isChecked) {
+            const selectedUsersContainer = document.getElementById('selected-users');
+            if (isChecked) {
+                // Add badge
+                const badge = document.createElement('span');
+                badge.className =
+                    'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300';
+                badge.textContent = userName;
+                badge.setAttribute('data-user-id', userId); // Store user ID in data attribute
+                selectedUsersContainer.appendChild(badge);
+            } else {
+                // Remove badge
+                const badges = selectedUsersContainer.querySelectorAll('span');
+                badges.forEach(badge => {
+                    if (badge.getAttribute('data-user-id') === userId) {
+                        badge.remove();
+                    }
+                });
+            }
+        }
+
+        // Initialize the selected users on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const userCheckboxes = document.querySelectorAll('#dropdownSearchUsers input[type="checkbox"]');
+            userCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateSelectedUsers(this.value, this.parentElement.querySelector('label')
+                        .textContent, this.checked);
+                });
+
+                // Initialize the badges for already selected users
+                if (checkbox.checked) {
+                    updateSelectedUsers(checkbox.value, checkbox.parentElement.querySelector('label')
+                        .textContent, true);
+                }
+            });
+        });
+        // Function to update the selected users
+        function updateSelectedUsers(userId, userName, isChecked) {
+            const selectedUsersContainer = document.getElementById('selected-users');
+            if (isChecked) {
+                // Add badge
+                const badge = document.createElement('span');
+                badge.className =
+                    'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300';
+                badge.textContent = userName;
+                badge.setAttribute('data-user-id', userId); // Store user ID in data attribute
+                selectedUsersContainer.appendChild(badge);
+            } else {
+                // Remove badge
+                const badges = selectedUsersContainer.querySelectorAll('span');
+                badges.forEach(badge => {
+                    if (badge.getAttribute('data-user-id') === userId) {
+                        badge.remove();
+                    }
+                });
+            }
+        }
+        const selectedCategoriesContainer = document.getElementById('selected-category');
+
+        // Function to update the selected categories
+        function updateSelectedCategories() {
+            selectedCategoriesContainer.innerHTML = '';
+            listItemsKategoriPenanganan.forEach(function(item) {
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                const categoryName = item.querySelector('label').innerText;
+
+                if (checkbox.checked) {
+                    // Add badge
+                    const badge = document.createElement('span');
+                    badge.className =
+                        'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300';
+                    badge.textContent = categoryName;
+                    badge.setAttribute('data-category', categoryName); // Store category name in data attribute
+                    selectedCategoriesContainer.appendChild(badge);
+                }
+            });
+        }
+
+        // Add event listener to checkboxes
+        listItemsKategoriPenanganan.forEach(function(item) {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            checkbox.addEventListener('change', updateSelectedCategories);
+        });
+
+        // Initial population of selected categories
+        updateSelectedCategories();
     </script>
 </x-app-layout>
