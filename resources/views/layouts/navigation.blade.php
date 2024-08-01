@@ -84,7 +84,7 @@
                         <span class="flex-1 ms-4 text-left rtl:text-right whitespace-nowrap">{{ __('Beranda') }}</span>
                     </a>
                 </li>
-                @if (Auth::user()->tipe_user_id === '1' || Auth::user()->tipe_user_id === '1')
+                @if (Auth::user()->tipe_user_id == 1)
                     <li>
                         <button type="button"
                             class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full"
@@ -288,7 +288,7 @@
                         </li>
                     </ul>
                 </li>
-                @if (Auth::user()->tipe_user_id === '3' || Auth::user()->tipe_user_id === '1')
+                @if (Auth::user()->tipe_user_id == 3|| Auth::user()->tipe_user_id == 1)
                     <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
                         <li>
                             <button href="{{ route('ipl.index') }}"
@@ -328,7 +328,7 @@
                         </li>
                     </ul>
                 @endif
-                @if (Auth::user()->tipe_user_id === '2' || Auth::user()->tipe_user_id === '1')
+                @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id === 1)
                     <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
                         <li>
                             <button type="button"
