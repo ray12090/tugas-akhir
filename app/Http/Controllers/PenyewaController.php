@@ -221,7 +221,7 @@ class PenyewaController extends Controller
     {
         try {
             $penyewa->delete();
-            return redirect()->route('penyewa.index')->with('danger', 'Data Penyewa berhasil dihapus.');
+            return redirect()->route('penyewa.index')->with('success', 'Data Penyewa berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('penyewa.index')->withErrors(['msg' => 'Error deleting komplain. Please try again.']);
         }
