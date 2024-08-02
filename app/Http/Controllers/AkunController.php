@@ -94,20 +94,27 @@ class AkunController extends Controller
             // Validate input
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $data->id],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $data->id],
                 'password' => ['nullable', 'string', 'min:8'],
                 'tipe_user_id' => ['required', 'exists:tipe_users,id'],
             ], [
                 'email.unique' => 'Email sudah digunakan. Silakan pilih email lain.',
             ]);
 
-            // Update user data
-            $data->update([
+            // Prepare data to update
+            $updateData = [
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password ? bcrypt($request->password) : $data->password,
                 'tipe_user_id' => $request->tipe_user_id,
-            ]);
+            ];
+
+            // Update password only if provided
+            if ($request->filled('password')) {
+                $updateData['password'] = bcrypt($request->password);
+            }
+
+            // Update user data
+            $data->update($updateData);
 
             return redirect()->route('akun.index')->with(['success' => 'Detail akun berhasil diubah!']);
         } catch (ValidationException $e) {
@@ -116,6 +123,7 @@ class AkunController extends Controller
             return redirect()->back()->withErrors(['msg' => 'Terjadi kesalahan saat mengubah akun. Silakan coba lagi.'])->withInput();
         }
     }
+
 
 
 
