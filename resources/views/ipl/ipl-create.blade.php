@@ -313,9 +313,9 @@
             </div>
         </div>
     </div>
-    <!-- </div>
+    </div>
     @include('components.modal', ['type' => 'confirmation'])
-    </div> -->
+    </div>
     <script>
         document.getElementById('pemilik_id').addEventListener('change', function () {
             var pemilikId = this.value;
