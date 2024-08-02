@@ -15,6 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 class KomplainController extends Controller
@@ -61,8 +62,6 @@ class KomplainController extends Controller
     public function store(Request $request)
     {
         $nomorLaporan = Komplain::generateNomorLaporan();
-        dd($request->all());
-        // dd($request->all());
         $request->validate([
             'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
             'tanggal_laporan' => 'required|date',
@@ -105,8 +104,10 @@ class KomplainController extends Controller
                 ]);
             }
         }
-
-        return redirect()->route('komplain.index')->with('success', 'Komplain berhasil ditambahkan');
+        if(Auth::user()->tipe_user_id != 1 || Auth::user()->tipe_user_id != 2){
+            return redirect()->route('komplain.index')->with('success', 'Komplain berhasil ditambahkan');
+        }
+        return redirect()->route('dashboard')->with('success', 'Komplain berhasil ditambahkan');
     }
 
 

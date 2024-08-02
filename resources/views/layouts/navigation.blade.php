@@ -235,60 +235,72 @@
                         </button>
                         <ul id="data-komplain" class="hidden py-2 space-y-2">
                             <li>
-                                <a href="{{ route('komplain.index') }}"
-                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Semua Komplain') }}</a>
+                                <a href="{{ route('komplain.create') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Tambah Komplain') }}</a>
                             </li>
-                            <li>
-                                <a href="{{ route('jenis_komplain.index') }}"
-                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Jenis Komplain') }}</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('lokasi_komplain.index') }}"
-                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Lokasi Komplain') }}</a>
-                            </li>
-                            {{-- <li>
+                            @if (Auth::user()->tipe_user_id != 11 && Auth::user()->tipe_user_id != 12)
+                                <li>
+                                    <a href="{{ route('komplain.index') }}"
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Semua Komplain') }}</a>
+                                </li>
+                                @if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 2)
+                                    <li>
+                                        <a href="{{ route('jenis_komplain.index') }}"
+                                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Jenis Komplain') }}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('lokasi_komplain.index') }}"
+                                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Lokasi Komplain') }}</a>
+                                    </li>
+                                    {{-- <li>
                                 <a href="{{ route('kategori_komplain.index') }}"
                                     class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Kategori') }}</a>
                             </li> --}}
-                            <li>
-                                <a href="{{ route('status_komplain.index') }}"
-                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Status Komplain') }}</a>
-                            </li>
+                                    <li>
+                                        <a href="{{ route('status_komplain.index') }}"
+                                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Status Komplain') }}</a>
+                                    </li>
+                                @endif
+                            @endif
                         </ul>
                     </li>
                 </ul>
-                <li>
-                    <button type="button"
-                        class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full"
-                        aria-controls="data-penanganan" data-collapse-toggle="data-penanganan">
-                        <svg class="w-6 h-6 text-[#016452] transition duration-75 group-hover:text-[#014F41]"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd"
-                                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span class="flex-1 ms-4 text-left rtl:text-right whitespace-nowrap">
-                            {{ __('Data Penanganan') }}
-                        </span>
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button>
-                    <ul id="data-penanganan" class="hidden py-2 space-y-2">
-                        <li>
-                            <a href="{{ route('penanganan.index') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Semua Penanganan') }}</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('kategori_penanganan.index') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Kategori Penanganan') }}</a>
-                        </li>
-                    </ul>
-                </li>
-                @if (Auth::user()->tipe_user_id == 3|| Auth::user()->tipe_user_id == 1)
+                @if (Auth::user()->tipe_user_id != 11 && Auth::user()->tipe_user_id != 12)
+                    <li>
+                        <button type="button"
+                            class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-full"
+                            aria-controls="data-penanganan" data-collapse-toggle="data-penanganan">
+                            <svg class="w-6 h-6 text-[#016452] transition duration-75 group-hover:text-[#014F41]"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd"
+                                    d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="flex-1 ms-4 text-left rtl:text-right whitespace-nowrap">
+                                {{ __('Data Penanganan') }}
+                            </span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <ul id="data-penanganan" class="hidden py-2 space-y-2">
+                            <li>
+                                <a href="{{ route('penanganan.index') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Semua Penanganan') }}</a>
+                            </li>
+                            @if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 2)
+                                <li>
+                                    <a href="{{ route('kategori_penanganan.index') }}"
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Daftar Kategori Penanganan') }}</a>
+                                </li>
+                            @endif
+                        </ul>
+                    </li>
+                @endif
+                @if (Auth::user()->tipe_user_id == 3 || Auth::user()->tipe_user_id == 1)
                     <ul class="pt-5 mt-5 space-y-2 border-t border-gray-200 dark:border-gray-700">
                         <li>
                             <button href="{{ route('ipl.index') }}"

@@ -16,12 +16,6 @@
                                 </svg>
                             </div>
                             <div class="me-auto place-self-center lg:col-span-7">
-                                @if (Auth::user()->tipe_user_id != 11 || Auth::user()->tipe_user_id != 12)
-                                    <h1
-                                        class="mb-3 text-2xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-4xl">
-                                        {{ __('Selamat datang, ') }} {{ Auth::user()->name }}!
-                                    </h1>
-                                @endif
                                 @if (Auth::user()->tipe_user_id == 11)
                                     @if (App\Models\Pemilik::where('user_id', Auth::user()->id)->exists())
                                         <h1
@@ -59,6 +53,12 @@
                                             class="inline-flex items-center py-3 px-5 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
                                             {{ __('Isi data diri sebagai penyewa') }}</a>
                                     @endif
+                                @endif
+                                @if (Auth::user()->tipe_user_id != 11 && Auth::user()->tipe_user_id != 12)
+                                    <h1
+                                        class="mb-3 text-2xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-4xl">
+                                        {{ __('Selamat datang, ') }} {{ Auth::user()->name }}!
+                                    </h1>
                                 @endif
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                                     </svg>
                                     <span class="text-sm font-medium text-white">{{ __('Data Diri') }}</span>
                                 </a>
-                                <a href="#"
+                                <a href="{{ route('komplain.create') }}"
                                     class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
                                     <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -115,7 +115,7 @@
                             </div>
                         @endif
                     @endif
-                    @if (Auth::user()->tipe_user_id != 11 || Auth::user()->tipe_user_id != 12)
+                    @if (Auth::user()->tipe_user_id != 11 && Auth::user()->tipe_user_id != 12)
                         <div
                             class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-4 rounded-lg p-6 shadow-md sm:rounded-2xl bg-[#01645222]">
                             @if (Auth::user()->tipe_user_id == 1)
@@ -143,8 +143,6 @@
                                     </svg>
                                     <span class="text-sm font-medium text-white">{{ __('Data Pemilik') }}</span>
                                 </a>
-                            @endif
-                            @if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 3)
                                 <a href="{{ route('penyewa.index') }}"
                                     class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
                                     <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
@@ -156,29 +154,29 @@
                                     </svg>
                                     <span class="text-sm font-medium text-white">{{ __('Data Penyewa') }}</span>
                                 </a>
+                                <a href="{{ route('komplain.index') }}"
+                                    class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
+                                    <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-sm font-medium text-white">{{ __('Data Komplain') }}</span>
+                                </a>
+                                <a href="{{ route('penanganan.index') }}"
+                                    class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
+                                    <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-sm font-medium text-white">{{ __('Data Penanganan') }}</span>
+                                </a>
                             @endif
-                            <a href="{{ route('komplain.index') }}"
-                                class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
-                                <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    fill="currentColor" viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd"
-                                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm font-medium text-white">{{ __('Data Komplain') }}</span>
-                            </a>
-                            <a href="{{ route('penanganan.index') }}"
-                                class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
-                                <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    fill="currentColor" viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd"
-                                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-sm font-medium text-white">{{ __('Data Penanganan') }}</span>
-                            </a>
                             @if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 3)
                                 <a href="{{ route('ipl.index') }}"
                                     class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
