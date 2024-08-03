@@ -11,9 +11,12 @@ class lokasiKomplain extends Model
     protected $fillable = ['nama_bagian'];
 
     public function komplains()
-{
-    return $this->belongsToMany(Komplain::class, 'komplain_lokasi_pivot')
-                ->withPivot('uraian_komplain', 'foto_komplain');
-}
-
+    {
+        return $this->belongsToMany(Komplain::class, 'komplain_lokasi_pivot')
+            ->withPivot('uraian_komplain', 'foto_komplain');
+    }
+    public function penanganans()
+    {
+        return $this->hasMany(Penanganan::class);
+    }
 }

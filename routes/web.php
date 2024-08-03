@@ -100,14 +100,19 @@ Route::get('/generate-nomor-laporan', function () {
     return response()->json(['nomor_laporan' => $nomorLaporan]);
 });
 Route::get('/generate-nomor-penanganan', function () {
-    $nomorPenanganan = \App\Models\Penanganan::generateNomorPenanganan();
+    $nomorPenanganan = \App\Models\Penanganan::generateFreshNomorPenanganan();
     return response()->json(['nomor_penanganan' => $nomorPenanganan]);
 });
+Route::get('createDirect', [PenangananController::class, 'createDirect'])->name('penanganan.createDirect');
 
 // routes/web.php
 Route::get('/api/get-kabupaten/{provinceCode}', [PemilikController::class, 'getKabupaten']);
 Route::get('/api/get-kecamatan/{cityCode}', [PemilikController::class, 'getKecamatan']);
 Route::get('/api/get-kelurahan/{districtCode}', [PemilikController::class, 'getKelurahan']);
+Route::get('/komplains/{id}/lokasi', [PenangananController::class, 'getLokasiKomplain']);
+
+
+
 
 
 // Default route for handling unknown routes

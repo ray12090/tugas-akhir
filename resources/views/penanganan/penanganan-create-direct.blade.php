@@ -4,7 +4,7 @@
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Tambah penanganan') }}
+                    {{ __('Tambah penanganan untuk no. komplain ') }}{{ $komplains->first()->nomor_laporan }}
                 </div>
                 <div class="text-gray-500 text-sm font-reguler">
                     {{ __('Di bawah merupakan formulir untuk menambah data penanganan. Isi formulir ini dapat diisi oleh Tenant Relation') }}
@@ -18,28 +18,8 @@
                             onsubmit="return confirmSave(this);">
                             @csrf
                             <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
-                                <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
+                                    <input type="hidden" id="komplain_id "name="komplain_id" value="{{ $komplains->first()->nomor_laporan }}">
                                     <div class="sm:col-span-1">
-                                        <label for="komplain_id"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Nomor Komplain') }}</label>
-                                        <select name="komplain_id" id="komplain_id"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            @foreach ($komplains as $komplain)
-                                                <option value="{{ $komplain->id }}">
-                                                    {{ $komplain->nomor_laporan }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="sm:col-span-1">
-                                        <label for="lokasi_komplain_id"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Lokasi Komplain') }}</label>
-                                        <select name="lokasi_komplain_id" id="lokasi_komplain_id"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            <!-- Lokasi komplain akan dimuat di sini -->
-                                        </select>
-                                    </div>
-                                    <div class="sm:col-span-2">
                                         <label for="nomor_penanganan"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             {{ __('Nomor Penanganan Komplain') }}
@@ -57,8 +37,6 @@
                                             </svg>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="sm:col-span-2">
                                     <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
                                         <div class="sm:col-span-1">
                                             <label for="time"
@@ -102,7 +80,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 <div class="sm:col-span-4">
                                     <label for="respon_awal"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Respon Awal') }}</label>
@@ -119,12 +96,12 @@
                                         {{ __('Penanganan ini ditugaskan kepada') }}
                                     </label>
                                     <button id="dropdownSearchButtonUsers" data-dropdown-toggle="dropdownSearchUsers"
-                                        class="w-full text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
+                                        class="text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
                                         type="button">{{ __('Pilih nama') }}
                                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="m1 1 4 4 4-4" />
                                         </svg>
                                     </button>
                                     <div id="dropdownSearchUsers"
@@ -313,37 +290,6 @@
                 noUserText.textContent = 'Nama belum dipilih';
                 selectedUsersContainer.appendChild(noUserText);
             }
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            const komplainSelect = document.getElementById('komplain_id');
-            const lokasiKomplainSelect = document.getElementById('lokasi_komplain_id');
-
-            komplainSelect.addEventListener('change', function() {
-                const komplainId = this.value;
-                if (komplainId) {
-                    fetch(`/komplains/${komplainId}/lokasi`)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            lokasiKomplainSelect.innerHTML = '';
-                            data.forEach(lokasi => {
-                                const option = document.createElement('option');
-                                option.value = lokasi.id;
-                                option.textContent = lokasi.nama_lokasi_komplain;
-                                lokasiKomplainSelect.appendChild(option);
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error fetching lokasi komplain:', error);
-                        });
-                } else {
-                    lokasiKomplainSelect.innerHTML = '';
-                }
-            });
         });
     </script>
 </x-app-layout>

@@ -19,8 +19,6 @@ class LokasiKomplainSeeder extends Seeder
             ['nama_lokasi_komplain' => 'Kamar Tidur'],
             ['nama_lokasi_komplain' => 'Kamar Mandi'],
             ['nama_lokasi_komplain' => 'Ruang Tamu'],
-            ['nama_lokasi_komplain' => 'Teras'],
-            ['nama_lokasi_komplain' => 'Taman'],
         ]);
     }
 }

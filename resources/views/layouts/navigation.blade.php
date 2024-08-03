@@ -28,10 +28,16 @@
             </div>
             <div class="flex items-center lg:order-2">
                 <button type="button"
-                    class="flex mx-3 text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    class="flex mx-3 text-sm bg-gray-100 shadow-md items-center rounded-lg focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                     <span class="sr-only">{{ __('Open user menu') }}</span>
-                    <img class="w-8 h-8 rounded-full"
+                    <div class="px-4 hidden lg:block">
+                        <span
+                            class="block text-sm font-semibold text-gray-900 dark:text-white text-end">{{ Auth::user()->name }}</span>
+                        <span
+                            class="block text-sm text-gray-900 truncate dark:text-white text-end">{{ __('Role: ') }}{{ Auth::user()->tipeUser->nama_tipe_user }}</span>
+                    </div>
+                    <img class="w-8 h-8 rounded-full lg:mr-3"
                         src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
                         alt="user photo" />
                 </button>
@@ -50,19 +56,20 @@
                                 {{ __('My profile') }}</a>
                         </li>
                     </ul>
-                    <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
+                    <ul class="pt-1 text-gray-700 dark:text-gray-300 " aria-labelledby="dropdown">
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
-                                    class="w-full block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                    {{ __('Sign out') }}
+                                    class="w-full block pt-2 pb-3 px-4 text-sm text-center hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white rounded-b-xl">
+                                    {{ __('Log out') }}
                                 </button>
                             </form>
                         </li>
                     </ul>
                 </div>
             </div>
+
         </div>
     </nav>
 

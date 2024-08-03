@@ -1,5 +1,6 @@
 <x-app-layout>
     <div>
+        @include('components.alert')
         <div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-2xl">
                 <div class="p-6 h-auto">
@@ -22,13 +23,16 @@
                                             class="mb-3 text-2xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-4xl">
                                             {{ __('Selamat datang, ') }} {{ Auth::user()->name }}!
                                         </h1>
+                                        <p class="mb-6 text-gray-500 dark:text-gray-400">
+                                            {{ __('Pilih layanan yang Anda diperlukan di bawah') }}
+                                        </p>
                                     @else
                                         <h1
                                             class="mb-3 text-2xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-4xl">
                                             {{ __('Selamat datang, ') }} {{ Auth::user()->name }}!
                                         </h1>
                                         <p class="mb-6 text-gray-500 dark:text-gray-400">
-                                            {{ 'Anda belum mengisi data diri Anda. Silahkan lengkapi data diri Anda terlebih dahulu.' }}
+                                            {{ __('Anda belum mengisi data diri Anda. Silahkan lengkapi data diri Anda terlebih dahulu.') }}
                                         </p>
                                         <a href="{{ route('pemilik.create') }}"
                                             class="inline-flex items-center py-3 px-5 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
@@ -47,7 +51,7 @@
                                             {{ __('Selamat datang, ') }} {{ Auth::user()->name }}!
                                         </h1>
                                         <p class="mb-6 text-gray-500 dark:text-gray-400">
-                                            {{ 'Anda belum mengisi data diri Anda. Silahkan lengkapi data diri Anda terlebih dahulu.' }}
+                                            {{ __('Anda belum mengisi data diri Anda. Silahkan lengkapi data diri Anda terlebih dahulu.') }}
                                         </p>
                                         <a href="{{ route('penyewa.create') }}"
                                             class="inline-flex items-center py-3 px-5 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
