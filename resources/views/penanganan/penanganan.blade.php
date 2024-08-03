@@ -38,7 +38,7 @@
                             </div>
                         </form>
                     </div>
-                    @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 1)
+                    {{-- @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 1)
                         <div
                             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                             <a href="{{ route('penanganan.create') }}" id="createProductButton"
@@ -51,7 +51,7 @@
                                 {{ __('Tambah Penanganan Komplain') }}
                             </a>
                         </div>
-                    @endif
+                    @endif --}}
                 </div>
                 <div class="overflow-x-scroll">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

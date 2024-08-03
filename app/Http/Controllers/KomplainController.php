@@ -7,6 +7,8 @@ use App\Models\Unit;
 use App\Models\JenisKomplain;
 use App\Models\LokasiKomplain;
 use App\Models\StatusKomplain;
+use App\Models\User;
+use App\Models\Penanganan;
 use App\Http\Requests\StoreKomplainRequest;
 use App\Http\Requests\UpdateKomplainRequest;
 use Illuminate\Http\Request;
@@ -53,7 +55,8 @@ class KomplainController extends Controller
         $units = Unit::all();
         $jenisKomplains = JenisKomplain::all();
         $lokasiKomplains = LokasiKomplain::all();
-        return view('komplain.komplain-create', compact('units', 'jenisKomplains', 'lokasiKomplains'));
+        $users = User::whereNotIn('tipe_user_id', [11, 12])->get();
+        return view('komplain.komplain-create', compact('units', 'jenisKomplains', 'lokasiKomplains', 'users'));
     }
 
     /**
@@ -69,6 +72,8 @@ class KomplainController extends Controller
             'nama_pelapor' => 'required|string',
             'no_hp' => 'required|string',
             'lokasi_komplain.*.lokasi_id' => 'required|exists:lokasi_komplains,id',
+            'users_id' => 'nullable|array',
+            'users_id.*' => 'exists:users,id',
         ]);
 
         $komplain = Komplain::create([
@@ -89,9 +94,6 @@ class KomplainController extends Controller
                 // Menggunakan $index untuk mengakses file dalam array multidimensi
                 if ($request->hasFile("lokasi_komplain.$index.foto_komplain")) {
                     $image = $request->file("lokasi_komplain.$index.foto_komplain");
-
-                    // Generate unique filename and save the file
-                    // $filename = time() . '_' . $image->hashName();
                     $image->storeAs('public/foto_komplain', $image->hashName());
                     $fotoPath = $image->hashName();
                 }
@@ -102,14 +104,28 @@ class KomplainController extends Controller
                     'uraian_komplain' => $uraian,
                     'foto_komplain' => $fotoPath,
                 ]);
+
+                // Buat penanganan untuk setiap lokasi komplain
+                $nomorPenanganan = Penanganan::generateFreshNomorPenanganan();
+                $penanganan = Penanganan::create([
+                    'komplain_id' => $komplain->id,
+                    'lokasi_komplain_id' => $lokasiId,
+                    'nomor_penanganan' => $nomorPenanganan,
+                    'created_by' => Auth::id(),
+                    'updated_by' => Auth::id(),
+                ]);
+
+                if ($request->has('users_id')) {
+                    $penanganan->users()->sync($request->users_id);
+                }
             }
         }
-        if(Auth::user()->tipe_user_id != 1 || Auth::user()->tipe_user_id != 2){
+
+        if (Auth::user()->tipe_user_id != 11 && Auth::user()->tipe_user_id != 12) {
             return redirect()->route('komplain.index')->with('success', 'Komplain berhasil ditambahkan');
         }
         return redirect()->route('dashboard')->with('success', 'Komplain berhasil ditambahkan');
     }
-
 
 
     /**
@@ -197,7 +213,7 @@ class KomplainController extends Controller
             }
         }
 
-        return redirect()->route('komplain.edit', $komplain->id)->with('success', 'Data komplain berhasil diperbarui.');
+        return redirect()->route('komplain.index')->with('success', 'Data komplain berhasil diperbarui.');
     }
     /**
      * Remove the specified resource from storage.

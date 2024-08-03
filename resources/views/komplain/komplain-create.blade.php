@@ -4,10 +4,10 @@
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Tambah komplain') }}
+                    {{ __('Tambah Laporan Komplain') }}
                 </div>
                 <div class="text-gray-500 text-sm font-reguler">
-                    {{ __('Di bawah merupakan formulir untuk menambah data komplain. Isi formulir ini dapat diisi oleh Tenant Relation') }}
+                    {{ __('Di bawah merupakan formulir untuk menambah data komplain') }}
                 </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
@@ -130,6 +130,7 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('No. HP') }}
                                     </label>
+                                    @if (Auth::user()->tipe_user_id == 11 || Auth::user()->tipe_user_id == 12)
                                     <div class="relative">
                                         <input type="text" name="no_hp" id="no_hp"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -142,7 +143,95 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </div>
+                                    @else
+                                    <div class="relative">
+                                        <input type="text" name="no_hp" id="no_hp"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Nomor handphone pelapor" required>
+                                        <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" fill="currentColor" viewBox="0 0 24 24">
+                                            <path fill-rule="evenodd"
+                                                d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    @endif
                                 </div>
+                                @if (Auth::user()->tipe_user_id == 2)
+                                    <div class="sm:col-span-4 text-gray-900 text-lg font-semibold">
+                                        {{ __('Penugasan') }}</div>
+                                    <div class="grid gap-4 sm:col-span-4 sm:grid-cols-4 sm:gap-6">
+                                        <div class="sm:col-span-1">
+                                            <label for="users_id" id="labelUsers"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ __('Penanganan ditugaskan kepada') }}
+                                            </label>
+                                            <button id="dropdownSearchButtonUsers"
+                                                data-dropdown-toggle="dropdownSearchUsers"
+                                                class="w-full text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
+                                                type="button">{{ __('Pilih nama') }}
+                                                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 10 6">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                                </svg>
+                                            </button>
+                                            <div id="dropdownSearchUsers"
+                                                class="z-10 hidden bg-white rounded-lg w-60 dark:bg-gray-700 outline-gray-300 outline outline-1">
+                                                <div class="p-3">
+                                                    <label for="users_search"
+                                                        class="sr-only">{{ __('Search') }}</label>
+                                                    <div class="relative">
+                                                        <div
+                                                            class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none" viewBox="0 0 20 20">
+                                                                <path stroke="currentColor" stroke-linecap="round"
+                                                                    stroke-linejoin="round" stroke-width="2"
+                                                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                                            </svg>
+                                                        </div>
+                                                        <input type="text" id="users_search"
+                                                            class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            placeholder="Cari Nama">
+                                                    </div>
+                                                </div>
+                                                <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+                                                    aria-labelledby="dropdownSearchButtonUsers">
+                                                    @foreach ($users as $user)
+                                                        <li>
+                                                            <div
+                                                                class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                                                <input id="users_id_{{ $user->id }}"
+                                                                    type="checkbox" value="{{ $user->id }}"
+                                                                    name="users_id[]"
+                                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                                    onchange="updateSelectedUsers('{{ $user->name }}', this.checked)">
+                                                                <label for="users_id_{{ $user->id }}"
+                                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
+                                                                    {{ $user->name }}
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="sm:col-span-3">
+                                            <label for="penanganan_by"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                {{ __('Penanganan Oleh:') }}
+                                            </label>
+                                            <div id="selected-users"
+                                                class="relative flex flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                                <!-- Badges will be added here dynamically -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="sm:col-span-4">
                                     <div class=" text-gray-900 text-lg font-semibold">
                                         {{ __('Isi Komplain') }}
@@ -174,7 +263,7 @@
                                         </div>
                                         <div class="sm:col-span-1">
                                             <label for="foto_komplain_0"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto') }}</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto (opsional)') }}</label>
                                             <input type="file" id="foto_komplain_0"
                                                 name="lokasi_komplain[0][foto_komplain]"
                                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-2">
@@ -337,6 +426,69 @@
             var month = ("0" + (today.getMonth() + 1)).slice(-2);
             var dateToday = today.getFullYear() + "-" + month + "-" + day;
             document.getElementById("tanggal_laporan").value = dateToday;
+        });
+
+        function updateSelectedUsers(userId, userName, isChecked) {
+            const selectedUsersContainer = document.getElementById('selected-users');
+
+            if (isChecked) {
+                // Add badge
+                const badge = document.createElement('span');
+                badge.className =
+                    'bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300';
+                badge.textContent = userName;
+                badge.setAttribute('data-user-id', userId); // Store user ID in data attribute
+                selectedUsersContainer.appendChild(badge);
+            } else {
+                // Remove badge
+                const badges = selectedUsersContainer.querySelectorAll('span');
+                badges.forEach(badge => {
+                    if (badge.getAttribute('data-user-id') === userId) {
+                        badge.remove();
+                    }
+                });
+            }
+
+            // Check if there are any selected users
+            if (selectedUsersContainer.querySelectorAll('span').length === 0) {
+                const noUserText = document.createElement('span');
+                noUserText.className = 'text-gray-500 dark:text-gray-300';
+                noUserText.textContent = 'Nama belum dipilih';
+                selectedUsersContainer.appendChild(noUserText);
+            } else {
+                // Remove "Nama belum dipilih" text if it exists
+                const noUserText = selectedUsersContainer.querySelector('span.text-gray-500');
+                if (noUserText) {
+                    noUserText.remove();
+                }
+            }
+        }
+
+        // Initialize the selected users on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const userCheckboxes = document.querySelectorAll('#dropdownSearchUsers input[type="checkbox"]');
+            const selectedUsersContainer = document.getElementById('selected-users');
+
+            userCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateSelectedUsers(this.value, this.parentElement.querySelector('label')
+                        .textContent, this.checked);
+                });
+
+                // Initialize the badges for already selected users
+                if (checkbox.checked) {
+                    updateSelectedUsers(checkbox.value, checkbox.parentElement.querySelector('label')
+                        .textContent, true);
+                }
+            });
+
+            // Check if there are any selected users initially
+            if (selectedUsersContainer.querySelectorAll('span').length === 0) {
+                const noUserText = document.createElement('span');
+                noUserText.className = 'text-gray-500 dark:text-gray-300';
+                noUserText.textContent = 'Nama belum dipilih';
+                selectedUsersContainer.appendChild(noUserText);
+            }
         });
     </script>
 </x-app-layout>

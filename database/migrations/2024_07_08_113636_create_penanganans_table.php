@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('penanganans', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('komplain_id');
+            $table->unsignedBigInteger('lokasi_komplain_id');
             $table->string('nomor_penanganan')->unique();
             $table->text('respon_awal')->nullable();
             $table->text('pemeriksaan_awal')->nullable();
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger('updated_by')->nullable();
 
             $table->foreign('komplain_id')->references('id')->on('komplains')->onDelete('cascade');
+            $table->foreign('lokasi_komplain_id')->references('id')->on('lokasi_komplains')->onDelete('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('set null');
 
