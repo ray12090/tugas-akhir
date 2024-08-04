@@ -55,6 +55,10 @@ class Penyewa extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function Komplain()
+    {
+        return $this->hasMany(Komplain::class);
+    }
 
     public function unit()
     {

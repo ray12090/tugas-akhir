@@ -18,6 +18,14 @@ class Komplain extends Model
     {
         return $this->belongsTo(Unit::class);
     }
+    public function Pemilik()
+    {
+        return $this->belongsTo(Pemilik::class);
+    }
+    public function Penyewa()
+    {
+        return $this->belongsTo(Penyewa::class);
+    }
     public function idPelapor()
     {
         return $this->belongsTo(User::class, 'pelapor_id');

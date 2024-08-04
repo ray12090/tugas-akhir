@@ -131,11 +131,26 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         {{ __('No. HP') }}
                                     </label>
-                                    @if (Auth::user()->tipe_user_id == 11 || Auth::user()->tipe_user_id == 12)
+                                    @if (Auth::user()->tipe_user_id == 11)
                                         <div class="relative">
                                             <input type="text" name="no_hp" id="no_hp"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                placeholder="123-1234-5678" required>
+                                                placeholder="123-1234-5678" required
+                                                value="{{ Auth::user()->pemilik->no_hp }}">
+                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
+                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                <path fill-rule="evenodd"
+                                                    d="M7.978 4a2.553 2.553 0 0 0-1.926.877C4.233 6.7 3.699 8.751 4.153 10.814c.44 1.995 1.778 3.893 3.456 5.572 1.68 1.679 3.577 3.018 5.57 3.459 2.062.456 4.115-.073 5.94-1.885a2.556 2.556 0 0 0 .001-3.861l-1.21-1.21a2.689 2.689 0 0 0-3.802 0l-.617.618a.806.806 0 0 1-1.14 0l-1.854-1.855a.807.807 0 0 1 0-1.14l.618-.62a2.692 2.692 0 0 0 0-3.803l-1.21-1.211A2.555 2.555 0 0 0 7.978 4Z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    @elseif (Auth::user()->tipe_user_id == 12)
+                                        <div class="relative">
+                                            <input type="text" name="no_hp" id="no_hp"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                                placeholder="123-1234-5678" required
+                                                value="{{ Auth::user()->penyewa->no_hp }}">
                                             <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                                 height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -280,7 +295,7 @@
                                     </div>
                                 </div>
                                 <div class="sm:col-span-4">
-                                    <a href="{{ route('komplain.index') }}"
+                                    <a href="{{ URL::previous() }}"
                                         class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-GRAY-900 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                         <svg class="w-[16px] h-[16px] text-gray-800 dark:text-white mr-2"
                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"

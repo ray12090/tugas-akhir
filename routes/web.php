@@ -113,6 +113,11 @@ Route::get('/komplains/{id}/lokasi', [PenangananController::class, 'getLokasiKom
 
 Route::get('/api/get-biaya-admin', [DetailBiayaAdminController::class, 'getBiayaAdminBerlaku']);
 Route::get('/api/get-biaya-air', [DetailBiayaAirController::class, 'getBiayaAirBerlaku']);
+Route::get('/get-unit-pemilik/{id}', [DashboardController::class, 'getUnitPemilik']);
+Route::get('/unit-dan-ipl-pemilik/{id}', [DashboardController::class, 'indexUnitdanIPLOwner'])->name('pemilik.unit-dan-ipl');
+Route::get('ipl/unit/{unit_id}', [IplController::class, 'show'])->name('ipl.showIPL');
+Route::get('ipl/unit/{unit_id}/history', [IplController::class, 'history'])->name('ipl.history');
+
 
 
 

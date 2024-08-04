@@ -3,11 +3,8 @@
         @include('components.alert')
         <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
             <div class="px-6 pt-6">
-                <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+                <div class="text-xl font-bold text-gray-900 dark:text-white">
                     {{ __('Data Komplain') }}
-                </div>
-                <div class="text-gray-500 text-sm font-regular">
-                    {{ __('Di bawah merupakan tabel komplain. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Tenant Relation.') }}
                 </div>
             </div>
             <div

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dashboard;
+use App\Models\Pemilik;
 use App\Http\Requests\StoreDashboardRequest;
 use App\Http\Requests\UpdateDashboardRequest;
 
@@ -62,5 +63,11 @@ class DashboardController extends Controller
     public function destroy(Dashboard $dashboard)
     {
         //
+    }
+    public function indexUnitdanIPLOwner($id)
+    {
+        // Ambil data pemilik berdasarkan ID, termasuk unit dan ipl
+        $pemilik = Pemilik::with(['unit'])->findOrFail($id);
+        return view('pemilik.pemilik-unit-ipl', compact('pemilik'));
     }
 }

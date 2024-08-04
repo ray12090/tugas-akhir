@@ -189,20 +189,22 @@ class PemilikController extends Controller
         // Ambil id unit yang sudah dipilih oleh pemilik
         $selectedUnitIds = $pemilik->unit->pluck('id')->toArray();
 
-        return view('pemilik.pemilik-update', compact(
-            'pemilik',
-            'units',
-            'detailKewarganegaraans',
-            'detailAgamas',
-            'detailPerkawinans',
-            'detailTempatLahir',
-            'users',
-            'detailAlamatVillages',
-            'detailAlamatProvinsi',
-            'detailAlamatKabupaten',
-            'detailAlamatKecamatan',
-            'selectedUnitIds' // Ditambahkan untuk di view
-        )
+        return view(
+            'pemilik.pemilik-update',
+            compact(
+                'pemilik',
+                'units',
+                'detailKewarganegaraans',
+                'detailAgamas',
+                'detailPerkawinans',
+                'detailTempatLahir',
+                'users',
+                'detailAlamatVillages',
+                'detailAlamatProvinsi',
+                'detailAlamatKabupaten',
+                'detailAlamatKecamatan',
+                'selectedUnitIds' // Ditambahkan untuk di view
+            )
         );
     }
 
@@ -269,14 +271,11 @@ class PemilikController extends Controller
                     'akhir_huni' => $unit['akhir_huni'],
                 ];
             }
-            $pemilik->unit()->sync($unitData);
+            $pemilik->unit()->syncWithoutDetaching($unitData);
         }
 
         return redirect()->route('pemilik.index')->with('success', 'Data pemilik berhasil diperbarui.');
     }
-
-
-
     /**
      * Remove the specified resource from storage.
      */
