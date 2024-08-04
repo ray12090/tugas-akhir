@@ -81,7 +81,7 @@ class DetailPerkawinanController extends Controller
     {
         try {
             $detailPerkawinan->delete();
-            return redirect()->route('detail_perkawinan.index')->with('danger', 'Status perkawinan berhasil dihapus.');
+            return redirect()->route('detail_perkawinan.index')->with('success', 'Status perkawinan berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('detail_perkawinan.index')->withErrors(['msg' => 'Error deleting status perkawinan. Please try again.']);
         }

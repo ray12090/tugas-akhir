@@ -40,7 +40,7 @@ class LokasiKomplainController extends Controller
     public function store(Request $request)
     {
         lokasiKomplain::create([
-            'nama_bagian' => $request->input('nama_lokasi_komplain'),
+            'nama_lokasi_komplain' => $request->input('nama_lokasi_komplain'),
         ]);
 
         return redirect()->route('lokasi_komplain.index')->with('success', 'Lokasi Komplain berhasil ditambahkan');
@@ -68,7 +68,7 @@ class LokasiKomplainController extends Controller
     public function update(Request $request, lokasiKomplain $lokasiKomplain)
     {
         $lokasiKomplain->update([
-            'nama_bagian' => $request->input('nama_lokasi_komplain'),
+            'nama_lokasi_komplain' => $request->input('nama_lokasi_komplain'),
         ]);
 
         return redirect()->route('lokasi_komplain.index')->with('success', 'Lokasi Komplain berhasil diubah');
@@ -81,7 +81,7 @@ class LokasiKomplainController extends Controller
     {
         try {
             $lokasiKomplain->delete();
-            return redirect()->route('lokasi_komplain.index')->with('danger', 'Data Lokasi Komplain berhasil dihapus.');
+            return redirect()->route('lokasi_komplain.index')->with('success', 'Data Lokasi Komplain berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('lokasi_komplain.index')->withErrors(['msg' => 'Error deleting lokasi komplain. Please try again.']);
         }

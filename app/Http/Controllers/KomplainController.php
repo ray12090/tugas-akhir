@@ -222,7 +222,7 @@ class KomplainController extends Controller
     {
         try {
             $komplain->delete();
-            return redirect()->route('komplain.index')->with('danger', 'Komplain berhasil dihapus.');
+            return redirect()->route('komplain.index')->with('success', 'Komplain berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('komplain.index')->withErrors(['msg' => 'Error deleting komplain. Please try again.']);
         }

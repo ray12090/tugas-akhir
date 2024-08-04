@@ -59,6 +59,7 @@ class TipeUserController extends Controller
      */
     public function edit(tipeUser $tipeUser)
     {
+        $tipeUser = tipeUser::find($tipeUser->id);
         return view('admin.admin-usertype-edit', compact('tipeUser'));
     }
 
@@ -81,7 +82,7 @@ class TipeUserController extends Controller
     {
         try {
             $tipeUser->delete();
-            return redirect()->route('tipe_user.index')->with('danger', 'Data tipe user berhasil dihapus.');
+            return redirect()->route('tipe_user.index')->with('success', 'Data tipe user berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('tipe_user.index')->withErrors(['msg' => 'Error deleting tipe user. Please try again.']);
         }

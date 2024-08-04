@@ -87,7 +87,7 @@ class KategoriPenangananController extends Controller
     {
         try {
             $kategoriPenanganan->delete();
-            return redirect()->route('kategori_penanganan.index')->with('danger', 'Data Kategori Penanganan berhasil dihapus.');
+            return redirect()->route('kategori_penanganan.index')->with('success', 'Data Kategori Penanganan berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('kategori_penanganan.index')->withErrors(['msg' => 'Error deleting kategori penanganan. Please try again.']);
         }

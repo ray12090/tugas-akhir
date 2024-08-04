@@ -85,7 +85,7 @@ class TowerController extends Controller
     {
         try {
             $tower->delete();
-            return redirect()->route('tower.index')->with('danger', 'Data Tower berhasil dihapus.');
+            return redirect()->route('tower.index')->with('success', 'Data Tower berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('tower.index')->withErrors(['msg' => 'Error deleting tower. Please try again.']);
         }

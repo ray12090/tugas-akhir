@@ -241,15 +241,17 @@
                             </svg>
                         </button>
                         <ul id="data-komplain" class="hidden py-2 space-y-2">
-                            <li>
-                                <a href="{{ route('komplain.create') }}"
-                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Tambah Komplain') }}</a>
-                            </li>
                             @if (Auth::user()->tipe_user_id != 11 && Auth::user()->tipe_user_id != 12)
                                 <li>
                                     <a href="{{ route('komplain.index') }}"
                                         class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Semua Komplain') }}</a>
                                 </li>
+                            @endif
+                            <li>
+                                <a href="{{ route('komplain.create') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">{{ __('Tambah Komplain') }}</a>
+                            </li>
+                            @if (Auth::user()->tipe_user_id != 11 && Auth::user()->tipe_user_id != 12)
                                 @if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 2)
                                     <li>
                                         <a href="{{ route('jenis_komplain.index') }}"

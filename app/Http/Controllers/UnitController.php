@@ -122,7 +122,7 @@ class UnitController extends Controller
     {
         try {
             $unit->delete();
-            return redirect()->route('unit.index')->with('danger', 'Unit berhasil dihapus.');
+            return redirect()->route('unit.index')->with('success', 'Unit berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('unit.index')->withErrors(['msg' => 'Error deleting unit. Please try again.']);
         }

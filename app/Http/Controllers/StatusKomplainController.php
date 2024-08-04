@@ -81,7 +81,7 @@ class StatusKomplainController extends Controller
     {
         try {
             $statusKomplain->delete();
-            return redirect()->route('status_komplain.index')->with('danger', 'Data Status Komplain berhasil dihapus.');
+            return redirect()->route('status_komplain.index')->with('success', 'Data Status Komplain berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('status_komplain.index')->withErrors(['msg' => 'Error deleting status komplain. Please try again.']);
         }
