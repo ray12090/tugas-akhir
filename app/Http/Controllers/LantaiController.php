@@ -17,9 +17,12 @@ class LantaiController extends Controller
         $sortBy = $request->input('sort_by', 'nama_lantai');
         $sortOrder = $request->input('sort_order', 'asc');
 
-        $lantais = Lantai::query()
+        $lantais = Lantai::with('tower')
             ->when($search, function ($query, $search) {
-                return $query->where('nama_lantai', 'like', "%{$search}%");
+                return $query->where('nama_lantai', 'like', "%{$search}%")
+                    ->orWhereHas('tower', function ($query) use ($search) {
+                        $query->where('nama_tower', 'like', "%{$search}%");
+                    });
             })
             ->when($sortBy === 'nama_lantai', function ($query) use ($sortOrder) {
                 return $query->orderByRaw('LENGTH(nama_lantai), nama_lantai ' . $sortOrder);
@@ -30,6 +33,7 @@ class LantaiController extends Controller
 
         return view('lantai.lantai', compact('lantais', 'sortBy', 'sortOrder'));
     }
+
 
     /**
      * Show the form for creating a new resource.

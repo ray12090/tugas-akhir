@@ -27,7 +27,6 @@ class KomplainController extends Controller
      */
     public function index(Request $request)
     {
-
         $search = $request->input('search');
         $sort_by = $request->input('sort_by', 'nomor_laporan');
         $sort_order = $request->input('sort_order', 'desc');
@@ -36,16 +35,24 @@ class KomplainController extends Controller
             ->when($search, function ($query, $search) {
                 return $query->where('nomor_laporan', 'like', "%{$search}%")
                     ->orWhere('tanggal_laporan', 'like', "%{$search}%")
-                    ->orWhere('unit', 'like', "%{$search}%")
-                    ->orWhere('nama_jenis_komplain', 'like', "%{$search}%")
                     ->orWhere('nama_pelapor', 'like', "%{$search}%")
-                    ->orWhere('no_hp', 'like', "%{$search}%");
+                    ->orWhere('no_hp', 'like', "%{$search}%")
+                    ->orWhereHas('unit', function ($query) use ($search) {
+                        $query->where('nama_unit', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('jenisKomplain', function ($query) use ($search) {
+                        $query->where('nama_jenis_komplain', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('lokasiKomplains', function ($query) use ($search) {
+                        $query->where('nama_lokasi_komplain', 'like', "%{$search}%");
+                    });
             })
             ->orderBy($sort_by, $sort_order)
             ->paginate(10);
 
         return view('komplain.komplain', compact('komplains', 'sort_by', 'sort_order'));
     }
+
 
     /**
      * Show the form for creating a new resource.
