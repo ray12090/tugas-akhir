@@ -6,9 +6,6 @@
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                     {{ __('Detail Biaya Admin') }}
                 </div>
-                <div class="text-gray-500 text-sm font-reguler">
-                    {{ __('Di bawah merupakan detail data biaya admin yang dipilih.') }}
-                </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
                 <div

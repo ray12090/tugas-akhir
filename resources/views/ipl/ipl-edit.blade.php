@@ -6,10 +6,7 @@
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Edit Pembayaran IPL') }}
-                </div>
-                <div class="text-gray-500 text-sm font-regular">
-                    {{ __('Di bawah merupakan formulir untuk mengedit data pembayaran IPL. Hanya dapat diubah oleh Finance.') }}
+                    {{ __('Edit Tagihan IPL') }}
                 </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
@@ -93,7 +90,7 @@
                                         </div>
                                         <div class="w-full sm:col-span-1">
                                             <label for="bulan_ipl"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Pembayaran Bulan') }}</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Tagihan Bulan') }}</label>
                                             <select name="bulan_ipl" id="bulan_ipl"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                                 @foreach (['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'] as $bulan)
@@ -289,7 +286,7 @@
                                 </div>
                                 <div class="w-full">
                                     <label for="status"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Status Pembayaran') }}</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Status Tagihan') }}</label>
                                     <select name="status" id="status"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         <option value="Belum Lunas"

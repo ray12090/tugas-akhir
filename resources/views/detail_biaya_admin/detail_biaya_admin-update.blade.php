@@ -4,10 +4,7 @@
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Ubah Biaya Admin') }}
-                </div>
-                <div class="text-gray-500 text-sm font-reguler">
-                    {{ __('Di bawah merupakan formulir untuk mengubah data biaya admin. Isi formulir ini dapat diisi oleh Finance') }}
+                    {{ __('Edit Biaya Admin') }}
                 </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">

@@ -6,9 +6,6 @@
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                     {{ __('Detail Biaya Air per m³') }}
                 </div>
-                <div class="text-gray-500 text-sm font-reguler">
-                    {{ __('Di bawah merupakan detail biaya air yang dipilih.') }}
-                </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
                 <div class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between py-4 dark:border-gray-700">

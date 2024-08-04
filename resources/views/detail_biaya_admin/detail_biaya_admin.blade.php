@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div>
+    <div class="p-6">
         @include('components.alert')
         <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
             <div class="px-6 pt-6">
@@ -7,7 +7,6 @@
                     {{ __('Data Biaya Admin') }}
                 </div>
                 <div class="text-gray-500 text-sm font-regular">
-                    {{ __('Di bawah merupakan tabel data biaya admin. Isi tabel ini dapat ditambah, lihat, ubah, dan hapus oleh Finance.') }}<br>
                     {{ __('Biaya admin yang digunakan adalah biaya admin yang berlaku.') }}
                 </div>
             </div>
@@ -43,7 +42,7 @@
                     </a>
                 </div>
             </div>
-            <div class="overflow-x-scroll">
+            <div class="overflow-x-auto p-4">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -98,7 +97,7 @@
                                                     d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
                                                     clip-rule="evenodd" />
                                             </svg>
-                                            {{ __('Ubah') }}
+                                            {{ __('Edit') }}
                                         </a>
                                         <a href="{{ route('detail_biaya_admin.show', $admin->id) }}"
                                             class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
