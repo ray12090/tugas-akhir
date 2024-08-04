@@ -22,8 +22,7 @@
                                         d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                                 </svg>
                             </div>
-                            <input type="text" name="search" id="simple-search"
-                                placeholder="{{ __('Cari') }}"
+                            <input type="text" name="search" id="simple-search" placeholder="{{ __('Cari') }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 value="{{ request('search') }}">
                         </div>
@@ -31,7 +30,7 @@
                 </div>
                 <div
                     class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                    <a href = "{{ route('kategori_penanganan.create') }} "type="button" id="createProductButton"
+                    <a href="{{ route('kategori_penanganan.create') }} " type="button" id="createProductButton"
                         data-modal-toggle="createProductModal"
                         class="flex items-center justify-center text-white bg-[#016452] hover:bg-[#014F41] focus:ring-4 focus:ring-[#014f415e] font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-[#016452] focus:outline-none dark:focus:ring-[#014F41]">
                         <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
@@ -52,8 +51,8 @@
                                     href="{{ route('kategori_penanganan.index', ['sort_by' => 'nama_kategori_penanganan', 'sort_order' => $sort_by === 'nama_kategori_penanganan' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
                                     {{ __('Kategori Penanganan') }}
                                     @if ($sort_by === 'nama_kategori_penanganan')
-                                        <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                             </path>
@@ -72,6 +71,16 @@
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="flex items-center space-x-4 justify-center">
+                                        <a href="{{ route('kategori_penanganan.show', $kategori->id) }}"
+                                            class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                                class="w-4 h-4 mr-2 -ml-0.5">
+                                                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" />
+                                            </svg>
+                                            {{ __('Lihat') }}
+                                        </a>
                                         <a href="{{ route('kategori_penanganan.edit', $kategori->id) }}"
                                             class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-[#016452] rounded-lg hover:bg-[#014F41] focus:ring-4 focus:outline-none focus:ring-[#014f415e] dark:bg-primary-600 dark:hover:bg-[#016452] dark:focus:ring-[#014F41]">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
@@ -84,17 +93,9 @@
                                             </svg>
                                             {{ __('Ubah') }}
                                         </a>
-                                        <a href="{{ route('kategori_penanganan.show', $kategori->id) }}"
-                                            class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                fill="currentColor" class="w-4 h-4 mr-2 -ml-0.5">
-                                                <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" />
-                                            </svg>
-                                            {{ __('Lihat') }}
-                                        </a>
-                                        <form action="{{ route('kategori_penanganan.destroy', $kategori->id) }}" method="POST"
+
+                                        <form action="{{ route('kategori_penanganan.destroy', $kategori->id) }}"
+                                            method="POST"
                                             onsubmit="return confirmDelete(this, '{{ $kategori->nama_kategori_penanganan }}');">
                                             @csrf
                                             @method('DELETE')
@@ -222,7 +223,7 @@
                 deleteModalText.textContent = `{{ __('Hapus Data ') }}${namaPenghuni}`;
                 toggleModal('deleteModal'); // Show the modal
 
-                confirmDeleteButton.onclick = function() {
+                confirmDeleteButton.onclick = function () {
                     form.submit();
                 };
                 return false; // Prevent the default form submission

@@ -3,10 +3,11 @@
         <div class="">
             @include('components.alert')
             {{-- @include('components.breadcrumbs', [
-                'breadcrumbs' => [
-                    ['title' => 'Dashboard', 'url' => Auth::user()->usertype === 'admin' ? route('admin-dashboard') : route('dashboard')],
-                    ['title' => 'Data Penanganan Komplain', 'url' => route('penanganan.index')]
-                ]
+            'breadcrumbs' => [
+            ['title' => 'Dashboard', 'url' => Auth::user()->usertype === 'admin' ? route('admin-dashboard') :
+            route('dashboard')],
+            ['title' => 'Data Penanganan Komplain', 'url' => route('penanganan.index')]
+            ]
             ]) --}}
         </div>
         <div class="bg-white overflow-hidden shadow-lg sm:rounded-lg">
@@ -39,18 +40,18 @@
                         </form>
                     </div>
                     {{-- @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 1)
-                        <div
-                            class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <a href="{{ route('penanganan.create') }}" id="createProductButton"
-                                class="flex items-center justify-center text-white bg-[#016452] hover:bg-[#014F41] focus:ring-4 focus:outline-none focus:ring-[#014f415e] font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-[#016452] focus:ring-[#014F41]">
-                                <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path clip-rule="evenodd" fill-rule="evenodd"
-                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
-                                </svg>
-                                {{ __('Tambah Penanganan Komplain') }}
-                            </a>
-                        </div>
+                    <div
+                        class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                        <a href="{{ route('penanganan.create') }}" id="createProductButton"
+                            class="flex items-center justify-center text-white bg-[#016452] hover:bg-[#014F41] focus:ring-4 focus:outline-none focus:ring-[#014f415e] font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-[#016452] focus:ring-[#014F41]">
+                            <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clip-rule="evenodd" fill-rule="evenodd"
+                                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                            </svg>
+                            {{ __('Tambah Penanganan Komplain') }}
+                        </a>
+                    </div>
                     @endif --}}
                 </div>
                 <div class="overflow-x-scroll">
@@ -164,9 +165,11 @@
                             @foreach ($penanganans as $penanganan)
                                 <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                                     <td class="px-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penanganan->nomor_penanganan }}</td>
+                                        {{ $penanganan->nomor_penanganan }}
+                                    </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penanganan->komplain->nomor_laporan }}</td>
+                                        {{ $penanganan->komplain->nomor_laporan }}
+                                    </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         @foreach ($penanganan->kategoriPenanganan as $kategori)
                                             <span
@@ -185,30 +188,28 @@
                                     </td>
                                     {{-- <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         @if ($penanganan->foto_pemeriksaan_awal)
-                                            <a href="#" data-modal-target="image_modal"
-                                                data-modal-toggle="image_modal"
-                                                data-image="{{ asset('storage/foto_pemeriksaan_awal/' . $penanganan->foto_pemeriksaan_awal) }}">
-                                                <img class="h-24 w-24 object-cover rounded-lg"
-                                                    src="{{ asset('storage/foto_pemeriksaan_awal/' . $penanganan->foto_pemeriksaan_awal) }}"
-                                                    alt="Foto Pemeriksaan Awal">
-                                            </a>
-                                        @else
+                                        <a href="#" data-modal-target="image_modal" data-modal-toggle="image_modal"
+                                            data-image="{{ asset('storage/foto_pemeriksaan_awal/' . $penanganan->foto_pemeriksaan_awal) }}">
                                             <img class="h-24 w-24 object-cover rounded-lg"
-                                                src="{{ asset('storage/images/no_photo.jpg') }}" alt="No Photo">
+                                                src="{{ asset('storage/foto_pemeriksaan_awal/' . $penanganan->foto_pemeriksaan_awal) }}"
+                                                alt="Foto Pemeriksaan Awal">
+                                        </a>
+                                        @else
+                                        <img class="h-24 w-24 object-cover rounded-lg"
+                                            src="{{ asset('storage/images/no_photo.jpg') }}" alt="No Photo">
                                         @endif
                                     </td> --}}
                                     {{-- <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         @if ($penanganan->foto_hasil_perbaikan)
-                                            <a href="#" data-modal-target="image_modal"
-                                                data-modal-toggle="image_modal"
-                                                data-image="{{ asset('storage/foto_hasil_perbaikan/' . $penanganan->foto_hasil_perbaikan) }}">
-                                                <img class="h-24 w-24 object-cover rounded-lg"
-                                                    src="{{ asset('storage/foto_hasil_perbaikan/' . $penanganan->foto_hasil_perbaikan) }}"
-                                                    alt="Foto Hasil Perbaikan">
-                                            </a>
-                                        @else
+                                        <a href="#" data-modal-target="image_modal" data-modal-toggle="image_modal"
+                                            data-image="{{ asset('storage/foto_hasil_perbaikan/' . $penanganan->foto_hasil_perbaikan) }}">
                                             <img class="h-24 w-24 object-cover rounded-lg"
-                                                src="{{ asset('storage/images/no_photo.jpg') }}" alt="No Photo">
+                                                src="{{ asset('storage/foto_hasil_perbaikan/' . $penanganan->foto_hasil_perbaikan) }}"
+                                                alt="Foto Hasil Perbaikan">
+                                        </a>
+                                        @else
+                                        <img class="h-24 w-24 object-cover rounded-lg"
+                                            src="{{ asset('storage/images/no_photo.jpg') }}" alt="No Photo">
                                         @endif
                                     </td> --}}
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -220,41 +221,28 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penanganan->createdBy->name }}</td>
+                                        {{ $penanganan->createdBy->name }}
+                                    </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penanganan->updatedBy->name }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            @if ($penanganan->komplain->status_komplain_id == 4)
-                                                <span
-                                                    class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300 border border-red-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
-                                            @elseif ($penanganan->komplain->status_komplain_id == 2)
-                                                <span
-                                                    class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300 border border-yellow-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
-                                            @elseif ($penanganan->komplain->status_komplain_id == 1)
-                                                <span
-                                                    class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 border border-blue-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
-                                            @else ()
-                                                <span
-                                                    class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 border border-green-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
-                                            @endif
-                                        </td>
+                                        {{ $penanganan->updatedBy->name }}
+                                    </td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        @if ($penanganan->komplain->status_komplain_id == 4)
+                                            <span
+                                                class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300 border border-red-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
+                                        @elseif ($penanganan->komplain->status_komplain_id == 2)
+                                            <span
+                                                class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300 border border-yellow-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
+                                        @elseif ($penanganan->komplain->status_komplain_id == 1)
+                                            <span
+                                                class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 border border-blue-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
+                                        @else ()
+                                            <span
+                                                class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 border border-green-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
+                                        @endif
+                                    </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <div class="flex items-center space-x-4 justify-center">
-                                            @if (Auth::user()->tipe_user_id != 11 && Auth::user()->tipe_user_id != 12)
-                                                <a href="{{ route('penanganan.edit', $penanganan->id) }}"
-                                                    class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-[#016452] rounded-lg hover:bg-[#014F41] focus:ring-4 focus:outline-none focus:ring-[#014f415e] dark:bg-primary-600 dark:hover:bg-[#016452] dark:focus:ring-[#014F41]">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="h-4 w-4 mr-2 -ml-0.5" viewBox="0 0 20 20"
-                                                        fill="currentColor" aria-hidden="true">
-                                                        <path
-                                                            d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                                        <path fill-rule="evenodd"
-                                                            d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-                                                    {{ __('Isi Penanganan') }}
-                                                </a>
-                                            @endif
                                             <a href="{{ route('penanganan.show', $penanganan->id) }}"
                                                 class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -265,17 +253,30 @@
                                                 </svg>
                                                 {{ __('Lihat') }}
                                             </a>
+                                            @if (Auth::user()->tipe_user_id != 11 && Auth::user()->tipe_user_id != 12)
+                                                <a href="{{ route('penanganan.edit', $penanganan->id) }}"
+                                                    class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-[#016452] rounded-lg hover:bg-[#014F41] focus:ring-4 focus:outline-none focus:ring-[#014f415e] dark:bg-primary-600 dark:hover:bg-[#016452] dark:focus:ring-[#014F41]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
+                                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                        <path
+                                                            d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                        <path fill-rule="evenodd"
+                                                            d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                    {{ __('Isi Penanganan') }}
+                                                </a>
+                                            @endif
+
                                             @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 1)
-                                                <form action="{{ route('penanganan.destroy', $penanganan->id) }}"
-                                                    method="POST"
+                                                <form action="{{ route('penanganan.destroy', $penanganan->id) }}" method="POST"
                                                     onsubmit="return confirmDelete(this, '{{ $penanganan->nomor_laporan }}');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-4 w-4 mr-2 -ml-0.5" viewBox="0 0 20 20"
-                                                            fill="currentColor" aria-hidden="true">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
+                                                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                             <path fill-rule="evenodd"
                                                                 d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                                                                 clip-rule="evenodd" />
@@ -298,11 +299,9 @@
                     aria-label="Table navigation">
                     <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                         Showing
-                        <span
-                            class="font-semibold text-gray-900 dark:text-white">{{ $penanganans->firstItem() }}</span>
+                        <span class="font-semibold text-gray-900 dark:text-white">{{ $penanganans->firstItem() }}</span>
                         to
-                        <span
-                            class="font-semibold text-gray-900 dark:text-white">{{ $penanganans->lastItem() }}</span>
+                        <span class="font-semibold text-gray-900 dark:text-white">{{ $penanganans->lastItem() }}</span>
                         of
                         <span class="font-semibold text-gray-900 dark:text-white">{{ $penanganans->total() }}</span>
                     </span>
@@ -397,7 +396,7 @@
                     deleteModalText.textContent = `{{ __('Hapus Penanganan Komplain #') }}${nomorPenanganan}`;
                     toggleModal('deleteModal'); // Show the modal
 
-                    confirmDeleteButton.onclick = function() {
+                    confirmDeleteButton.onclick = function () {
                         form.submit();
                     };
                     return false; // Prevent the default form submission
@@ -405,7 +404,7 @@
                 document.addEventListener('DOMContentLoaded', (event) => {
                     const imageLinks = document.querySelectorAll('[data-modal-toggle="image_modal"]');
                     imageLinks.forEach(link => {
-                        link.addEventListener('click', function() {
+                        link.addEventListener('click', function () {
                             const imageUrl = this.getAttribute('data-image');
                             document.getElementById('modal_image').setAttribute('src', imageUrl);
                         });

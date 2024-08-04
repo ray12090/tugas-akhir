@@ -59,8 +59,7 @@
                                             @if ($sort_by === 'nama_penyewa')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
@@ -74,8 +73,7 @@
                                             @if ($sort_by === 'unit')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
@@ -89,8 +87,7 @@
                                             @if ($sort_by === 'no_hp')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
@@ -104,8 +101,7 @@
                                             @if ($sort_by === 'awal_sewa')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
@@ -119,8 +115,7 @@
                                             @if ($sort_by === 'akhir_sewa')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
@@ -134,8 +129,7 @@
                                             @if ($sort_by === 'warga_negara_id')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}" />
                                                 </svg>
                                             @endif
@@ -148,8 +142,7 @@
                                             @if ($sort_by === 'agama_id')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
@@ -163,8 +156,7 @@
                                             @if ($sort_by === 'perkawinan_id')
                                                 <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                         d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
                                                     </path>
                                                 </svg>
@@ -179,56 +171,32 @@
                                 @foreach ($penyewas as $penyewa)
                                     <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
 
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $penyewa->nama_penyewa }}
                                         </td>
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $penyewa->unit->nama_unit }}
                                         </td>
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $penyewa->no_hp }}
                                         </td>
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $penyewa->awal_sewa }}
                                         </td>
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $penyewa->akhir_sewa }}
                                         </td>
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $penyewa->detailKewarganegaraan->status_kewarganegaraan }}
                                         </td>
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $penyewa->detailAgama->nama_agama }}
                                         </td>
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $penyewa->detailPerkawinan->status_perkawinan }}
                                         </td>
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             <div class="flex items-center space-x-4 justify-center">
-                                                @if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 2)
-                                                    <a href="{{ route('penyewa.edit', $penyewa->id) }}"
-                                                        class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-[#016452] rounded-lg hover:bg-[#014F41] focus:ring-4 focus:outline-none focus:ring-[#014f415e] dark:bg-primary-600 dark:hover:bg-[#016452] dark:focus:ring-[#014F41]">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="h-4 w-4 mr-2 -ml-0.5" viewBox="0 0 20 20"
-                                                            fill="currentColor" aria-hidden="true">
-                                                            <path
-                                                                d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                                            <path fill-rule="evenodd"
-                                                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                                                clip-rule="evenodd" />
-                                                        </svg>
-                                                        {{ __('Ubah') }}
-                                                    </a>
-                                                @endif
                                                 <a href="{{ route('penyewa.show', $penyewa->id) }}"
                                                     class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -240,16 +208,29 @@
                                                     {{ __('Lihat') }}
                                                 </a>
                                                 @if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 2)
-                                                    <form action="{{ route('penyewa.destroy', $penyewa->id) }}"
-                                                        method="POST"
+                                                    <a href="{{ route('penyewa.edit', $penyewa->id) }}"
+                                                        class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-[#016452] rounded-lg hover:bg-[#014F41] focus:ring-4 focus:outline-none focus:ring-[#014f415e] dark:bg-primary-600 dark:hover:bg-[#016452] dark:focus:ring-[#014F41]">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
+                                                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                            <path
+                                                                d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                            <path fill-rule="evenodd"
+                                                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                        {{ __('Ubah') }}
+                                                    </a>
+                                                @endif
+
+                                                @if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 2)
+                                                    <form action="{{ route('penyewa.destroy', $penyewa->id) }}" method="POST"
                                                         onsubmit="return confirmDelete(this, '{{ $penyewa->nama_penyewa }}');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit"
                                                             class="flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="h-4 w-4 mr-2 -ml-0.5" viewBox="0 0 20 20"
-                                                                fill="currentColor" aria-hidden="true">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
+                                                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                                 <path fill-rule="evenodd"
                                                                     d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                                                                     clip-rule="evenodd" />
@@ -276,8 +257,7 @@
                             <span
                                 class="font-semibold text-gray-900 dark:text-white">{{ $penyewas->firstItem() }}</span>
                             to
-                            <span
-                                class="font-semibold text-gray-900 dark:text-white">{{ $penyewas->lastItem() }}</span>
+                            <span class="font-semibold text-gray-900 dark:text-white">{{ $penyewas->lastItem() }}</span>
                             of
                             <span class="font-semibold text-gray-900 dark:text-white">{{ $penyewas->total() }}</span>
                         </span>
@@ -288,8 +268,8 @@
                                 <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
                                     <span
                                         class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
                                                 d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                                 clip-rule="evenodd" />
@@ -300,8 +280,8 @@
                                 <li>
                                     <a href="{{ $penyewas->previousPageUrl() }}" rel="prev"
                                         class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
                                                 d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                                 clip-rule="evenodd" />
@@ -334,8 +314,8 @@
                                 <li>
                                     <a href="{{ $penyewas->nextPageUrl() }}" rel="next"
                                         class="flex items-center justify-center h-full py-1.5 px-3 text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
                                                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                                 clip-rule="evenodd" />
@@ -346,8 +326,8 @@
                                 <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
                                     <span
                                         class="flex items-center justify-center h-full py-1.5 px-3 text-gray-500 bg-white rounded-r-lg border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
                                                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                                 clip-rule="evenodd" />
@@ -373,7 +353,7 @@
                         deleteModalText.textContent = `{{ __('Hapus Data ') }}${namaPenghuni}`;
                         toggleModal('deleteModal'); // Show the modal
 
-                        confirmDeleteButton.onclick = function() {
+                        confirmDeleteButton.onclick = function () {
                             form.submit();
                         };
                         return false; // Prevent the default form submission
