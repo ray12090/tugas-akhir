@@ -75,6 +75,23 @@ class DetailBiayaAdminController extends Controller
         return redirect()->route('detail_biaya_admin.index')->with('success', 'Biaya admin berhasil ditambahkan');
     }
 
+    public function getBiayaAdmin(Request $request)
+    {
+        $tanggal = $request->input('tanggal');
+
+        $biayaAdmin = DetailBiayaAdmin::where('tanggal_awal_berlaku', '<=', $tanggal)
+            ->where(function ($query) use ($tanggal) {
+                $query->whereNull('tanggal_akhir_berlaku')
+                    ->orWhere('tanggal_akhir_berlaku', '>=', $tanggal);
+            })
+            ->orderBy('tanggal_awal_berlaku', 'desc')
+            ->first();
+
+        return response()->json([
+            'biaya_admin' => $biayaAdmin ? $biayaAdmin->biaya_admin : 0,
+            'biaya_admin_id' => $biayaAdmin ? $biayaAdmin->id : null,
+        ]);
+    }
     /**
      * Display the specified resource.
      */

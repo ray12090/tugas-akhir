@@ -154,7 +154,7 @@
                             <div class="w-full">
                                 <label for="biaya_air"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    {{ __('Harga Air per m³') }}
+                                    {{ __('Biaya Air per m³') }}
                                 </label>
                                 <input type="text" id="biaya_air" name="biaya_air"
                                     value="{{ number_format($biaya_air->biaya_air, 2, ',', '.') }}"

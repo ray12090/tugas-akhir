@@ -61,9 +61,10 @@
                                                 </div>
                                                 <input id="tanggal_invoice" name="tanggal_invoice" type="text"
                                                     datepicker datepicker-format="yyyy-mm-dd" datepicker-buttons
-                                                    datepicker-autoselect-today
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"                                                                                                    
                                                     value="{{ $ipl->tanggal_invoice }}">
+                                                    
+
                                             </div>
                                         </div>
                                         <div class="w-full">
@@ -114,7 +115,7 @@
                                             </label>
                                             <select id="pemilik_id" name="pemilik_id"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                <option value="">{{ __('Pilih Pemilik') }}</option>
+                                                <option selected disabled value="">{{ __('Pilih Pemilik') }}</option>
                                                 @foreach ($pemiliks as $pemilik)
                                                     <option value="{{ $pemilik->id }}"
                                                         {{ old('pemilik_id', $ipl->pemilik_id) == $pemilik->id ? 'selected' : '' }}>
@@ -130,7 +131,7 @@
                                             </label>
                                             <select id="unit_id" name="unit_id"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                <option value="">{{ __('Pilih Unit') }}</option>
+                                                <option selected disabled value="">{{ __('Pilih Unit') }}</option>
                                                 @foreach ($units as $unit)
                                                     <option value="{{ $unit->id }}"
                                                         {{ old('unit_id', $ipl->unit_id) == $unit->id ? 'selected' : '' }}>
@@ -181,7 +182,7 @@
                                         <div class="w-full">
                                             <label for="biaya_air"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                {{ __('Harga Air per m³') }}
+                                                {{ __('Biaya Air per m³') }}
                                             </label>
                                             <input type="text" id="biaya_air" name="biaya_air"
                                                 value="{{ number_format($biaya_air->biaya_air, 2, ',', '.') }}"
@@ -454,23 +455,6 @@
             });
 
             hitungTotalAkhir();
-        });
-
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var today = new Date();
-            var day = ("0" + today.getDate()).slice(-2);
-            var month = ("0" + (today.getMonth() + 1)).slice(-2);
-            var dateToday = today.getFullYear() + "-" + month + "-" + day;
-            document.getElementById("tanggal_invoice").value = dateToday;
-
-            today.setDate(today.getDate() + 10);
-            var dayDue = ("0" + today.getDate()).slice(-2);
-            var monthDue = ("0" + (today.getMonth() + 1)).slice(-2);
-            var dateDue = today.getFullYear() + "-" + monthDue + "-" + dayDue;
-            document.getElementById("jatuh_tempo").value = dateDue;
-
-            var monthSelect = document.getElementById("bulan_ipl");
-            monthSelect.selectedIndex = today.getMonth(); // Set bulan IPL ke bulan saat ini
         });
     </script>
 </x-app-layout>

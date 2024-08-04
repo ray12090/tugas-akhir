@@ -81,8 +81,8 @@
                                                             clip-rule="evenodd" />
                                                     </svg>
                                                 </div>
-                                                <input id="jatuh_tempo" name="jatuh_tempo" type="text"
-                                                    datepicker datepicker-format="yyyy-mm-dd" datepicker-buttons
+                                                <input id="jatuh_tempo" name="jatuh_tempo" type="text" datepicker
+                                                    datepicker-format="yyyy-mm-dd" datepicker-buttons
                                                     datepicker-autoselect-today
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     required>
@@ -118,7 +118,7 @@
                                             </label>
                                             <select id="pemilik_id" name="pemilik_id"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                <option value="">{{ __('Pilih Pemilik') }}</option>
+                                                <option selected disabled value="">{{ __('Pilih Pemilik') }}</option>
                                                 @foreach ($pemiliks as $pemilik)
                                                     <option value="{{ $pemilik->id }}">{{ $pemilik->nama_pemilik }}
                                                     </option>
@@ -132,7 +132,7 @@
                                             </label>
                                             <select id="unit_id" name="unit_id"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                                <option value="">{{ __('Pilih Unit') }}</option>
+                                                <option selected disabled value="">{{ __('Pilih Unit') }}</option>
                                                 <!-- Unit akan dimuat secara dinamis berdasarkan pemilik yang dipilih -->
                                             </select>
                                         </div>
@@ -176,7 +176,7 @@
                                             <div class="w-full">
                                                 <label for="biaya_air"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    {{ __('Harga Air per m³') }}
+                                                    {{ __('Biaya Air per m³') }}
                                                 </label>
                                                 <input type="text" id="biaya_air" name="biaya_air"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -249,8 +249,8 @@
                                                 <label for=""
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
                                                 <button type="button" id="tambah-tagihan-btn"
-                                                class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
-                                                {{ __('Tambah tagihan lainnya') }}
+                                                    class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
+                                                    {{ __('Tambah tagihan lainnya') }}
                                                 </button>
                                             </div>
                                         </div>
@@ -344,8 +344,10 @@
             const tagihanAirInput = document.getElementById('tagihan_air');
             const totalAkhirSpan = document.getElementById('total_akhir');
             const totalTagihanInput = document.getElementById('total');
-            const biayaAir = parseFloat('{{ $biaya_air->biaya_air }}'); // Dari database
-            const biayaAdmin = parseFloat('{{ $biaya_admin->biaya_admin }}'); // Dari database
+            const biayaAirInput = document.getElementById('biaya_air');
+            const biayaAirIdInput = document.getElementById('biaya_air_id');
+            const biayaAdminInput = document.getElementById('biaya_admin');
+            const biayaAdminIdInput = document.getElementById('biaya_admin_id');
 
             function formatNumber(num) {
                 return num.toLocaleString('id-ID', {
@@ -360,13 +362,15 @@
                 return meterAkhir - meterAwal;
             }
 
-            function hitungTagihanAir(pemakaianAir) {
+            function hitungTagihanAir(pemakaianAir, biayaAir) {
                 return pemakaianAir * biayaAir;
             }
 
             function hitungTotalAkhir() {
                 const pemakaianAir = hitungPemakaianAir();
-                const tagihanAir = hitungTagihanAir(pemakaianAir);
+                const biayaAir = parseFloat(biayaAirInput.value.replace(/\./g, '').replace(',', '.')) || 0;
+                const tagihanAir = hitungTagihanAir(pemakaianAir, biayaAir);
+                const biayaAdmin = parseFloat(biayaAdminInput.value.replace(/\./g, '').replace(',', '.')) || 0;
                 let totalAkhir = tagihanAir + biayaAdmin;
 
                 document.querySelectorAll('.tagihan-row').forEach((row, index) => {
@@ -381,6 +385,40 @@
                 totalTagihanInput.value = totalAkhir; // Set hidden input value
             }
 
+            function fetchBiayaAdmin(tanggalInvoice) {
+                return fetch(`/api/get-biaya-admin?tanggal=${tanggalInvoice}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        biayaAdminInput.value = data.biaya_admin.toLocaleString('id-ID', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                        biayaAdminIdInput.value = data.biaya_admin_id;
+                        hitungTotalAkhir();
+                    })
+                    .catch(error => console.error('Error fetching biaya admin:', error));
+            }
+
+            function fetchBiayaAir(tanggalInvoice) {
+                return fetch(`/api/get-biaya-air?tanggal=${tanggalInvoice}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        biayaAirInput.value = data.biaya_air.toLocaleString('id-ID', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        });
+                        biayaAirIdInput.value = data.biaya_air_id;
+                        hitungTotalAkhir();
+                    })
+                    .catch(error => console.error('Error fetching biaya air:', error));
+            }
+
+            document.getElementById('tanggal_invoice').addEventListener('change', function () {
+                var tanggalInvoice = this.value;
+                fetchBiayaAdmin(tanggalInvoice);
+                fetchBiayaAir(tanggalInvoice);
+            });
+
             meterAirAwalInput.addEventListener('input', hitungTotalAkhir);
             meterAirAkhirInput.addEventListener('input', hitungTotalAkhir);
             document.querySelectorAll('.tagihan-row input[type="number"]').forEach(input => {
@@ -394,35 +432,35 @@
                 var newRow = document.createElement('div');
                 newRow.classList.add('grid', 'gap-4', 'sm:grid-cols-4', 'sm:gap-6', 'tagihan-row');
                 var newTagihan = `
-                    <div class="sm:col-span-1">
-                        <label for="jenis_tagihan_${index}"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            {{ __('Jenis Tagihan') }}
-                        </label>
-                        <select id="jenis_tagihan_${index}" name="jenis_tagihan[${index}][jenis_tagihan_id]"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected disabled>{{ __('Pilih jenis tagihan') }}</option>
-                            @foreach ($jenisTagihans as $tagihan)
-                                <option value="{{ $tagihan->id }}">
-                                    {{ $tagihan->nama_jenis_tagihan }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="sm:col-span-1">
-                        <label for="jumlah_${index}"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Jumlah') }}</label>
-                        <input type="number" id="jumlah_${index}" name="jenis_tagihan[${index}][jumlah]" rows="2"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    </div>
-                    <div class="sm:col-span-1">
-                        <label for=""
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
-                        <button type="button" class="hapus-tagihan-btn flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                            {{ __('Hapus') }}
-                        </button>
-                    </div>
-                `;
+                <div class="sm:col-span-1">
+                    <label for="jenis_tagihan_${index}"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        {{ __('Jenis Tagihan') }}
+                    </label>
+                    <select id="jenis_tagihan_${index}" name="jenis_tagihan[${index}][jenis_tagihan_id]"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected disabled>{{ __('Pilih jenis tagihan') }}</option>
+                        @foreach ($jenisTagihans as $tagihan)
+                            <option value="{{ $tagihan->id }}">
+                                {{ $tagihan->nama_jenis_tagihan }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="sm:col-span-1">
+                    <label for="jumlah_${index}"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Jumlah') }}</label>
+                    <input type="number" id="jumlah_${index}" name="jenis_tagihan[${index}][jumlah]" rows="2"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                </div>
+                <div class="sm:col-span-1">
+                    <label for=""
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
+                    <button type="button" class="hapus-tagihan-btn flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                        {{ __('Hapus') }}
+                    </button>
+                </div>
+            `;
                 newRow.innerHTML = newTagihan;
                 container.appendChild(newRow);
 
@@ -444,7 +482,7 @@
             var month = ("0" + (today.getMonth() + 1)).slice(-2);
             var dateToday = today.getFullYear() + "-" + month + "-" + day;
             document.getElementById("tanggal_invoice").value = dateToday;
-
+            
             today.setDate(today.getDate() + 10);
             var dayDue = ("0" + today.getDate()).slice(-2);
             var monthDue = ("0" + (today.getMonth() + 1)).slice(-2);

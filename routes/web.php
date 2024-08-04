@@ -111,7 +111,8 @@ Route::get('/api/get-kecamatan/{cityCode}', [PemilikController::class, 'getKecam
 Route::get('/api/get-kelurahan/{districtCode}', [PemilikController::class, 'getKelurahan']);
 Route::get('/komplains/{id}/lokasi', [PenangananController::class, 'getLokasiKomplain']);
 
-
+Route::get('/api/get-biaya-admin', [DetailBiayaAdminController::class, 'getBiayaAdmin']);
+Route::get('/api/get-biaya-air', [DetailBiayaAirController::class, 'getBiayaAir']);
 
 
 

@@ -75,6 +75,24 @@ class DetailBiayaAirController extends Controller
         return redirect()->route('detail_biaya_air.index')->with('success', 'Biaya air berhasil ditambahkan');
     }
 
+    public function getBiayaAir(Request $request)
+    {
+        $tanggal = $request->input('tanggal');
+
+        $biayaAir = DetailBiayaAir::where('tanggal_awal_berlaku', '<=', $tanggal)
+            ->where(function ($query) use ($tanggal) {
+                $query->whereNull('tanggal_akhir_berlaku')
+                    ->orWhere('tanggal_akhir_berlaku', '>=', $tanggal);
+            })
+            ->orderBy('tanggal_awal_berlaku', 'desc')
+            ->first();
+
+        return response()->json([
+            'biaya_air' => $biayaAir ? $biayaAir->biaya_air : 0,
+            'biaya_air_id' => $biayaAir ? $biayaAir->id : null,
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */
