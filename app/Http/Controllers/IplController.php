@@ -29,12 +29,16 @@ class IplController extends Controller
         $ipls = Ipl::with('unit', 'pemilik')
             ->when($search, function ($query, $search) {
                 return $query->where('nomor_invoice', 'like', "%{$search}%")
-                    ->orWhere('unit', 'like', "%{$search}%")
-                    ->orWhere('pemilik', 'like', "%{$search}%")
                     ->orWhere('tanggal_invoice', 'like', "%{$search}%")
                     ->orWhere('jatuh_tempo', 'like', "%{$search}%")
                     ->orWhere('total', 'like', "%{$search}%")
-                    ->orWhere('status', 'like', "%{$search}%");
+                    ->orWhere('status', 'like', "%{$search}%")
+                    ->orWhereHas('unit', function ($query) use ($search) {
+                        $query->where('nama_unit', 'like', "%{$search}%");
+                    })
+                    ->orWhereHas('pemilik', function ($query) use ($search) {
+                        $query->where('nama_pemilik', 'like', "%{$search}%");
+                    });
             })
             ->orderBy($sort_by, $sort_order)
             ->paginate(10);

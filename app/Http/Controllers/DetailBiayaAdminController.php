@@ -27,7 +27,9 @@ class DetailBiayaAdminController extends Controller
             ->when($search, function ($query, $search) {
                 return $query->where('biaya_admin', 'like', "%{$search}%")
                     ->orWhere('tanggal_awal_berlaku', 'like', "%{$search}%")
-                    ->orWhere('tanggal_akhir_berlaku', 'like', "%{$search}%");
+                    ->orWhere('tanggal_akhir_berlaku', 'like', "%{$search}%")
+                    ->orWhere('created_at', 'like', "%{$search}%")
+                    ->orWhere('updated_at', 'like', "%{$search}%");
             })
             ->orderBy($sort_by, $sort_order)
             ->paginate(10);

@@ -181,14 +181,21 @@
                                             </td>
                                             <td
                                                 class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                Rp{{ number_format($ipl->total, 2, ',', '.') }}</td>
-                                                <td class="px-4 py-3 font-medium whitespace-nowrap">
+                                                Rp{{ number_format($ipl->total, 2, ',', '.') }}
+                                            </td>
+                                            <td class="px-4 py-3 font-medium whitespace-nowrap">
                                                 @if ($ipl->status === 'Lunas')
-                                                    <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 border border-green-500">
+                                                    <span class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 border border-green-500">
+                                                        <svg class="w-2.5 h-2.5 me-1.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                            <circle cx="9" cy="9" r="9"></circle>
+                                                        </svg>
                                                         {{ $ipl->status }}
                                                     </span>
                                                 @else
-                                                    <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300 border border-red-500">
+                                                    <span class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300 border border-red-500">
+                                                        <svg class="w-2.5 h-2.5 me-1.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                            <circle cx="9" cy="9" r="9"></circle>
+                                                        </svg>
                                                         {{ $ipl->status }}
                                                     </span>
                                                 @endif
