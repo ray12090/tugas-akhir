@@ -99,7 +99,7 @@
                                         @if($air->tanggal_akhir_berlaku)
                                             <div>{{ \Carbon\Carbon::parse($air->tanggal_akhir_berlaku)->format('Y-m-d') }}</div>
                                         @else
-                                            <div>{{ __('Tidak ditentukan') }}</div>
+                                            <div>{{ __('N/A') }}</div>
                                         @endif
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">

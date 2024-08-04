@@ -87,7 +87,7 @@
                                             @if ($admin->tanggal_akhir_berlaku)
                                                 {{ \Carbon\Carbon::parse($admin->tanggal_akhir_berlaku)->format('Y-m-d') }}
                                             @else
-                                                -
+                                                N/A
                                             @endif
                                         </td>
                                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
