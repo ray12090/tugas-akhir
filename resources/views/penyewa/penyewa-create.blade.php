@@ -107,7 +107,7 @@
                                     <div class="relative">
                                         <input type="text" name="no_hp" id="no_hp"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Nomor handphone penyewa" required>
+                                            placeholder="123-1234-5678" required>
                                         <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white absolute top-1/2 left-3 transform -translate-y-1/2 pointer-events-none"
                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                             height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -614,5 +614,24 @@
         //         addUnit();
         //     });
         // });
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.getElementById('no_hp');
+
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, ''); // Hanya biarkan angka
+                value = value.slice(0, 15); // Batasi maksimum 15 digit
+                const length = value.length;
+
+                if (length > 3 && length <= 7) {
+                    value = `${value.slice(0, 3)}-${value.slice(3)}`;
+                } else if (length > 7 && length <= 11) {
+                    value = `${value.slice(0, 3)}-${value.slice(3, 7)}-${value.slice(7)}`;
+                } else if (length > 11) {
+                    value =
+                        `${value.slice(0, 3)}-${value.slice(3, 7)}-${value.slice(7, 11)}-${value.slice(11, 15)}`;
+                }
+                e.target.value = value;
+            });
+        });
     </script>
 </x-app-layout>
