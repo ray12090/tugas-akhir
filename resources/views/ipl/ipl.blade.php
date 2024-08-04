@@ -182,9 +182,16 @@
                                             <td
                                                 class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                 Rp{{ number_format($ipl->total, 2, ',', '.') }}</td>
-                                            <td
-                                                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                {{ $ipl->status }}
+                                                <td class="px-4 py-3 font-medium whitespace-nowrap">
+                                                @if ($ipl->status === 'Lunas')
+                                                    <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 border border-green-500">
+                                                        {{ $ipl->status }}
+                                                    </span>
+                                                @else
+                                                    <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300 border border-red-500">
+                                                        {{ $ipl->status }}
+                                                    </span>
+                                                @endif
                                             </td>
                                             <td
                                                 class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
