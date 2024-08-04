@@ -35,7 +35,6 @@
                         <span>{{ __('Formulir di bawah ini digunakan untuk mengisi laporan pengerjaan komplain oleh yang ditugaskan.') }}</span>
                     </div>
                 </div>
-
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
                 <div
@@ -52,16 +51,13 @@
                                 @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 1)
                                     <div class="sm:col-span-1">
                                         <label for="users_id" id="labelUsers"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Ditugaskan kepada') }}
-                                        </label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Ditugaskan kepada') }}</label>
                                         <button id="dropdownSearchButtonUsers"
                                             data-dropdown-toggle="dropdownSearchUsers"
                                             class="w-full text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
                                             type="button">{{ __('Pilih User') }}
                                             <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 10 6">
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                                 <path stroke="currentColor" stroke-linecap="round"
                                                     stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                                             </svg>
@@ -69,8 +65,7 @@
                                         <div id="dropdownSearchUsers"
                                             class="z-10 hidden bg-white rounded-lg w-60 dark:bg-gray-700 outline-gray-300 outline outline-1">
                                             <div class="p-3">
-                                                <label for="users_search"
-                                                    class="sr-only">{{ __('Search') }}</label>
+                                                <label for="users_search" class="sr-only">{{ __('Search') }}</label>
                                                 <div class="relative">
                                                     <div
                                                         class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -93,15 +88,12 @@
                                                     <li>
                                                         <div
                                                             class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                                            <input id="users_id_{{ $user->id }}"
-                                                                type="checkbox" value="{{ $user->id }}"
-                                                                name="users_id[]"
+                                                            <input id="users_id_{{ $user->id }}" type="checkbox"
+                                                                value="{{ $user->id }}" name="users_id[]"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                                 @if (in_array($user->id, $penanganan->users->pluck('id')->toArray())) checked @endif>
                                                             <label for="users_id_{{ $user->id }}"
-                                                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
-                                                                {{ $user->name }}
-                                                            </label>
+                                                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $user->name }}</label>
                                                         </div>
                                                     </li>
                                                 @endforeach
@@ -110,9 +102,7 @@
                                     </div>
                                     <div class="sm:col-span-3">
                                         <label for="penanganan_by"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Penanganan Oleh:') }}
-                                        </label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Penanganan Oleh:') }}</label>
                                         <div id="selected-users"
                                             class="relative flex flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                             <!-- Badges will be added here dynamically -->
@@ -121,9 +111,7 @@
                                 @else
                                     <div class="sm:col-span-4">
                                         <label for="penanganan_by"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Penanganan Oleh:') }}
-                                        </label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Penanganan Oleh:') }}</label>
                                         <div id="selected-users-nontr"
                                             class="relative flex flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                             @foreach ($penanganan->users as $user)
@@ -192,9 +180,7 @@
                                     </div>
                                     <div class="sm:col-span-1">
                                         <label for="kategori_penanganan_id" id="labelKategoriPenanganan"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Kategori Penanganan') }}
-                                        </label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kategori Penanganan') }}</label>
                                         <button id="dropdownSearchButtonKategoriPenanganan"
                                             data-dropdown-toggle="dropdownSearchKategoriPenanganan"
                                             class="w-full text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
@@ -238,9 +224,7 @@
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                                                 @if (in_array($kategori->id, $penanganan->kategoriPenanganan->pluck('id')->toArray())) checked @endif>
                                                             <label for="kategori_penanganan_id_{{ $kategori->id }}"
-                                                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">
-                                                                {{ $kategori->nama_kategori_penanganan }}
-                                                            </label>
+                                                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $kategori->nama_kategori_penanganan }}</label>
                                                         </div>
                                                     </li>
                                                 @endforeach
@@ -249,9 +233,7 @@
                                     </div>
                                     <div class="sm:col-span-4">
                                         <label for="kategori"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ __('Kategori yang Dipilih:') }}
-                                        </label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kategori yang Dipilih:') }}</label>
                                         <div id="selected-category"
                                             class="relative flex flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                             <!-- Badges will be added here dynamically -->
@@ -266,57 +248,47 @@
                                 <div id="lokasi-komplain-container"
                                     class="grid gap-4 sm:gap-6 sm:col-span-4 sm:grid-cols-1 rounded-lg sm:rounded-2xl pb-6">
                                     @foreach ($penanganan->komplain->lokasiKomplains as $index => $lokasi)
-                                        <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 lokasi-komplain-row ">
-                                            <div class="sm:col-span-1">
-                                                <label for="lokasi_komplain_{{ $index }}"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    {{ __('Lokasi') }}
-                                                </label>
-                                                <div id="lokasi_komplain_{{ $index }}"
-                                                    class="bg-gray-50 text-sm text-gray-900 dark:text-white p-2.5 rounded-lg border">
-                                                    {{ $penanganan->komplain->lokasiKomplains->firstWhere('id', $lokasi->pivot->lokasi_komplain_id)->nama_lokasi_komplain ?? 'Tidak diketahui' }}
-                                                </div>
-                                            </div>
-                                            <div class="sm:col-span-1">
-                                                <label for="uraian_komplain_{{ $index }}"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Uraian Komplain') }}</label>
-                                                <div id="uraian_komplain_{{ $index }}"
-                                                    class="bg-gray-50 text-sm text-gray-900 dark:text-white p-2.5 rounded-lg border">
-                                                    {{ $lokasi->pivot->uraian_komplain }}
-                                                </div>
-                                            </div>
-                                            <div class="sm:col-span-1">
-                                                <label for="foto_komplain_{{ $index }}"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto') }}</label>
-                                                @if ($lokasi->pivot->foto_komplain)
-                                                    <div>
-                                                        <img src="{{ asset('storage/foto_komplain/' . $lokasi->pivot->foto_komplain) }}"
-                                                            alt="Foto Komplain" class="w-auto h-80 rounded-lg">
+                                        @if ($lokasi->id == $penanganan->lokasi_komplain_id)
+                                            <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 lokasi-komplain-row ">
+                                                <div class="sm:col-span-1">
+                                                    <label for="lokasi_komplain_{{ $index }}"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                        {{ __('Lokasi') }}
+                                                    </label>
+                                                    <div id="lokasi_komplain_{{ $index }}"
+                                                        class="bg-gray-50 text-sm text-gray-900 dark:text-white p-2.5 rounded-lg border">
+                                                        {{ $lokasi->nama_lokasi_komplain }}
                                                     </div>
-                                                @else
-                                                    <p class="text-gray-500">
-                                                        {{ __('Tidak ada foto komplain.') }}
-                                                    </p>
-                                                @endif
+                                                </div>
+                                                <div class="sm:col-span-1">
+                                                    <label for="uraian_komplain_{{ $index }}"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Uraian Komplain') }}</label>
+                                                    <div id="uraian_komplain_{{ $index }}"
+                                                        class="bg-gray-50 text-sm text-gray-900 dark:text-white p-2.5 rounded-lg border">
+                                                        {{ $lokasi->pivot->uraian_komplain ?? 'Tidak diketahui' }}
+                                                    </div>
+                                                </div>
+                                                <div class="sm:col-span-1">
+                                                    <label for="foto_komplain_{{ $index }}"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto') }}</label>
+                                                    @if ($lokasi->pivot->foto_komplain ?? false)
+                                                        <div>
+                                                            <img src="{{ asset('storage/foto_komplain/' . $lokasi->pivot->foto_komplain) }}"
+                                                                alt="Foto Komplain" class="w-auto h-80 rounded-lg">
+                                                        </div>
+                                                    @else
+                                                        <p class="text-gray-500">
+                                                            {{ __('Tidak ada foto komplain.') }}
+                                                        </p>
+                                                    @endif
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     @endforeach
+
                                 </div>
                             </div>
                             <div class="grid gap-4 sm:grid-cols-4 sm:gap-6">
-                                {{-- <div class="sm:col-span-1">
-                                        <label for="komplain_id"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Nomor Komplain') }}</label>
-                                        <select name="komplain_id" id="komplain_id"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            @foreach ($komplains as $komplain)
-                                                <option value="{{ $komplain->id }}"
-                                                    {{ $komplain->id == $penanganan->komplain_id ? 'selected' : '' }}>
-                                                    {{ $komplain->nomor_laporan }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div> --}}
-
                                 <div class="sm:col-span-4">
                                     <label for="respon_awal"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Respon Awal') }}</label>
@@ -325,8 +297,8 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">{{ $penanganan->respon_awal }}</textarea>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-4 text-gray-900 text-lg font-semibold">
-                                    {{ __('Pengerjaan') }}</div>
+                                <div class="sm:col-span-4 text-gray-900 text-lg font-semibold">{{ __('Pengerjaan') }}
+                                </div>
                                 <div class="sm:col-span-2">
                                     <label for="pemeriksaan_awal"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Pemeriksaan Awal') }}</label>
@@ -349,8 +321,8 @@
                                     <input type="file" name="foto_pemeriksaan_awal" id="foto_pemeriksaan_awal"
                                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                         aria-describedby="foto_pemeriksaan_awal">
-                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG
-                                        (MAX. 5MB).</p>
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG (MAX. 5MB).
+                                    </p>
                                     @if ($penanganan->foto_pemeriksaan_awal)
                                         <img src="{{ asset('storage/foto_pemeriksaan_awal/' . $penanganan->foto_pemeriksaan_awal) }}"
                                             class="mt-2" alt="Foto Pemeriksaan Awal" style="max-width: 100px;">
@@ -362,8 +334,8 @@
                                     <input type="file" name="foto_hasil_perbaikan" id="foto_hasil_perbaikan"
                                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                         aria-describedby="foto_hasil_perbaikan">
-                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG
-                                        (MAX. 5MB).</p>
+                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">JPG, JPEG, PNG (MAX. 5MB).
+                                    </p>
                                     @if ($penanganan->foto_hasil_perbaikan)
                                         <img src="{{ asset('storage/foto_hasil_perbaikan/' . $penanganan->foto_hasil_perbaikan) }}"
                                             class="mt-2" alt="Foto Hasil Perbaikan" style="max-width: 100px;">
@@ -371,8 +343,7 @@
                                 </div>
                                 <div class="grid gap-4 sm:col-span-4 sm:grid-cols-2 sm:gap-6">
                                     <div class="sm:col-span-2 text-gray-900 text-lg font-semibold">
-                                        {{ __('Persetujuan Selesai') }}
-                                    </div>
+                                        {{ __('Persetujuan Selesai') }}</div>
                                     <div class="sm:row-span-2">
                                         <label for="persetujuan_selesai_tr"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Oleh Tenant Relation') }}</label>
@@ -532,7 +503,6 @@
                 }
             }
 
-
             document.addEventListener('DOMContentLoaded', () => {
                 const userCheckboxes = document.querySelectorAll('#dropdownSearchUsers input[type="checkbox"]');
                 userCheckboxes.forEach(checkbox => {
@@ -577,7 +547,6 @@
                 selectedCategoriesContainer.appendChild(noCategoryText);
             }
         }
-
 
         listItemsKategoriPenanganan.forEach(function(item) {
             const checkbox = item.querySelector('input[type="checkbox"]');

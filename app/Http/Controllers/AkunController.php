@@ -134,9 +134,9 @@ class AkunController extends Controller
     {
         $user = User::find($id);
         if ($user->tipe_user_id == '1') {
-            return redirect()->back()->with('danger', 'Tipe akun "Admin" tidak bisa dihapus');
+            return redirect()->back()->with('danger', 'Tipe akun "Admin" tidak boleh dihapus');
         }
         $user->delete();
-        return redirect()->route('akun.index')->with('danger', 'Akun berhasil dihapus.');
+        return redirect()->route('akun.index')->with('success', 'Akun berhasil dihapus.');
     }
 }

@@ -37,6 +37,7 @@ class Penanganan extends Model
         return $this->belongsTo(LokasiKomplain::class, 'lokasi_komplain_id');
     }
 
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'penanganan_user_pivot');

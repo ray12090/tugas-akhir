@@ -105,7 +105,7 @@ class LantaiController extends Controller
     {
         try {
             $lantai->delete();
-            return redirect()->route('lantai.index')->with('danger', 'Lantai berhasil dihapus.');
+            return redirect()->route('lantai.index')->with('success', 'Lantai berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('lantai.index')->withErrors(['msg' => 'Error deleting lantai. Please try again.']);
         }

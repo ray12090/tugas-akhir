@@ -166,12 +166,14 @@ class PenangananController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Penanganan $penanganan)
+    public function show($id)
     {
-        $users = User::all();
-        $groupedUsers = $users->groupBy('usertype');
-        // $penanganan = Penanganan::with('komplains', 'kategoriPenanganans', 'users')->findOrFail($id);
-        return view('penanganan.penanganan-read', compact('penanganan', 'groupedUsers'));
+        $penanganan = Penanganan::with(['komplain.lokasiKomplains', 'users', 'komplain.unit'])->findOrFail($id);
+        $users = User::all(); // atau filter sesuai kebutuhan
+        $statusKomplains = StatusKomplain::all();
+        $kategoriPenanganans = KategoriPenanganan::all();
+
+        return view('penanganan.show', compact('penanganan', 'users', 'statusKomplains', 'kategoriPenanganans'));
     }
 
     /**
@@ -179,7 +181,7 @@ class PenangananController extends Controller
      */
     public function edit($id)
     {
-        $penanganan = Penanganan::with('kategoriPenanganan', 'users', 'komplain')->findOrFail($id);
+        $penanganan = Penanganan::with(['kategoriPenanganan', 'users', 'komplain', 'lokasiKomplain'])->findOrFail($id);
         $komplains = Komplain::orderBy('created_at', 'desc')->get();
         $kategoriPenanganans = KategoriPenanganan::all();
         $jenisKomplains = JenisKomplain::all();
@@ -187,10 +189,11 @@ class PenangananController extends Controller
         $units = Unit::all();
         $lokasiKomplains = LokasiKomplain::all();
         $users = User::whereNotIn('tipe_user_id', [11, 12])->get();
-        // $groupedUsers = $users->groupBy('usertype');
 
         return view('penanganan.penanganan-edit', compact('penanganan', 'komplains', 'kategoriPenanganans', 'users', 'jenisKomplains', 'statusKomplains', 'units', 'lokasiKomplains'));
     }
+
+
 
 
 
@@ -263,7 +266,7 @@ class PenangananController extends Controller
     {
         try {
             $penanganan->delete();
-            return redirect()->route('penanganan.index')->with('danger', 'Penanganan Komplain berhasil dihapus.');
+            return redirect()->route('penanganan.index')->with('success', 'Penanganan Komplain berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('penanganan.index')->withErrors(['msg' => 'Error deleting komplain. Please try again.']);
         }

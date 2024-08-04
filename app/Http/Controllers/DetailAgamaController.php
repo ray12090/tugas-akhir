@@ -81,7 +81,7 @@ class DetailAgamaController extends Controller
     {
         try {
             $detailAgama->delete();
-            return redirect()->route('detail_agama.index')->with('danger', 'Data Agama berhasil dihapus.');
+            return redirect()->route('detail_agama.index')->with('success', 'Data Agama berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('detail_agama.index')->withErrors(['msg' => 'Error deleting agama. Please try again.']);
         }

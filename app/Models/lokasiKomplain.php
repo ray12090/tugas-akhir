@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class lokasiKomplain extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama_bagian'];
+    protected $fillable = ['nama_lokasi_komplain'];
 
     public function komplains()
     {

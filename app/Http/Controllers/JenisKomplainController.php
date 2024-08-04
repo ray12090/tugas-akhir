@@ -81,7 +81,7 @@ class JenisKomplainController extends Controller
     {
         try {
             $jenisKomplain->delete();
-            return redirect()->route('jenis_komplain.index')->with('danger', 'Data Jenis Komplain berhasil dihapus.');
+            return redirect()->route('jenis_komplain.index')->with('success', 'Data Jenis Komplain berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('jenis_komplain.index')->withErrors(['msg' => 'Error deleting jenis komplain. Please try again.']);
         }

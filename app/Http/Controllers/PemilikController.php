@@ -284,7 +284,7 @@ class PemilikController extends Controller
     {
         try {
             $pemilik->delete();
-            return redirect()->route('pemilik.index')->with('success', 'Data Pembeli berhasil dihapus.');
+            return redirect()->route('pemilik.index')->with('success', 'Data pemilik berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('pemilik.index')->withErrors(['msg' => 'Error deleting komplain. Please try again.']);
         }
