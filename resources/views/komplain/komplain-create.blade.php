@@ -106,6 +106,7 @@
                                         {{ __('Identitas Pelapor') }}
                                     </div>
                                 </div>
+                                <input type="hidden" name="pelapor_id" id="pelapor_id" value="{{ Auth::user()->id }}">
                                 <div class="sm:col-span-2">
                                     <label for="nama_pelapor"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

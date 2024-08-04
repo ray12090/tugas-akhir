@@ -143,6 +143,20 @@
                                         @endif
                                     </a>
                                 </th>
+                                <th class="p-4">
+                                    <a
+                                        href="{{ route('penanganan.index', ['sort_by' => 'status', 'sort_order' => $sort_by === 'status' && $sort_order === 'asc' ? 'desc' : 'asc']) }}">
+                                        {{ __('Status') }}
+                                        @if ($sort_by === 'status')
+                                            <svg class="w-4 h-4 inline" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="{{ $sort_order === 'asc' ? 'm8 10 4 4 4-4' : 'm16 14-4-4-4 4' }}">
+                                                </path>
+                                            </svg>
+                                        @endif
+                                    </a>
+                                </th>
                                 <th class="p-4 text-center">{{ __('Aksi') }}</th>
                             </tr>
                         </thead>
@@ -209,20 +223,38 @@
                                         {{ $penanganan->createdBy->name }}</td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $penanganan->updatedBy->name }}</td>
+                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @if ($penanganan->komplain->status_komplain_id == 4)
+                                                <span
+                                                    class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300 border border-red-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
+                                            @elseif ($penanganan->komplain->status_komplain_id == 2)
+                                                <span
+                                                    class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300 border border-yellow-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
+                                            @elseif ($penanganan->komplain->status_komplain_id == 1)
+                                                <span
+                                                    class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300 border border-blue-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
+                                            @else ()
+                                                <span
+                                                    class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 border border-green-500">{{ $penanganan->komplain->statusKomplain->nama_status_komplain }}</span>
+                                            @endif
+                                        </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <div class="flex items-center space-x-4 justify-center">
-                                            <a href="{{ route('penanganan.edit', $penanganan->id) }}"
-                                                class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-[#016452] rounded-lg hover:bg-[#014F41] focus:ring-4 focus:outline-none focus:ring-[#014f415e] dark:bg-primary-600 dark:hover:bg-[#016452] dark:focus:ring-[#014F41]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
-                                                    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                    <path
-                                                        d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                                    <path fill-rule="evenodd"
-                                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                                {{ __('Isi Penanganan') }}
-                                            </a>
+                                            @if (Auth::user()->tipe_user_id != 11 && Auth::user()->tipe_user_id != 12)
+                                                <a href="{{ route('penanganan.edit', $penanganan->id) }}"
+                                                    class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-[#016452] rounded-lg hover:bg-[#014F41] focus:ring-4 focus:outline-none focus:ring-[#014f415e] dark:bg-primary-600 dark:hover:bg-[#016452] dark:focus:ring-[#014F41]">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="h-4 w-4 mr-2 -ml-0.5" viewBox="0 0 20 20"
+                                                        fill="currentColor" aria-hidden="true">
+                                                        <path
+                                                            d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                        <path fill-rule="evenodd"
+                                                            d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                    {{ __('Isi Penanganan') }}
+                                                </a>
+                                            @endif
                                             <a href="{{ route('penanganan.show', $penanganan->id) }}"
                                                 class="py-2 px-3 flex items-center text-sm font-medium text-center text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"

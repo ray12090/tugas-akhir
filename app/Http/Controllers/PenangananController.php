@@ -44,9 +44,10 @@ class PenangananController extends Controller
                     });
             })
             ->when($user->tipe_user_id !== 2 && $user->tipe_user_id !== 1, function ($query) use ($user) {
-                // Filter to only include penanganan where the user is assigned
                 return $query->whereHas('users', function ($query) use ($user) {
                     $query->where('users.id', $user->id);
+                })->orWhereHas('komplain', function ($query) use ($user) {
+                    $query->where('pelapor_id', $user->id);
                 });
             })
             ->orderBy($sort_by, $sort_order)
@@ -54,6 +55,7 @@ class PenangananController extends Controller
 
         return view('penanganan.penanganan', compact('penanganans', 'sort_by', 'sort_order'));
     }
+
 
 
 
@@ -173,7 +175,7 @@ class PenangananController extends Controller
         $statusKomplains = StatusKomplain::all();
         $kategoriPenanganans = KategoriPenanganan::all();
 
-        return view('penanganan.show', compact('penanganan', 'users', 'statusKomplains', 'kategoriPenanganans'));
+        return view('penanganan.penanganan-read', compact('penanganan', 'users', 'statusKomplains', 'kategoriPenanganans'));
     }
 
     /**

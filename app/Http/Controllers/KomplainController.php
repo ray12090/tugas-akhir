@@ -76,6 +76,7 @@ class KomplainController extends Controller
             'jenis_komplain_id' => 'required|exists:jenis_komplains,id',
             'tanggal_laporan' => 'required|date',
             'unit_id' => 'required|exists:units,id',
+            'pelapor_id' => 'required|exists:users,id',
             'nama_pelapor' => 'required|string',
             'no_hp' => 'required|string',
             'lokasi_komplain.*.lokasi_id' => 'required|exists:lokasi_komplains,id',
@@ -85,6 +86,7 @@ class KomplainController extends Controller
 
         $komplain = Komplain::create([
             'jenis_komplain_id' => $request->jenis_komplain_id,
+            'pelapor_id' => $request->pelapor_id,
             'nomor_laporan' => $nomorLaporan,
             'tanggal_laporan' => $request->tanggal_laporan,
             'unit_id' => $request->unit_id,

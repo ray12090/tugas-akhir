@@ -11,12 +11,16 @@ class Komplain extends Model
     use HasFactory;
     protected $fillable = [
         'nomor_laporan', 'tanggal_laporan', 'unit_id', 'jenis_komplain_id', 'status_komplain_id',
-        'nama_pelapor', 'no_hp', 'uraian_komplain', 'foto_komplain'
+        'nama_pelapor', 'no_hp', 'uraian_komplain', 'foto_komplain', 'pelapor_id'
     ];
 
     public function unit()
     {
         return $this->belongsTo(Unit::class);
+    }
+    public function idPelapor()
+    {
+        return $this->belongsTo(User::class, 'pelapor_id');
     }
 
     public function jenisKomplain()

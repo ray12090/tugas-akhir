@@ -124,6 +124,19 @@
                                     <span class="text-sm font-medium text-white">{{ __('Data Akun') }}</span>
                                 </a>
                             @endif
+                            @if (Auth::user()->tipe_user_id == 4)
+                                <a href="{{ route('penanganan.index') }}"
+                                    class="sm:col-span-4 flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
+                                    <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-sm font-medium text-white">{{ __('Penanganan Komplain') }}</span>
+                                </a>
+                            @endif
                             @if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 3)
                                 <a href="{{ route('pemilik.index') }}"
                                     class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">

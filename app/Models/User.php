@@ -71,4 +71,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(TipeUser::class, 'tipe_user_id');
     }
+    public function Komplain()
+    {
+        return $this->hasMany(Komplain::class, 'pelapor_id');
+    }
 }
