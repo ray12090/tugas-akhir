@@ -7,7 +7,7 @@
                     {{ __('Data Biaya Air') }}
                 </div>
                 <div class="text-gray-500 text-sm font-regular">
-                    {{ __('Biaya air yang dihitung adalah biaya air yang berlaku.') }}
+                    {{ __('Biaya air yang digunakan adalah biaya air yang berlaku.') }}
                 </div>
                 <div 
                 class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 dark:border-gray-700">
