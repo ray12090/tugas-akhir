@@ -55,7 +55,7 @@ class PemilikController extends Controller
             ->orderBy($sort_by, $sort_order)
             ->paginate(10);
 
-        if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 3) {
+        if (Auth::user()->tipe_user_id == 1 || Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 3) {
             return view('pemilik.pemilik', compact('pemiliks', 'sort_by', 'sort_order'));
         } else {
             return redirect('/dashboard');
