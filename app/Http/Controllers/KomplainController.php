@@ -63,7 +63,14 @@ class KomplainController extends Controller
         $jenisKomplains = JenisKomplain::all();
         $lokasiKomplains = LokasiKomplain::all();
         $users = User::whereNotIn('tipe_user_id', [11, 12])->get();
-        return view('komplain.komplain-create', compact('units', 'jenisKomplains', 'lokasiKomplains', 'users'));
+        $user = Auth::user();
+        $noHp = null;
+        if ($user->tipe_user_id == 11) {
+            $noHp = $user->Pemilik->no_hp ?? 'No HP tidak tersedia';
+        } elseif ($user->tipe_user_id == 12) {
+            $noHp = $user->Penyewa->no_hp ?? 'No HP tidak tersedia';
+        }
+        return view('komplain.komplain-create', compact('units', 'jenisKomplains', 'lokasiKomplains', 'users', 'noHp', 'user'));
     }
 
     /**

@@ -208,17 +208,18 @@ class IplController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ipl $ipl)
+    public function show($unitId)
     {
+        $unit = Unit::findOrFail($unitId);
+        $ipl = Ipl::where('unit_id', $unitId)->firstOrFail();
         $detailTagihanAir = detailTagihanAir::find($ipl->tagihan_air_id);
         $detailTagihans = DB::table('ipl_jenis_tagihans_pivot')->where('ipl_id', $ipl->id)->get();
-        // $biaya_air = detailBiayaAir::orderBy('id', 'desc')->first();
-        // $biaya_admin = detailBiayaAdmin::orderBy('id', 'desc')->first();
         $biaya_air = $this->getBiayaAirBerlaku($ipl->tanggal_invoice);
         $biaya_admin = $this->getBiayaAdminBerlaku($ipl->tanggal_invoice);
         $pemiliks = Pemilik::all();
         $jenisTagihans = detailJenisTagihan::all();
-        return view('ipl.ipl-read', compact('ipl', 'detailTagihanAir', 'detailTagihans', 'biaya_air', 'biaya_admin', 'pemiliks', 'jenisTagihans'));
+
+        return view('ipl.ipl-read', compact('ipl', 'detailTagihanAir', 'detailTagihans', 'biaya_air', 'biaya_admin', 'pemiliks', 'jenisTagihans', 'unit'));
     }
 
     /**
@@ -368,5 +369,12 @@ class IplController extends Controller
             })
             ->orderBy('tanggal_awal_berlaku', 'desc')
             ->first();
+    }
+    public function history($unitId)
+    {
+        $unit = Unit::findOrFail($unitId);
+        $ipls = Ipl::where('unit_id', $unitId)->get();
+
+        return view('ipl.ipl-history', compact('ipls', 'unit'));
     }
 }
