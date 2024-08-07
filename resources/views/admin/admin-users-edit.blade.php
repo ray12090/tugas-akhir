@@ -4,10 +4,10 @@
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
             <div>
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Ubah Akun') }}
+                    {{ __('Edit Akun') }}
                 </div>
                 <div class="text-gray-500 text-sm font-reguler">
-                    {{ __('Di bawah merupakan formulir untuk mengubah data akun. Isi formulir ini dapat diisi oleh Admin') }}
+                    {{ __('Di bawah merupakan formulir untuk mengedit data akun. Isi formulir ini dapat diisi oleh Admin') }}
                 </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
