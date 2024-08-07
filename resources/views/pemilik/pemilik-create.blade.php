@@ -54,7 +54,7 @@
                                 {{--
                                 </div> --}}
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
-                                    
+
                                     <div class="sm:col-span-2">
                                         <label for="agama_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Agama') }}</label>
@@ -223,31 +223,30 @@
                                         </ul>
                                     </div>
                                     <div class="sm:col-span-2">
-                                    <label for="tanggal_lahir"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Tanggal Lahir') }}</label>
-                                    <div class="relative max-w">
-                                        <div
-                                            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                            <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white"
-                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                <path fill-rule="evenodd"
-                                                    d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
+                                        <label for="tanggal_lahir"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Tanggal Lahir') }}</label>
+                                        <div class="relative max-w">
+                                            <div
+                                                class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                <svg class="w-[16px] h-[16px] text-gray-500 dark:text-white"
+                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" fill="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd"
+                                                        d="M6 5V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h3V4a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v2H3V7a2 2 0 0 1 2-2h1ZM3 19v-8h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm5-6a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <input id="tanggal_lahir" name="tanggal_lahir" type="text" datepicker
+                                                datepicker-format="yyyy-mm-dd" datepicker-buttons
+                                                datepicker-autoselect-today
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="YYYY-MM-DD" required>
                                         </div>
-                                        <input id="tanggal_lahir" name="tanggal_lahir" type="text" datepicker
-                                            datepicker-format="yyyy-mm-dd" datepicker-buttons
-                                            datepicker-autoselect-today
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="YYYY-MM-DD" required>
                                     </div>
                                 </div>
-                                
-                                </div>
-                                
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-5 sm:gap-6">
-                                <div class="sm:col-span-1">
+                                    <div class="sm:col-span-1">
                                         <label for="warga_negara_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Warga Negara') }}</label>
                                         <select name="warga_negara_id" id="warga_negara_id"
@@ -258,8 +257,8 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                    </div>    
-                                <div class="sm:col-span-1">
+                                    </div>
+                                    <div class="sm:col-span-1">
                                         <label for="alamat_provinsi_id" id="labelAlamatProvinsi"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Alamat sesuai KTP') }}</label>
                                         <select name="alamat_provinsi_id" id="alamat_provinsi_id"
@@ -298,14 +297,20 @@
                                             <option value="">{{ __('Pilih Kelurahan') }}</option>
                                         </select>
                                     </div>
-                                </div>                            
-                                <div class="sm:col-span-2">
+                                </div>
+                                <div class="sm:col-span-1">
                                     <label for="alamat"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Jalan') }}</label>
                                     <div class="relative">
                                         <textarea id="alamat" name="alamat" rows="4"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
                                     </div>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <label for="foto_ktp"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto KTP') }}</label>
+                                    <input type="file" id="foto_ktp" name="foto_ktp"
+                                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-2">
                                 </div>
                                 <div id="unit-container" class="sm:col-span-2">
                                     @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 3)
@@ -379,7 +384,6 @@
                                                     placeholder="YYYY-MM-DD" autocomplete="off">
                                             </div>
                                         </div>
-
                                         <div class="sm:col-span-1">
                                             <label for=""
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -578,7 +582,7 @@
                         targetSelect.innerHTML = `<option value="">${placeholder}</option>`;
                         data.forEach(item => {
                             targetSelect.innerHTML +=
-                            `<option value="${item.id}">${item.name}</option>`;
+                                `<option value="${item.id}">${item.name}</option>`;
                         });
                         targetSelect.disabled = false;
                     })
@@ -655,6 +659,29 @@
                 }
                 e.target.value = value;
             });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fungsi untuk mengaktifkan atau menonaktifkan dropdown provinsi
+            function toggleProvinsiDropdown() {
+                const wargaNegaraId = document.getElementById('warga_negara_id').value;
+                const provinsiDropdown = document.getElementById('alamat_provinsi_id');
+
+                if (wargaNegaraId !== '1') { // Misal id 1 adalah Indonesia
+                    provinsiDropdown.disabled = true;
+                    provinsiDropdown.value = ''; // Reset pilihan
+                    document.getElementById('alamat_kabupaten_id').disabled = true;
+                    document.getElementById('alamat_kecamatan_id').disabled = true;
+                    document.getElementById('alamat_village_id').disabled = true;
+                } else {
+                    provinsiDropdown.disabled = false;
+                }
+            }
+
+            // Inisialisasi dropdown provinsi saat DOM siap
+            toggleProvinsiDropdown();
+
+            // Event listener untuk perubahan di dropdown warga negara
+            document.getElementById('warga_negara_id').addEventListener('change', toggleProvinsiDropdown);
         });
     </script>
 

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('alamat_kabupaten_id')->nullable();
             $table->unsignedBigInteger('alamat_kecamatan_id')->nullable();
             $table->unsignedBigInteger('alamat_village_id')->nullable();
+            $table->string('foto_ktp')->nullable();
             $table->string('jenis_kelamin');
             $table->string('nama_pemilik');
             $table->string('no_hp');

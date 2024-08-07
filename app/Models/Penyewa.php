@@ -27,6 +27,7 @@ class Penyewa extends Model
         'awal_sewa',
         'akhir_sewa',
         'jenis_kelamin',
+        'foto_ktp',
         'alamat_village_id',
         'alamat_kecamatan_id',
         'alamat_kabupaten_id',

@@ -39,7 +39,7 @@
                                 </div>
 
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
-                                    
+
                                     <div class="sm:col-span-1">
                                         <label for="agama_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Agama') }}</label>
@@ -236,7 +236,7 @@
                                     </div>
                                 </div>
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-5 sm:gap-6">
-                                <div class="sm:col-span-1">
+                                    <div class="sm:col-span-1">
                                         <label for="warga_negara_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Warga Negara') }}</label>
                                         <select name="warga_negara_id" id="warga_negara_id"
@@ -248,8 +248,8 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                    </div>    
-                                <div class="sm:col-span-1">
+                                    </div>
+                                    <div class="sm:col-span-1">
                                         <label for="alamat_provinsi_id" id="labelAlamatProvinsi"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Alamat (diisi ulang)') }}</label>
                                         <select name="alamat_provinsi_id" id="alamat_provinsi_id"
@@ -290,13 +290,29 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2">
+                                <div class="sm:col-span-1">
                                     <label for="alamat"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Jalan') }}</label>
                                     <div class="relative">
                                         <textarea id="alamat" name="alamat" rows="4"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">{{ $pemilik->alamat }}</textarea>
                                     </div>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <label for="foto_ktp"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto KTP') }}</label>
+                                    @if ($pemilik->foto_ktp)
+                                        <div>
+                                            <img src="{{ asset('storage/foto_ktp/' . $pemilik->foto_ktp) }}"
+                                                alt="Foto KTP" class="w-auto h-64 rounded-lg">
+                                        </div>
+                                    @else
+                                        <p class="text-gray-500">
+                                            {{ __('Tidak ada foto KTP.') }}
+                                        </p>
+                                    @endif
+                                    <input type="file" id="foto_ktp" name="foto_ktp"
+                                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-2">
                                 </div>
                                 <div id="unit-container" class="sm:col-span-2">
                                     <div class="mb-4 text-lg font-bold text-gray-900 dark:text-white sm:col-span-4">
@@ -375,20 +391,19 @@
                                                         value="{{ old('units.' . $index . '.akhir_huni', $unit->pivot->akhir_huni) }}">
                                                 </div>
                                             </div>
-                                                <div class="sm:col-span-1">
-                                                    <label for=""
-                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                        </br>
-                                                    </label>
-                                                    <button type="button" id="tambah-unit-btn"
-                                                        class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
-                                                        {{ __('Tambah unit baru') }}
-                                                    </button>
-                                                </div>
+                                            <div class="sm:col-span-1">
+                                                <label for=""
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    </br>
+                                                </label>
+                                                <button type="button" id="tambah-unit-btn"
+                                                    class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
+                                                    {{ __('Tambah unit baru') }}
+                                                </button>
                                             </div>
+                                        </div>
                                     @endforeach
                                 </div>
-                                
                             </div>
                             <div class="sm:col-span-4 items-end">
                                 <a href="{{ route('pemilik.index') }}"
@@ -578,7 +593,7 @@
                         targetSelect.innerHTML = `<option value="">${placeholder}</option>`;
                         data.forEach(item => {
                             targetSelect.innerHTML +=
-                            `<option value="${item.id}">${item.name}</option>`;
+                                `<option value="${item.id}">${item.name}</option>`;
                         });
                         targetSelect.disabled = false;
                     })
@@ -655,6 +670,29 @@
                 }
                 e.target.value = value;
             });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fungsi untuk mengaktifkan atau menonaktifkan dropdown provinsi
+            function toggleProvinsiDropdown() {
+                const wargaNegaraId = document.getElementById('warga_negara_id').value;
+                const provinsiDropdown = document.getElementById('alamat_provinsi_id');
+
+                if (wargaNegaraId !== '1') { // Misal id 1 adalah Indonesia
+                    provinsiDropdown.disabled = true;
+                    provinsiDropdown.value = ''; // Reset pilihan
+                    document.getElementById('alamat_kabupaten_id').disabled = true;
+                    document.getElementById('alamat_kecamatan_id').disabled = true;
+                    document.getElementById('alamat_village_id').disabled = true;
+                } else {
+                    provinsiDropdown.disabled = false;
+                }
+            }
+
+            // Inisialisasi dropdown provinsi saat DOM siap
+            toggleProvinsiDropdown();
+
+            // Event listener untuk perubahan di dropdown warga negara
+            document.getElementById('warga_negara_id').addEventListener('change', toggleProvinsiDropdown);
         });
     </script>
 </x-app-layout>
