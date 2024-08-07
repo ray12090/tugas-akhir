@@ -105,7 +105,7 @@
                                     {{ $penyewa->tanggal_lahir }}
                                 </p>
                             </div>
-                        
+
                         <div class="grid gap-4 sm:col-span-4 sm:grid-cols-4 sm:gap-6">
                             <div class="grid gap-4 sm:col-span-2 sm:grid-cols-5 sm:gap-6">
                                 <div class="sm:col-span-1">
@@ -151,7 +151,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="sm:col-span-2">
+                            <div class="sm:col-span-1">
                                 <label for="alamat"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Jalan') }}</label>
                                 <div class="relative">
@@ -160,6 +160,21 @@
                                         {{ $penyewa->alamat }}
                                     </p>
                                 </div>
+                            </div>
+                            <div class="sm:col-span-1">
+                                <label for="foto_ktp"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto KTP') }}</label>
+                                    @if ($penyewa->foto_ktp)
+                                    <div>
+                                        <img src="{{ asset('storage/foto_ktp/' . $penyewa->foto_ktp) }}"
+                                            alt="Foto KTP"
+                                            class="w-auto h-64 rounded-lg">
+                                    </div>
+                                @else
+                                    <p class="text-gray-500">
+                                        {{ __('Tidak ada foto KTP.') }}
+                                    </p>
+                                @endif
                             </div>
                             <div class="grid gap-4 sm:col-span-2 sm:grid-cols-3 sm:gap-6">
                                 <div class="sm:col-span-1">

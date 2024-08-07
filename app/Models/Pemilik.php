@@ -25,6 +25,7 @@ class Pemilik extends Model
         'agama_id',
         'perkawinan_id',
         'alamat',
+        'foto_ktp',
         'jenis_kelamin',
         'alamat_village_id',
         'alamat_kecamatan_id',

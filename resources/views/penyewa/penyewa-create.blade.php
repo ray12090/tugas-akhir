@@ -40,7 +40,7 @@
                                 {{--
                                 </div> --}}
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
-                                    
+
                                     <div class="sm:col-span-2">
                                         <label for="agama_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Agama') }}</label>
@@ -64,10 +64,10 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    @if ( Auth::user()->tipe_user_id == 12 )
-                                    <input type="hidden" name="user_id" id="user_id"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        value="{{ Auth::user()->id }}">
+                                    @if (Auth::user()->tipe_user_id == 12)
+                                        <input type="hidden" name="user_id" id="user_id"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            value="{{ Auth::user()->id }}">
                                     @endif
                                 </div>
                                 <div class="sm:col-span-1">
@@ -219,7 +219,7 @@
                                     </div>
                                 </div>
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-5 sm:gap-6">
-                                <div class="sm:col-span-1">
+                                    <div class="sm:col-span-1">
                                         <label for="warga_negara_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Warga Negara') }}</label>
                                         <select name="warga_negara_id" id="warga_negara_id"
@@ -231,7 +231,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                <div class="sm:col-span-1">
+                                    <div class="sm:col-span-1">
                                         <label for="alamat_provinsi_id" id="labelAlamatProvinsi"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Alamat sesuai KTP') }}</label>
                                         <select name="alamat_provinsi_id" id="alamat_provinsi_id"
@@ -271,13 +271,19 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2">
+                                <div class="sm:col-span-1">
                                     <label for="alamat"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Jalan') }}</label>
                                     <div class="relative">
                                         <textarea id="alamat" name="alamat" rows="4"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"></textarea>
                                     </div>
+                                </div>
+                                <div class="sm:col-span-1">
+                                    <label for="foto_ktp"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto KTP') }}</label>
+                                    <input type="file" id="foto_ktp" name="foto_ktp"
+                                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-2">
                                 </div>
                                 <div class="mb-4 text-lg font-bold text-gray-900 dark:text-white sm:col-span-4">
                                     {{ __('Tambah unit penyewa') }}
@@ -633,6 +639,29 @@
                 }
                 e.target.value = value;
             });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fungsi untuk mengaktifkan atau menonaktifkan dropdown provinsi
+            function toggleProvinsiDropdown() {
+                const wargaNegaraId = document.getElementById('warga_negara_id').value;
+                const provinsiDropdown = document.getElementById('alamat_provinsi_id');
+
+                if (wargaNegaraId !== '1') { // Misal id 1 adalah Indonesia
+                    provinsiDropdown.disabled = true;
+                    provinsiDropdown.value = ''; // Reset pilihan
+                    document.getElementById('alamat_kabupaten_id').disabled = true;
+                    document.getElementById('alamat_kecamatan_id').disabled = true;
+                    document.getElementById('alamat_village_id').disabled = true;
+                } else {
+                    provinsiDropdown.disabled = false;
+                }
+            }
+
+            // Inisialisasi dropdown provinsi saat DOM siap
+            toggleProvinsiDropdown();
+
+            // Event listener untuk perubahan di dropdown warga negara
+            document.getElementById('warga_negara_id').addEventListener('change', toggleProvinsiDropdown);
         });
     </script>
 </x-app-layout>

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PemilikController extends Controller
 {
@@ -101,6 +102,7 @@ class PemilikController extends Controller
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:10',
+            'foto_ktp' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
             'alamat_village_id' => 'nullable|exists:villages,id',
             'alamat_kecamatan_id' => 'nullable|exists:districts,id',
             'alamat_kabupaten_id' => 'nullable|exists:cities,id',
@@ -116,6 +118,12 @@ class PemilikController extends Controller
                 ->withInput();
         }
 
+        if ($request->hasFile("foto_ktp")) {
+            $image = $request->file("foto_ktp");
+            $image->storeAs('public/foto_ktp', $image->hashName());
+            $fotoPath = $image->hashName();
+        }
+
         // Buat pemilik baru
         $pemilik = Pemilik::create([
             'nik' => $request->input('nik'),
@@ -129,6 +137,7 @@ class PemilikController extends Controller
             'tanggal_lahir' => $request->input('tanggal_lahir'),
             'alamat' => $request->input('alamat'),
             'jenis_kelamin' => $request->input('jenis_kelamin'),
+            'foto_ktp' => $fotoPath ?? null,
             'alamat_village_id' => $request->input('alamat_village_id'),
             'alamat_kecamatan_id' => $request->input('alamat_kecamatan_id'),
             'alamat_kabupaten_id' => $request->input('alamat_kabupaten_id'),
@@ -156,9 +165,6 @@ class PemilikController extends Controller
             return redirect()->route('pemilik.index')->with('success', 'Pemilik berhasil ditambahkan.');
         }
     }
-
-
-
 
     /**
      * Display the specified resource.
@@ -227,6 +233,7 @@ class PemilikController extends Controller
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:10',
+            'foto_ktp' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             'alamat_village_id' => 'nullable|exists:villages,id',
             'alamat_kecamatan_id' => 'nullable|exists:districts,id',
             'alamat_kabupaten_id' => 'nullable|exists:cities,id',
@@ -262,6 +269,18 @@ class PemilikController extends Controller
             'alamat_provinsi_id'
         ]));
 
+        // Handle foto_ktp
+        if ($request->hasFile('foto_ktp')) {
+            // Delete the old foto_ktp if exists
+            if ($pemilik->foto_ktp) {
+                Storage::delete('public/foto_ktp/' . $pemilik->foto_ktp);
+            }
+            // Store the new foto_ktp
+            $image = $request->file('foto_ktp');
+            $image->storeAs('public/foto_ktp', $image->hashName());
+            $pemilik->update(['foto_ktp' => $image->hashName()]);
+        }
+
         // Update data unit
         $unitData = [];
         if ($request->has('units')) {
@@ -276,18 +295,23 @@ class PemilikController extends Controller
 
         return redirect()->route('pemilik.index')->with('success', 'Data pemilik berhasil diperbarui.');
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Pemilik $pemilik)
     {
         try {
+            if ($pemilik->foto_ktp) {
+                Storage::delete('public/foto_ktp/' . $pemilik->foto_ktp);
+            }
             $pemilik->delete();
             return redirect()->route('pemilik.index')->with('success', 'Data pemilik berhasil dihapus.');
         } catch (\Exception $e) {
             return redirect()->route('pemilik.index')->withErrors(['msg' => 'Error deleting komplain. Please try again.']);
         }
     }
+
     public function getKabupaten($provinsiId)
     {
         // Cari provinsi berdasarkan ID untuk mendapatkan kode provinsi
@@ -303,6 +327,7 @@ class PemilikController extends Controller
             return response()->json(['error' => 'Provinsi tidak ditemukan'], 404);
         }
     }
+
     public function getKecamatan($cityId)
     {
         // Cari city berdasarkan ID untuk mendapatkan kode city
