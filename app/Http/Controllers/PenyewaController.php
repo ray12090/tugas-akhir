@@ -97,7 +97,7 @@ class PenyewaController extends Controller
             'agama_id' => 'required|exists:detail_agamas,id',
             'perkawinan_id' => 'required|exists:detail_perkawinans,id',
             'user_id' => 'nullable|exists:users,id',
-            'tempat_lahir_id' => 'required|exists:cities,id',
+            'tempat_lahir_id' => 'nullable|exists:cities,id',
             'nama_penyewa' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:10',
             'no_hp' => 'required|string|max:15',
@@ -105,10 +105,10 @@ class PenyewaController extends Controller
             'alamat' => 'required|string|max:255',
             'awal_sewa' => 'required|date',
             'akhir_sewa' => 'required|date|after:awal_sewa',
-            'alamat_village_id' => 'required|exists:villages,id',
-            'alamat_kecamatan_id' => 'required|exists:districts,id',
-            'alamat_kabupaten_id' => 'required|exists:cities,id',
-            'alamat_provinsi_id' => 'required|exists:provinces,id',
+            'alamat_village_id' => 'nullable|exists:villages,id',
+            'alamat_kecamatan_id' => 'nullable|exists:districts,id',
+            'alamat_kabupaten_id' => 'nullable|exists:cities,id',
+            'alamat_provinsi_id' => 'nullable|exists:provinces,id',
         ]);
 
         if ($validator->fails()) {
@@ -189,15 +189,15 @@ class PenyewaController extends Controller
             'nama_penyewa' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:10',
             'no_hp' => 'required|string|max:15',
-            'tempat_lahir_id' => 'required|exists:cities,id',
+            'tempat_lahir_id' => 'nullable|exists:cities,id',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'awal_sewa' => 'required|date',
             'akhir_sewa' => 'required|date|after:awal_sewa',
-            'alamat_village_id' => 'required|exists:villages,id',
-            'alamat_kecamatan_id' => 'required|exists:districts,id',
-            'alamat_kabupaten_id' => 'required|exists:cities,id',
-            'alamat_provinsi_id' => 'required|exists:provinces,id',
+            'alamat_village_id' => 'nullable|exists:villages,id',
+            'alamat_kecamatan_id' => 'nullable|exists:districts,id',
+            'alamat_kabupaten_id' => 'nullable|exists:cities,id',
+            'alamat_provinsi_id' => 'nullable|exists:provinces,id',
 
         ]);
 

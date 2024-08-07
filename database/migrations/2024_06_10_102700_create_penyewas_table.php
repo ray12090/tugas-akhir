@@ -19,11 +19,11 @@ return new class extends Migration
             $table->unsignedBigInteger('agama_id');
             $table->unsignedBigInteger('perkawinan_id');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('tempat_lahir_id');
-            $table->unsignedBigInteger('alamat_provinsi_id');
-            $table->unsignedBigInteger('alamat_kabupaten_id');
-            $table->unsignedBigInteger('alamat_kecamatan_id');
-            $table->unsignedBigInteger('alamat_village_id');
+            $table->unsignedBigInteger('tempat_lahir_id')->nullable();
+            $table->unsignedBigInteger('alamat_provinsi_id')->nullable();
+            $table->unsignedBigInteger('alamat_kabupaten_id')->nullable();
+            $table->unsignedBigInteger('alamat_kecamatan_id')->nullable();
+            $table->unsignedBigInteger('alamat_village_id')->nullable();
             $table->string('jenis_kelamin');
             $table->string('nama_penyewa');
             $table->string('no_hp');

@@ -39,19 +39,7 @@
                                 </div>
 
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
-                                    <div class="sm:col-span-1">
-                                        <label for="warga_negara_id"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Warga Negara') }}</label>
-                                        <select name="warga_negara_id" id="warga_negara_id"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            @foreach ($detailKewarganegaraans as $detailKewarganegaraan)
-                                                <option value="{{ $detailKewarganegaraan->id }}"
-                                                    {{ $pemilik->warga_negara_id == $detailKewarganegaraan->id ? 'selected' : '' }}>
-                                                    {{ $detailKewarganegaraan->status_kewarganegaraan }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                    
                                     <div class="sm:col-span-1">
                                         <label for="agama_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Agama') }}</label>
@@ -77,7 +65,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="sm:col-span-1">
+                                    <div class="sm:col-span-2">
                                         <label for="user_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Email Pemilik') }}</label>
                                         <select name="user_id" id="user_id"
@@ -247,8 +235,21 @@
                                             placeholder="YYYY-MM-DD" value="{{ $pemilik->tanggal_lahir }}" required>
                                     </div>
                                 </div>
-                                <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
-                                    <div class="sm:col-span-1">
+                                <div class="grid gap-4 sm:col-span-2 sm:grid-cols-5 sm:gap-6">
+                                <div class="sm:col-span-1">
+                                        <label for="warga_negara_id"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Warga Negara') }}</label>
+                                        <select name="warga_negara_id" id="warga_negara_id"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                            @foreach ($detailKewarganegaraans as $detailKewarganegaraan)
+                                                <option value="{{ $detailKewarganegaraan->id }}"
+                                                    {{ $pemilik->warga_negara_id == $detailKewarganegaraan->id ? 'selected' : '' }}>
+                                                    {{ $detailKewarganegaraan->status_kewarganegaraan }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>    
+                                <div class="sm:col-span-1">
                                         <label for="alamat_provinsi_id" id="labelAlamatProvinsi"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Alamat (diisi ulang)') }}</label>
                                         <select name="alamat_provinsi_id" id="alamat_provinsi_id"
@@ -374,19 +375,20 @@
                                                         value="{{ old('units.' . $index . '.akhir_huni', $unit->pivot->akhir_huni) }}">
                                                 </div>
                                             </div>
-                                        </div>
+                                                <div class="sm:col-span-1">
+                                                    <label for=""
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                        </br>
+                                                    </label>
+                                                    <button type="button" id="tambah-unit-btn"
+                                                        class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
+                                                        {{ __('Tambah unit baru') }}
+                                                    </button>
+                                                </div>
+                                            </div>
                                     @endforeach
                                 </div>
-                                <div class="sm:col-span-1">
-                                    <label for=""
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                        </br>
-                                    </label>
-                                    <button type="button" id="tambah-unit-btn"
-                                        class="inline-flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-center text-white bg-[#016452] rounded-lg focus:ring-4 focus:ring-[#014f415e] dark:focus:ring-primary-900 hover:bg-[#014F41]">
-                                        {{ __('Tambah unit baru') }}
-                                    </button>
-                                </div>
+                                
                             </div>
                             <div class="sm:col-span-4 items-end">
                                 <a href="{{ route('pemilik.index') }}"

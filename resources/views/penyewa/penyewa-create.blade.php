@@ -40,19 +40,8 @@
                                 {{--
                                 </div> --}}
                                 <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
-                                    <div class="sm:col-span-1">
-                                        <label for="warga_negara_id"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Warga Negara') }}</label>
-                                        <select name="warga_negara_id" id="warga_negara_id"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                            @foreach ($detailKewarganegaraans as $detailKewarganegaraan)
-                                                <option value="{{ $detailKewarganegaraan->id }}">
-                                                    {{ $detailKewarganegaraan->status_kewarganegaraan }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="sm:col-span-1">
+                                    
+                                    <div class="sm:col-span-2">
                                         <label for="agama_id"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Agama') }}</label>
                                         <select name="agama_id" id="agama_id"
@@ -229,10 +218,22 @@
                                             placeholder="YYYY-MM-DD" required>
                                     </div>
                                 </div>
-                                <div class="grid gap-4 sm:col-span-2 sm:grid-cols-4 sm:gap-6">
-                                    <div class="sm:col-span-1">
+                                <div class="grid gap-4 sm:col-span-2 sm:grid-cols-5 sm:gap-6">
+                                <div class="sm:col-span-1">
+                                        <label for="warga_negara_id"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Warga Negara') }}</label>
+                                        <select name="warga_negara_id" id="warga_negara_id"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                            @foreach ($detailKewarganegaraans as $detailKewarganegaraan)
+                                                <option value="{{ $detailKewarganegaraan->id }}">
+                                                    {{ $detailKewarganegaraan->status_kewarganegaraan }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                <div class="sm:col-span-1">
                                         <label for="alamat_provinsi_id" id="labelAlamatProvinsi"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Alamat') }}</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Alamat sesuai KTP') }}</label>
                                         <select name="alamat_provinsi_id" id="alamat_provinsi_id"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                             <option value="">{{ __('Pilih Provinsi') }}</option>
