@@ -6,9 +6,6 @@
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                     {{ __('Edit Pemilik') }}
                 </div>
-                <div class="text-gray-500 text-sm font-regular">
-                    {{ __('Di bawah merupakan formulir untuk mengedit data pemilik. Formulir ini dapat diisi oleh Tenant Relation') }}
-                </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
                 <div

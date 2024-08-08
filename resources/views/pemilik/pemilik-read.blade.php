@@ -6,9 +6,6 @@
                 <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                     {{ __('Detail Pemilik') }}
                 </div>
-                <div class="text-gray-500 text-sm font-regular">
-                    {{ __('Berikut adalah detail data pemilik yang telah diisi oleh Tenant Relation.') }}
-                </div>
             </div>
             <div class="relative sm:rounded-lg overflow-hidden">
                 <div
@@ -119,7 +116,7 @@
                                     </div>
                                     <div class="sm:col-span-1">
                                         <label for="alamat_provinsi_id" id="labelAlamatProvinsi"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Provinsi') }}</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Alamat (sesuai KTP)') }}</label>
                                         <p
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                             {{ optional($pemilik->detailAlamatProvinsi)->name ?? 'Tidak ada data' }}
@@ -127,7 +124,7 @@
                                     </div>
                                     <div class="sm:col-span-1">
                                         <label for="alamat_kabupaten_id" id="labelAlamatKabupaten"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kabupaten') }}</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
                                         <p
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                             {{ optional($pemilik->detailAlamatKabupaten)->name ?? 'Tidak ada data' }}
@@ -135,7 +132,7 @@
                                     </div>
                                     <div class="sm:col-span-1">
                                         <label for="alamat_kecamatan_id" id="labelAlamatKecamatan"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kecamatan') }}</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
                                         <p
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                             {{ optional($pemilik->detailAlamatKecamatan)->name ?? 'Tidak ada data' }}
@@ -143,7 +140,7 @@
                                     </div>
                                     <div class="sm:col-span-1">
                                         <label for="alamat_village_id" id="labelAlamatVillage"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kelurahan') }}</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></br></label>
                                         <p
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                             {{ optional($pemilik->detailAlamatVillages)->name ?? 'Tidak ada data' }}

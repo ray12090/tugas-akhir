@@ -7,9 +7,6 @@
                     <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
                         {{ __('Tambah pemilik') }}
                     </div>
-                    <div class="text-gray-500 text-sm font-reguler">
-                        {{ __('Di bawah merupakan formulir untuk menambah data pemilik. Isi formulir ini dapat diisi oleh Tenant Relation') }}
-                    </div>
                 </div>
             @endif
 

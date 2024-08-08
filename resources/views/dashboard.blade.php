@@ -82,7 +82,48 @@
                                     </svg>
                                     <span class="text-sm font-medium text-white">{{ __('Unit dan Tagihan') }}</span>
                                 </a>
-                                <a href="#"
+                                <a href="{{ route('pemilik.show', Auth::user()->pemilik->id) }}"
+                                    class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
+                                    <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-sm font-medium text-white">{{ __('Data Diri') }}</span>
+                                </a>
+                                <a href="{{ route('komplain.create') }}"
+                                    class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
+                                    <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v5a1 1 0 1 0 2 0V8Zm-1 7a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2H12Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-sm font-medium text-white">{{ __('Ajukan Komplain') }}</span>
+                                </a>
+                                <!-- Tambahkan elemen lainnya sesuai kebutuhan -->
+                            </div>
+                        @endif
+                    @endif
+                    @if (Auth::user()->tipe_user_id == 12)
+                        @if (App\Models\Penyewa::where('user_id', Auth::user()->id)->exists())
+                            <div
+                                class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-3 rounded-lg p-6 shadow-md sm:rounded-2xl bg-[#01645222]">
+                                {{-- <a href="{{ route('pemilik.unit-dan-ipl', Auth::user()->penyewa->id) }}"
+                                    class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
+                                    <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                            d="M4 4a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2v14a1 1 0 1 1 0 2H5a1 1 0 1 1 0-2V5a1 1 0 0 1-1-1Zm5 2a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-1Zm-5 4a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-1Zm-3 4a2 2 0 0 0-2 2v3h2v-3h2v3h2v-3a2 2 0 0 0-2-2h-2Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-sm font-medium text-white">{{ __('Unit dan Tagihan') }}</span>
+                                </a> --}}
+                                <a href="{{ route('penyewa.show', Auth::user()->penyewa->id) }}"
                                     class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
                                     <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
