@@ -250,7 +250,7 @@
                                     </td>
                                     <td
                                         class="text-end px-4 py-6 font-bold text-red-700 whitespace-nowrap dark:text-white border-b text-2xl md:text-3xl">
-                                        Rp{{ number_format($ipl->detailTagihanAir->tagihan_air, 2, ',', '.') }}
+                                        Rp{{ number_format($ipl->total, 2, ',', '.') }}
                                     </td>
                                 </tr>
                             </tbody>
