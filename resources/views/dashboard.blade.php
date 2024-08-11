@@ -112,7 +112,7 @@
                         @if (App\Models\Penyewa::where('user_id', Auth::user()->id)->exists())
                             <div
                                 class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-3 rounded-lg p-6 shadow-md sm:rounded-2xl bg-[#01645222]">
-                                {{-- <a href="{{ route('pemilik.unit-dan-ipl', Auth::user()->penyewa->id) }}"
+                                <a href="{{ route('penyewa.unit-dan-ipl', Auth::user()->penyewa->id) }}"
                                     class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
                                     <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -122,7 +122,7 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                     <span class="text-sm font-medium text-white">{{ __('Unit dan Tagihan') }}</span>
-                                </a> --}}
+                                </a>
                                 <a href="{{ route('penyewa.show', Auth::user()->penyewa->id) }}"
                                     class="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-[#016452] px-4 py-6 hover:bg-[#014F41] dark:border-[#014F41] dark:bg-gray-800 dark:hover:bg-[#014F41]">
                                     <svg class="w-[48px] h-[48px] text-white dark:text-white" aria-hidden="true"

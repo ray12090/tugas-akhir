@@ -266,7 +266,7 @@
 
                                             @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 1)
                                                 <form action="{{ route('penanganan.destroy', $penanganan->id) }}" method="POST"
-                                                    onsubmit="return confirmDelete(this, '{{ $penanganan->nomor_laporan }}');">
+                                                    onsubmit="return confirmDelete(this, '{{ $penanganan->nomor_penanganan }}');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
