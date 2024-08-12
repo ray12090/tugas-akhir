@@ -306,8 +306,12 @@
                                 <div class="sm:col-span-1">
                                     <label for="foto_ktp"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Foto KTP') }}</label>
+                                    
                                     <input type="file" id="foto_ktp" name="foto_ktp"
                                         class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-2">
+                                        <p class="text-gray-500">
+                                        {{ __('JPG, JPEG, PNG (MAX. 5MB)') }}
+                                        </p>
                                 </div>
                                 <div id="unit-container" class="sm:col-span-2">
                                     @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 3)

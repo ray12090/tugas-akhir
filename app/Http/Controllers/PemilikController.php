@@ -102,7 +102,7 @@ class PemilikController extends Controller
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'jenis_kelamin' => 'required|string|max:10',
-            'foto_ktp' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
+            'foto_ktp' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             'alamat_village_id' => 'nullable|exists:villages,id',
             'alamat_kecamatan_id' => 'nullable|exists:districts,id',
             'alamat_kabupaten_id' => 'nullable|exists:cities,id',
