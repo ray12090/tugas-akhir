@@ -48,80 +48,7 @@
                                 <div class="sm:col-span-4 text-gray-900 text-lg font-semibold">
                                     {{ __('Penugasan') }}
                                 </div>
-                                @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 1)
-                                    <div class="sm:col-span-1">
-                                        <label for="users_id" id="labelUsers"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Ditugaskan kepada') }}</label>
-                                        <button id="dropdownSearchButtonUsers"
-                                            data-dropdown-toggle="dropdownSearchUsers"
-                                            class="w-full text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
-                                            type="button">{{ __('Pilih User') }}
-                                            <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                                            </svg>
-                                        </button>
-                                        <div id="dropdownSearchUsers"
-                                            class="z-10 hidden bg-white rounded-lg w-60 dark:bg-gray-700 outline-gray-300 outline outline-1">
-                                            <div class="p-3">
-                                                <label for="users_search" class="sr-only">{{ __('Search') }}</label>
-                                                <div class="relative">
-                                                    <div
-                                                        class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none" viewBox="0 0 20 20">
-                                                            <path stroke="currentColor" stroke-linecap="round"
-                                                                stroke-linejoin="round" stroke-width="2"
-                                                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                                        </svg>
-                                                    </div>
-                                                    <input type="text" id="users_search"
-                                                        class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                        placeholder="Cari Nama">
-                                                </div>
-                                            </div>
-                                            <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-                                                aria-labelledby="dropdownSearchButtonUsers">
-                                                @foreach ($users as $user)
-                                                    <li>
-                                                        <div
-                                                            class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                                            <input id="users_id_{{ $user->id }}" type="checkbox"
-                                                                value="{{ $user->id }}" name="users_id[]"
-                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                                                                @if (in_array($user->id, $penanganan->users->pluck('id')->toArray())) checked @endif>
-                                                            <label for="users_id_{{ $user->id }}"
-                                                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $user->name }}</label>
-                                                        </div>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="sm:col-span-3">
-                                        <label for="penanganan_by"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Penanganan Oleh:') }}</label>
-                                        <div id="selected-users"
-                                            class="relative flex flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                            <!-- Badges will be added here dynamically -->
-                                        </div>
-                                    </div>
-                                @else
-                                    <div class="sm:col-span-4">
-                                        <label for="penanganan_by"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Penanganan Oleh:') }}</label>
-                                        <div id="selected-users-nontr"
-                                            class="relative flex flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                            @foreach ($penanganan->users as $user)
-                                                <span
-                                                    class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">{{ $user->name }}</span>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                @endif
-                                <div class="grid gap-4 sm:col-span-4 sm:grid-cols-8 sm:gap-6">
+                                <div class="grid gap-4 sm:col-span-2 sm:grid-cols-3 sm:gap-6">
                                     <div class="sm:col-span-1">
                                         <label for="status_komplain_id" id="labelStatusKomplain"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Status') }}</label>
@@ -178,12 +105,89 @@
                                                 placeholder="Pilih tanggal" required>
                                         </div>
                                     </div>
-                                    <div class="sm:col-span-1">
-                                        <label for="kategori_penanganan_id" id="labelKategoriPenanganan"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kategori Penanganan') }}</label>
+                                </div>
+                                @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 1)
+                                    <div class="sm:col-span-2">
+                                        <label for="users_id" id="labelUsers"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Penanganan Ditugaskan Kepada:') }}</label>
+                                        <div class="flex">
+                                            <button id="dropdownSearchButtonUsers"
+                                                data-dropdown-toggle="dropdownSearchUsers"
+                                                class="relative flex-shrink-0 text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-l-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
+                                                type="button">{{ __('Pilih User') }}
+                                                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 10 6">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                                </svg>
+                                            </button>
+                                            <div id="dropdownSearchUsers"
+                                                class="z-10 hidden rounded-lg bg-white w-auto dark:bg-gray-700 outline-gray-300 outline outline-1">
+                                                <div class="p-3">
+                                                    <label for="users_search"
+                                                        class="sr-only">{{ __('Search') }}</label>
+                                                    <div class="relative">
+                                                        <div
+                                                            class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none" viewBox="0 0 20 20">
+                                                                <path stroke="currentColor" stroke-linecap="round"
+                                                                    stroke-linejoin="round" stroke-width="2"
+                                                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                                            </svg>
+                                                        </div>
+                                                        <input type="text" id="users_search"
+                                                            class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                            placeholder="Cari Nama">
+                                                    </div>
+                                                </div>
+                                                <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+                                                    aria-labelledby="dropdownSearchButtonUsers">
+                                                    @foreach ($users as $user)
+                                                        <li>
+                                                            <div
+                                                                class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                                                <input id="users_id_{{ $user->id }}"
+                                                                    type="checkbox" value="{{ $user->id }}"
+                                                                    name="users_id[]"
+                                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                                    @if (in_array($user->id, $penanganan->users->pluck('id')->toArray())) checked @endif>
+                                                                <label for="users_id_{{ $user->id }}"
+                                                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $user->name }}</label>
+                                                                    <span class="text-xs font-medium text-gray-500 dark:text-gray-400">{{ $user->tipeUser->nama_tipe_user }}</span>
+                                                            </div>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <div id="selected-users"
+                                                class="relative flex-grow flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-r-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                                <!-- Badges will be added here dynamically -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="sm:col-span-4">
+                                        <label for="penanganan_by"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Penanganan Oleh:') }}</label>
+                                        <div id="selected-users-nontr"
+                                            class="relative flex flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                            @foreach ($penanganan->users as $user)
+                                                <span
+                                                    class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">{{ $user->name }}</span>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="sm:col-span-2">
+                                    <label for="kategori_penanganan_id" id="labelKategoriPenanganan"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kategori Penanganan') }}</label>
+                                    <div class="flex w-full">
                                         <button id="dropdownSearchButtonKategoriPenanganan"
                                             data-dropdown-toggle="dropdownSearchKategoriPenanganan"
-                                            class="w-full text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
+                                            class="relative flex-shrink-0 text-gray-900 bg-gray-50 border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-small rounded-l-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-700 focus:outline-none"
                                             type="button">{{ __('Pilih Kategori') }}
                                             <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -191,53 +195,49 @@
                                                     stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                                             </svg>
                                         </button>
-                                        <div id="dropdownSearchKategoriPenanganan"
-                                            class="z-10 hidden bg-white rounded-lg w-60 dark:bg-gray-700 outline-gray-300 outline outline-1">
-                                            <div class="p-3">
-                                                <label for="kategori_penanganan_search"
-                                                    class="sr-only">{{ __('Search') }}</label>
-                                                <div class="relative">
-                                                    <div
-                                                        class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none" viewBox="0 0 20 20">
-                                                            <path stroke="currentColor" stroke-linecap="round"
-                                                                stroke-linejoin="round" stroke-width="2"
-                                                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                                        </svg>
-                                                    </div>
-                                                    <input type="text" id="kategori_penanganan_search"
-                                                        class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                        placeholder="Cari Kategori">
-                                                </div>
-                                            </div>
-                                            <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
-                                                aria-labelledby="dropdownSearchButtonKategoriPenanganan">
-                                                @foreach ($kategoriPenanganans as $kategori)
-                                                    <li>
-                                                        <div
-                                                            class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                                            <input id="kategori_penanganan_id_{{ $kategori->id }}"
-                                                                type="checkbox" value="{{ $kategori->id }}"
-                                                                name="kategori_penanganan_id[]"
-                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                                                                @if (in_array($kategori->id, $penanganan->kategoriPenanganan->pluck('id')->toArray())) checked @endif>
-                                                            <label for="kategori_penanganan_id_{{ $kategori->id }}"
-                                                                class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $kategori->nama_kategori_penanganan }}</label>
-                                                        </div>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="sm:col-span-4">
-                                        <label for="kategori"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Kategori yang Dipilih:') }}</label>
                                         <div id="selected-category"
-                                            class="relative flex flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                            class="relative flex-grow flex-wrap gap-2 bg-gray-50 border border-gray-300 p-2.5 text-sm rounded-r-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                                             <!-- Badges will be added here dynamically -->
                                         </div>
+                                    </div>
+                                    <div id="dropdownSearchKategoriPenanganan"
+                                        class="z-10 hidden bg-white rounded-lg w-60 dark:bg-gray-700 outline-gray-300 outline outline-1">
+                                        <div class="p-3">
+                                            <label for="kategori_penanganan_search"
+                                                class="sr-only">{{ __('Search') }}</label>
+                                            <div class="relative">
+                                                <div
+                                                    class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none" viewBox="0 0 20 20">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                                    </svg>
+                                                </div>
+                                                <input type="text" id="kategori_penanganan_search"
+                                                    class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                    placeholder="Cari Kategori">
+                                            </div>
+                                        </div>
+                                        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
+                                            aria-labelledby="dropdownSearchButtonKategoriPenanganan">
+                                            @foreach ($kategoriPenanganans as $kategori)
+                                                <li>
+                                                    <div
+                                                        class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                                        <input id="kategori_penanganan_id_{{ $kategori->id }}"
+                                                            type="checkbox" value="{{ $kategori->id }}"
+                                                            name="kategori_penanganan_id[]"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                                            @if (in_array($kategori->id, $penanganan->kategoriPenanganan->pluck('id')->toArray())) checked @endif>
+                                                        <label for="kategori_penanganan_id_{{ $kategori->id }}"
+                                                            class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $kategori->nama_kategori_penanganan }}</label>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="sm:col-span-4">

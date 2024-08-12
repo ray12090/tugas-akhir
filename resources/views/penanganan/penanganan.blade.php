@@ -213,15 +213,14 @@
                                         <div>
                                             {{ \Carbon\Carbon::parse($penanganan->tanggal_penanganan)->format('d-m-Y') }}
                                         </div>
-                                        <div>
-                                            {{ \Carbon\Carbon::parse($penanganan->tanggal_penanganan)->format('H:i:s') }}
-                                        </div>
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penanganan->createdBy->name }}
+                                        {{ $penanganan->createdBy->name }}</br>
+                                        <span class="text-gray-500 font-normal">{{ $penanganan->createdBy->tipeUser->nama_tipe_user }}</span>
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $penanganan->updatedBy->name }}
+                                        {{ $penanganan->updatedBy->name }}</br>
+                                        <span class="text-gray-500 font-normal">{{ $penanganan->updatedBy->tipeUser->nama_tipe_user }}</span>
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         @if ($penanganan->komplain->status_komplain_id == 4)
@@ -267,7 +266,7 @@
 
                                             @if (Auth::user()->tipe_user_id == 2 || Auth::user()->tipe_user_id == 1)
                                                 <form action="{{ route('penanganan.destroy', $penanganan->id) }}" method="POST"
-                                                    onsubmit="return confirmDelete(this, '{{ $penanganan->nomor_laporan }}');">
+                                                    onsubmit="return confirmDelete(this, '{{ $penanganan->nomor_penanganan }}');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"

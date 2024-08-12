@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dashboard;
 use App\Models\Pemilik;
+use App\Models\Penyewa;
 use App\Http\Requests\StoreDashboardRequest;
 use App\Http\Requests\UpdateDashboardRequest;
 
@@ -69,5 +70,11 @@ class DashboardController extends Controller
         // Ambil data pemilik berdasarkan ID, termasuk unit dan ipl
         $pemilik = Pemilik::with(['unit'])->findOrFail($id);
         return view('pemilik.pemilik-unit-ipl', compact('pemilik'));
+    }
+    public function indexUnitdanIPLRenter($id)
+    {
+        // Ambil data pemilik berdasarkan ID, termasuk unit dan ipl
+        $penyewa = Penyewa::with(['unit'])->findOrFail($id);
+        return view('penyewa.penyewa-unit-ipl', compact('penyewa'));
     }
 }

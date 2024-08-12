@@ -5,17 +5,10 @@
 
 <x-app-layout>
     <div>
-        <div class="pb-6">
-            @include('components.alert')
-        </div>
+        @include('components.alert')
         <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-2xl">
-            {{-- <div>
-                <div class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
-                    {{ __('Detail Tagihan ') }}{{ $ipl->nomor_invoice }}
-                </div>
-            </div> --}}
             <div class="relative sm:rounded-lg overflow-hidden">
-                @if (Auth::user()->tipe_user_id == 11)
+                @if (Auth::user()->tipe_user_id == 11 || Auth::user()->tipe_user_id == 12)
                     <div class="text-gray-900 text-sm font-reguler mb-2 grid sm:grid-cols-2">
                         <div class="mb-2 grid sm:col-span-2 sm:grid-cols-3">
                             <div class="sm:col-span-1 mb-12">
@@ -34,10 +27,18 @@
                         </div>
                         <div class="mb-2 grid sm:grid-cols-1">
                             <div class="sm:col-span-1 mb-6">
-                                <span
-                                    class="mb-3 text-2xl font-semibold leading-tight tracking-tight text-gray-900 dark:text-white md:text-3xl">
-                                    {{ $ipl->pemilik->nama_pemilik }}
-                                </span>
+                                @if (Auth::user()->tipe_user_id == 11)
+                                    <span
+                                        class="mb-3 text-2xl font-semibold leading-tight tracking-tight text-gray-900 dark:text-white md:text-3xl">
+                                        {{ $ipl->pemilik->nama_pemilik }}
+                                    </span>
+                                @endif
+                                @if (Auth::user()->tipe_user_id == 12)
+                                    <span
+                                        class="mb-3 text-2xl font-semibold leading-tight tracking-tight text-gray-900 dark:text-white md:text-3xl">
+                                        {{ $ipl->unit->penyewa->nama_penyewa }}
+                                    </span>
+                                @endif
                             </div>
                             <div class="sm:col-span-1 mb-2">
                                 <span
@@ -53,13 +54,26 @@
                             </div>
                         </div>
                         <div class="mb-2 grid sm:grid-cols-1 justify-end items-end text-right">
-                            <span class="inline-block align-bottom text-right">
-                                <span class="mb-2 block">{{ $ipl->pemilik->alamat }}</span>
-                                <span class="mb-2 block">Kel. {{ $ipl->pemilik->detailAlamatVillages->name }}, Kec.
-                                    {{ $ipl->pemilik->detailAlamatKecamatan->name }}</span>
-                                <span class="mb-2 block">{{ $ipl->pemilik->detailAlamatKabupaten->name }}</span>
-                                <span class="mb-2 block">{{ $ipl->pemilik->user->email }}</span>
-                            </span>
+                            @if (Auth::user()->tipe_user_id == 11)
+                                <span class="inline-block align-bottom text-right">
+                                    <span class="mb-2 block">{{ $ipl->pemilik->alamat }}</span>
+                                    <span class="mb-2 block">Kel. {{ $ipl->pemilik->detailAlamatVillages->name }}, Kec.
+                                        {{ $ipl->pemilik->detailAlamatKecamatan->name }}</span>
+                                    <span class="mb-2 block">{{ $ipl->pemilik->detailAlamatKabupaten->name }}</span>
+                                    <span class="mb-2 block">{{ $ipl->pemilik->user->email }}</span>
+                                </span>
+                            @endif
+                            @if (Auth::user()->tipe_user_id == 12)
+                                <span class="inline-block align-bottom text-right">
+                                    <span class="mb-2 block">{{ $ipl->unit->penyewa->alamat }}</span>
+                                    <span class="mb-2 block">Kel. {{ $ipl->unit->penyewa->detailAlamatVillage->name }},
+                                        Kec.
+                                        {{ $ipl->unit->penyewa->detailAlamatKecamatan->name }}</span>
+                                    <span
+                                        class="mb-2 block">{{ $ipl->unit->penyewa->detailAlamatKabupaten->name }}</span>
+                                    <span class="mb-2 block">{{ $ipl->unit->penyewa->user->email }}</span>
+                                </span>
+                            @endif
                         </div>
                     </div>
 
@@ -238,10 +252,14 @@
                                 <tr>
                                     <td
                                         class="text-left px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white border-b">
-                                        <span>{{ __('Mandiri: ') }}</span><span class="font-bold">{{ __('1310014338240')}}</span></br>
-                                        <span>{{ __('CIMB: ') }}</span><span class="font-bold">{{ __('800147933800')}}</span>
-                                        <span class="block text-sm mt-4">{{ __('Berikan keterangan transfer berupa:') }}</span>
-                                        <span class="block text-sm font-bold">{{ __('Kode Tower - Nomor Lantai dan Nomor Unit') }}</span>
+                                        <span>{{ __('Mandiri: ') }}</span><span
+                                            class="font-bold">{{ __('1310014338240') }}</span></br>
+                                        <span>{{ __('CIMB: ') }}</span><span
+                                            class="font-bold">{{ __('800147933800') }}</span>
+                                        <span
+                                            class="block text-sm mt-4">{{ __('Berikan keterangan transfer berupa:') }}</span>
+                                        <span
+                                            class="block text-sm font-bold">{{ __('Kode Tower - Nomor Lantai dan Nomor Unit') }}</span>
                                         <span class="block text-sm">{{ __('Contoh X-0101') }}</span>
                                     </td>
                                     <td
@@ -250,7 +268,7 @@
                                     </td>
                                     <td
                                         class="text-end px-4 py-6 font-bold text-red-700 whitespace-nowrap dark:text-white border-b text-2xl md:text-3xl">
-                                        Rp{{ number_format($ipl->detailTagihanAir->tagihan_air, 2, ',', '.') }}
+                                        Rp{{ number_format($ipl->total, 2, ',', '.') }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -259,7 +277,8 @@
                     <div class="mb-2 py-5 ">
                         <span
                             class="text-gray-900 dark:text-white sm:col-span-1 text-sm font-bold">{{ __('Catatan:') }}</span>
-                        <span class="block text-sm">{{ __('Untuk konfirmasi atau pertanyaan, kontak kami pada:') }}</span>
+                        <span
+                            class="block text-sm">{{ __('Untuk konfirmasi atau pertanyaan, kontak kami pada:') }}</span>
                         <span class="block text-sm">{{ __('No. Telp: 022-3000-0444') }}</span>
                         <span class="block text-sm">{{ __('WhatsApp: 0815-1313-8444') }}</span>
                         <span class="block text-sm">{{ __('Email   : bp.landmarkresidence@gmail.com') }}</span>
